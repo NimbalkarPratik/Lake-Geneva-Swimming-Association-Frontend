@@ -6,6 +6,214 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page 1</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Popup Overlay ── */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 6, 19, 0.65);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .popup-overlay.active {
+            display: flex;
+            animation: overlayIn 0.25s ease;
+        }
+
+        @keyframes overlayIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* ── Popup Card ── */
+        .popup-card {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            min-height: 520px;
+            background: #fff;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 32px 80px rgba(0, 6, 19, 0.35);
+            animation: cardIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(24px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ── Left Column ── */
+        .popup-left {
+            flex: 0 0 50%;
+            position: relative;
+            overflow: hidden;
+            min-height: 480px;
+            background: #001f3a;
+            background-image: url("Hero_Side_popup.png");
+            background-size: 100% 100%;
+        }
+
+        .popup-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .popup-left-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(0, 10, 40, 0.82) 0%,
+                rgba(0, 10, 40, 0.25) 55%,
+                rgba(0, 10, 40, 0.08) 100%
+            );
+        }
+
+        .popup-left-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px 28px;
+        }
+
+        .popup-left-content h2 {
+            color: #fff;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin: 0 0 12px;
+        }
+
+        .popup-left-content p {
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 14px;
+            line-height: 1.55;
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        /* ── Right Column ── */
+        .popup-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        /* thin blue accent bar at top of right column */
+        .popup-right-bar {
+            /* height: 4px; */
+            background: #005EB2;
+            flex-shrink: 0;
+        }
+
+        .popup-right-inner {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .popup-right-header {
+            padding: 28px 32px 0;
+            flex-shrink: 0;
+        }
+
+        .popup-right-header h3 {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #000613;
+            margin: 0 0 4px;
+        }
+
+        .popup-right-header p {
+            font-size: 13px;
+            color: #6b7280;
+            margin: 0 0 20px;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        /* Calendly iframe wrapper */
+        .calendly-wrap {
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .calendly-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* ── Close Button ── */
+        .popup-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 34px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .popup-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.08);
+        }
+
+        .popup-close svg {
+            width: 16px;
+            height: 16px;
+            stroke: #fff;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        /* On the right side (white bg) override close btn styling */
+        .popup-card .popup-close {
+            background: rgba(0, 6, 19, 0.07);
+            border-color: rgba(0, 6, 19, 0.12);
+        }
+
+        .popup-card .popup-close svg {
+            stroke: #000613;
+        }
+
+        .popup-card .popup-close:hover {
+            background: rgba(0, 6, 19, 0.14);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 680px) {
+            .popup-left { display: none; }
+            .popup-card { min-height: 580px; }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,15 +234,14 @@
                     <div class="hidden md:flex flex-1 justify-center"><span
                             class="text-[14px] font-normal tracking-[2px] uppercase text-center"
                             style="color: rgb(5, 43, 121);">The Maillot d'Or CHALLENGE</span></div>
-                    <div class="flex-shrink-0"><button
+                    <div class="flex-shrink-0">
+                        <button onclick="openPopup()"
                             class="bg-[#005EB2] text-white text-[12px] font-normal px-6 py-3 hover:bg-blue-800 transition-colors tracking-wide">Book
-                            a Meeting</button></div>
+                            a Meeting</button>
+                    </div>
                 </div>
             </header>
             <section class="section_2 relative w-full" style="min-height: 514px;">
-                <!-- <img
-                    src="https://api.builder.io/api/v1/image/assets/TEMP/eaf237ca7433ee4fb768a4cfdcf755db8e835fbf?width=2570"
-                    alt="" class="absolute inset-0 w-full h-full object-cover"> -->
                 <div class="absolute inset-0"
                     style="background: linear-gradient(269deg, rgba(255, 255, 255, 0) -0.47%, rgba(0, 0, 0, 0.3) 99.13%);">
                 </div>
@@ -46,7 +253,8 @@
                         >Lead differently.<br>Out on the lake.</h1>
                     <p class="text-white/90 font-normal mb-8 max-w-[554px] Lower_text_info"
                         >Leadership and wellbeing
-                        experiences on Lake Geneva for teams that need something real.</p><button
+                        experiences on Lake Geneva for teams that need something real.</p>
+                    <button onclick="openPopup()"
                         class="bg-[#005EB2] text-white font-semibold px-12 py-3.5 text-[14px] tracking-[0.7px] hover:bg-blue-800 transition-colors book_meeting_inside-image">Book
                         a 20-min meeting</button>
                     <p class="mt-20 text-white text-[10px] uppercase tracking-[0.5px] font-normal bottom_info_text">For HR, LEADERSHIP,
@@ -55,12 +263,6 @@
             </section>
             <section class="bg-[#F1F8FF] px-4 md:px-8 py-12 md:py-16">
                 <div class="max-w-[1280px] mx-2rem">
-                    <!-- <div class="mb-8">
-                        <p class="text-[#005EB2] text-[12px] font-normal tracking-[1.2px] uppercase mb-2">OUR PROGRAMS
-                        </p>
-                        <h2 class="font-bold text-[#000613] leading-[1.2] tracking-[-0.02em]"
-                            style="font-size: clamp(28px, 3.5vw, 40px);">Elite Leadership Interventions</h2>
-                    </div> -->
                     <div class="flex flex-col lg:flex-row gap-6">
                         <div class="flex-1 flex flex-col gap-4">
                             <div class="mb-8">
@@ -86,9 +288,6 @@
                                     </div>
                                 </div>
                                 <div class="relative overflow-hidden min-h-[222px] right_upper_box">
-                                    <!-- <img
-                                        src="https://api.builder.io/api/v1/image/assets/TEMP/20c9838120751ff1ee8845f60c2db4b159ebc62b?width=784"
-                                        alt="Lakefront Retreats" class="absolute inset-0 w-full h-full object-cover"> -->
                                     <div class="absolute inset-0 bg-black/40"></div>
                                     <div class="relative z-10 p-6 h-full flex flex-col">
                                         <div class="icon_water"></div>
@@ -100,10 +299,6 @@
                                 </div>
                             </div>
                             <div class="relative overflow-hidden min-h-[222px] full_bottom_box">
-                                <!-- <img
-                                    src="https://api.builder.io/api/v1/image/assets/TEMP/1640532b3d271ce9530c7b55db7e31f30f7f1047?width=1616"
-                                    alt="Annual Signature Team Challenge"
-                                    class="absolute inset-0 w-full h-full object-cover"> -->
                                 <div class="absolute inset-0 bg-[rgba(0,6,19,0.40)]"></div>
                                 <div class="relative z-10 p-6 h-full flex flex-col justify-center min-h-[222px]">
                                     <div class="mb-2"><span
@@ -197,7 +392,8 @@
                     <h2 class="text-white font-bold leading-[1.2] tracking-[-0.02em] mb-4 lower_section_heading"
                         style="font-size: clamp(28px, 3.5vw, 40px);">One conversation. Clear fit.</h2>
                     <p class="text-white/80 text-[16px] font-medium leading-[1.5] mb-8 max-w-[535px]">We'll help you
-                        choose the right format for your team, goals and timing.</p><button
+                        choose the right format for your team, goals and timing.</p>
+                    <button onclick="openPopup()"
                         class="bg-[#005EB2] text-white text-[14px] font-semibold tracking-[0.7px] px-10 py-3 hover:bg-blue-800 transition-colors fix_a_meeting_btn">Fix
                         a meeting</button>
                 </div>
@@ -210,6 +406,85 @@
             </section>
         </div>
     </div>
+
+    <!-- ══════════════════════════════════════
+         BOOKING POPUP
+    ══════════════════════════════════════ -->
+    <div class="popup-overlay" id="bookingPopup" role="dialog" aria-modal="true" aria-label="Book a Meeting">
+
+        <div class="popup-card">
+
+            <!-- Close button -->
+            <button class="popup-close" onclick="closePopup()" aria-label="Close">
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="2" y1="2" x2="14" y2="14"/>
+                    <line x1="14" y1="2" x2="2" y2="14"/>
+                </svg>
+            </button>
+
+            <!-- Left: hero image + text -->
+            <div class="popup-left">
+                <!-- <img
+                    src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80"
+                    alt="Kayaking on Lake Geneva"
+                    onerror="this.style.display='none'"
+                > -->
+                <!-- <div class="popup-left-overlay"></div> -->
+                <!-- <div class="popup-left-content">
+                    <h2>Let's Get Started!</h2>
+                    <p>Book a 20-minute call to discuss your customised event and team-building needs.</p>
+                </div> -->
+            </div>
+
+            <!-- Right: Calendly embed -->
+            <div class="popup-right">
+                <div class="popup-right-bar"></div>
+                <div class="popup-right-inner">
+                    <div class="popup-right-header">
+                        <h3>Plan Your Event</h3>
+                        <p>Select a time that works for you below.</p>
+                    </div>
+                    <div class="calendly-wrap" id="calendlyWrap">
+                        <!-- Calendly inline widget begin -->
+                        <div
+                            class="calendly-inline-widget"
+                            data-url="https://calendly.com/tdavies-lgsa?hide_gdpr_banner=1&primary_color=005eb2"
+                            style="width:100%;height:100%;min-height:480px;">
+                        </div>
+                        <!-- Calendly inline widget end -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Calendly widget script (loaded once) -->
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <script>
+        const overlay = document.getElementById('bookingPopup');
+
+        function openPopup() {
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePopup() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close when clicking the dark backdrop
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) closePopup();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closePopup();
+        });
+    </script>
 </body>
 
 </html>
