@@ -1,422 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lake Geneva — Product Catalog</title>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lake Geneva — Product Catalog</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- ══ TOP BAR ══ -->
-<div class="topbar">
-  <div class="topbar-logo">
-    <!-- <div class="topbar-logo-icon">
+  <!-- ══ TOP BAR ══ -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <!-- <div class="topbar-logo-icon">
     </div> -->
-    <!-- <div class="topbar-logo-text">Lake Geneva<br>Open Water</div> -->
+      <!-- <div class="topbar-logo-text">Lake Geneva<br>Open Water</div> -->
+    </div>
+    <div class="topbar-center">Product Catalog</div>
+    <button class="btn-mobile-filter" onclick="openMobFilter()">
+      <svg viewBox="0 0 24 24">
+        <line x1="4" y1="6" x2="20" y2="6" />
+        <line x1="7" y1="12" x2="17" y2="12" />
+        <line x1="10" y1="18" x2="14" y2="18" />
+      </svg>
+      Filter
+    </button>
   </div>
-  <div class="topbar-center">Product Catalog</div>
-  <button class="btn-mobile-filter" onclick="openMobFilter()">
-    <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
-    Filter
-  </button>
-</div>
 
-<!-- ══ PAGE WRAP ══ -->
-<div class="page-wrap">
+  <!-- ══ PAGE WRAP ══ -->
+  <div class="page-wrap">
 
-  <!-- ══ DESKTOP SIDEBAR ══ -->
-  <aside class="sidebar">
-    <div class="sidebar-title">Filter</div>
-    <div class="filter-section">
-      <span class="filter-label">Select Date</span>
-      <div class="cal-wrap">
-        <div class="cal-nav">
-          <button onclick="changeMonth(-1,'d')">&#8249;</button>
-          <span id="d-cal-label"></span>
-          <button onclick="changeMonth(1,'d')">&#8250;</button>
+    <!-- ══ DESKTOP SIDEBAR ══ -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Filter</div>
+      <div class="filter-section">
+        <span class="filter-label">Select Date</span>
+        <div class="cal-wrap">
+          <div class="cal-nav">
+            <button onclick="changeMonth(-1,'d')">&#8249;</button>
+            <span id="d-cal-label"></span>
+            <button onclick="changeMonth(1,'d')">&#8250;</button>
+          </div>
+          <div class="cal-grid" id="d-cal-grid"></div>
         </div>
-        <div class="cal-grid" id="d-cal-grid"></div>
       </div>
+      <div class="filter-section">
+        <span class="filter-label">Select Event type</span>
+        <div class="check-row"><input type="checkbox" id="d-flagship" onchange="applyFilters()"><label
+            for="d-flagship">Flagship</label></div>
+        <div class="check-row"><input type="checkbox" id="d-core" onchange="applyFilters()"><label
+            for="d-core">Core</label></div>
+        <div class="check-row"><input type="checkbox" id="d-entry" onchange="applyFilters()"><label for="d-entry">Entry
+            Level</label></div>
+      </div>
+      <div class="filter-section">
+        <span class="filter-label">Select Place</span>
+        <div class="place-group">
+          <div class="place-group-name">Geneva</div>
+          <div class="place-sub">
+            <div class="check-row"><input type="checkbox" id="d-mont" onchange="applyFilters()"><label
+                for="d-mont">Mont-Voisin</label></div>
+            <div class="check-row"><input type="checkbox" id="d-evian" onchange="applyFilters()"><label
+                for="d-evian">Evian-les-Bains</label></div>
+            <div class="check-row"><input type="checkbox" id="d-lausanne" onchange="applyFilters()"><label
+                for="d-lausanne">Lausanne/Evian-les-Bains</label></div>
+          </div>
+        </div>
+        <div class="place-group">
+          <div class="check-row"><input type="checkbox" id="d-montreux" onchange="applyFilters()"><label
+              for="d-montreux">Geneva / Montreux</label></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ══ CATALOG MAIN ══ -->
+    <main class="main" id="catalog-main">
+      <h1 class="page-title">Explore the Deep</h1>
+      <p class="page-subtitle">Discover elite open water swimming events across the most iconic waters. From beginner
+        initiations to our legendary 70km flagship endurance challenge. Only for the elite.</p>
+
+      <div class="featured-card" id="feat-card" data-type="flagship" data-place="mont-voisin">
+        <div class="featured-img">
+          <span class="featured-badge"><span class="badge badge-flagship">Flagship</span></span>
+        </div>
+        <div class="featured-body">
+          <div>
+            <div class="featured-title">La Signature</div>
+            <div class="featured-desc">The ultimate test of human endurance. 70km and 140km across the legendary expanse
+              of Lake Geneva. Only for the elite.</div>
+          </div>
+          <div>
+            <div class="featured-meta-label">Distance</div>
+            <div class="featured-meta-value">70 km / 140 km</div>
+            <div class="featured-meta-label">Duration</div>
+            <div class="featured-meta-value">22–28 hrs / 3 days</div>
+            <div class="featured-price">€1,250</div>
+            <button class="btn-view-details-featured" onclick="showDetail('la-signature')">View Details</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-grid" id="product-grid">
+
+        <div class="product-card" data-id="swim-stronger" data-type="core" data-place="mont-voisin">
+          <div class="product-img img-swim-stronger"><span class="badge badge-core">Core</span></div>
+          <div class="product-body">
+            <div class="product-title">Swim Stronger</div>
+            <div class="product-desc">5-day training camp to improve technique, endurance, and open water performance.
+            </div>
+            <div class="product-stats">
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <path d="M22 12H2M12 2v20" />
+                </svg>3 – 15 km</span>
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>5 days</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">€145</span>
+              <button class="btn-view-link" onclick="showDetail('swim-stronger')">View details <svg viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-id="la-classique" data-type="core" data-place="montreux">
+          <div class="product-img img-la-classique"><span class="badge badge-core">Core</span></div>
+          <div class="product-body">
+            <div class="product-title">La Classique</div>
+            <div class="product-desc">Popular 15km mass event for experienced swimmers seeking a competitive challenge.
+            </div>
+            <div class="product-stats">
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <path d="M22 12H2M12 2v20" />
+                </svg>15 km</span>
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>1 day</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">€85</span>
+              <button class="btn-view-link" onclick="showDetail('la-classique')">View details <svg viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-id="guided-classique" data-type="core" data-place="lausanne">
+          <div class="product-img img-guided-classique"><span class="badge badge-core">Core</span></div>
+          <div class="product-body">
+            <div class="product-title">Guided Classique</div>
+            <div class="product-desc">Full-day 15km guided swim for experienced swimmers; available solo, group, or
+              relay.</div>
+            <div class="product-stats">
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <path d="M22 12H2M12 2v20" />
+                </svg>One-way 15km</span>
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>1 day</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">€65</span>
+              <button class="btn-view-link" onclick="showDetail('guided-classique')">View details <svg
+                  viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-id="la-nyvoirienne" data-type="entry" data-place="evian">
+          <div class="product-img img-la-nyvoirienne"><span class="badge badge-entry">Entry</span></div>
+          <div class="product-body">
+            <div class="product-title">La Nyvoirienne</div>
+            <div class="product-desc">Fun open water event blending endurance and community.</div>
+            <div class="product-stats">
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <path d="M22 12H2M12 2v20" />
+                </svg>8 – 7 km</span>
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>1 day</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">€45</span>
+              <button class="btn-view-link" onclick="showDetail('la-nyvoirienne')">View details <svg
+                  viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-id="guided-nyvoirienne" data-type="entry" data-place="evian">
+          <div class="product-img img-guided-nyvo"><span class="badge badge-entry">Entry</span></div>
+          <div class="product-body">
+            <div class="product-title">Guided Nyvoirienne</div>
+            <div class="product-desc">Scenic 7km guided swim for moderately experienced swimmers; solo, group, or relay.
+            </div>
+            <div class="product-stats">
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <path d="M22 12H2M12 2v20" />
+                </svg>7 km</span>
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>1/2 day</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">€35</span>
+              <button class="btn-view-link" onclick="showDetail('guided-nyvoirienne')">View details <svg
+                  viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card" data-id="lake-geneva-initiation" data-type="entry" data-place="mont-voisin">
+          <div class="product-img img-initiation"><span class="badge badge-entry">Entry</span></div>
+          <div class="product-body">
+            <div class="product-title">Lake Geneva Initiation</div>
+            <div class="product-desc">Beginner-friendly guided swim to build open water confidence.</div>
+            <div class="product-stats">
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <path d="M22 12H2M12 2v20" />
+                </svg>0–3 km</span>
+              <span class="stat-item"><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>2–3 hrs</span>
+            </div>
+            <div class="product-footer">
+              <span class="product-price">€25</span>
+              <button class="btn-view-link" onclick="showDetail('lake-geneva-initiation')">View details <svg
+                  viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ══ DETAIL PAGE (injected by JS) ══ -->
+    <div class="detail-wrap" id="detail-wrap"></div>
+
+  </div><!-- /page-wrap -->
+
+  <!-- ══ WISE PAYMENT POPUP ══ -->
+  <div class="wise-overlay" id="wise-overlay" onclick="closeWiseIfOutside(event)">
+    <div class="wise-panel" id="wise-panel">
+
+      <!-- Header -->
+      <div class="wise-panel-header">
+        <div class="wise-header-left">
+          <div class="wise-logo-mark">W</div>
+          <span class="wise-logo-text"><span>Wise</span> Pay</span>
+        </div>
+        <button class="wise-close-btn" onclick="closeWise()">✕</button>
+      </div>
+
+      <!-- Body -->
+      <div class="wise-panel-body">
+
+        <!-- Product row -->
+        <div class="wise-product-row">
+          <div class="wise-product-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 12c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2s10 4.48 10 10z" />
+              <path d="M7 12c1-2 2.5-3 5-3s4 1 5 3-2 4-5 4-6-2-5-4z" />
+            </svg>
+          </div>
+          <div>
+            <div class="wise-product-name" id="wise-product-name">—</div>
+            <div class="wise-product-type">Lake Geneva Open Water</div>
+          </div>
+        </div>
+
+        <!-- Amount -->
+        <div class="wise-amount-block">
+          <div class="wise-amount-label">Total amount</div>
+          <div class="wise-amount-row">
+            <span class="wise-amount-value" id="wise-amount">—</span>
+            <span class="wise-currency-tag">EUR</span>
+          </div>
+        </div>
+
+        <!-- Breakdown -->
+        <div class="wise-breakdown">
+          <div class="wise-fee-row"><span>Entry fee</span><span id="wise-fee-entry">—</span></div>
+          <div class="wise-fee-row"><span>Wise transfer fee</span><span id="wise-fee-wise">~€1.84</span></div>
+          <div class="wise-fee-row total"><span>You pay</span><span id="wise-fee-total">—</span></div>
+        </div>
+
+      </div>
+
+      <!-- Footer actions -->
+      <div class="wise-panel-footer">
+        <button class="wise-pay-btn" onclick="proceedToWise()">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+          Continue to Wise
+        </button>
+        <button class="wise-cancel-btn" onclick="closeWise()">Cancel</button>
+        <div class="wise-secure-note">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0110 0v4" />
+          </svg>
+          Secured by Wise · FCA regulated
+        </div>
+      </div>
+
     </div>
-    <div class="filter-section">
-      <span class="filter-label">Select Event type</span>
-      <div class="check-row"><input type="checkbox" id="d-flagship" onchange="applyFilters()"><label for="d-flagship">Flagship</label></div>
-      <div class="check-row"><input type="checkbox" id="d-core" onchange="applyFilters()"><label for="d-core">Core</label></div>
-      <div class="check-row"><input type="checkbox" id="d-entry" onchange="applyFilters()"><label for="d-entry">Entry Level</label></div>
-    </div>
-    <div class="filter-section">
-      <span class="filter-label">Select Place</span>
-      <div class="place-group">
-        <div class="place-group-name">Geneva</div>
-        <div class="place-sub">
-          <div class="check-row"><input type="checkbox" id="d-mont" onchange="applyFilters()"><label for="d-mont">Mont-Voisin</label></div>
-          <div class="check-row"><input type="checkbox" id="d-evian" onchange="applyFilters()"><label for="d-evian">Evian-les-Bains</label></div>
-          <div class="check-row"><input type="checkbox" id="d-lausanne" onchange="applyFilters()"><label for="d-lausanne">Lausanne/Evian-les-Bains</label></div>
-        </div>
-      </div>
-      <div class="place-group">
-        <div class="check-row"><input type="checkbox" id="d-montreux" onchange="applyFilters()"><label for="d-montreux">Geneva / Montreux</label></div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- ══ CATALOG MAIN ══ -->
-  <main class="main" id="catalog-main">
-    <h1 class="page-title">Explore the Deep</h1>
-    <p class="page-subtitle">Discover elite open water swimming events across the most iconic waters. From beginner initiations to our legendary 70km flagship endurance challenge. Only for the elite.</p>
-
-    <div class="featured-card" id="feat-card" data-type="flagship" data-place="mont-voisin">
-      <div class="featured-img">
-        <span class="featured-badge"><span class="badge badge-flagship">Flagship</span></span>
-      </div>
-      <div class="featured-body">
-        <div>
-          <div class="featured-title">La Signature</div>
-          <div class="featured-desc">The ultimate test of human endurance. 70km and 140km across the legendary expanse of Lake Geneva. Only for the elite.</div>
-        </div>
-        <div>
-          <div class="featured-meta-label">Distance</div>
-          <div class="featured-meta-value">70 km / 140 km</div>
-          <div class="featured-meta-label">Duration</div>
-          <div class="featured-meta-value">22–28 hrs / 3 days</div>
-          <div class="featured-price">€1,250</div>
-          <button class="btn-view-details-featured" onclick="showDetail('la-signature')">View Details</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-grid" id="product-grid">
-
-      <div class="product-card" data-id="swim-stronger" data-type="core" data-place="mont-voisin">
-        <div class="product-img img-swim-stronger"><span class="badge badge-core">Core</span></div>
-        <div class="product-body">
-          <div class="product-title">Swim Stronger</div>
-          <div class="product-desc">5-day training camp to improve technique, endurance, and open water performance.</div>
-          <div class="product-stats">
-            <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>3 – 15 km</span>
-            <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 days</span>
-          </div>
-          <div class="product-footer">
-            <span class="product-price">€145</span>
-            <button class="btn-view-link" onclick="showDetail('swim-stronger')">View details <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card" data-id="la-classique" data-type="core" data-place="montreux">
-        <div class="product-img img-la-classique"><span class="badge badge-core">Core</span></div>
-        <div class="product-body">
-          <div class="product-title">La Classique</div>
-          <div class="product-desc">Popular 15km mass event for experienced swimmers seeking a competitive challenge.</div>
-          <div class="product-stats">
-            <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>15 km</span>
-            <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>1 day</span>
-          </div>
-          <div class="product-footer">
-            <span class="product-price">€85</span>
-            <button class="btn-view-link" onclick="showDetail('la-classique')">View details <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card" data-id="guided-classique" data-type="core" data-place="lausanne">
-        <div class="product-img img-guided-classique"><span class="badge badge-core">Core</span></div>
-        <div class="product-body">
-          <div class="product-title">Guided Classique</div>
-          <div class="product-desc">Full-day 15km guided swim for experienced swimmers; available solo, group, or relay.</div>
-          <div class="product-stats">
-            <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>One-way 15km</span>
-            <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>1 day</span>
-          </div>
-          <div class="product-footer">
-            <span class="product-price">€65</span>
-            <button class="btn-view-link" onclick="showDetail('guided-classique')">View details <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card" data-id="la-nyvoirienne" data-type="entry" data-place="evian">
-        <div class="product-img img-la-nyvoirienne"><span class="badge badge-entry">Entry</span></div>
-        <div class="product-body">
-          <div class="product-title">La Nyvoirienne</div>
-          <div class="product-desc">Fun open water event blending endurance and community.</div>
-          <div class="product-stats">
-            <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>8 – 7 km</span>
-            <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>1 day</span>
-          </div>
-          <div class="product-footer">
-            <span class="product-price">€45</span>
-            <button class="btn-view-link" onclick="showDetail('la-nyvoirienne')">View details <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card" data-id="guided-nyvoirienne" data-type="entry" data-place="evian">
-        <div class="product-img img-guided-nyvo"><span class="badge badge-entry">Entry</span></div>
-        <div class="product-body">
-          <div class="product-title">Guided Nyvoirienne</div>
-          <div class="product-desc">Scenic 7km guided swim for moderately experienced swimmers; solo, group, or relay.</div>
-          <div class="product-stats">
-            <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>7 km</span>
-            <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>1/2 day</span>
-          </div>
-          <div class="product-footer">
-            <span class="product-price">€35</span>
-            <button class="btn-view-link" onclick="showDetail('guided-nyvoirienne')">View details <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-card" data-id="lake-geneva-initiation" data-type="entry" data-place="mont-voisin">
-        <div class="product-img img-initiation"><span class="badge badge-entry">Entry</span></div>
-        <div class="product-body">
-          <div class="product-title">Lake Geneva Initiation</div>
-          <div class="product-desc">Beginner-friendly guided swim to build open water confidence.</div>
-          <div class="product-stats">
-            <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>0–3 km</span>
-            <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>2–3 hrs</span>
-          </div>
-          <div class="product-footer">
-            <span class="product-price">€25</span>
-            <button class="btn-view-link" onclick="showDetail('lake-geneva-initiation')">View details <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- ══ DETAIL PAGE (injected by JS) ══ -->
-  <div class="detail-wrap" id="detail-wrap"></div>
-
-</div><!-- /page-wrap -->
-
-<!-- ══ WISE PAYMENT POPUP ══ -->
-<div class="wise-overlay" id="wise-overlay" onclick="closeWiseIfOutside(event)">
-  <div class="wise-panel" id="wise-panel">
-
-    <!-- Header -->
-    <div class="wise-panel-header">
-      <div class="wise-header-left">
-        <div class="wise-logo-mark">W</div>
-        <span class="wise-logo-text"><span>Wise</span> Pay</span>
-      </div>
-      <button class="wise-close-btn" onclick="closeWise()">✕</button>
-    </div>
-
-    <!-- Body -->
-    <div class="wise-panel-body">
-
-      <!-- Product row -->
-      <div class="wise-product-row">
-        <div class="wise-product-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 12c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2s10 4.48 10 10z"/><path d="M7 12c1-2 2.5-3 5-3s4 1 5 3-2 4-5 4-6-2-5-4z"/></svg>
-        </div>
-        <div>
-          <div class="wise-product-name" id="wise-product-name">—</div>
-          <div class="wise-product-type">Lake Geneva Open Water</div>
-        </div>
-      </div>
-
-      <!-- Amount -->
-      <div class="wise-amount-block">
-        <div class="wise-amount-label">Total amount</div>
-        <div class="wise-amount-row">
-          <span class="wise-amount-value" id="wise-amount">—</span>
-          <span class="wise-currency-tag">EUR</span>
-        </div>
-      </div>
-
-      <!-- Breakdown -->
-      <div class="wise-breakdown">
-        <div class="wise-fee-row"><span>Entry fee</span><span id="wise-fee-entry">—</span></div>
-        <div class="wise-fee-row"><span>Wise transfer fee</span><span id="wise-fee-wise">~€1.84</span></div>
-        <div class="wise-fee-row total"><span>You pay</span><span id="wise-fee-total">—</span></div>
-      </div>
-
-    </div>
-
-    <!-- Footer actions -->
-    <div class="wise-panel-footer">
-      <button class="wise-pay-btn" onclick="proceedToWise()">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Continue to Wise
-      </button>
-      <button class="wise-cancel-btn" onclick="closeWise()">Cancel</button>
-      <div class="wise-secure-note">
-        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        Secured by Wise · FCA regulated
-      </div>
-    </div>
-
   </div>
-</div>
 
-<!-- ══ MOBILE FILTER SHEET ══ -->
-<div class="mob-overlay" id="mob-overlay" onclick="closeMobIfOutside(event)">
-  <div class="mob-sheet">
-    <div class="mob-handle"></div>
-    <div class="mob-sheet-header">
-      <h3>Filter</h3>
-      <button class="mob-close" onclick="closeMobFilter()">✕</button>
-    </div>
-    <div class="filter-section">
-      <span class="filter-label">Select Date</span>
-      <div class="cal-wrap">
-        <div class="cal-nav">
-          <button onclick="changeMonth(-1,'m')">&#8249;</button>
-          <span id="m-cal-label"></span>
-          <button onclick="changeMonth(1,'m')">&#8250;</button>
-        </div>
-        <div class="cal-grid" id="m-cal-grid"></div>
+  <!-- ══ MOBILE FILTER SHEET ══ -->
+  <div class="mob-overlay" id="mob-overlay" onclick="closeMobIfOutside(event)">
+    <div class="mob-sheet">
+      <div class="mob-handle"></div>
+      <div class="mob-sheet-header">
+        <h3>Filter</h3>
+        <button class="mob-close" onclick="closeMobFilter()">✕</button>
       </div>
-    </div>
-    <div class="filter-section">
-      <span class="filter-label">Select Event type</span>
-      <div class="check-row"><input type="checkbox" id="m-flagship" onchange="syncMobile('flagship')"><label for="m-flagship">Flagship</label></div>
-      <div class="check-row"><input type="checkbox" id="m-core" onchange="syncMobile('core')"><label for="m-core">Core</label></div>
-      <div class="check-row"><input type="checkbox" id="m-entry" onchange="syncMobile('entry')"><label for="m-entry">Entry Level</label></div>
-    </div>
-    <div class="filter-section">
-      <span class="filter-label">Select Place</span>
-      <div class="place-group">
-        <div class="place-group-name">Geneva</div>
-        <div class="place-sub">
-          <div class="check-row"><input type="checkbox" id="m-mont" onchange="syncMobile('mont')"><label for="m-mont">Mont-Voisin</label></div>
-          <div class="check-row"><input type="checkbox" id="m-evian" onchange="syncMobile('evian')"><label for="m-evian">Evian-les-Bains</label></div>
-          <div class="check-row"><input type="checkbox" id="m-lausanne" onchange="syncMobile('lausanne')"><label for="m-lausanne">Lausanne/Evian-les-Bains</label></div>
+      <div class="filter-section">
+        <span class="filter-label">Select Date</span>
+        <div class="cal-wrap">
+          <div class="cal-nav">
+            <button onclick="changeMonth(-1,'m')">&#8249;</button>
+            <span id="m-cal-label"></span>
+            <button onclick="changeMonth(1,'m')">&#8250;</button>
+          </div>
+          <div class="cal-grid" id="m-cal-grid"></div>
         </div>
       </div>
-      <div class="place-group">
-        <div class="check-row"><input type="checkbox" id="m-montreux" onchange="syncMobile('montreux')"><label for="m-montreux">Geneva / Montreux</label></div>
+      <div class="filter-section">
+        <span class="filter-label">Select Event type</span>
+        <div class="check-row"><input type="checkbox" id="m-flagship" onchange="syncMobile('flagship')"><label
+            for="m-flagship">Flagship</label></div>
+        <div class="check-row"><input type="checkbox" id="m-core" onchange="syncMobile('core')"><label
+            for="m-core">Core</label></div>
+        <div class="check-row"><input type="checkbox" id="m-entry" onchange="syncMobile('entry')"><label
+            for="m-entry">Entry Level</label></div>
       </div>
+      <div class="filter-section">
+        <span class="filter-label">Select Place</span>
+        <div class="place-group">
+          <div class="place-group-name">Geneva</div>
+          <div class="place-sub">
+            <div class="check-row"><input type="checkbox" id="m-mont" onchange="syncMobile('mont')"><label
+                for="m-mont">Mont-Voisin</label></div>
+            <div class="check-row"><input type="checkbox" id="m-evian" onchange="syncMobile('evian')"><label
+                for="m-evian">Evian-les-Bains</label></div>
+            <div class="check-row"><input type="checkbox" id="m-lausanne" onchange="syncMobile('lausanne')"><label
+                for="m-lausanne">Lausanne/Evian-les-Bains</label></div>
+          </div>
+        </div>
+        <div class="place-group">
+          <div class="check-row"><input type="checkbox" id="m-montreux" onchange="syncMobile('montreux')"><label
+              for="m-montreux">Geneva / Montreux</label></div>
+        </div>
+      </div>
+      <button class="mob-apply" onclick="closeMobFilter()">Apply Filters</button>
     </div>
-    <button class="mob-apply" onclick="closeMobFilter()">Apply Filters</button>
   </div>
-</div>
 
-<script>
-/* ══════════════════════════════════════════════
-   TAB DEFINITIONS
-══════════════════════════════════════════════ */
-const TABS = [
-  { key: 'swimOverview',   label: 'Swim Overview'    },
-  { key: 'distanceRoute',  label: 'Distance & route' },
-  { key: 'safetySupport',  label: 'Safety & Support' },
-  { key: 'whatsIncluded',  label: "What's included"  },
-  { key: 'entryLogistics', label: 'Entry & Logistics'},
-];
+  <script>
+    /* ══════════════════════════════════════════════
+       TAB DEFINITIONS
+    ══════════════════════════════════════════════ */
+    const TABS = [
+      { key: 'swimOverview', label: 'Swim Overview' },
+      { key: 'distanceRoute', label: 'Distance & route' },
+      { key: 'safetySupport', label: 'Safety & Support' },
+      { key: 'whatsIncluded', label: "What's included" },
+      { key: 'entryLogistics', label: 'Entry & Logistics' },
+    ];
 
-/* ══════════════════════════════════════════════
-   PRODUCT DATA
-   - price      : numeric value (used for Wise popup)
-   - priceLabel : display string e.g. "€85"
-   - Each tab key: array of strings OR object of sub-sections { heading: [bullets] }
-   - Empty array → "Content coming soon." placeholder
-══════════════════════════════════════════════ */
-const products = {
+    /* ══════════════════════════════════════════════
+       PRODUCT DATA
+       - price      : numeric value (used for Wise popup)
+       - priceLabel : display string e.g. "€85"
+       - Each tab key: array of strings OR object of sub-sections { heading: [bullets] }
+       - Empty array → "Content coming soon." placeholder
+    ══════════════════════════════════════════════ */
+    const products = {
 
-  'la-signature': {
-    title: 'La Signature', badge: 'Flagship', badgeClass: 'badge-flagship',
-    price: 1250, priceLabel: '€1,250',
-    imgStyle: "background-image:url('assets/flagged_ship_img.png'); background-color:#1a3a6e;",
-    swimOverview:   ['70 km or 140 km non-stop crossing of Lake Geneva.', 'Solo or relay team formats available.', 'The ultimate test of elite open water endurance.'],
-    distanceRoute:  [], safetySupport: [], whatsIncluded: [], entryLogistics: [],
-  },
+      'la-signature': {
+        title: 'La Signature', badge: 'Flagship', badgeClass: 'badge-flagship',
+        price: 1250, priceLabel: '€1,250',
+        imgStyle: "background-image:url('assets/flagged_ship_img.png'); background-color:#1a3a6e;",
+        swimOverview: ['70 km Signature end‑to‑end crossing of Lake Geneva.', 'For highly experienced solo swimmers or relay teams.', 'Application‑only LGSA trophy swim.'],
+        distanceRoute: ['Approx. 70 km along the full length of Lake Geneva.', 'Typical route between Geneva and Villeneuve/Montreux (direction chosen for conditions).', 'Bespoke route briefing for each attempt.'], safetySupport: ['Dedicated pilot, observer and support crew for entire swim.', 'Full night‑swimming and contingency protocols.', 'Proven marathon‑swim history and robust training plan required.', 'Medical clearance and comprehensive insurance mandatory.'], whatsIncluded: ['Route planning, permits and authority liaison.', 'Escort boat(s), crew and standard feed preparation.', 'GPS tracking link for supporters.', 'Signature 70 finisher recognition (certificate, medal, listing).'], entryLogistics: {
+          "Travel & access": [
+            "Start/finish typically near Geneva or Montreux.",
+            "Geneva Airport + rail/road to start point.",
+            'Detailed logistics and accommodation guidance once accepted.'
+          ],
+          "Price & entry terms": [
+            "From CHF XX’XXX per solo or relay attempt.",
+            "Application fee; staged payments after acceptance.",
+            "Date windows highly weather‑dependent; flexibility required.",
+            'Bespoke contract, waiver and cancellation terms.'
+          ]
+        },
+      },
 
-  'swim-stronger': {
-    title: 'Swim Stronger', badge: 'Core', badgeClass: 'badge-core',
-    price: 145, priceLabel: '€145',
-    imgStyle: "background-image:url('assets/core_01_img.png'); background-color:#2a5298;",
-    swimOverview:   ['5-day intensive open water training camp on Lake Geneva.', 'Structured pool sessions combined with progressive open water swims.', 'Designed for intermediate to advanced swimmers.'],
-    distanceRoute:  [], safetySupport: [], whatsIncluded: [], entryLogistics: [],
-  },
+      'swim-stronger': {
+        title: 'Swim Stronger', badge: 'Core', badgeClass: 'badge-core',
+        price: 145, priceLabel: '€145',
+        imgStyle: "background-image:url('assets/core_01_img.png'); background-color:#2a5298;",
+        swimOverview: ['5‑day open‑water training camp on Lake Geneva.', 'Based in Évian‑les‑Bains; aimed at strong improvers and marathon‑swim aspirants.', 'Mix of technique, endurance and mindset sessions.'],
+        distanceRoute: ['Daily swims from ~1–5+ km, building towards 5–13 km capability.', 'Shoreline loops and crossing‑style routes, chosen for conditions.', 'Clear daily plan shared in advance.'], safetySupport: ['LGSA coaching team plus safety support for all water sessions.', 'Minimum: able to swim at least 2 km continuous in open water; age 18+.', 'Health questionnaire and appropriate insurance required.'], whatsIncluded: ['Coaching programme and all on‑water sessions.', 'Workshops on pacing, feeds, safety and mental skills.', 'Support boat/kayaks as needed.', 'Camp briefing pack and post‑camp recommendations.'], entryLogistics: {
+          "Travel & access": [
+            "Évian‑les‑Bains via Geneva Airport + train/ferry/road.",
+            "Meeting point and suggested accommodation list provided after booking."
+          ],
+          "Price & entry terms": [
+            "From CHF X’XXX per person for 5‑day camp.",
+            "Deposit at registration; balance due X weeks before start.",
+            "Clear cancellation / deferral policy in booking conditions."
+          ]
+        },
+      },
 
-  'la-classique': {
-    title: 'La Classique', badge: 'Core', badgeClass: 'badge-core',
-    price: 85, priceLabel: '€85',
-    imgStyle: "background-image:url('assets/core_02_img.png'); background-color:#2a7060;",
-    swimOverview:   ['13 km international event across Lake Geneva.', 'Lausanne (CH) to Évian-les-Bains (FR).', 'Adventure marathon swim with limited entries.'],
-    distanceRoute:  ['Distance: 13 km "as the crow flies".', 'Start: Lausanne–Ouchy.', 'Finish: Parc Dollfus, Évian-les-Bains.', 'Course marked and supported by safety boats.'],
-    safetySupport:  ['LGSA-run event with professional safety team.', 'Dedicated kayaker required for each swimmer or booked via LGSA.', 'Strong marathon-swim fitness; minimum 8–10 km open-water experience.', 'Wetsuit and medical rules set in the official regulations.'],
-    whatsIncluded:  ['Event entry and on-water safety support.', 'Feed stations (drinks and energy) along the course.', 'Official La Classique swim cap and medal.', 'One-way event-day ferry transport between Évian and Lausanne.'],
-    entryLogistics: {
-      'Travel & Access':     ['Lausanne and Évian connected by ferry and road.', 'Geneva Airport + rail to Lausanne is typical international route.', 'Full logistics and kit list in event information pack.'],
-      'Price, Entry & Terms':['Entry fee: €XXX per swimmer.', 'Entries non-refundable and non-transferable except if cancelled.', 'Event rules and waiver accepted at registration.'],
-    },
-  },
+      'la-classique': {
+        title: 'La Classique', badge: 'Core', badgeClass: 'badge-core',
+        price: 85, priceLabel: '€85',
+        imgStyle: "background-image:url('assets/core_02_img.png'); background-color:#2a7060;",
+        swimOverview: ['13 km international event across Lake Geneva.', 'Lausanne (CH) to Évian-les-Bains (FR).', 'Adventure marathon swim with limited entries.'],
+        distanceRoute: ['Distance: 13 km "as the crow flies".', 'Start: Lausanne–Ouchy.', 'Finish: Parc Dollfus, Évian-les-Bains.', 'Course marked and supported by safety boats.'],
+        safetySupport: ['LGSA-run event with professional safety team.', 'Dedicated kayaker required for each swimmer or booked via LGSA.', 'Strong marathon-swim fitness; minimum 8–10 km open-water experience.', 'Wetsuit and medical rules set in the official regulations.'],
+        whatsIncluded: ['Event entry and on-water safety support.', 'Feed stations (drinks and energy) along the course.', 'Official La Classique swim cap and medal.', 'One-way event-day ferry transport between Évian and Lausanne.'],
+        entryLogistics: {
+          'Travel & Access': ['Lausanne and Évian connected by ferry and road.', 'Geneva Airport + rail to Lausanne is typical international route.', 'Full logistics and kit list in event information pack.'],
+          'Price, Entry & Terms': ['Entry fee: €XXX per swimmer.', 'Entries non-refundable and non-transferable except if cancelled.', 'Event rules and waiver accepted at registration.'],
+        },
+      },
 
-  'guided-classique': {
-    title: 'Guided Classique', badge: 'Core', badgeClass: 'badge-core',
-    price: 65, priceLabel: '€65',
-    imgStyle: "background-image:url('assets/core_03_img.png'); background-color:#3a6cb5;",
-    swimOverview:   ['Full-day 15 km guided crossing of Lake Geneva.', 'Available as solo, group (up to 4), or relay.', 'Personal escort boat accompanies every swimmer.'],
-    distanceRoute:  [], safetySupport: [], whatsIncluded: [], entryLogistics: [],
-  },
+      'guided-classique': {
+        title: 'Guided Classique', badge: 'Core', badgeClass: 'badge-core',
+        price: 65, priceLabel: '€65',
+        imgStyle: "background-image:url('assets/core_03_img.png'); background-color:#3a6cb5;",
+        swimOverview: ['Iconic 13 km guided crossing of Lake Geneva.', 'Lausanne (CH) to Évian‑les‑Bains (FR), or reverse.', 'Private or small‑group format for serious open‑water swimmers.'],
+        distanceRoute: ['Distance: 13 km point‑to‑point.', 'Start: Lausanne–Ouchy.', 'Finish: Parc Dollfus, Évian‑les‑Bains.', 'Exact direction and start time set for best conditions.'], safetySupport: ['Dedicated escort boat with pilot and observer.', 'Pre‑swim safety briefing and feed plan.', 'Minimum: recent 8–10 km open‑water swim; age 18+.', 'Wetsuit rules based on water temperature and LGSA guidance.'], whatsIncluded: ['Escort boat, pilot, observer and route planning.', 'Standard feeds on the boat (drinks/basic nutrition).', 'Official LGSA Classique certificate/medal.', 'Logistics brief for travel and border crossing.'], entryLogistics: {
+          "Travel & access": [
+            "Easy rail access to Lausanne from Geneva/Zurich.",
+            "Ferry / road options from Évian back to Switzerland.",
+            "Full meet‑point and timing details in confirmation email."
+          ],
+          "Price & entry terms": [
+            "From CHF X’XXX per guided crossing (solo or shared).",
+            "Deposit on booking; balance due before swim.",
+            "Weather may move start within agreed window; safety first.",
+            'Full terms, waiver and insurance expectations at checkout.'
+          ]
+        },
+      },
 
-  'la-nyvoirienne': {
-    title: 'La Nyvoirienne', badge: 'Entry', badgeClass: 'badge-entry',
-    price: 45, priceLabel: '€45',
-    imgStyle: "background-image:url('assets/entry_01_img.png'); background-color:#2a8060;",
-    swimOverview:   ['Fun open water festival event on Lake Geneva.', 'Choice of 5 km or 8 km distance.', 'Welcoming atmosphere for all abilities.'],
-    distanceRoute:  [], safetySupport: [], whatsIncluded: [], entryLogistics: [],
-  },
+      'la-nyvoirienne': {
+        title: 'La Nyvoirienne', badge: 'Entry', badgeClass: 'badge-entry',
+        price: 45, priceLabel: '€45',
+        imgStyle: "background-image:url('assets/entry_01_img.png'); background-color:#2a8060;",
+        swimOverview: ['6–7 km international adventure event across the Petit Lac.', 'Nyon (CH) to Yvoire (FR) or similar route.', 'Mass‑start, non‑elite open‑water event for experienced swimmers.'],
+        distanceRoute: ['Distance: approx. 7 km.', 'Point‑to‑point course between Swiss and French shores.', 'Supported by safety boats and at least one feed station.'], safetySupport: ['Professional water‑safety team on the course.', 'Mandatory race briefing before start.', 'Minimum: comfortable over 3–4 km open water; age 18+.', 'Wetsuit and medical rules as per event regulations.'], whatsIncluded: ['Event entry and full on‑water safety support.', 'Feed station(s) with drinks and basic energy.', 'Official event swim cap and finisher medal.', 'One‑way ferry transfer between start and finish on event day.'], entryLogistics: {
+          "Travel & access": [
+            "Nyon: train connections from Geneva and Lausanne.",
+            "Yvoire / surrounding villages: ferry and road access from Switzerland/France.",
+            "Detailed travel plan and timetable in the event information pack."
+          ],
+          "Price & entry terms": [
+            "Entry fee: €XXX per swimmer.",
+            "Entries non‑refundable and non‑transferable except if cancelled by organiser.",
+            "Rules and waiver accepted at registration."
+          ]
+        },
+      },
 
-  'guided-nyvoirienne': {
-    title: 'Guided Nyvoirienne', badge: 'Entry', badgeClass: 'badge-entry',
-    price: 35, priceLabel: '€35',
-    imgStyle: "background-image:url('assets/entry_02_img.png'); background-color:#3a7bd5;",
-    swimOverview:   ['Scenic 7 km guided swim along the Evian coastline.', 'Ideal for moderately experienced open water swimmers.', 'Available solo, group, or relay.'],
-    distanceRoute:  [], safetySupport: [], whatsIncluded: [], entryLogistics: [],
-  },
+      'guided-nyvoirienne': {
+        title: 'Guided Nyvoirienne', badge: 'Entry', badgeClass: 'badge-entry',
+        price: 35, priceLabel: '€35',
+        imgStyle: "background-image:url('assets/entry_02_img.png'); background-color:#3a7bd5;",
+        swimOverview: ['7 km guided cross‑border swim on the Petit Lac.', 'Nyon (Switzerland) to Yvoire or Nernier (France), or reverse.', 'Solo, relay or small‑group format.'],
+        distanceRoute: ['Distance: approx. 7 km.', 'Typical route: Nyon harbour to Yvoire or Nernier (or reverse).', 'Exact line and direction chosen for best conditions.'], safetySupport: ['Escort boat with LGSA pilot and safety equipment.', 'Pre‑swim briefing on feeds, signals and border formalities.', 'Minimum: able to swim 3–4 km continuous in open water; age 18+.', 'Wetsuit rules set according to water temperature.'], whatsIncluded: ['Escort boat, pilot and route planning.', 'Standard on‑boat feeds (water/basic energy).', 'Guidance on return logistics between Nyon and Yvoire/Nernier.', 'Completion certificate.'], entryLogistics: {
+          "Travel & access": [
+            "Nyon: ~20–25 minutes by train from Geneva.",
+            "Easy train/bus/taxi connections to Nyon from Geneva and Lausanne.",
+            "Meeting point, timing and travel suggestions in confirmation email."
+          ],
+          "Price & entry terms": [
+            "From CHF X’XXX per guided crossing (solo or shared).",
+            "Deposit to secure your date; balance due before swim.",
+            "Date/time may move within agreed window for safety.",
+            'Full terms, waiver and insurance expectations at checkout.'
+          ]
+        },
+      },
 
-  'lake-geneva-initiation': {
-    title: 'Lake Geneva Initiation', badge: 'Entry', badgeClass: 'badge-entry',
-    price: 25, priceLabel: '€25',
-    imgStyle: "background-image:url('assets/entry_03_img.png'); background-color:#1a4a7e;",
-    swimOverview:   ['Beginner-friendly introduction to open water swimming.', 'Small groups of up to 8 participants with expert coaching.', '0–3 km session tailored to your comfort level.'],
-    distanceRoute:  [], safetySupport: [], whatsIncluded: [], entryLogistics: [],
-  },
-};
+      'lake-geneva-initiation': {
+        title: 'Lake Geneva Initiation', badge: 'Entry', badgeClass: 'badge-entry',
+        price: 25, priceLabel: '€25',
+        imgStyle: "background-image:url('assets/entry_03_img.png'); background-color:#1a4a7e;",
+        swimOverview: ['Guided 0–2 km “initiation” swim in Lake Geneva.', 'Ideal first open‑water experience for sporty tourists and local swimmers.', 'Small‑group, non‑race format.'],
+        distanceRoute: ['Distance: up to 2 km, agreed with group on the day.', 'Route: sheltered loop or short out‑and‑back from a Geneva lakeside spot.', 'Calm water chosen wherever possible.'],
+        safetySupport: ['LGSA coach in the water plus shore/boat support.', 'Mandatory safety briefing and kit check.', 'Minimum: comfortable 400 m continuous pool swim; age 16+ (with guardian under 18).', 'Wetsuit recommended in cooler water.'],
+        whatsIncluded: ['Small‑group guided swim with LGSA coach.', 'Safety cover throughout the session.', 'Short debrief and Q&A on open‑water basics.', 'Participation certificate.'],
+        entryLogistics: {
+          "Travel & access": [
+            "Nearest city: Geneva.",
+            "Easy tram/bus or taxi from central Geneva to the meeting point.",
+            "Exact location and timing confirmed by email."
+          ],
+          "Price & entry terms": [
+            "From CHF XXX per person.",
+            "Card payment at booking; instant confirmation.",
+            "Weather‑related reschedule offered where needed; full T&Cs at checkout."
+          ]
+        },
+      },
+    };
 
-/* ══════════════════════════════════════════════
-   RENDER TAB BODY  (handles array OR object)
-══════════════════════════════════════════════ */
-function renderTabBody(data) {
-  if (!data) return `<p class="tab-placeholder">Content coming soon.</p>`;
-  // Object → sub-sections
-  if (!Array.isArray(data) && typeof data === 'object') {
-    return Object.entries(data).map(([heading, bullets]) => `
+    /* ══════════════════════════════════════════════
+       RENDER TAB BODY  (handles array OR object)
+    ══════════════════════════════════════════════ */
+    function renderTabBody(data) {
+      if (!data) return `<p class="tab-placeholder">Content coming soon.</p>`;
+
+      // Object → sub-sections (heading + bullets)
+      if (!Array.isArray(data) && typeof data === 'object') {
+        return Object.entries(data).map(([heading, bullets]) => `
       <div class="tab-sub-title">${heading}</div>
-      <ul class="tab-bullet-list">${bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+      <ul class="tab-bullet-list">
+        ${Array.isArray(bullets) ? bullets.map(b => `<li>${b}</li>`).join('') : `<li>${bullets}</li>`}
+      </ul>
     `).join('');
-  }
-  // Array
-  if (data.length === 0) return `<p class="tab-placeholder">Content coming soon.</p>`;
-  return `<ul class="tab-bullet-list">${data.map(b => `<li>${b}</li>`).join('')}</ul>`;
-}
+      }
 
-/* ══════════════════════════════════════════════
-   SHOW DETAIL PAGE
-══════════════════════════════════════════════ */
-function showDetail(id) {
-  const p = products[id];
-  if (!p) return;
+      // Flat array → single bullet list
+      if (Array.isArray(data)) {
+        if (data.length === 0) return `<p class="tab-placeholder">Content coming soon.</p>`;
+        return `<ul class="tab-bullet-list">${data.map(b => `<li>${b}</li>`).join('')}</ul>`;
+      }
 
-  const tabBtns = TABS.map((t, i) =>
-    `<button class="tab-btn${i === 0 ? ' active' : ''}" onclick="switchTab('${id}','${t.key}',this)">${t.label}</button>`
-  ).join('');
+      return `<p class="tab-placeholder">Content coming soon.</p>`;
+    }
 
-  const tabPanels = TABS.map((t, i) => `
+    /* ══════════════════════════════════════════════
+       SHOW DETAIL PAGE
+    ══════════════════════════════════════════════ */
+    function showDetail(id) {
+      const p = products[id];
+      if (!p) return;
+
+      const tabBtns = TABS.map((t, i) =>
+        `<button class="tab-btn${i === 0 ? ' active' : ''}" onclick="switchTab('${id}','${t.key}',this)">${t.label}</button>`
+      ).join('');
+
+      const tabPanels = TABS.map((t, i) => `
     <div class="tab-panel${i === 0 ? ' active' : ''}" id="panel-${id}-${t.key}">
       <div class="tab-section-title">${t.label}</div>
       ${renderTabBody(p[t.key])}
     </div>`
-  ).join('');
+      ).join('');
 
-  document.getElementById('detail-wrap').innerHTML = `
+      document.getElementById('detail-wrap').innerHTML = `
     <div class="detail-hero-card" style="${p.imgStyle}">
       <span class="detail-hero-badge"><span class="badge ${p.badgeClass}">${p.badge}</span></span>
       <div class="detail-hero-title">${p.title}</div>
@@ -432,182 +593,183 @@ function showDetail(id) {
       </button>
     </div>`;
 
-  document.getElementById('detail-wrap').classList.add('active');
-  document.getElementById('catalog-main').style.display = 'none';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+      document.getElementById('detail-wrap').classList.add('active');
+      document.getElementById('catalog-main').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-function switchTab(productId, tabKey, btnEl) {
-  document.querySelectorAll(`#tabbar-${productId} .tab-btn`).forEach(b => b.classList.remove('active'));
-  btnEl.classList.add('active');
-  TABS.forEach(t => {
-    const el = document.getElementById(`panel-${productId}-${t.key}`);
-    if (el) el.classList.remove('active');
-  });
-  const target = document.getElementById(`panel-${productId}-${tabKey}`);
-  if (target) target.classList.add('active');
-}
+    function switchTab(productId, tabKey, btnEl) {
+      document.querySelectorAll(`#tabbar-${productId} .tab-btn`).forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      TABS.forEach(t => {
+        const el = document.getElementById(`panel-${productId}-${t.key}`);
+        if (el) el.classList.remove('active');
+      });
+      const target = document.getElementById(`panel-${productId}-${tabKey}`);
+      if (target) target.classList.add('active');
+    }
 
-function backToCatalog() {
-  document.getElementById('catalog-main').style.display = '';
-  const dw = document.getElementById('detail-wrap');
-  dw.classList.remove('active');
-  dw.innerHTML = '';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+    function backToCatalog() {
+      document.getElementById('catalog-main').style.display = '';
+      const dw = document.getElementById('detail-wrap');
+      dw.classList.remove('active');
+      dw.innerHTML = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-/* ══════════════════════════════════════════════
-   WISE POPUP
-══════════════════════════════════════════════ */
-const WISE_FEE = 1.84; // static display fee — replace with live API value
-let _wiseCurrentId = null;
+    /* ══════════════════════════════════════════════
+       WISE POPUP
+    ══════════════════════════════════════════════ */
+    const WISE_FEE = 1.84; // static display fee — replace with live API value
+    let _wiseCurrentId = null;
 
-function openWise(productId) {
-  const p = products[productId];
-  if (!p) return;
-  _wiseCurrentId = productId;
+    function openWise(productId) {
+      const p = products[productId];
+      if (!p) return;
+      _wiseCurrentId = productId;
 
-  const total = (p.price + WISE_FEE).toFixed(2);
+      const total = (p.price + WISE_FEE).toFixed(2);
 
-  document.getElementById('wise-product-name').textContent  = p.title;
-  document.getElementById('wise-amount').textContent        = p.priceLabel;
-  document.getElementById('wise-fee-entry').textContent     = p.priceLabel;
-  document.getElementById('wise-fee-wise').textContent      = `~€${WISE_FEE.toFixed(2)}`;
-  document.getElementById('wise-fee-total').textContent     = `€${total}`;
+      document.getElementById('wise-product-name').textContent = p.title;
+      document.getElementById('wise-amount').textContent = p.priceLabel;
+      document.getElementById('wise-fee-entry').textContent = p.priceLabel;
+      document.getElementById('wise-fee-wise').textContent = `~€${WISE_FEE.toFixed(2)}`;
+      document.getElementById('wise-fee-total').textContent = `€${total}`;
 
-  document.getElementById('wise-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
+      document.getElementById('wise-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
-function closeWise() {
-  document.getElementById('wise-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
+    function closeWise() {
+      document.getElementById('wise-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
-function closeWiseIfOutside(e) {
-  if (e.target === document.getElementById('wise-overlay')) closeWise();
-}
+    function closeWiseIfOutside(e) {
+      if (e.target === document.getElementById('wise-overlay')) closeWise();
+    }
 
-function proceedToWise() {
-  /*
-    INTEGRATION NOTE:
-    Replace the URL below with your actual Wise payment link.
-    Options:
-      A) Wise.me payment link  → https://wise.com/pay/me/YOUR_WISE_USERNAME
-      B) Wise Business pay-in  → https://wise.com/pay/business/YOUR_PROFILE_ID
-      C) Wise API checkout URL → generated server-side per transaction
+    function proceedToWise() {
+      /*
+        INTEGRATION NOTE:
+        Replace the URL below with your actual Wise payment link.
+        Options:
+          A) Wise.me payment link  → https://wise.com/pay/me/YOUR_WISE_USERNAME
+          B) Wise Business pay-in  → https://wise.com/pay/business/YOUR_PROFILE_ID
+          C) Wise API checkout URL → generated server-side per transaction
+    
+        You can append amount + reference as query params if your link supports it.
+        Example: https://wise.com/pay/me/yourname?amount=85&currency=EUR&reference=La+Classique
+      */
+      const p = _wiseCurrentId ? products[_wiseCurrentId] : null;
+      const ref = p ? encodeURIComponent(p.title) : '';
+      const amt = p ? p.price : '';
+      const wiseUrl = `https://wise.com/pay/me/YOUR_WISE_USERNAME?amount=${amt}&currency=EUR&reference=${ref}`;
+      window.open(wiseUrl, '_blank', 'noopener,noreferrer');
+      closeWise();
+    }
 
-    You can append amount + reference as query params if your link supports it.
-    Example: https://wise.com/pay/me/yourname?amount=85&currency=EUR&reference=La+Classique
-  */
-  const p = _wiseCurrentId ? products[_wiseCurrentId] : null;
-  const ref = p ? encodeURIComponent(p.title) : '';
-  const amt = p ? p.price : '';
-  const wiseUrl = `https://wise.com/pay/me/YOUR_WISE_USERNAME?amount=${amt}&currency=EUR&reference=${ref}`;
-  window.open(wiseUrl, '_blank', 'noopener,noreferrer');
-  closeWise();
-}
+    /* ══════════════════════════════════════════════
+       FILTER LOGIC
+    ══════════════════════════════════════════════ */
+    function applyFilters() {
+      const flagship = document.getElementById('d-flagship').checked;
+      const core = document.getElementById('d-core').checked;
+      const entry = document.getElementById('d-entry').checked;
+      const mont = document.getElementById('d-mont').checked;
+      const evian = document.getElementById('d-evian').checked;
+      const lausanne = document.getElementById('d-lausanne').checked;
+      const montreux = document.getElementById('d-montreux').checked;
 
-/* ══════════════════════════════════════════════
-   FILTER LOGIC
-══════════════════════════════════════════════ */
-function applyFilters() {
-  const flagship = document.getElementById('d-flagship').checked;
-  const core     = document.getElementById('d-core').checked;
-  const entry    = document.getElementById('d-entry').checked;
-  const mont     = document.getElementById('d-mont').checked;
-  const evian    = document.getElementById('d-evian').checked;
-  const lausanne = document.getElementById('d-lausanne').checked;
-  const montreux = document.getElementById('d-montreux').checked;
+      const typeMap = { flagship, core, entry };
+      const placeMap = { 'mont-voisin': mont, 'evian': evian, 'lausanne': lausanne, 'montreux': montreux };
 
-  const typeMap  = { flagship, core, entry };
-  const placeMap = { 'mont-voisin': mont, 'evian': evian, 'lausanne': lausanne, 'montreux': montreux };
+      const anyTypeSelected = Object.values(typeMap).some(v => v);
+      const anyPlaceSelected = Object.values(placeMap).some(v => v);
 
-  const anyTypeSelected  = Object.values(typeMap).some(v => v);
-  const anyPlaceSelected = Object.values(placeMap).some(v => v);
+      const feat = document.getElementById('feat-card');
+      const fTypeOk = !anyTypeSelected ? true : (typeMap[feat.dataset.type] ?? true);
+      const fPlaceOk = !anyPlaceSelected ? true : (placeMap[feat.dataset.place] ?? true);
+      feat.style.display = (fTypeOk && fPlaceOk) ? '' : 'none';
 
-  const feat = document.getElementById('feat-card');
-  const fTypeOk  = !anyTypeSelected  ? true : (typeMap[feat.dataset.type]   ?? true);
-  const fPlaceOk = !anyPlaceSelected ? true : (placeMap[feat.dataset.place] ?? true);
-  feat.style.display = (fTypeOk && fPlaceOk) ? '' : 'none';
+      document.querySelectorAll('#product-grid .product-card').forEach(card => {
+        const tOk = !anyTypeSelected ? true : (typeMap[card.dataset.type] ?? true);
+        const plOk = !anyPlaceSelected ? true : (placeMap[card.dataset.place] ?? true);
+        card.style.display = (tOk && plOk) ? '' : 'none';
+      });
+    }
 
-  document.querySelectorAll('#product-grid .product-card').forEach(card => {
-    const tOk  = !anyTypeSelected  ? true : (typeMap[card.dataset.type]   ?? true);
-    const plOk = !anyPlaceSelected ? true : (placeMap[card.dataset.place] ?? true);
-    card.style.display = (tOk && plOk) ? '' : 'none';
-  });
-}
+    function syncMobile(key) {
+      const map = {
+        flagship: ['d-flagship', 'm-flagship'], core: ['d-core', 'm-core'],
+        entry: ['d-entry', 'm-entry'], mont: ['d-mont', 'm-mont'],
+        evian: ['d-evian', 'm-evian'], lausanne: ['d-lausanne', 'm-lausanne'],
+        montreux: ['d-montreux', 'm-montreux']
+      };
+      if (!map[key]) return;
+      document.getElementById(map[key][0]).checked = document.getElementById(map[key][1]).checked;
+      applyFilters();
+    }
 
-function syncMobile(key) {
-  const map = {
-    flagship: ['d-flagship','m-flagship'], core: ['d-core','m-core'],
-    entry: ['d-entry','m-entry'], mont: ['d-mont','m-mont'],
-    evian: ['d-evian','m-evian'], lausanne: ['d-lausanne','m-lausanne'],
-    montreux: ['d-montreux','m-montreux']
-  };
-  if (!map[key]) return;
-  document.getElementById(map[key][0]).checked = document.getElementById(map[key][1]).checked;
-  applyFilters();
-}
+    /* ══════════════════════════════════════════════
+       CALENDAR
+    ══════════════════════════════════════════════ */
+    const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const DNAMES = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    let calD = new Date(2021, 8, 1), calM = new Date(2021, 8, 1);
+    let selectedD = null, selectedM = null;
 
-/* ══════════════════════════════════════════════
-   CALENDAR
-══════════════════════════════════════════════ */
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DNAMES = ['S','M','T','W','T','F','S'];
-let calD = new Date(2021, 8, 1), calM = new Date(2021, 8, 1);
-let selectedD = null, selectedM = null;
+    function buildCal(date, gridId, labelId, selDay, prefix) {
+      document.getElementById(labelId).textContent = MONTHS[date.getMonth()] + ' ' + date.getFullYear();
+      const grid = document.getElementById(gridId);
+      const first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+      const days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+      let html = DNAMES.map(d => `<div class="cal-head">${d}</div>`).join('');
+      for (let i = 0; i < first; i++) html += `<div class="cal-cell cal-empty"></div>`;
+      for (let d = 1; d <= days; d++) {
+        const isToday = (d === 18 && date.getMonth() === 8 && date.getFullYear() === 2021);
+        const isSel = (d === selDay);
+        let cls = 'cal-cell';
+        if (isSel) cls += ' cal-selected'; else if (isToday) cls += ' cal-today';
+        html += `<div class="${cls}" onclick="selectDay(${d},'${prefix}')">${d}</div>`;
+      }
+      grid.innerHTML = html;
+    }
+    function selectDay(d, p) {
+      if (p === 'd') { selectedD = d; buildCal(calD, 'd-cal-grid', 'd-cal-label', d, 'd'); }
+      else { selectedM = d; buildCal(calM, 'm-cal-grid', 'm-cal-label', d, 'm'); }
+    }
+    function changeMonth(dir, p) {
+      if (p === 'd') { calD.setMonth(calD.getMonth() + dir); buildCal(calD, 'd-cal-grid', 'd-cal-label', selectedD, 'd'); }
+      else { calM.setMonth(calM.getMonth() + dir); buildCal(calM, 'm-cal-grid', 'm-cal-label', selectedM, 'm'); }
+    }
 
-function buildCal(date, gridId, labelId, selDay, prefix) {
-  document.getElementById(labelId).textContent = MONTHS[date.getMonth()] + ' ' + date.getFullYear();
-  const grid  = document.getElementById(gridId);
-  const first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  const days  = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  let html = DNAMES.map(d => `<div class="cal-head">${d}</div>`).join('');
-  for (let i = 0; i < first; i++) html += `<div class="cal-cell cal-empty"></div>`;
-  for (let d = 1; d <= days; d++) {
-    const isToday = (d === 18 && date.getMonth() === 8 && date.getFullYear() === 2021);
-    const isSel   = (d === selDay);
-    let cls = 'cal-cell';
-    if (isSel) cls += ' cal-selected'; else if (isToday) cls += ' cal-today';
-    html += `<div class="${cls}" onclick="selectDay(${d},'${prefix}')">${d}</div>`;
-  }
-  grid.innerHTML = html;
-}
-function selectDay(d, p) {
-  if (p === 'd') { selectedD = d; buildCal(calD,'d-cal-grid','d-cal-label',d,'d'); }
-  else           { selectedM = d; buildCal(calM,'m-cal-grid','m-cal-label',d,'m'); }
-}
-function changeMonth(dir, p) {
-  if (p === 'd') { calD.setMonth(calD.getMonth()+dir); buildCal(calD,'d-cal-grid','d-cal-label',selectedD,'d'); }
-  else           { calM.setMonth(calM.getMonth()+dir); buildCal(calM,'m-cal-grid','m-cal-label',selectedM,'m'); }
-}
+    /* ══════════════════════════════════════════════
+       MOBILE FILTER
+    ══════════════════════════════════════════════ */
+    function openMobFilter() {
+      document.getElementById('mob-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      ['flagship', 'core', 'entry', 'mont', 'evian', 'lausanne', 'montreux'].forEach(k => {
+        const d = document.getElementById('d-' + k), m = document.getElementById('m-' + k);
+        if (d && m) m.checked = d.checked;
+      });
+    }
+    function closeMobFilter() {
+      document.getElementById('mob-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeMobIfOutside(e) {
+      if (e.target === document.getElementById('mob-overlay')) closeMobFilter();
+    }
 
-/* ══════════════════════════════════════════════
-   MOBILE FILTER
-══════════════════════════════════════════════ */
-function openMobFilter() {
-  document.getElementById('mob-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  ['flagship','core','entry','mont','evian','lausanne','montreux'].forEach(k => {
-    const d = document.getElementById('d-'+k), m = document.getElementById('m-'+k);
-    if (d && m) m.checked = d.checked;
-  });
-}
-function closeMobFilter() {
-  document.getElementById('mob-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function closeMobIfOutside(e) {
-  if (e.target === document.getElementById('mob-overlay')) closeMobFilter();
-}
-
-/* ══════════════════════════════════════════════
-   INIT
-══════════════════════════════════════════════ */
-buildCal(calD, 'd-cal-grid', 'd-cal-label', null, 'd');
-buildCal(calM, 'm-cal-grid', 'm-cal-label', null, 'm');
-applyFilters();
-</script>
+    /* ══════════════════════════════════════════════
+       INIT
+    ══════════════════════════════════════════════ */
+    buildCal(calD, 'd-cal-grid', 'd-cal-label', null, 'd');
+    buildCal(calM, 'm-cal-grid', 'm-cal-label', null, 'm');
+    applyFilters();
+  </script>
 </body>
+
 </html>
