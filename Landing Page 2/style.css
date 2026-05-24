@@ -3630,7 +3630,17 @@ code {
 }
 
 .container_02 {
+    background-image: url("container_02_img.jpg");
+    background-size: 100% 100%;
+}
+
+.container_03 {
     background-image: url("https://api.builder.io/api/v1/image/assets/TEMP/f4f9b4a93ed0b3f85eaea2b04da21d13ee7114ec?width=560");
+    background-size: 100% 100%;
+}
+
+.container_04 {
+    background-image: url("container_04_img.jpg");
     background-size: 100% 100%;
 }
 
