@@ -3752,7 +3752,17 @@ code {
     background-size: 100% 100%;
 }
 
+.credit_text {
+    bottom: .1rem;
+    right: 2.2rem;
+}
+
 @media (max-width: 675px) {
+
+    .credit_text {
+        top: .1rem;
+        right: 0.2rem;
+    }
 
     .section_2 {
         position: relative;
@@ -3914,84 +3924,3 @@ code {
         font-weight: 600;
     }
 }
-
-/* @media (max-width: 640px) {
-    .section_2 {
-        background-image: url("Mobile_Version_test.jpg");
-        background-size: 100% 100%;
-        background-position: center;
-        -webkit-mask-image: linear-gradient(
-            to bottom,
-            transparent -25%,
-            black 27%,
-            black 76%,
-            transparent 102%
-        );
-
-        mask-image: linear-gradient(
-            to bottom,
-            transparent 0%,
-            black 38%,
-            black 78%,
-            transparent 103%
-        );
-    }
-
-    .bottom_info_text {
-        position: relative;
-        top: 231px;
-        color: black;
-        font-size: 8px;
-        text-align: center;
-    }
-
-    .book_meeting_inside-image {
-        position: relative;
-        top: 221px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 167px;
-        height: 33px;
-    }
-
-    .Upper_text_info {
-        font-size: clamp(28px, 5vw, 56px);
-        color: currentColor;
-        text-align: center;
-        position: relative;
-        bottom: 53px;
-    }
-
-    .Lower_text_info {
-        font-size: clamp(11px, 2vw, 18px);
-        line-height: 1;
-        text-align: center;
-        color: #000;
-        position: relative;
-        bottom: 60px;
-    }
-
-    .text-\[14px\] {
-        font-size: 10px;
-    }
-
-    .py-3\.5 {
-        padding-top: .675rem;
-        padding-bottom: .675rem;
-    }
-
-    .px-12 {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    .header_image_top {
-        text-align: center;
-        position: relative;
-        top: 25px;
-    }
-
-    .right-8 {
-        right: 0;
-    }
-} */
