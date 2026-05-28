@@ -8,27 +8,60 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <!-- ══ TOP BAR ══ -->
   <div class="topbar">
-    <div class="topbar-logo">
-      <!-- <div class="topbar-logo-icon">
-    </div> -->
-      <!-- <div class="topbar-logo-text">Lake Geneva<br>Open Water</div> -->
-    </div>
+    <div class="topbar-logo"></div>
     <div class="topbar-center">Product Catalog</div>
-    <button class="btn-mobile-filter" onclick="openMobFilter()">
-      <svg viewBox="0 0 24 24">
-        <line x1="4" y1="6" x2="20" y2="6" />
-        <line x1="7" y1="12" x2="17" y2="12" />
-        <line x1="10" y1="18" x2="14" y2="18" />
-      </svg>
-      Filter
-    </button>
+    <div class="topbar-right">
+      <button class="cart-btn" onclick="openCart()" title="View cart" aria-label="Open cart">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+      <button class="btn-mobile-filter" onclick="openMobFilter()">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="6" x2="20" y2="6" />
+          <line x1="7" y1="12" x2="17" y2="12" />
+          <line x1="10" y1="18" x2="14" y2="18" />
+        </svg>
+        Filter
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ CART OVERLAY ══ -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+
+  <!-- ══ CART DRAWER ══ -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        My Cart
+        <span class="cart-item-count-label" id="cart-count-label">0 items</span>
+      </div>
+      <button class="cart-close-btn" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-drawer-body" id="cart-drawer-body"></div>
+    <div class="cart-drawer-footer" id="cart-drawer-footer" style="display:none">
+      <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="cartCheckout()">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Proceed to Checkout
+      </button>
+      <button class="cart-continue-btn" onclick="closeCart()">Continue Shopping</button>
+      <div class="cart-secure-note">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Secure checkout via Wise
+      </div>
+    </div>
   </div>
 
   <!-- ══ PAGE WRAP ══ -->
@@ -37,234 +70,807 @@
     <!-- ══ DESKTOP SIDEBAR ══ -->
     <aside class="sidebar">
       <div class="sidebar-title">Filter</div>
-      <div class="filter-section">
-        <span class="filter-label">Select Date</span>
-        <div class="cal-wrap">
-          <div class="cal-nav">
-            <button onclick="changeMonth(-1,'d')">&#8249;</button>
-            <span id="d-cal-label"></span>
-            <button onclick="changeMonth(1,'d')">&#8250;</button>
-          </div>
-          <div class="cal-grid" id="d-cal-grid"></div>
-        </div>
-      </div>
-      <div class="filter-section">
-        <span class="filter-label">Select Event type</span>
-        <div class="check-row"><input type="checkbox" id="d-flagship" onchange="applyFilters()"><label
-            for="d-flagship">Flagship</label></div>
-        <div class="check-row"><input type="checkbox" id="d-core" onchange="applyFilters()"><label
-            for="d-core">Core</label></div>
-        <div class="check-row"><input type="checkbox" id="d-entry" onchange="applyFilters()"><label for="d-entry">Entry
-            Level</label></div>
-      </div>
-      <div class="filter-section">
-        <span class="filter-label">Select Place</span>
-        <div class="place-group">
-          <div class="place-group-name">Geneva</div>
-          <div class="place-sub">
-            <div class="check-row"><input type="checkbox" id="d-mont" onchange="applyFilters()"><label
-                for="d-mont">Mont-Voisin</label></div>
-            <div class="check-row"><input type="checkbox" id="d-evian" onchange="applyFilters()"><label
-                for="d-evian">Evian-les-Bains</label></div>
-            <div class="check-row"><input type="checkbox" id="d-lausanne" onchange="applyFilters()"><label
-                for="d-lausanne">Lausanne/Evian-les-Bains</label></div>
+
+      <div id="swim-filters">
+        <div class="filter-section">
+          <span class="filter-label">Select Date</span>
+          <div class="cal-wrap">
+            <div class="cal-nav">
+              <button onclick="changeMonth(-1,'d')">&#8249;</button>
+              <span id="d-cal-label"></span>
+              <button onclick="changeMonth(1,'d')">&#8250;</button>
+            </div>
+            <div class="cal-grid" id="d-cal-grid"></div>
           </div>
         </div>
-        <div class="place-group">
-          <div class="check-row"><input type="checkbox" id="d-montreux" onchange="applyFilters()"><label
-              for="d-montreux">Geneva / Montreux</label></div>
+        <div class="filter-section">
+          <span class="filter-label">Select Category</span>
+          <div class="check-row"><input type="checkbox" id="d-flagship" onchange="applyFilters()"><label for="d-flagship">Flagship</label></div>
+          <div class="check-row"><input type="checkbox" id="d-core" onchange="applyFilters()"><label for="d-core">Core</label></div>
+          <div class="check-row"><input type="checkbox" id="d-entry" onchange="applyFilters()"><label for="d-entry">Entry Level</label></div>
+        </div>
+        <div class="filter-section">
+          <span class="filter-label">Select Place</span>
+          <div class="place-group">
+            <div class="place-group-name">Geneva</div>
+            <div class="place-sub">
+              <div class="check-row"><input type="checkbox" id="d-nyon" onchange="applyFilters()"><label for="d-nyon">Nyon/Yvoire</label></div>
+              <div class="check-row"><input type="checkbox" id="d-evian" onchange="applyFilters()"><label for="d-evian">Evian-les-Bains</label></div>
+              <div class="check-row"><input type="checkbox" id="d-lausanne" onchange="applyFilters()"><label for="d-lausanne">Lausanne/Evian-les-Bains</label></div>
+            </div>
+          </div>
+          <div class="place-group">
+            <div class="check-row"><input type="checkbox" id="d-montreux" onchange="applyFilters()"><label for="d-montreux">Geneva / Montreux</label></div>
+          </div>
+        </div>
+        <div class="filter-section">
+          <span class="filter-label">Select Event Type</span>
+          <div class="check-row"><input type="checkbox" id="d-guided" onchange="applyFilters()"><label for="d-guided">Guided</label></div>
+          <div class="check-row"><input type="checkbox" id="d-event-type" onchange="applyFilters()"><label for="d-event-type">Event</label></div>
+          <div class="check-row"><input type="checkbox" id="d-training" onchange="applyFilters()"><label for="d-training">Training Camp</label></div>
+        </div>
+        <div class="filter-section">
+          <span class="filter-label">Participation</span>
+          <div class="check-row"><input type="checkbox" id="d-solo" onchange="applyFilters()"><label for="d-solo">Solo</label></div>
+          <div class="check-row"><input type="checkbox" id="d-group" onchange="applyFilters()"><label for="d-group">Group</label></div>
+          <div class="check-row"><input type="checkbox" id="d-relay" onchange="applyFilters()"><label for="d-relay">Relay</label></div>
+          <div class="check-row"><input type="checkbox" id="d-team" onchange="applyFilters()"><label for="d-team">Team</label></div>
+        </div>
+      </div>
+
+      <div id="merch-filters" style="display:none">
+        <div class="filter-section">
+          <span class="filter-label">Collection</span>
+          <div class="check-row"><input type="checkbox" id="d-col-classique" onchange="applyMerchFilters()"><label for="d-col-classique">Classique Collection</label></div>
+          <div class="check-row"><input type="checkbox" id="d-col-lgsa" onchange="applyMerchFilters()"><label for="d-col-lgsa">LGSA Collection</label></div>
+          <div class="check-row"><input type="checkbox" id="d-col-legendaire" onchange="applyMerchFilters()"><label for="d-col-legendaire">Légendaire Collection</label></div>
+          <div class="check-row"><input type="checkbox" id="d-col-signature" onchange="applyMerchFilters()"><label for="d-col-signature">Signature Collection</label></div>
         </div>
       </div>
     </aside>
 
     <!-- ══ CATALOG MAIN ══ -->
     <main class="main" id="catalog-main">
-      <h1 class="page-title">Explore the Deep</h1>
-      <p class="page-subtitle">Discover elite open water swimming events across the most iconic waters. From beginner
-        initiations to our legendary 70km flagship endurance challenge. Only for the elite.</p>
 
-      <div class="featured-card" id="feat-card" data-type="flagship" data-place="mont-voisin">
-        <div class="featured-img">
-          <span class="featured-badge"><span class="badge badge-flagship">Flagship</span></span>
-        </div>
-        <div class="featured-body">
-          <div>
-            <div class="featured-title">La Signature</div>
-            <div class="featured-desc">The ultimate test of human endurance. 70km and 140km across the legendary expanse
-              of Lake Geneva. Only for the elite.</div>
+      <div class="main-tab-bar">
+        <button class="main-tab-btn active" onclick="switchMainTab('swim-events', this)">Swim Events</button>
+        <button class="main-tab-btn" onclick="switchMainTab('merchandise', this)">Merchandise</button>
+      </div>
+
+      <!-- ══ SWIM EVENTS TAB ══ -->
+      <div class="main-tab-panel active" id="tab-swim-events">
+        <h1 class="page-title">Explore the Deep</h1>
+        <p class="page-subtitle">Discover elite open water swimming events across the most iconic waters. From beginner
+          initiations to our legendary 70km flagship endurance challenge.</p>
+
+        <div class="product-grid" id="product-grid">
+
+          <div class="product-card" data-id="la-signature-140" data-type="flagship" data-place="mont-voisin" data-eventtype="event" data-participation="solo relay team">
+            <div class="product-img img-signature-140"><span class="badge badge-flagship">Flagship</span></div>
+            <div class="product-body">
+              <div class="product-title">La Signature 140</div>
+              <div class="product-desc">Ultimate 140 km double crossing for elite ultra-endurance swimmers.</div>
+              <div class="product-stats">
+                <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>140 km</span>
+                <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>3 days</span>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">€1,250</span>
+                <div class="product-footer-actions">
+                  <button class="btn-add-cart" id="atc-la-signature-140" onclick="addToCart('la-signature-140','La Signature 140',1250,'flagship','img-signature-140',this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Add
+                  </button>
+                  <button class="btn-view-link" onclick="showDetail('la-signature')">View <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <div class="featured-meta-label">Distance</div>
-            <div class="featured-meta-value">70 km / 140 km</div>
-            <div class="featured-meta-label">Duration</div>
-            <div class="featured-meta-value">22–28 hrs / 3 days</div>
-            <div class="featured-price">€1,250</div>
-            <button class="btn-view-details-featured" onclick="showDetail('la-signature')">View Details</button>
+
+          <div class="product-card" data-id="la-signature-70" data-type="flagship" data-place="mont-voisin" data-eventtype="event" data-participation="solo relay team">
+            <div class="product-img img-signature-70"><span class="badge badge-flagship">Flagship</span></div>
+            <div class="product-body">
+              <div class="product-title">La Signature 70</div>
+              <div class="product-desc">Legendary 70 km Lake Geneva crossing for experienced solo and relay swimmers.</div>
+              <div class="product-stats">
+                <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>70 km</span>
+                <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>22–28 hrs</span>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">€645</span>
+                <div class="product-footer-actions">
+                  <button class="btn-add-cart" id="atc-la-signature-70" onclick="addToCart('la-signature-70','La Signature 70',645,'flagship','img-signature-70',this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Add
+                  </button>
+                  <button class="btn-view-link" onclick="showDetail('la-signature')">View <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <div class="product-card" data-id="swim-stronger" data-type="core" data-place="evian" data-eventtype="guided" data-participation="solo group">
+            <div class="product-img img-swim-stronger"><span class="badge badge-core">Core</span></div>
+            <div class="product-body">
+              <div class="product-title">Swim Stronger</div>
+              <div class="product-desc">5-day training camp to improve technique, endurance, and open water performance.</div>
+              <div class="product-stats">
+                <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>5 – 15 km</span>
+                <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>5 days</span>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">€145</span>
+                <div class="product-footer-actions">
+                  <button class="btn-add-cart" id="atc-swim-stronger" onclick="addToCart('swim-stronger','Swim Stronger',145,'core','img-swim-stronger',this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Add
+                  </button>
+                  <button class="btn-view-link" onclick="showDetail('swim-stronger')">View <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="la-classique" data-type="core" data-place="montreux" data-eventtype="event" data-participation="solo group relay team">
+            <div class="product-img img-la-classique"><span class="badge badge-core">Core</span></div>
+            <div class="product-body">
+              <div class="product-title">La Classique</div>
+              <div class="product-desc">Popular 13km event for experienced competitive swimmers.</div>
+              <div class="product-stats">
+                <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>13 km</span>
+                <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>1 day</span>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">€85</span>
+                <div class="product-footer-actions">
+                  <button class="btn-add-cart" id="atc-la-classique" onclick="addToCart('la-classique','La Classique',85,'core','img-la-classique',this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Add
+                  </button>
+                  <button class="btn-view-link" onclick="showDetail('la-classique')">View <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="guided-classique" data-type="core" data-place="lausanne" data-eventtype="guided" data-participation="solo group relay team">
+            <div class="product-img img-guided-classique"><span class="badge badge-core">Core</span></div>
+            <div class="product-body">
+              <div class="product-title">Guided Classique</div>
+              <div class="product-desc">Full-day 13km guided swim for experienced swimmers; available solo, group, or relay.</div>
+              <div class="product-stats">
+                <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>One-way 13km</span>
+                <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>1 day</span>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">€65</span>
+                <div class="product-footer-actions">
+                  <button class="btn-add-cart" id="atc-guided-classique" onclick="addToCart('guided-classique','Guided Classique',65,'core','img-guided-classique',this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Add
+                  </button>
+                  <button class="btn-view-link" onclick="showDetail('guided-classique')">View <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="la-nyvoirienne" data-type="entry" data-place="nyon" data-eventtype="event" data-participation="solo group">
+            <div class="product-img img-la-nyvoirienne"><span class="badge badge-entry">Entry</span></div>
+            <div class="product-body">
+              <div class="product-title">La Nyvoirienne</div>
+              <div class="product-desc">Fun open water event blending endurance and community.</div>
+              <div class="product-stats">
+                <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>6 – 8 km</span>
+                <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>1 day</span>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">€45</span>
+                <div class="product-footer-actions">
+                  <button class="btn-add-cart" id="atc-la-nyvoirienne" onclick="addToCart('la-nyvoirienne','La Nyvoirienne',45,'entry','img-la-nyvoirienne',this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Add
+                  </button>
+                  <button class="btn-view-link" onclick="showDetail('la-nyvoirienne')">View <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="guided-nyvoirienne" data-type="entry" data-place="nyon" data-eventtype="guided" data-participation="solo group relay">
+            <div class="product-img img-guided-nyvo"><span class="badge badge-entry">Entry</span></div>
+            <div class="product-body">
+              <div class="product-title">Guided Nyvoirienne</div>
+              <div class="product-desc">Scenic 7km guided swim for moderately experienced swimmers; solo, group, or relay.</div>
+              <div class="product-stats">
+                <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>7 km</span>
+                <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>½ day</span>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">€35</span>
+                <div class="product-footer-actions">
+                  <button class="btn-add-cart" id="atc-guided-nyvoirienne" onclick="addToCart('guided-nyvoirienne','Guided Nyvoirienne',35,'entry','img-guided-nyvo',this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Add
+                  </button>
+                  <button class="btn-view-link" onclick="showDetail('guided-nyvoirienne')">View <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-id="lake-geneva-initiation" data-type="entry" data-place="mont-voisin" data-eventtype="guided" data-participation="solo group">
+            <div class="product-img img-initiation"><span class="badge badge-entry">Entry</span></div>
+            <div class="product-body">
+              <div class="product-title">Lake Geneva Initiation</div>
+              <div class="product-desc">Beginner-friendly guided swim to build open water confidence.</div>
+              <div class="product-stats">
+                <span class="stat-item"><svg viewBox="0 0 24 24"><path d="M22 12H2M12 2v20"/></svg>0–2 km</span>
+                <span class="stat-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>2–5 hrs</span>
+              </div>
+              <div class="product-footer">
+                <span class="product-price">€25</span>
+                <div class="product-footer-actions">
+                  <button class="btn-add-cart" id="atc-lake-geneva-initiation" onclick="addToCart('lake-geneva-initiation','Lake Geneva Initiation',25,'entry','img-initiation',this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Add
+                  </button>
+                  <button class="btn-view-link" onclick="showDetail('lake-geneva-initiation')">View <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="product-grid" id="product-grid">
+      <!-- ══ MERCHANDISE TAB ══ -->
+      <div class="main-tab-panel" id="tab-merchandise">
+        <h1 class="page-title">Discover our Boutique</h1>
+        <p class="page-subtitle">Exclusive swimwear, apparel, and accessories inspired by Lake Geneva's iconic open-water events.</p>
 
-        <div class="product-card" data-id="swim-stronger" data-type="core" data-place="mont-voisin">
-          <div class="product-img img-swim-stronger"><span class="badge badge-core">Core</span></div>
-          <div class="product-body">
-            <div class="product-title">Swim Stronger</div>
-            <div class="product-desc">5-day training camp to improve technique, endurance, and open water performance.
-            </div>
-            <div class="product-stats">
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <path d="M22 12H2M12 2v20" />
-                </svg>3 – 15 km</span>
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>5 days</span>
-            </div>
-            <div class="product-footer">
-              <span class="product-price">€145</span>
-              <button class="btn-view-link" onclick="showDetail('swim-stronger')">View details <svg viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></button>
+        <div class="merch-grid" id="merch-grid">
+
+          <div class="merch-card" data-collection="lgsa">
+            <a href="https://www.lgsa.com/en/boutique/lgsa-swim-cap" target="_blank" rel="noopener noreferrer" class="merch-link">
+              <div class="merch-img-wrap">
+                <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/6689b16fdf12ff3d07c64a9d/1777581186011/Copy+of+Pre-order+today%21+%283%29.png?format=300w" alt="LGSA Swim Cap">
+              </div>
+              <div class="merch-body"><div class="merch-title">LGSA Swim Cap</div></div>
+            </a>
+            <div class="merch-footer">
+              <span class="merch-price">€12.00</span>
+              <button class="btn-add-cart" id="atc-lgsa-swim-cap" onclick="addToCart('lgsa-swim-cap','LGSA Swim Cap',12,'merch','merch-lgsa-cap',this)">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add
+              </button>
             </div>
           </div>
-        </div>
 
-        <div class="product-card" data-id="la-classique" data-type="core" data-place="montreux">
-          <div class="product-img img-la-classique"><span class="badge badge-core">Core</span></div>
-          <div class="product-body">
-            <div class="product-title">La Classique</div>
-            <div class="product-desc">Popular 15km mass event for experienced swimmers seeking a competitive challenge.
-            </div>
-            <div class="product-stats">
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <path d="M22 12H2M12 2v20" />
-                </svg>15 km</span>
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>1 day</span>
-            </div>
-            <div class="product-footer">
-              <span class="product-price">€85</span>
-              <button class="btn-view-link" onclick="showDetail('la-classique')">View details <svg viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></button>
+          <div class="merch-card" data-collection="legendaire">
+            <a href="https://www.lgsa.com/en/boutique/legendaire-towel" target="_blank" rel="noopener noreferrer" class="merch-link">
+              <div class="merch-img-wrap">
+                <span class="badge-coming-soon">Coming soon</span>
+                <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/6662de869d9764334b5daf74/1777581186011/Copy+of+Pre-order+today%21+%2810%29.png?format=300w" alt="Légendaire Towel">
+              </div>
+              <div class="merch-body"><div class="merch-title">Légendaire Towel</div></div>
+            </a>
+            <div class="merch-footer">
+              <span class="merch-price">Sold Out</span>
+              <button class="btn-add-cart" disabled style="opacity:0.4;cursor:not-allowed;background:#aaa;">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Sold Out
+              </button>
             </div>
           </div>
-        </div>
 
-        <div class="product-card" data-id="guided-classique" data-type="core" data-place="lausanne">
-          <div class="product-img img-guided-classique"><span class="badge badge-core">Core</span></div>
-          <div class="product-body">
-            <div class="product-title">Guided Classique</div>
-            <div class="product-desc">Full-day 15km guided swim for experienced swimmers; available solo, group, or
-              relay.</div>
-            <div class="product-stats">
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <path d="M22 12H2M12 2v20" />
-                </svg>One-way 15km</span>
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>1 day</span>
-            </div>
-            <div class="product-footer">
-              <span class="product-price">€65</span>
-              <button class="btn-view-link" onclick="showDetail('guided-classique')">View details <svg
-                  viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></button>
+          <div class="merch-card" data-collection="signature">
+            <a href="https://www.lgsa.com/en/boutique/lgsa-signature-swim-cap" target="_blank" rel="noopener noreferrer" class="merch-link">
+              <div class="merch-img-wrap">
+                <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/6662dd2847546a7f6bae272c/1777581186011/LGSA-Swimcap-updated.jpg?format=300w" alt="Signature Swim Cap">
+              </div>
+              <div class="merch-body"><div class="merch-title">Signature Swim Cap</div></div>
+            </a>
+            <div class="merch-footer">
+              <span class="merch-price">€15.00</span>
+              <button class="btn-add-cart" id="atc-signature-swim-cap" onclick="addToCart('signature-swim-cap','Signature Swim Cap',15,'merch','merch-sig-cap',this)">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add
+              </button>
             </div>
           </div>
-        </div>
 
-        <div class="product-card" data-id="la-nyvoirienne" data-type="entry" data-place="evian">
-          <div class="product-img img-la-nyvoirienne"><span class="badge badge-entry">Entry</span></div>
-          <div class="product-body">
-            <div class="product-title">La Nyvoirienne</div>
-            <div class="product-desc">Fun open water event blending endurance and community.</div>
-            <div class="product-stats">
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <path d="M22 12H2M12 2v20" />
-                </svg>8 – 7 km</span>
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>1 day</span>
-            </div>
-            <div class="product-footer">
-              <span class="product-price">€45</span>
-              <button class="btn-view-link" onclick="showDetail('la-nyvoirienne')">View details <svg
-                  viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></button>
+          <div class="merch-card" data-collection="classique">
+            <a href="https://www.lgsa.com/en/boutique/classique-tee" target="_blank" rel="noopener noreferrer" class="merch-link">
+              <div class="merch-img-wrap">
+                <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/68a7401cc1bfc45b6dbf8e41/1755791390839/unisex-basic-softstyle-t-shirt-light-blue-right-front-68a7400d6e91e.jpg?format=300w" alt="Classique Tee">
+              </div>
+              <div class="merch-body"><div class="merch-title">Classique Tee</div></div>
+            </a>
+            <div class="merch-footer">
+              <span class="merch-price">€55.00</span>
+              <button class="btn-add-cart" id="atc-classique-tee" onclick="addToCart('classique-tee','Classique Tee',55,'merch','merch-classique-tee',this)">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add
+              </button>
             </div>
           </div>
-        </div>
 
-        <div class="product-card" data-id="guided-nyvoirienne" data-type="entry" data-place="evian">
-          <div class="product-img img-guided-nyvo"><span class="badge badge-entry">Entry</span></div>
-          <div class="product-body">
-            <div class="product-title">Guided Nyvoirienne</div>
-            <div class="product-desc">Scenic 7km guided swim for moderately experienced swimmers; solo, group, or relay.
-            </div>
-            <div class="product-stats">
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <path d="M22 12H2M12 2v20" />
-                </svg>7 km</span>
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>1/2 day</span>
-            </div>
-            <div class="product-footer">
-              <span class="product-price">€35</span>
-              <button class="btn-view-link" onclick="showDetail('guided-nyvoirienne')">View details <svg
-                  viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></button>
+          <div class="merch-card" data-collection="lgsa">
+            <a href="https://www.lgsa.com/en/boutique/lgsa-tee" target="_blank" rel="noopener noreferrer" class="merch-link">
+              <div class="merch-img-wrap">
+                <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69982c89ebdc5f236e9b917f/1771580557469/unisex-premium-t-shirt-navy-front-69982c7b467f4.jpg?format=300w" alt="LGSA Tee">
+              </div>
+              <div class="merch-body"><div class="merch-title">LGSA Tee</div></div>
+            </a>
+            <div class="merch-footer">
+              <span class="merch-price">€55.00</span>
+              <button class="btn-add-cart" id="atc-lgsa-tee" onclick="addToCart('lgsa-tee','LGSA Tee',55,'merch','merch-lgsa-tee',this)">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add
+              </button>
             </div>
           </div>
-        </div>
 
-        <div class="product-card" data-id="lake-geneva-initiation" data-type="entry" data-place="mont-voisin">
-          <div class="product-img img-initiation"><span class="badge badge-entry">Entry</span></div>
-          <div class="product-body">
-            <div class="product-title">Lake Geneva Initiation</div>
-            <div class="product-desc">Beginner-friendly guided swim to build open water confidence.</div>
-            <div class="product-stats">
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <path d="M22 12H2M12 2v20" />
-                </svg>0–3 km</span>
-              <span class="stat-item"><svg viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6v6l4 2" />
-                </svg>2–3 hrs</span>
-            </div>
-            <div class="product-footer">
-              <span class="product-price">€25</span>
-              <button class="btn-view-link" onclick="showDetail('lake-geneva-initiation')">View details <svg
-                  viewBox="0 0 24 24">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></button>
+          <div class="merch-card" data-collection="signature">
+            <a href="https://www.lgsa.com/en/boutique/signature-tee" target="_blank" rel="noopener noreferrer" class="merch-link">
+              <div class="merch-img-wrap">
+                <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69b3fd16b5b4d71f19191d9c/1773403416474/unisex-premium-t-shirt-white-front-69b3fd0c427e6.jpg?format=300w" alt="Signature Tee">
+              </div>
+              <div class="merch-body"><div class="merch-title">Signature Tee</div></div>
+            </a>
+            <div class="merch-footer">
+              <span class="merch-price">€55.00</span>
+              <button class="btn-add-cart" id="atc-signature-tee" onclick="addToCart('signature-tee','Signature Tee',55,'merch','merch-sig-tee',this)">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add
+              </button>
             </div>
           </div>
-        </div>
 
+          <div class="merch-card" data-collection="classique">
+            <a href="https://www.lgsa.com/en/boutique/classique-hoodie" target="_blank" rel="noopener noreferrer" class="merch-link">
+              <div class="merch-img-wrap">
+                <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69b9417ad93579030626aeb8/1773748606799/unisex-essential-eco-hoodie-french-navy-front-69b9416f22859.jpg?format=300w" alt="Classique Hoodie">
+              </div>
+              <div class="merch-body"><div class="merch-title">Classique Hoodie</div></div>
+            </a>
+            <div class="merch-footer">
+              <span class="merch-price">€100.00</span>
+              <button class="btn-add-cart" id="atc-classique-hoodie" onclick="addToCart('classique-hoodie','Classique Hoodie',100,'merch','merch-classique-hoodie',this)">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add
+              </button>
+            </div>
+          </div>
+
+          <div class="merch-card" data-collection="signature">
+            <a href="https://www.lgsa.com/en/boutique/signature-hoodie" target="_blank" rel="noopener noreferrer" class="merch-link">
+              <div class="merch-img-wrap">
+                <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69b95328d93579030626bb2d/1773753132045/unisex-essential-eco-hoodie-white-front-69b953205cd15.jpg?format=300w" alt="Signature Hoodie">
+              </div>
+              <div class="merch-body"><div class="merch-title">Signature Hoodie</div></div>
+            </a>
+            <div class="merch-footer">
+              <span class="merch-price">€100.00</span>
+              <button class="btn-add-cart" id="atc-signature-hoodie" onclick="addToCart('signature-hoodie','Signature Hoodie',100,'merch','merch-sig-hoodie',this)">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add
+              </button>
+            </div>
+          </div>
+
+        </div>
       </div>
+
     </main>
 
-    <!-- ══ DETAIL PAGE (injected by JS) ══ -->
+    <!-- ══ DETAIL PAGE ══ -->
     <div class="detail-wrap" id="detail-wrap"></div>
 
-  </div><!-- /page-wrap -->
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MERCH UPSELL POPUP  ← NEW
+  ══════════════════════════════════════════ -->
+  <div class="upsell-overlay" id="upsell-overlay">
+    <div class="upsell-panel">
+
+      <!-- Header -->
+      <div class="upsell-header">
+        <div class="upsell-header-content">
+          <div class="upsell-header-eyebrow">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Complete Your Look
+          </div>
+          <div class="upsell-header-title">Add gear before you book</div>
+          <div class="upsell-header-sub">Gear up with LGSA merchandise — delivered before your event.</div>
+        </div>
+        <button class="upsell-close-btn" onclick="closeUpsell()">✕</button>
+      </div>
+
+      <!-- Body: Merch Items -->
+      <div class="upsell-body">
+        <div class="upsell-merch-grid">
+
+          <!-- Item 1: LGSA Swim Cap -->
+          <div class="upsell-merch-item" id="upsell-item-lgsa-swim-cap">
+            <div class="upsell-item-img">
+              <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/6689b16fdf12ff3d07c64a9d/1777581186011/Copy+of+Pre-order+today%21+%283%29.png?format=300w" alt="LGSA Swim Cap">
+              <div class="upsell-added-tick">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+            <div class="upsell-item-body">
+              <div class="upsell-item-name">LGSA Swim Cap</div>
+              <div class="upsell-item-price">€12.00</div>
+            </div>
+            <div class="upsell-item-footer">
+              <button class="upsell-item-btn" id="upsell-btn-lgsa-swim-cap"
+                onclick="upsellAddToCart('lgsa-swim-cap','LGSA Swim Cap',12,'merch','merch-lgsa-cap','upsell-btn-lgsa-swim-cap','upsell-item-lgsa-swim-cap')">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 2: Signature Swim Cap -->
+          <div class="upsell-merch-item" id="upsell-item-signature-swim-cap">
+            <div class="upsell-item-img">
+              <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/6662dd2847546a7f6bae272c/1777581186011/LGSA-Swimcap-updated.jpg?format=300w" alt="Signature Swim Cap">
+              <div class="upsell-added-tick">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+            <div class="upsell-item-body">
+              <div class="upsell-item-name">Signature Swim Cap</div>
+              <div class="upsell-item-price">€15.00</div>
+            </div>
+            <div class="upsell-item-footer">
+              <button class="upsell-item-btn" id="upsell-btn-signature-swim-cap"
+                onclick="upsellAddToCart('signature-swim-cap','Signature Swim Cap',15,'merch','merch-sig-cap','upsell-btn-signature-swim-cap','upsell-item-signature-swim-cap')">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 3: Classique Tee -->
+          <div class="upsell-merch-item" id="upsell-item-classique-tee">
+            <div class="upsell-item-img">
+              <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/68a7401cc1bfc45b6dbf8e41/1755791390839/unisex-basic-softstyle-t-shirt-light-blue-right-front-68a7400d6e91e.jpg?format=300w" alt="Classique Tee">
+              <div class="upsell-added-tick">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+            <div class="upsell-item-body">
+              <div class="upsell-item-name">Classique Tee</div>
+              <div class="upsell-item-price">€55.00</div>
+            </div>
+            <div class="upsell-item-footer">
+              <button class="upsell-item-btn" id="upsell-btn-classique-tee"
+                onclick="upsellAddToCart('classique-tee','Classique Tee',55,'merch','merch-classique-tee','upsell-btn-classique-tee','upsell-item-classique-tee')">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Item 4: LGSA Tee -->
+          <div class="upsell-merch-item" id="upsell-item-lgsa-tee">
+            <div class="upsell-item-img">
+              <img src="http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69982c89ebdc5f236e9b917f/1771580557469/unisex-premium-t-shirt-navy-front-69982c7b467f4.jpg?format=300w" alt="LGSA Tee">
+              <div class="upsell-added-tick">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+            </div>
+            <div class="upsell-item-body">
+              <div class="upsell-item-name">LGSA Tee</div>
+              <div class="upsell-item-price">€55.00</div>
+            </div>
+            <div class="upsell-item-footer">
+              <button class="upsell-item-btn" id="upsell-btn-lgsa-tee"
+                onclick="upsellAddToCart('lgsa-tee','LGSA Tee',55,'merch','merch-lgsa-tee','upsell-btn-lgsa-tee','upsell-item-lgsa-tee')">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Browse all merch link -->
+        <button class="upsell-browse-link" onclick="upsellGoToMerch()">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          Browse all merchandise
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- Footer -->
+      <div class="upsell-footer">
+        <button class="upsell-proceed-btn" onclick="upsellProceedToWise()">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Continue to Payment
+        </button>
+        <button class="upsell-skip-btn" onclick="upsellProceedToWise()">
+          No thanks, skip merchandise →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PAYMENT METHOD SELECTOR ← NEW ══ -->
+  <div class="paymethod-overlay" id="paymethod-overlay">
+    <div class="paymethod-panel">
+      <div class="paymethod-header">
+        <div class="paymethod-header-info">
+          <div class="paymethod-header-label">Step 2 of 2 — Checkout</div>
+          <div class="paymethod-header-title">Choose payment method</div>
+          <div class="paymethod-header-amount" id="paymethod-header-amount">—</div>
+        </div>
+        <button class="paymethod-close-btn" onclick="closePaymentMethod()">✕</button>
+      </div>
+      <div class="paymethod-body">
+        <div class="paymethod-body-label">How would you like to pay?</div>
+        <div class="paymethod-options">
+
+          <!-- Option 1: Bank Transfer -->
+          <div class="paymethod-card pm-bank" onclick="choosePaymentMethod('bank')">
+            <div class="paymethod-card-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M3 10l9-6 9 6"/><line x1="8" y1="10" x2="8" y2="21"/><line x1="16" y1="10" x2="16" y2="21"/><line x1="12" y1="10" x2="12" y2="21"/></svg>
+            </div>
+            <div class="paymethod-card-info">
+              <div class="paymethod-card-name">Bank Transfer</div>
+              <div class="paymethod-card-desc">Pay directly via IBAN bank transfer. We'll email confirmation once received.</div>
+            </div>
+            <div class="paymethod-card-arrow">
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <!-- Option 2: Wise Pay -->
+          <div class="paymethod-card pm-wise" onclick="choosePaymentMethod('wise')">
+            <div class="paymethod-card-icon">
+              <div class="paymethod-card-wise-mark">W</div>
+            </div>
+            <div class="paymethod-card-info">
+              <div class="paymethod-card-name">Wise Pay</div>
+              <div class="paymethod-card-desc">Fast, low-fee international payment via Wise. Instant confirmation.</div>
+            </div>
+            <div class="paymethod-card-arrow">
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="paymethod-footer">
+        <div class="paymethod-secure">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          100% secure · LGSA verified account
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ BANK TRANSFER POPUP ← NEW ══ -->
+  <div class="banktx-overlay" id="banktx-overlay">
+    <div class="banktx-panel">
+
+      <!-- Header -->
+      <div class="banktx-header">
+        <div class="banktx-header-left">
+          <div class="banktx-header-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M3 10l9-6 9 6"/><line x1="8" y1="10" x2="8" y2="21"/><line x1="16" y1="10" x2="16" y2="21"/><line x1="12" y1="10" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <div class="banktx-header-title">Bank Transfer Details</div>
+            <div class="banktx-header-sub">Lake Geneva Swimming Association</div>
+          </div>
+        </div>
+        <button class="banktx-close-btn" onclick="closeBankTransfer()">✕</button>
+      </div>
+
+      <!-- Scrollable body -->
+      <div class="banktx-body" id="banktx-body">
+
+        <!-- Currency Selector -->
+        <div class="banktx-currency-wrap">
+          <div class="banktx-currency-label">Select Currency</div>
+          <div class="banktx-currency-tabs">
+            <button class="banktx-cur-btn active" id="cur-btn-EUR" onclick="selectBankCurrency('EUR')">
+              <span class="banktx-cur-symbol">€</span>
+              <span class="banktx-cur-code">EUR</span>
+              <span class="banktx-cur-rate">Euro</span>
+            </button>
+            <button class="banktx-cur-btn" id="cur-btn-USD" onclick="selectBankCurrency('USD')">
+              <span class="banktx-cur-symbol">$</span>
+              <span class="banktx-cur-code">USD</span>
+              <span class="banktx-cur-rate">≈ 1.08/€</span>
+            </button>
+            <button class="banktx-cur-btn" id="cur-btn-CHF" onclick="selectBankCurrency('CHF')">
+              <span class="banktx-cur-symbol">₣</span>
+              <span class="banktx-cur-code">CHF</span>
+              <span class="banktx-cur-rate">≈ 0.95/€</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Amount bar -->
+        <div class="banktx-amount-bar">
+          <div>
+            <div class="banktx-amount-label">Amount to Transfer</div>
+            <div class="banktx-amount-product" id="banktx-product-name">—</div>
+          </div>
+          <div class="banktx-amount-value" id="banktx-amount">—</div>
+        </div>
+        <div class="banktx-rate-note" id="banktx-rate-note" style="display:none"></div>
+
+        <!-- Paying To — beneficiary card (LGSA, always fixed) -->
+        <div class="banktx-beneficiary-card">
+          <div class="banktx-beneficiary-header">
+            <svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M3 10l9-6 9 6"/></svg>
+            <span>Paying To</span>
+          </div>
+          <div class="banktx-beneficiary-rows">
+            <div class="banktx-bene-row">
+              <span class="banktx-bene-key">Name</span>
+              <span class="banktx-bene-val name-val">Lake Geneva Swimming Association</span>
+            </div>
+          </div>
+        </div>
+        <!-- Hidden reference (used by JS for email params) -->
+        <span id="banktx-reference" style="display:none;">—</span>
+
+        <!-- Divider -->
+        <div class="banktx-section-label" style="margin-bottom:12px;">
+          Your Bank Details — Paying From
+        </div>
+
+        <!-- Payer form -->
+        <div class="banktx-payer-form" id="banktx-payer-form">
+
+          <div class="banktx-form-row">
+            <div class="banktx-form-field">
+              <label for="payer-name">Account Holder Name</label>
+              <input type="text" id="payer-name" placeholder="e.g. Jean-Pierre Blanc" autocomplete="name">
+            </div>
+          </div>
+
+          <div class="banktx-form-row">
+            <div class="banktx-form-field">
+              <label for="payer-email">Your Email</label>
+              <input type="email" id="payer-email" placeholder="you@example.com" autocomplete="email">
+            </div>
+          </div>
+
+          <div class="banktx-form-row">
+            <div class="banktx-form-field">
+              <label for="payer-bank">Bank Name</label>
+              <input type="text" id="payer-bank" placeholder="e.g. UBS, Crédit Agricole" autocomplete="organization">
+            </div>
+          </div>
+
+          <div class="banktx-form-row">
+            <div class="banktx-form-field">
+              <label for="payer-iban">Your IBAN</label>
+              <input type="text" id="payer-iban" class="mono-input" placeholder="CH56 0483 5012 3456 7800 9"
+                maxlength="34" oninput="formatIBANInput(this)">
+              <span class="field-hint">Your account number — funds will be debited from here</span>
+            </div>
+          </div>
+
+          <div class="banktx-form-row">
+            <div class="banktx-form-field">
+              <label for="payer-bic">BIC / Swift Code</label>
+              <input type="text" id="payer-bic" class="mono-input" placeholder="e.g. UBSWCHZH80A" maxlength="11"
+                oninput="this.value=this.value.toUpperCase()">
+            </div>
+            <div class="banktx-form-field">
+              <label for="payer-country">Country</label>
+              <select id="payer-country">
+                <option value="">Select…</option>
+                <option value="CH">🇨🇭 Switzerland</option>
+                <option value="FR">🇫🇷 France</option>
+                <option value="DE">🇩🇪 Germany</option>
+                <option value="GB">🇬🇧 United Kingdom</option>
+                <option value="BE">🇧🇪 Belgium</option>
+                <option value="NL">🇳🇱 Netherlands</option>
+                <option value="IT">🇮🇹 Italy</option>
+                <option value="ES">🇪🇸 Spain</option>
+                <option value="AT">🇦🇹 Austria</option>
+                <option value="US">🇺🇸 United States</option>
+                <option value="CA">🇨🇦 Canada</option>
+                <option value="AU">🇦🇺 Australia</option>
+                <option value="OTHER">🌍 Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Validation error bar -->
+          <div class="banktx-form-err" id="banktx-form-err">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="banktx-form-err-text">Please fill in all required fields.</span>
+          </div>
+
+          <div class="banktx-secure-row">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Your details are encrypted and never stored
+          </div>
+
+        </div>
+
+      </div><!-- end banktx-body -->
+
+      <!-- Footer -->
+      <div class="banktx-footer" id="banktx-footer">
+        <button class="banktx-confirm-btn" onclick="submitPayerForm()">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          Authorize Bank Transfer
+        </button>
+        <button class="banktx-back-btn" onclick="backToPaymentMethod()">← Back to payment options</button>
+      </div>
+
+      <!-- Email confirmation step (shown after form submit) -->
+      <div class="banktx-email-form" id="banktx-email-form">
+        <div class="banktx-email-form-title">Confirm &amp; Send</div>
+        <div class="banktx-email-form-sub">
+          We'll send a booking confirmation to <strong id="banktx-confirm-email-display"></strong> and notify LGSA of your transfer.
+        </div>
+
+        <!-- Summary of what's being sent -->
+        <div style="background:#f8f9fc;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-size:12px;line-height:1.8;color:var(--text-dark);">
+          <div><strong>Name:</strong> <span id="confirm-name-display"></span></div>
+          <div><strong>Bank:</strong> <span id="confirm-bank-display"></span></div>
+          <div><strong>IBAN:</strong> <span id="confirm-iban-display" style="font-family:'Courier New',monospace;"></span></div>
+          <div><strong>Amount:</strong> <span id="confirm-amount-display"></span></div>
+          <div><strong>Reference:</strong> <span id="confirm-ref-display" style="font-family:'Courier New',monospace;color:#1a4a90;font-weight:700;"></span></div>
+        </div>
+
+        <div class="banktx-email-err-msg" id="banktx-email-err">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="banktx-email-err-text">Something went wrong.</span>
+        </div>
+
+        <button class="banktx-email-send-btn" id="banktx-email-send-btn" onclick="sendConfirmationEmails()">
+          <div class="btn-spinner"></div>
+          <span class="btn-label" style="display:flex;align-items:center;gap:7px;">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+            Confirm Transfer &amp; Send Email
+          </span>
+        </button>
+        <button class="banktx-email-skip" onclick="skipEmailAndComplete()">Skip email — complete without confirmation →</button>
+      </div>
+
+      <!-- Email footer hint -->
+      <div id="banktx-email-footer-hint" style="display:none;padding:0 22px 16px;text-align:center;">
+        <div class="banktx-email-skip" onclick="backToTransferDetails()" style="cursor:pointer;">
+          ← Back to transfer details
+        </div>
+      </div>
+
+      <!-- Success screen -->
+      <div class="banktx-success" id="banktx-success">
+        <div class="banktx-success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Transfer Noted!</h3>
+        <p>Thanks — we'll verify your transfer and confirm your booking within <strong>1–2 business days</strong>.</p>
+        <div class="banktx-success-sent" id="banktx-success-sent" style="display:none">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          Confirmation sent to <strong id="banktx-success-email"></strong>
+        </div>
+        <button class="banktx-success-close" onclick="closeBankTransfer()">Done</button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ══ WISE PAYMENT POPUP ══ -->
   <div class="wise-overlay" id="wise-overlay" onclick="closeWiseIfOutside(event)">
     <div class="wise-panel" id="wise-panel">
-
-      <!-- Header -->
       <div class="wise-panel-header">
         <div class="wise-header-left">
           <div class="wise-logo-mark">W</div>
@@ -272,11 +878,7 @@
         </div>
         <button class="wise-close-btn" onclick="closeWise()">✕</button>
       </div>
-
-      <!-- Body -->
       <div class="wise-panel-body">
-
-        <!-- Product row -->
         <div class="wise-product-row">
           <div class="wise-product-icon">
             <svg viewBox="0 0 24 24">
@@ -289,8 +891,6 @@
             <div class="wise-product-type">Lake Geneva Open Water</div>
           </div>
         </div>
-
-        <!-- Amount -->
         <div class="wise-amount-block">
           <div class="wise-amount-label">Total amount</div>
           <div class="wise-amount-row">
@@ -298,34 +898,23 @@
             <span class="wise-currency-tag">EUR</span>
           </div>
         </div>
-
-        <!-- Breakdown -->
         <div class="wise-breakdown">
           <div class="wise-fee-row"><span>Entry fee</span><span id="wise-fee-entry">—</span></div>
           <div class="wise-fee-row"><span>Wise transfer fee</span><span id="wise-fee-wise">~€1.84</span></div>
           <div class="wise-fee-row total"><span>You pay</span><span id="wise-fee-total">—</span></div>
         </div>
-
       </div>
-
-      <!-- Footer actions -->
       <div class="wise-panel-footer">
         <button class="wise-pay-btn" onclick="proceedToWise()">
-          <svg viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           Continue to Wise
         </button>
         <button class="wise-cancel-btn" onclick="closeWise()">Cancel</button>
         <div class="wise-secure-note">
-          <svg viewBox="0 0 24 24">
-            <rect x="3" y="11" width="18" height="11" rx="2" />
-            <path d="M7 11V7a5 5 0 0110 0v4" />
-          </svg>
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
           Secured by Wise · FCA regulated
         </div>
       </div>
-
     </div>
   </div>
 
@@ -337,225 +926,533 @@
         <h3>Filter</h3>
         <button class="mob-close" onclick="closeMobFilter()">✕</button>
       </div>
-      <div class="filter-section">
-        <span class="filter-label">Select Date</span>
-        <div class="cal-wrap">
-          <div class="cal-nav">
-            <button onclick="changeMonth(-1,'m')">&#8249;</button>
-            <span id="m-cal-label"></span>
-            <button onclick="changeMonth(1,'m')">&#8250;</button>
-          </div>
-          <div class="cal-grid" id="m-cal-grid"></div>
-        </div>
-      </div>
-      <div class="filter-section">
-        <span class="filter-label">Select Event type</span>
-        <div class="check-row"><input type="checkbox" id="m-flagship" onchange="syncMobile('flagship')"><label
-            for="m-flagship">Flagship</label></div>
-        <div class="check-row"><input type="checkbox" id="m-core" onchange="syncMobile('core')"><label
-            for="m-core">Core</label></div>
-        <div class="check-row"><input type="checkbox" id="m-entry" onchange="syncMobile('entry')"><label
-            for="m-entry">Entry Level</label></div>
-      </div>
-      <div class="filter-section">
-        <span class="filter-label">Select Place</span>
-        <div class="place-group">
-          <div class="place-group-name">Geneva</div>
-          <div class="place-sub">
-            <div class="check-row"><input type="checkbox" id="m-mont" onchange="syncMobile('mont')"><label
-                for="m-mont">Mont-Voisin</label></div>
-            <div class="check-row"><input type="checkbox" id="m-evian" onchange="syncMobile('evian')"><label
-                for="m-evian">Evian-les-Bains</label></div>
-            <div class="check-row"><input type="checkbox" id="m-lausanne" onchange="syncMobile('lausanne')"><label
-                for="m-lausanne">Lausanne/Evian-les-Bains</label></div>
+
+      <div id="m-swim-filters">
+        <div class="filter-section">
+          <span class="filter-label">Select Date</span>
+          <div class="cal-wrap">
+            <div class="cal-nav">
+              <button onclick="changeMonth(-1,'m')">&#8249;</button>
+              <span id="m-cal-label"></span>
+              <button onclick="changeMonth(1,'m')">&#8250;</button>
+            </div>
+            <div class="cal-grid" id="m-cal-grid"></div>
           </div>
         </div>
-        <div class="place-group">
-          <div class="check-row"><input type="checkbox" id="m-montreux" onchange="syncMobile('montreux')"><label
-              for="m-montreux">Geneva / Montreux</label></div>
+        <div class="filter-section">
+          <span class="filter-label">Select Category</span>
+          <div class="check-row"><input type="checkbox" id="m-flagship" onchange="syncMobile('flagship')"><label for="m-flagship">Flagship</label></div>
+          <div class="check-row"><input type="checkbox" id="m-core" onchange="syncMobile('core')"><label for="m-core">Core</label></div>
+          <div class="check-row"><input type="checkbox" id="m-entry" onchange="syncMobile('entry')"><label for="m-entry">Entry Level</label></div>
+        </div>
+        <div class="filter-section">
+          <span class="filter-label">Select Place</span>
+          <div class="place-group">
+            <div class="place-group-name">Geneva</div>
+            <div class="place-sub">
+              <div class="check-row"><input type="checkbox" id="m-nyon" onchange="syncMobile('nyon')"><label for="m-nyon">Nyon/Yvoire</label></div>
+              <div class="check-row"><input type="checkbox" id="m-evian" onchange="syncMobile('evian')"><label for="m-evian">Evian-les-Bains</label></div>
+              <div class="check-row"><input type="checkbox" id="m-lausanne" onchange="syncMobile('lausanne')"><label for="m-lausanne">Lausanne/Evian-les-Bains</label></div>
+            </div>
+          </div>
+          <div class="place-group">
+            <div class="check-row"><input type="checkbox" id="m-montreux" onchange="syncMobile('montreux')"><label for="m-montreux">Geneva / Montreux</label></div>
+          </div>
+        </div>
+        <div class="filter-section">
+          <span class="filter-label">Select Event Type</span>
+          <div class="check-row"><input type="checkbox" id="m-guided" onchange="syncMobile('guided')"><label for="m-guided">Guided</label></div>
+          <div class="check-row"><input type="checkbox" id="m-event-type" onchange="syncMobile('event-type')"><label for="m-event-type">Event</label></div>
+          <div class="check-row"><input type="checkbox" id="m-training" onchange="syncMobile('training')"><label for="m-training">Training Camp</label></div>
+        </div>
+        <div class="filter-section">
+          <span class="filter-label">Participation</span>
+          <div class="check-row"><input type="checkbox" id="m-solo" onchange="syncMobile('solo')"><label for="m-solo">Solo</label></div>
+          <div class="check-row"><input type="checkbox" id="m-group" onchange="syncMobile('group')"><label for="m-group">Group</label></div>
+          <div class="check-row"><input type="checkbox" id="m-relay" onchange="syncMobile('relay')"><label for="m-relay">Relay</label></div>
+          <div class="check-row"><input type="checkbox" id="m-team" onchange="syncMobile('team')"><label for="m-team">Team</label></div>
         </div>
       </div>
+
+      <div id="m-merch-filters" style="display:none">
+        <div class="filter-section">
+          <span class="filter-label">Collection</span>
+          <div class="check-row"><input type="checkbox" id="m-col-classique" onchange="syncMobileMerch('classique')"><label for="m-col-classique">Classique Collection</label></div>
+          <div class="check-row"><input type="checkbox" id="m-col-lgsa" onchange="syncMobileMerch('lgsa')"><label for="m-col-lgsa">LGSA Collection</label></div>
+          <div class="check-row"><input type="checkbox" id="m-col-legendaire" onchange="syncMobileMerch('legendaire')"><label for="m-col-legendaire">Légendaire Collection</label></div>
+          <div class="check-row"><input type="checkbox" id="m-col-signature" onchange="syncMobileMerch('signature')"><label for="m-col-signature">Signature Collection</label></div>
+        </div>
+      </div>
+
       <button class="mob-apply" onclick="closeMobFilter()">Apply Filters</button>
     </div>
   </div>
 
+  <!-- ══ TOAST ══ -->
+  <div class="cart-toast" id="cart-toast">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="cart-toast-msg">Added to cart</span>
+  </div>
+
   <script>
+    /* ══════════════════════════════════════════════
+       CART STATE
+    ══════════════════════════════════════════════ */
+    let cart = {};
+
+    /* ── Discount codes ── */
+    const DISCOUNT_CODES = {
+      'LGSA10':   { type: 'percent', value: 10, label: '10% off' },
+      'SWIM20':   { type: 'percent', value: 20, label: '20% off' },
+      'WELCOME5': { type: 'fixed',   value: 5,  label: '€5 off'  },
+      'LGSA2025': { type: 'percent', value: 15, label: '15% off' },
+    };
+    let _appliedDiscount = null; // { code, type, value, label }
+
+    /* ── Exchange rates (base EUR) ── */
+    const EXCHANGE_RATES = {
+      EUR: { rate: 1,    symbol: '€',   name: 'Euro'        },
+      USD: { rate: 1.08, symbol: '$',   name: 'US Dollar'   },
+      CHF: { rate: 0.95, symbol: 'CHF ', name: 'Swiss Franc' },
+    };
+    let _bankCurrency    = 'EUR';
+    let _bankBaseAmountEUR = 0; // raw EUR amount before currency conversion
+
+    const BADGE_CLASS_MAP = {
+      flagship: 'badge-flagship',
+      core:     'badge-core',
+      entry:    'badge-entry',
+      merch:    'badge-core',
+    };
+
+    const BADGE_LABEL_MAP = {
+      flagship: 'Flagship',
+      core:     'Core',
+      entry:    'Entry',
+      merch:    'Merch',
+    };
+
+    function addToCart(id, name, price, type, imgClass, btnEl) {
+      if (cart[id]) {
+        cart[id].qty += 1;
+      } else {
+        cart[id] = { id, name, price, type, imgClass, qty: 1 };
+      }
+      updateCartUI();
+      markButtonInCart(id, true);
+      showToast(`"${name}" added to cart`);
+      animateBadge();
+    }
+
+    function removeFromCart(id) {
+      const itemEl = document.getElementById(`cart-item-${id}`);
+      if (itemEl) {
+        itemEl.classList.add('cart-item-removing');
+        setTimeout(() => {
+          delete cart[id];
+          markButtonInCart(id, false);
+          updateCartUI();
+        }, 220);
+      } else {
+        delete cart[id];
+        markButtonInCart(id, false);
+        updateCartUI();
+      }
+    }
+
+    function updateQty(id, delta) {
+      if (!cart[id]) return;
+      cart[id].qty += delta;
+      if (cart[id].qty <= 0) {
+        removeFromCart(id);
+        return;
+      }
+      const qtyEl   = document.getElementById(`qty-val-${id}`);
+      const priceEl = document.getElementById(`item-price-${id}`);
+      if (qtyEl)   qtyEl.textContent = cart[id].qty;
+      if (priceEl) priceEl.textContent = `€${(cart[id].price * cart[id].qty).toLocaleString('en-EU', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      updateCartSummary();
+      updateCartBadge();
+    }
+
+    function clearCart() {
+      Object.keys(cart).forEach(id => markButtonInCart(id, false));
+      cart = {};
+      updateCartUI();
+    }
+
+    /* ══════════════════════════════════════════════
+       CART UI RENDERING
+    ══════════════════════════════════════════════ */
+    function updateCartUI() {
+      const body   = document.getElementById('cart-drawer-body');
+      const footer = document.getElementById('cart-drawer-footer');
+      const items  = Object.values(cart);
+
+      updateCartBadge();
+
+      if (items.length === 0) {
+        body.innerHTML = `
+          <div class="cart-empty">
+            <div class="cart-empty-icon">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            </div>
+            <h3>Your cart is empty</h3>
+            <p>Add swim events or merchandise to get started.</p>
+          </div>`;
+        footer.style.display = 'none';
+        return;
+      }
+
+      footer.style.display = '';
+
+      let html = `<div class="cart-clear-row">
+        <button class="cart-clear-btn" onclick="clearCart()">
+          <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          Clear all
+        </button>
+      </div>`;
+
+      items.forEach(item => {
+        const lineTotal = (item.price * item.qty).toLocaleString('en-EU', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        const unitPrice = item.price.toLocaleString('en-EU', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        const badgeCls  = BADGE_CLASS_MAP[item.type] || 'badge-core';
+        const badgeLbl  = BADGE_LABEL_MAP[item.type] || '';
+        html += `
+          <div class="cart-item" id="cart-item-${item.id}">
+            <div class="cart-item-img ${item.imgClass}"></div>
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-meta">
+                <span class="cart-item-badge ${badgeCls}">${badgeLbl}</span>
+                Lake Geneva
+              </div>
+              <div class="cart-qty-row">
+                <button class="qty-btn qty-minus" onclick="updateQty('${item.id}',-1)">−</button>
+                <div class="qty-value" id="qty-val-${item.id}">${item.qty}</div>
+                <button class="qty-btn qty-plus" onclick="updateQty('${item.id}',1)">+</button>
+              </div>
+            </div>
+            <div class="cart-item-right">
+              <div class="cart-item-price" id="item-price-${item.id}">€${lineTotal}</div>
+              <div class="cart-item-unit-price">€${unitPrice} each</div>
+              <button class="cart-remove-btn" onclick="removeFromCart('${item.id}')">
+                <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+                Remove
+              </button>
+            </div>
+          </div>`;
+      });
+
+      html += buildDiscountSectionHTML();
+      html += buildCartSummaryHTML();
+      body.innerHTML = html;
+    }
+
+    /* ── Discount code input section ── */
+    function buildDiscountSectionHTML() {
+      const applied = _appliedDiscount;
+      if (applied) {
+        return `
+          <div class="cart-discount-wrap">
+            <div class="cart-discount-label">
+              <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              Promo Code
+            </div>
+            <div class="cart-discount-row">
+              <input class="cart-discount-input ok" type="text" value="${applied.code}" readonly>
+              <button class="cart-discount-apply" style="background:var(--teal)" disabled>Applied ✓</button>
+            </div>
+            <div class="cart-discount-msg ok">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              ${applied.label} applied!
+              <button onclick="removeDiscount()" style="background:none;border:none;font-size:11px;color:#e05555;cursor:pointer;margin-left:auto;font-weight:600;">Remove</button>
+            </div>
+          </div>`;
+      }
+      return `
+        <div class="cart-discount-wrap">
+          <div class="cart-discount-label">
+            <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            Promo Code
+          </div>
+          <div class="cart-discount-row">
+            <input class="cart-discount-input" type="text" id="discount-input" placeholder="Enter code e.g. LGSA10" maxlength="20"
+              onkeydown="if(event.key==='Enter') applyDiscountCode()">
+            <button class="cart-discount-apply" onclick="applyDiscountCode()">Apply</button>
+          </div>
+          <div class="cart-discount-msg" id="discount-msg"></div>
+        </div>`;
+    }
+
+    function buildCartSummaryHTML() {
+      const items    = Object.values(cart);
+      const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+      const wiseFee  = items.length > 0 ? 1.84 : 0;
+      const fmt = n => n.toLocaleString('en-EU', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+      let discountAmt = 0;
+      let discountRow = '';
+      if (_appliedDiscount) {
+        if (_appliedDiscount.type === 'percent') {
+          discountAmt = subtotal * (_appliedDiscount.value / 100);
+        } else {
+          discountAmt = Math.min(_appliedDiscount.value, subtotal);
+        }
+        discountRow = `<div class="cart-summary-row" style="color:var(--teal-dark);font-weight:600;">
+          <span>
+            Discount
+            <span class="cart-discount-applied-tag">${_appliedDiscount.code}</span>
+          </span>
+          <span>−€${fmt(discountAmt)}</span>
+        </div>`;
+      }
+
+      const total = Math.max(0, subtotal - discountAmt) + wiseFee;
+      return `
+        <div class="cart-summary-section">
+          <div class="cart-summary-row"><span>Subtotal (${items.reduce((s,i)=>s+i.qty,0)} item${items.reduce((s,i)=>s+i.qty,0)!==1?'s':''})</span><span>€${fmt(subtotal)}</span></div>
+          ${discountRow}
+          <div class="cart-summary-row"><span>Transfer fee</span><span>~€${fmt(wiseFee)}</span></div>
+          <div class="cart-summary-row total"><span>Total</span><span>€${fmt(total)}</span></div>
+        </div>`;
+    }
+
+    function updateCartSummary() {
+      const body = document.getElementById('cart-drawer-body');
+      const old  = body.querySelector('.cart-summary-section');
+      if (old) old.outerHTML = buildCartSummaryHTML();
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const badge = document.getElementById('cart-badge');
+      const label = document.getElementById('cart-count-label');
+      const total = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+      badge.textContent = total;
+      if (total > 0) badge.classList.add('visible');
+      else badge.classList.remove('visible');
+      if (label) label.textContent = `${total} item${total !== 1 ? 's' : ''}`;
+    }
+
+    function animateBadge() {
+      const badge = document.getElementById('cart-badge');
+      badge.classList.remove('pop');
+      void badge.offsetWidth;
+      badge.classList.add('pop');
+    }
+
+    function markButtonInCart(id, inCart) {
+      // Mark main grid / merch page button
+      const btn = document.getElementById(`atc-${id}`);
+      if (btn) {
+        if (inCart) {
+          btn.classList.add('in-cart');
+          btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Cart`;
+        } else {
+          btn.classList.remove('in-cart');
+          btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> Add`;
+        }
+      }
+    }
+
+    /* ══════════════════════════════════════════════
+       CART DRAWER OPEN / CLOSE
+    ══════════════════════════════════════════════ */
+    function openCart() {
+      document.getElementById('cart-overlay').classList.add('open');
+      document.getElementById('cart-drawer').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      document.getElementById('cart-overlay').classList.remove('open');
+      document.getElementById('cart-drawer').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function cartCheckout() {
+      const items = Object.values(cart);
+      if (items.length === 0) return;
+      closeCart();
+      if (items.length === 1) {
+        _pendingWise = { type: 'product', id: items[0].id };
+        // Only use product flow if it maps to a known product key
+        const p = products[items[0].id];
+        if (!p) {
+          // Merch-only single item — use custom flow
+          _pendingWise = { type: 'custom', name: items[0].name, amount: items[0].price * items[0].qty };
+        }
+      } else {
+        const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+        const names    = items.map(i => `${i.name} x${i.qty}`).join(', ');
+        _pendingWise   = { type: 'custom', name: names, amount: subtotal };
+      }
+      setTimeout(() => openPaymentMethod(), 60);
+    }
+
+    /* ══════════════════════════════════════════════
+       TOAST
+    ══════════════════════════════════════════════ */
+    let _toastTimer = null;
+    function showToast(msg) {
+      const t = document.getElementById('cart-toast');
+      document.getElementById('cart-toast-msg').textContent = msg;
+      t.classList.add('show');
+      if (_toastTimer) clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
     /* ══════════════════════════════════════════════
        TAB DEFINITIONS
     ══════════════════════════════════════════════ */
     const TABS = [
-      { key: 'swimOverview', label: 'Swim Overview' },
-      { key: 'distanceRoute', label: 'Distance & route' },
-      { key: 'safetySupport', label: 'Safety & Support' },
-      { key: 'whatsIncluded', label: "What's included" },
+      { key: 'swimOverview',   label: 'Swim Overview' },
+      { key: 'distanceRoute',  label: 'Distance & route' },
+      { key: 'safetySupport',  label: 'Safety & Support' },
+      { key: 'whatsIncluded',  label: "What's included" },
       { key: 'entryLogistics', label: 'Entry & Logistics' },
     ];
 
     /* ══════════════════════════════════════════════
        PRODUCT DATA
-       - price      : numeric value (used for Wise popup)
-       - priceLabel : display string e.g. "€85"
-       - Each tab key: array of strings OR object of sub-sections { heading: [bullets] }
-       - Empty array → "Content coming soon." placeholder
     ══════════════════════════════════════════════ */
     const products = {
-
       'la-signature': {
         title: 'La Signature', badge: 'Flagship', badgeClass: 'badge-flagship',
         price: 1250, priceLabel: '€1,250',
         imgStyle: "background-image:url('assets/flagged_ship_img.png'); background-color:#1a3a6e;",
-        swimOverview: ['70 km Signature end‑to‑end crossing of Lake Geneva.', 'For highly experienced solo swimmers or relay teams.', 'Application‑only LGSA trophy swim.'],
-        distanceRoute: ['Approx. 70 km along the full length of Lake Geneva.', 'Typical route between Geneva and Villeneuve/Montreux (direction chosen for conditions).', 'Bespoke route briefing for each attempt.'], safetySupport: ['Dedicated pilot, observer and support crew for entire swim.', 'Full night‑swimming and contingency protocols.', 'Proven marathon‑swim history and robust training plan required.', 'Medical clearance and comprehensive insurance mandatory.'], whatsIncluded: ['Route planning, permits and authority liaison.', 'Escort boat(s), crew and standard feed preparation.', 'GPS tracking link for supporters.', 'Signature 70 finisher recognition (certificate, medal, listing).'], entryLogistics: {
-          "Travel & access": [
-            "Start/finish typically near Geneva or Montreux.",
-            "Geneva Airport + rail/road to start point.",
-            'Detailed logistics and accommodation guidance once accepted.'
-          ],
-          "Price & entry terms": [
-            "From CHF XX’XXX per solo or relay attempt.",
-            "Application fee; staged payments after acceptance.",
-            "Date windows highly weather‑dependent; flexibility required.",
-            'Bespoke contract, waiver and cancellation terms.'
-          ]
+        cartId: 'la-signature-140', cartName: 'La Signature 140',
+        swimOverview: ['70 km Signature end‑to‑end crossing of Lake Geneva.','For highly experienced solo swimmers or relay teams.','Application‑only LGSA trophy swim.'],
+        distanceRoute: ['Approx. 70 km along the full length of Lake Geneva.','Typical route between Geneva and Villeneuve/Montreux.','Bespoke route briefing for each attempt.'],
+        safetySupport: ['Dedicated pilot, observer and support crew for entire swim.','Full night‑swimming and contingency protocols.','Proven marathon‑swim history and robust training plan required.','Medical clearance and comprehensive insurance mandatory.'],
+        whatsIncluded: ['Route planning, permits and authority liaison.','Escort boat(s), crew and standard feed preparation.','GPS tracking link for supporters.','Signature 70 finisher recognition (certificate, medal, listing).'],
+        entryLogistics: {
+          "Travel & access": ["Start/finish typically near Geneva or Montreux.","Geneva Airport + rail/road to start point.","Detailed logistics and accommodation guidance once accepted."],
+          "Price & entry terms": ["From CHF XX'XXX per solo or relay attempt.","Application fee; staged payments after acceptance.","Date windows highly weather‑dependent; flexibility required.","Bespoke contract, waiver and cancellation terms."]
         },
       },
-
       'swim-stronger': {
         title: 'Swim Stronger', badge: 'Core', badgeClass: 'badge-core',
         price: 145, priceLabel: '€145',
         imgStyle: "background-image:url('assets/core_01_img.png'); background-color:#2a5298;",
-        swimOverview: ['5‑day open‑water training camp on Lake Geneva.', 'Based in Évian‑les‑Bains; aimed at strong improvers and marathon‑swim aspirants.', 'Mix of technique, endurance and mindset sessions.'],
-        distanceRoute: ['Daily swims from ~1–5+ km, building towards 5–13 km capability.', 'Shoreline loops and crossing‑style routes, chosen for conditions.', 'Clear daily plan shared in advance.'], safetySupport: ['LGSA coaching team plus safety support for all water sessions.', 'Minimum: able to swim at least 2 km continuous in open water; age 18+.', 'Health questionnaire and appropriate insurance required.'], whatsIncluded: ['Coaching programme and all on‑water sessions.', 'Workshops on pacing, feeds, safety and mental skills.', 'Support boat/kayaks as needed.', 'Camp briefing pack and post‑camp recommendations.'], entryLogistics: {
-          "Travel & access": [
-            "Évian‑les‑Bains via Geneva Airport + train/ferry/road.",
-            "Meeting point and suggested accommodation list provided after booking."
-          ],
-          "Price & entry terms": [
-            "From CHF X’XXX per person for 5‑day camp.",
-            "Deposit at registration; balance due X weeks before start.",
-            "Clear cancellation / deferral policy in booking conditions."
-          ]
+        cartId: 'swim-stronger', cartName: 'Swim Stronger',
+        swimOverview: ['5‑day open‑water training camp on Lake Geneva.','Based in Évian‑les‑Bains; aimed at strong improvers and marathon‑swim aspirants.','Mix of technique, endurance and mindset sessions.'],
+        distanceRoute: ['Daily swims from ~1–5+ km, building towards 5–13 km capability.','Shoreline loops and crossing‑style routes, chosen for conditions.','Clear daily plan shared in advance.'],
+        safetySupport: ['LGSA coaching team plus safety support for all water sessions.','Minimum: able to swim at least 2 km continuous in open water; age 18+.','Health questionnaire and appropriate insurance required.'],
+        whatsIncluded: ['Coaching programme and all on‑water sessions.','Workshops on pacing, feeds, safety and mental skills.','Support boat/kayaks as needed.','Camp briefing pack and post‑camp recommendations.'],
+        entryLogistics: {
+          "Travel & access": ["Évian‑les‑Bains via Geneva Airport + train/ferry/road.","Meeting point and suggested accommodation list provided after booking."],
+          "Price & entry terms": ["From CHF X'XXX per person for 5‑day camp.","Deposit at registration; balance due X weeks before start.","Clear cancellation / deferral policy in booking conditions."]
         },
       },
-
       'la-classique': {
         title: 'La Classique', badge: 'Core', badgeClass: 'badge-core',
         price: 85, priceLabel: '€85',
         imgStyle: "background-image:url('assets/core_02_img.png'); background-color:#2a7060;",
-        swimOverview: ['13 km international event across Lake Geneva.', 'Lausanne (CH) to Évian-les-Bains (FR).', 'Adventure marathon swim with limited entries.'],
-        distanceRoute: ['Distance: 13 km "as the crow flies".', 'Start: Lausanne–Ouchy.', 'Finish: Parc Dollfus, Évian-les-Bains.', 'Course marked and supported by safety boats.'],
-        safetySupport: ['LGSA-run event with professional safety team.', 'Dedicated kayaker required for each swimmer or booked via LGSA.', 'Strong marathon-swim fitness; minimum 8–10 km open-water experience.', 'Wetsuit and medical rules set in the official regulations.'],
-        whatsIncluded: ['Event entry and on-water safety support.', 'Feed stations (drinks and energy) along the course.', 'Official La Classique swim cap and medal.', 'One-way event-day ferry transport between Évian and Lausanne.'],
+        cartId: 'la-classique', cartName: 'La Classique',
+        swimOverview: ['13 km international event across Lake Geneva.','Lausanne (CH) to Évian-les-Bains (FR).','Adventure marathon swim with limited entries.'],
+        distanceRoute: ['Distance: 13 km "as the crow flies".','Start: Lausanne–Ouchy.','Finish: Parc Dollfus, Évian-les-Bains.','Course marked and supported by safety boats.'],
+        safetySupport: ['LGSA-run event with professional safety team.','Dedicated kayaker required for each swimmer or booked via LGSA.','Strong marathon-swim fitness; minimum 8–10 km open-water experience.','Wetsuit and medical rules set in the official regulations.'],
+        whatsIncluded: ['Event entry and on-water safety support.','Feed stations (drinks and energy) along the course.','Official La Classique swim cap and medal.','One-way event-day ferry transport between Évian and Lausanne.'],
         entryLogistics: {
-          'Travel & Access': ['Lausanne and Évian connected by ferry and road.', 'Geneva Airport + rail to Lausanne is typical international route.', 'Full logistics and kit list in event information pack.'],
-          'Price, Entry & Terms': ['Entry fee: €XXX per swimmer.', 'Entries non-refundable and non-transferable except if cancelled.', 'Event rules and waiver accepted at registration.'],
+          'Travel & Access': ['Lausanne and Évian connected by ferry and road.','Geneva Airport + rail to Lausanne is typical international route.','Full logistics and kit list in event information pack.'],
+          'Price, Entry & Terms': ['Entry fee: €XXX per swimmer.','Entries non-refundable and non-transferable except if cancelled.','Event rules and waiver accepted at registration.'],
         },
       },
-
       'guided-classique': {
         title: 'Guided Classique', badge: 'Core', badgeClass: 'badge-core',
         price: 65, priceLabel: '€65',
         imgStyle: "background-image:url('assets/core_03_img.png'); background-color:#3a6cb5;",
-        swimOverview: ['Iconic 13 km guided crossing of Lake Geneva.', 'Lausanne (CH) to Évian‑les‑Bains (FR), or reverse.', 'Private or small‑group format for serious open‑water swimmers.'],
-        distanceRoute: ['Distance: 13 km point‑to‑point.', 'Start: Lausanne–Ouchy.', 'Finish: Parc Dollfus, Évian‑les‑Bains.', 'Exact direction and start time set for best conditions.'], safetySupport: ['Dedicated escort boat with pilot and observer.', 'Pre‑swim safety briefing and feed plan.', 'Minimum: recent 8–10 km open‑water swim; age 18+.', 'Wetsuit rules based on water temperature and LGSA guidance.'], whatsIncluded: ['Escort boat, pilot, observer and route planning.', 'Standard feeds on the boat (drinks/basic nutrition).', 'Official LGSA Classique certificate/medal.', 'Logistics brief for travel and border crossing.'], entryLogistics: {
-          "Travel & access": [
-            "Easy rail access to Lausanne from Geneva/Zurich.",
-            "Ferry / road options from Évian back to Switzerland.",
-            "Full meet‑point and timing details in confirmation email."
-          ],
-          "Price & entry terms": [
-            "From CHF X’XXX per guided crossing (solo or shared).",
-            "Deposit on booking; balance due before swim.",
-            "Weather may move start within agreed window; safety first.",
-            'Full terms, waiver and insurance expectations at checkout.'
-          ]
+        cartId: 'guided-classique', cartName: 'Guided Classique',
+        swimOverview: ['Iconic 13 km guided crossing of Lake Geneva.','Lausanne (CH) to Évian‑les‑Bains (FR), or reverse.','Private or small‑group format for serious open‑water swimmers.'],
+        distanceRoute: ['Distance: 13 km point‑to‑point.','Start: Lausanne–Ouchy.','Finish: Parc Dollfus, Évian‑les‑Bains.','Exact direction and start time set for best conditions.'],
+        safetySupport: ['Dedicated escort boat with pilot and observer.','Pre‑swim safety briefing and feed plan.','Minimum: recent 8–10 km open‑water swim; age 18+.','Wetsuit rules based on water temperature and LGSA guidance.'],
+        whatsIncluded: ['Escort boat, pilot, observer and route planning.','Standard feeds on the boat (drinks/basic nutrition).','Official LGSA Classique certificate/medal.','Logistics brief for travel and border crossing.'],
+        entryLogistics: {
+          "Travel & access": ["Easy rail access to Lausanne from Geneva/Zurich.","Ferry / road options from Évian back to Switzerland.","Full meet‑point and timing details in confirmation email."],
+          "Price & entry terms": ["From CHF X'XXX per guided crossing (solo or shared).","Deposit on booking; balance due before swim.","Weather may move start within agreed window; safety first.","Full terms, waiver and insurance expectations at checkout."]
         },
       },
-
       'la-nyvoirienne': {
         title: 'La Nyvoirienne', badge: 'Entry', badgeClass: 'badge-entry',
         price: 45, priceLabel: '€45',
         imgStyle: "background-image:url('assets/entry_01_img.png'); background-color:#2a8060;",
-        swimOverview: ['6–7 km international adventure event across the Petit Lac.', 'Nyon (CH) to Yvoire (FR) or similar route.', 'Mass‑start, non‑elite open‑water event for experienced swimmers.'],
-        distanceRoute: ['Distance: approx. 7 km.', 'Point‑to‑point course between Swiss and French shores.', 'Supported by safety boats and at least one feed station.'], safetySupport: ['Professional water‑safety team on the course.', 'Mandatory race briefing before start.', 'Minimum: comfortable over 3–4 km open water; age 18+.', 'Wetsuit and medical rules as per event regulations.'], whatsIncluded: ['Event entry and full on‑water safety support.', 'Feed station(s) with drinks and basic energy.', 'Official event swim cap and finisher medal.', 'One‑way ferry transfer between start and finish on event day.'], entryLogistics: {
-          "Travel & access": [
-            "Nyon: train connections from Geneva and Lausanne.",
-            "Yvoire / surrounding villages: ferry and road access from Switzerland/France.",
-            "Detailed travel plan and timetable in the event information pack."
-          ],
-          "Price & entry terms": [
-            "Entry fee: €XXX per swimmer.",
-            "Entries non‑refundable and non‑transferable except if cancelled by organiser.",
-            "Rules and waiver accepted at registration."
-          ]
+        cartId: 'la-nyvoirienne', cartName: 'La Nyvoirienne',
+        swimOverview: ['6–7 km international adventure event across the Petit Lac.','Nyon (CH) to Yvoire (FR) or similar route.','Mass‑start, non‑elite open‑water event for experienced swimmers.'],
+        distanceRoute: ['Distance: approx. 7 km.','Point‑to‑point course between Swiss and French shores.','Supported by safety boats and at least one feed station.'],
+        safetySupport: ['Professional water‑safety team on the course.','Mandatory race briefing before start.','Minimum: comfortable over 3–4 km open water; age 18+.','Wetsuit and medical rules as per event regulations.'],
+        whatsIncluded: ['Event entry and full on‑water safety support.','Feed station(s) with drinks and basic energy.','Official event swim cap and finisher medal.','One‑way ferry transfer between start and finish on event day.'],
+        entryLogistics: {
+          "Travel & access": ["Nyon: train connections from Geneva and Lausanne.","Yvoire / surrounding villages: ferry and road access from Switzerland/France.","Detailed travel plan and timetable in the event information pack."],
+          "Price & entry terms": ["Entry fee: €XXX per swimmer.","Entries non‑refundable and non‑transferable except if cancelled by organiser.","Rules and waiver accepted at registration."]
         },
       },
-
       'guided-nyvoirienne': {
         title: 'Guided Nyvoirienne', badge: 'Entry', badgeClass: 'badge-entry',
         price: 35, priceLabel: '€35',
         imgStyle: "background-image:url('assets/entry_02_img.png'); background-color:#3a7bd5;",
-        swimOverview: ['7 km guided cross‑border swim on the Petit Lac.', 'Nyon (Switzerland) to Yvoire or Nernier (France), or reverse.', 'Solo, relay or small‑group format.'],
-        distanceRoute: ['Distance: approx. 7 km.', 'Typical route: Nyon harbour to Yvoire or Nernier (or reverse).', 'Exact line and direction chosen for best conditions.'], safetySupport: ['Escort boat with LGSA pilot and safety equipment.', 'Pre‑swim briefing on feeds, signals and border formalities.', 'Minimum: able to swim 3–4 km continuous in open water; age 18+.', 'Wetsuit rules set according to water temperature.'], whatsIncluded: ['Escort boat, pilot and route planning.', 'Standard on‑boat feeds (water/basic energy).', 'Guidance on return logistics between Nyon and Yvoire/Nernier.', 'Completion certificate.'], entryLogistics: {
-          "Travel & access": [
-            "Nyon: ~20–25 minutes by train from Geneva.",
-            "Easy train/bus/taxi connections to Nyon from Geneva and Lausanne.",
-            "Meeting point, timing and travel suggestions in confirmation email."
-          ],
-          "Price & entry terms": [
-            "From CHF X’XXX per guided crossing (solo or shared).",
-            "Deposit to secure your date; balance due before swim.",
-            "Date/time may move within agreed window for safety.",
-            'Full terms, waiver and insurance expectations at checkout.'
-          ]
+        cartId: 'guided-nyvoirienne', cartName: 'Guided Nyvoirienne',
+        swimOverview: ['7 km guided cross‑border swim on the Petit Lac.','Nyon (Switzerland) to Yvoire or Nernier (France), or reverse.','Solo, relay or small‑group format.'],
+        distanceRoute: ['Distance: approx. 7 km.','Typical route: Nyon harbour to Yvoire or Nernier (or reverse).','Exact line and direction chosen for best conditions.'],
+        safetySupport: ['Escort boat with LGSA pilot and safety equipment.','Pre‑swim briefing on feeds, signals and border formalities.','Minimum: able to swim 3–4 km continuous in open water; age 18+.','Wetsuit rules set according to water temperature.'],
+        whatsIncluded: ['Escort boat, pilot and route planning.','Standard on‑boat feeds (water/basic energy).','Guidance on return logistics between Nyon and Yvoire/Nernier.','Completion certificate.'],
+        entryLogistics: {
+          "Travel & access": ["Nyon: ~20–25 minutes by train from Geneva.","Easy train/bus/taxi connections to Nyon from Geneva and Lausanne.","Meeting point, timing and travel suggestions in confirmation email."],
+          "Price & entry terms": ["From CHF X'XXX per guided crossing (solo or shared).","Deposit to secure your date; balance due before swim.","Date/time may move within agreed window for safety.","Full terms, waiver and insurance expectations at checkout."]
         },
       },
-
       'lake-geneva-initiation': {
         title: 'Lake Geneva Initiation', badge: 'Entry', badgeClass: 'badge-entry',
         price: 25, priceLabel: '€25',
         imgStyle: "background-image:url('assets/entry_03_img.png'); background-color:#1a4a7e;",
-        swimOverview: ['Guided 0–2 km “initiation” swim in Lake Geneva.', 'Ideal first open‑water experience for sporty tourists and local swimmers.', 'Small‑group, non‑race format.'],
-        distanceRoute: ['Distance: up to 2 km, agreed with group on the day.', 'Route: sheltered loop or short out‑and‑back from a Geneva lakeside spot.', 'Calm water chosen wherever possible.'],
-        safetySupport: ['LGSA coach in the water plus shore/boat support.', 'Mandatory safety briefing and kit check.', 'Minimum: comfortable 400 m continuous pool swim; age 16+ (with guardian under 18).', 'Wetsuit recommended in cooler water.'],
-        whatsIncluded: ['Small‑group guided swim with LGSA coach.', 'Safety cover throughout the session.', 'Short debrief and Q&A on open‑water basics.', 'Participation certificate.'],
+        cartId: 'lake-geneva-initiation', cartName: 'Lake Geneva Initiation',
+        swimOverview: ['Guided 0–2 km "initiation" swim in Lake Geneva.','Ideal first open‑water experience for sporty tourists and local swimmers.','Small‑group, non‑race format.'],
+        distanceRoute: ['Distance: up to 2 km, agreed with group on the day.','Route: sheltered loop or short out‑and‑back from a Geneva lakeside spot.','Calm water chosen wherever possible.'],
+        safetySupport: ['LGSA coach in the water plus shore/boat support.','Mandatory safety briefing and kit check.','Minimum: comfortable 400 m continuous pool swim; age 16+ (with guardian under 18).','Wetsuit recommended in cooler water.'],
+        whatsIncluded: ['Small‑group guided swim with LGSA coach.','Safety cover throughout the session.','Short debrief and Q&A on open‑water basics.','Participation certificate.'],
         entryLogistics: {
-          "Travel & access": [
-            "Nearest city: Geneva.",
-            "Easy tram/bus or taxi from central Geneva to the meeting point.",
-            "Exact location and timing confirmed by email."
-          ],
-          "Price & entry terms": [
-            "From CHF XXX per person.",
-            "Card payment at booking; instant confirmation.",
-            "Weather‑related reschedule offered where needed; full T&Cs at checkout."
-          ]
+          "Travel & access": ["Nearest city: Geneva.","Easy tram/bus or taxi from central Geneva to the meeting point.","Exact location and timing confirmed by email."],
+          "Price & entry terms": ["From CHF XXX per person.","Card payment at booking; instant confirmation.","Weather‑related reschedule offered where needed; full T&Cs at checkout."]
         },
       },
     };
 
     /* ══════════════════════════════════════════════
-       RENDER TAB BODY  (handles array OR object)
+       MAIN TAB SWITCH
+    ══════════════════════════════════════════════ */
+    let currentMainTab = 'swim-events';
+
+    function switchMainTab(tab, btn) {
+      currentMainTab = tab;
+      document.querySelectorAll('.main-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.main-tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.getElementById('swim-filters').style.display  = (tab === 'swim-events')  ? '' : 'none';
+      document.getElementById('merch-filters').style.display = (tab === 'merchandise') ? '' : 'none';
+      const ms = document.getElementById('m-swim-filters');
+      const mm = document.getElementById('m-merch-filters');
+      if (ms) ms.style.display = (tab === 'swim-events')  ? '' : 'none';
+      if (mm) mm.style.display = (tab === 'merchandise') ? '' : 'none';
+    }
+
+    /* ══════════════════════════════════════════════
+       RENDER TAB BODY
     ══════════════════════════════════════════════ */
     function renderTabBody(data) {
       if (!data) return `<p class="tab-placeholder">Content coming soon.</p>`;
-
-      // Object → sub-sections (heading + bullets)
       if (!Array.isArray(data) && typeof data === 'object') {
         return Object.entries(data).map(([heading, bullets]) => `
-      <div class="tab-sub-title">${heading}</div>
-      <ul class="tab-bullet-list">
-        ${Array.isArray(bullets) ? bullets.map(b => `<li>${b}</li>`).join('') : `<li>${bullets}</li>`}
-      </ul>
-    `).join('');
+          <div class="tab-sub-title">${heading}</div>
+          <ul class="tab-bullet-list">
+            ${Array.isArray(bullets) ? bullets.map(b => `<li>${b}</li>`).join('') : `<li>${bullets}</li>`}
+          </ul>`).join('');
       }
-
-      // Flat array → single bullet list
       if (Array.isArray(data)) {
         if (data.length === 0) return `<p class="tab-placeholder">Content coming soon.</p>`;
         return `<ul class="tab-bullet-list">${data.map(b => `<li>${b}</li>`).join('')}</ul>`;
       }
-
       return `<p class="tab-placeholder">Content coming soon.</p>`;
     }
 
@@ -566,36 +1463,59 @@
       const p = products[id];
       if (!p) return;
 
+      const inCart   = cart[p.cartId];
+      const atcClass = inCart ? 'btn-add-cart-detail in-cart' : 'btn-add-cart-detail';
+      const atcLabel = inCart
+        ? `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Cart`
+        : `<svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> Add to Cart`;
+
       const tabBtns = TABS.map((t, i) =>
-        `<button class="tab-btn${i === 0 ? ' active' : ''}" onclick="switchTab('${id}','${t.key}',this)">${t.label}</button>`
+        `<button class="tab-btn${i===0?' active':''}" onclick="switchTab('${id}','${t.key}',this)">${t.label}</button>`
       ).join('');
 
       const tabPanels = TABS.map((t, i) => `
-    <div class="tab-panel${i === 0 ? ' active' : ''}" id="panel-${id}-${t.key}">
-      <div class="tab-section-title">${t.label}</div>
-      ${renderTabBody(p[t.key])}
-    </div>`
-      ).join('');
+        <div class="tab-panel${i===0?' active':''}" id="panel-${id}-${t.key}">
+          <div class="tab-section-title">${t.label}</div>
+          ${renderTabBody(p[t.key])}
+        </div>`).join('');
 
       document.getElementById('detail-wrap').innerHTML = `
-    <div class="detail-hero-card" style="${p.imgStyle}">
-      <span class="detail-hero-badge"><span class="badge ${p.badgeClass}">${p.badge}</span></span>
-      <div class="detail-hero-title">${p.title}</div>
-    </div>
-    <div class="tab-bar" id="tabbar-${id}">${tabBtns}</div>
-    <div id="panels-${id}">${tabPanels}</div>
-    <hr class="tab-divider">
-    <div class="book-cta">
-      <span class="book-cta-label">Ready to dive in?</span>
-      <button class="btn-book-now" onclick="openWise('${id}')">
-        Book Now&nbsp;
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>`;
+        <button class="btn-back" onclick="backToCatalog()">
+          <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back to catalog
+        </button>
+        <div class="detail-hero-card" style="${p.imgStyle}">
+          <span class="detail-hero-badge"><span class="badge ${p.badgeClass}">${p.badge}</span></span>
+          <div class="detail-hero-title">${p.title}</div>
+        </div>
+        <div class="tab-bar" id="tabbar-${id}">${tabBtns}</div>
+        <div id="panels-${id}">${tabPanels}</div>
+        <hr class="tab-divider">
+        <div class="book-cta">
+          <span class="book-cta-label">Ready to dive in?</span>
+          <div class="book-cta-actions">
+            <button class="${atcClass}" id="detail-atc-${p.cartId}"
+              onclick="addToCart('${p.cartId}','${p.cartName}',${p.price},'${(p.badgeClass||'').replace('badge-','')}','${p.imgStyle.includes('flagged')?'img-signature-140':p.imgStyle.includes('core_01')?'img-swim-stronger':p.imgStyle.includes('core_02')?'img-la-classique':p.imgStyle.includes('core_03')?'img-guided-classique':p.imgStyle.includes('entry_01')?'img-la-nyvoirienne':p.imgStyle.includes('entry_02')?'img-guided-nyvo':'img-initiation'}',this);syncDetailBtn('${p.cartId}',this)">
+              ${atcLabel}
+            </button>
+            <button class="btn-book-now" onclick="openWise('${id}')">
+              Book Now
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>`;
 
       document.getElementById('detail-wrap').classList.add('active');
       document.getElementById('catalog-main').style.display = 'none';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function syncDetailBtn(cartId, btnEl) {
+      const inCart = !!cart[cartId];
+      if (inCart) {
+        btnEl.classList.add('in-cart');
+        btnEl.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Cart`;
+      }
     }
 
     function switchTab(productId, tabKey, btnEl) {
@@ -618,24 +1538,321 @@
     }
 
     /* ══════════════════════════════════════════════
-       WISE POPUP
+       MERCH UPSELL POPUP  ← NEW
     ══════════════════════════════════════════════ */
-    const WISE_FEE = 1.84; // static display fee — replace with live API value
-    let _wiseCurrentId = null;
+    let _pendingWise = null; // stores context for after upsell
 
+    /**
+     * openWise() — now intercepts and shows the upsell popup first.
+     * Called by "Book Now" buttons on event detail pages.
+     */
     function openWise(productId) {
       const p = products[productId];
       if (!p) return;
+      // Store the pending payment context
+      _pendingWise = { type: 'product', id: productId };
+      // Sync upsell item states (already-in-cart items show as "Added")
+      syncUpsellItemStates();
+      // Show the upsell overlay
+      document.getElementById('upsell-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    /** Sync upsell popup button states with current cart */
+    function syncUpsellItemStates() {
+      const upsellItems = [
+        'lgsa-swim-cap',
+        'signature-swim-cap',
+        'classique-tee',
+        'lgsa-tee'
+      ];
+      upsellItems.forEach(id => {
+        const card = document.getElementById(`upsell-item-${id}`);
+        const btn  = document.getElementById(`upsell-btn-${id}`);
+        if (!card || !btn) return;
+        if (cart[id]) {
+          card.classList.add('added');
+          btn.classList.add('added-state');
+          btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Added`;
+        } else {
+          card.classList.remove('added');
+          btn.classList.remove('added-state');
+          btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> Add to Cart`;
+        }
+      });
+    }
+
+    /** Add merch item from inside the upsell popup */
+    function upsellAddToCart(id, name, price, type, imgClass, btnId, cardId) {
+      // Add to main cart
+      addToCart(id, name, price, type, imgClass, null);
+      // Update upsell card state
+      const card = document.getElementById(cardId);
+      const btn  = document.getElementById(btnId);
+      if (card) card.classList.add('added');
+      if (btn) {
+        btn.classList.add('added-state');
+        btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Added`;
+      }
+    }
+
+    /** Close upsell popup without proceeding to payment */
+    function closeUpsell() {
+      document.getElementById('upsell-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      _pendingWise = null;
+    }
+
+    /** "Continue to Payment" — close upsell, open Payment Method selector */
+    function upsellProceedToWise() {
+      document.getElementById('upsell-overlay').classList.remove('open');
+      setTimeout(() => {
+        if (!_pendingWise) return;
+        openPaymentMethod();
+      }, 180);
+    }
+
+    /** Navigate to Merchandise tab from within the upsell popup */
+    function upsellGoToMerch() {
+      document.getElementById('upsell-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      _pendingWise = null;
+
+      const catalogMain = document.getElementById('catalog-main');
+      if (catalogMain.style.display === 'none') {
+        backToCatalog();
+      }
+
+      setTimeout(() => {
+        const merchBtn = document.querySelector('.main-tab-btn:nth-child(2)');
+        if (merchBtn) switchMainTab('merchandise', merchBtn);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 120);
+    }
+
+    /* ══════════════════════════════════════════════
+       PAYMENT METHOD SELECTOR  ← NEW
+    ══════════════════════════════════════════════ */
+    function openPaymentMethod() {
+      // Populate the amount label in the header
+      const p = _pendingWise && _pendingWise.type === 'product' ? products[_pendingWise.id] : null;
+      const amountEl = document.getElementById('paymethod-header-amount');
+      if (p) {
+        amountEl.textContent = `${p.title} · ${p.priceLabel}`;
+      } else if (_pendingWise && _pendingWise.type === 'custom') {
+        amountEl.textContent = `€${_pendingWise.amount.toLocaleString('en-EU', {minimumFractionDigits:2})}`;
+      }
+      document.getElementById('paymethod-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePaymentMethod() {
+      document.getElementById('paymethod-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      _pendingWise = null;
+    }
+
+    function choosePaymentMethod(method) {
+      document.getElementById('paymethod-overlay').classList.remove('open');
+      setTimeout(() => {
+        if (method === 'wise') {
+          if (!_pendingWise) return;
+          if (_pendingWise.type === 'product') {
+            openWiseDirect(_pendingWise.id);
+          } else {
+            openWiseCustomDirect(_pendingWise.name, _pendingWise.amount);
+          }
+        } else if (method === 'bank') {
+          openBankTransfer();
+        }
+      }, 180);
+    }
+
+    /* ══════════════════════════════════════════════
+       BANK TRANSFER POPUP
+    ══════════════════════════════════════════════ */
+    function openBankTransfer() {
+      const p   = _pendingWise && _pendingWise.type === 'product' ? products[_pendingWise.id] : null;
+      const fmt = n => n.toLocaleString('en-EU', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+      // Determine base EUR amount (apply discount if any)
+      let baseEUR = 0;
+      if (p) {
+        baseEUR = p.price;
+      } else if (_pendingWise && _pendingWise.type === 'custom') {
+        baseEUR = _pendingWise.amount;
+      }
+      // Apply cart discount if present
+      if (_appliedDiscount) {
+        if (_appliedDiscount.type === 'percent') baseEUR = baseEUR * (1 - _appliedDiscount.value / 100);
+        else baseEUR = Math.max(0, baseEUR - _appliedDiscount.value);
+      }
+      _bankBaseAmountEUR = baseEUR;
+      _bankCurrency = 'EUR';
+
+      // Populate name and reference
+      const nameEl = document.getElementById('banktx-product-name');
+      const refEl  = document.getElementById('banktx-reference');
+      if (p) {
+        nameEl.textContent = p.title + (_appliedDiscount ? ` (${_appliedDiscount.label})` : '');
+        refEl.textContent  = `LGSA-${p.title.replace(/\s+/g,'-').toUpperCase()}-${Date.now().toString().slice(-5)}`;
+      } else if (_pendingWise) {
+        nameEl.textContent = _pendingWise.name;
+        refEl.textContent  = `LGSA-ORDER-${Date.now().toString().slice(-5)}`;
+      }
+
+      // Set amount display (EUR default)
+      updateBankAmountDisplay();
+
+      // Reset currency tabs
+      ['EUR','USD','CHF'].forEach(c => {
+        document.getElementById(`cur-btn-${c}`)?.classList.remove('active');
+      });
+      document.getElementById('cur-btn-EUR')?.classList.add('active');
+
+      // Reset success / body visibility
+      document.getElementById('banktx-body').style.display   = '';
+      document.getElementById('banktx-footer').style.display = '';
+      document.getElementById('banktx-success').classList.remove('show');
+
+      document.getElementById('banktx-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    /** Update displayed amount when currency changes */
+    function updateBankAmountDisplay() {
+      const cur    = EXCHANGE_RATES[_bankCurrency];
+      const amount = _bankBaseAmountEUR * cur.rate;
+      const fmt    = n => n.toLocaleString('en-EU', {minimumFractionDigits:2, maximumFractionDigits:2});
+      document.getElementById('banktx-amount').textContent = `${cur.symbol}${fmt(amount)}`;
+      const rateNote = document.getElementById('banktx-rate-note');
+      if (_bankCurrency === 'EUR') {
+        rateNote.style.display = 'none';
+      } else {
+        rateNote.style.display = 'block';
+        rateNote.textContent   = `1 EUR = ${cur.rate.toFixed(2)} ${_bankCurrency} · indicative rate`;
+      }
+    }
+
+    /** Handle currency tab click */
+    function selectBankCurrency(cur) {
+      _bankCurrency = cur;
+      ['EUR','USD','CHF'].forEach(c => {
+        document.getElementById(`cur-btn-${c}`)?.classList.remove('active');
+      });
+      document.getElementById(`cur-btn-${cur}`)?.classList.add('active');
+      updateBankAmountDisplay();
+    }
+
+    function closeBankTransfer() {
+      document.getElementById('banktx-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      _pendingWise = null;
+      setTimeout(() => {
+        document.getElementById('banktx-email-form').classList.remove('show');
+        document.getElementById('banktx-email-footer-hint').style.display = 'none';
+        document.getElementById('banktx-form-err').classList.remove('show');
+        document.getElementById('banktx-email-err').classList.remove('show');
+        // Reset payer form fields
+        ['payer-name','payer-email','payer-bank','payer-iban','payer-bic'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) { el.value = ''; el.classList.remove('err','ok'); }
+        });
+        const country = document.getElementById('payer-country');
+        if (country) country.value = '';
+        const btn = document.getElementById('banktx-email-send-btn');
+        if (btn) { btn.classList.remove('loading'); btn.disabled = false; }
+      }, 350);
+    }
+
+    function backToPaymentMethod() {
+      document.getElementById('banktx-overlay').classList.remove('open');
+      setTimeout(() => openPaymentMethod(), 180);
+    }
+
+    function confirmBankTransfer() {
+      document.getElementById('banktx-body').style.display   = 'none';
+      document.getElementById('banktx-footer').style.display = 'none';
+      document.getElementById('banktx-success').classList.add('show');
+    }
+
+    function copyBankField(btn, text) {
+      const doVisual = () => {
+        const orig = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
+        setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+      };
+      navigator.clipboard.writeText(text).then(doVisual).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        doVisual();
+      });
+    }
+
+    /* ══════════════════════════════════════════════
+       DISCOUNT CODE
+    ══════════════════════════════════════════════ */
+    function applyDiscountCode() {
+      const input = document.getElementById('discount-input');
+      const msg   = document.getElementById('discount-msg');
+      if (!input || !msg) return;
+      const code = input.value.trim().toUpperCase();
+      if (!code) {
+        msg.className = 'cart-discount-msg err';
+        msg.innerHTML = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Please enter a code.`;
+        return;
+      }
+      const dc = DISCOUNT_CODES[code];
+      if (!dc) {
+        input.className = 'cart-discount-input err';
+        msg.className   = 'cart-discount-msg err';
+        msg.innerHTML   = `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Invalid code. Try LGSA10 or SWIM20.`;
+        return;
+      }
+      _appliedDiscount = { code, ...dc };
+      updateCartUI(); // re-render with discount applied
+      showToast(`Promo "${code}" applied — ${dc.label}!`);
+    }
+
+    function removeDiscount() {
+      _appliedDiscount = null;
+      updateCartUI();
+    }
+
+    /* ══════════════════════════════════════════════
+       WISE POPUP (direct — no upsell intercept)
+    ══════════════════════════════════════════════ */
+    const WISE_FEE = 1.84;
+    let _wiseCurrentId = null;
+
+    /** Direct opener — called after upsell is resolved */
+    function openWiseDirect(productId) {
+      const p = products[productId];
+      if (!p) return;
       _wiseCurrentId = productId;
-
       const total = (p.price + WISE_FEE).toFixed(2);
-
       document.getElementById('wise-product-name').textContent = p.title;
       document.getElementById('wise-amount').textContent = p.priceLabel;
       document.getElementById('wise-fee-entry').textContent = p.priceLabel;
       document.getElementById('wise-fee-wise').textContent = `~€${WISE_FEE.toFixed(2)}`;
       document.getElementById('wise-fee-total').textContent = `€${total}`;
+      document.getElementById('wise-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
+    function openWiseCustomDirect(name, amount) {
+      _wiseCurrentId = null;
+      const total = (amount + WISE_FEE).toFixed(2);
+      const fmt = n => n.toLocaleString('en-EU', {minimumFractionDigits:2, maximumFractionDigits:2});
+      document.getElementById('wise-product-name').textContent = name;
+      document.getElementById('wise-amount').textContent = `€${fmt(amount)}`;
+      document.getElementById('wise-fee-entry').textContent = `€${fmt(amount)}`;
+      document.getElementById('wise-fee-wise').textContent = `~€${WISE_FEE.toFixed(2)}`;
+      document.getElementById('wise-fee-total').textContent = `€${total}`;
       document.getElementById('wise-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -650,98 +1867,143 @@
     }
 
     function proceedToWise() {
-      /*
-        INTEGRATION NOTE:
-        Replace the URL below with your actual Wise payment link.
-        Options:
-          A) Wise.me payment link  → https://wise.com/pay/me/YOUR_WISE_USERNAME
-          B) Wise Business pay-in  → https://wise.com/pay/business/YOUR_PROFILE_ID
-          C) Wise API checkout URL → generated server-side per transaction
-    
-        You can append amount + reference as query params if your link supports it.
-        Example: https://wise.com/pay/me/yourname?amount=85&currency=EUR&reference=La+Classique
-      */
-      const p = _wiseCurrentId ? products[_wiseCurrentId] : null;
-      const ref = p ? encodeURIComponent(p.title) : '';
-      const amt = p ? p.price : '';
+      const p   = _wiseCurrentId ? products[_wiseCurrentId] : null;
+      const ref = p ? encodeURIComponent(p.title) : encodeURIComponent('Lake Geneva Cart');
+      const amt = p ? p.price : Object.values(cart).reduce((s,i)=>s+i.price*i.qty,0);
       const wiseUrl = `https://wise.com/pay/me/YOUR_WISE_USERNAME?amount=${amt}&currency=EUR&reference=${ref}`;
       window.open(wiseUrl, '_blank', 'noopener,noreferrer');
       closeWise();
     }
 
     /* ══════════════════════════════════════════════
-       FILTER LOGIC
+       SWIM EVENT FILTERS
     ══════════════════════════════════════════════ */
     function applyFilters() {
-      const flagship = document.getElementById('d-flagship').checked;
-      const core = document.getElementById('d-core').checked;
-      const entry = document.getElementById('d-entry').checked;
-      const mont = document.getElementById('d-mont').checked;
-      const evian = document.getElementById('d-evian').checked;
-      const lausanne = document.getElementById('d-lausanne').checked;
-      const montreux = document.getElementById('d-montreux').checked;
+      const flagship  = document.getElementById('d-flagship').checked;
+      const core      = document.getElementById('d-core').checked;
+      const entry     = document.getElementById('d-entry').checked;
+      const nyon      = document.getElementById('d-nyon').checked;
+      const evian     = document.getElementById('d-evian').checked;
+      const lausanne  = document.getElementById('d-lausanne').checked;
+      const montreux  = document.getElementById('d-montreux').checked;
+      const guided    = document.getElementById('d-guided').checked;
+      const eventType = document.getElementById('d-event-type').checked;
+      const training  = document.getElementById('d-training').checked;
+      const solo      = document.getElementById('d-solo').checked;
+      const group     = document.getElementById('d-group').checked;
+      const relay     = document.getElementById('d-relay').checked;
+      const team      = document.getElementById('d-team').checked;
 
-      const typeMap = { flagship, core, entry };
-      const placeMap = { 'mont-voisin': mont, 'evian': evian, 'lausanne': lausanne, 'montreux': montreux };
+      const anyType  = flagship || core || entry;
+      const anyPlace = nyon || evian || lausanne || montreux;
+      const anyEType = guided || eventType || training;
+      const anyPart  = solo || group || relay || team;
 
-      const anyTypeSelected = Object.values(typeMap).some(v => v);
-      const anyPlaceSelected = Object.values(placeMap).some(v => v);
-
-      const feat = document.getElementById('feat-card');
-      const fTypeOk = !anyTypeSelected ? true : (typeMap[feat.dataset.type] ?? true);
-      const fPlaceOk = !anyPlaceSelected ? true : (placeMap[feat.dataset.place] ?? true);
-      feat.style.display = (fTypeOk && fPlaceOk) ? '' : 'none';
+      const typeMap  = { flagship, core, entry };
+      const placeMap = { nyon, evian, lausanne, montreux };
 
       document.querySelectorAll('#product-grid .product-card').forEach(card => {
-        const tOk = !anyTypeSelected ? true : (typeMap[card.dataset.type] ?? true);
-        const plOk = !anyPlaceSelected ? true : (placeMap[card.dataset.place] ?? true);
-        card.style.display = (tOk && plOk) ? '' : 'none';
+        const tOk  = !anyType  || (typeMap[card.dataset.type]  ?? false);
+        const plOk = !anyPlace || (placeMap[card.dataset.place] ?? false);
+        const etOk = !anyEType || (
+          (guided    && card.dataset.eventtype === 'guided') ||
+          (eventType && card.dataset.eventtype === 'event')  ||
+          (training  && card.dataset.eventtype === 'training')
+        );
+        const parts  = card.dataset.participation || '';
+        const partOk = !anyPart || (
+          (solo  && parts.includes('solo'))  ||
+          (group && parts.includes('group')) ||
+          (relay && parts.includes('relay')) ||
+          (team  && parts.includes('team'))
+        );
+        card.style.display = (tOk && plOk && etOk && partOk) ? '' : 'none';
       });
     }
 
+    /* ══════════════════════════════════════════════
+       MERCHANDISE FILTERS
+    ══════════════════════════════════════════════ */
+    function applyMerchFilters() {
+      const classique  = document.getElementById('d-col-classique').checked;
+      const lgsa       = document.getElementById('d-col-lgsa').checked;
+      const legendaire = document.getElementById('d-col-legendaire').checked;
+      const signature  = document.getElementById('d-col-signature').checked;
+      const anySelected = classique || lgsa || legendaire || signature;
+      const colMap = { classique, lgsa, legendaire, signature };
+      document.querySelectorAll('#merch-grid .merch-card').forEach(card => {
+        const ok = !anySelected || (colMap[card.dataset.collection] ?? false);
+        card.style.display = ok ? '' : 'none';
+      });
+    }
+
+    /* ══════════════════════════════════════════════
+       MOBILE SYNC
+    ══════════════════════════════════════════════ */
     function syncMobile(key) {
       const map = {
-        flagship: ['d-flagship', 'm-flagship'], core: ['d-core', 'm-core'],
-        entry: ['d-entry', 'm-entry'], mont: ['d-mont', 'm-mont'],
-        evian: ['d-evian', 'm-evian'], lausanne: ['d-lausanne', 'm-lausanne'],
-        montreux: ['d-montreux', 'm-montreux']
+        flagship: ['d-flagship','m-flagship'], core: ['d-core','m-core'],
+        entry: ['d-entry','m-entry'], nyon: ['d-nyon','m-nyon'],
+        evian: ['d-evian','m-evian'], lausanne: ['d-lausanne','m-lausanne'],
+        montreux: ['d-montreux','m-montreux'], guided: ['d-guided','m-guided'],
+        'event-type': ['d-event-type','m-event-type'],
+        solo: ['d-solo','m-solo'], group: ['d-group','m-group'],
+        relay: ['d-relay','m-relay'], training: ['d-training','m-training'],
+        team: ['d-team','m-team'],
       };
       if (!map[key]) return;
       document.getElementById(map[key][0]).checked = document.getElementById(map[key][1]).checked;
       applyFilters();
     }
 
+    function syncMobileMerch(key) {
+      const map = {
+        classique:  ['d-col-classique','m-col-classique'],
+        lgsa:       ['d-col-lgsa','m-col-lgsa'],
+        legendaire: ['d-col-legendaire','m-col-legendaire'],
+        signature:  ['d-col-signature','m-col-signature'],
+      };
+      if (!map[key]) return;
+      document.getElementById(map[key][0]).checked = document.getElementById(map[key][1]).checked;
+      applyMerchFilters();
+    }
+
     /* ══════════════════════════════════════════════
        CALENDAR
     ══════════════════════════════════════════════ */
-    const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const DNAMES = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-    let calD = new Date(2021, 8, 1), calM = new Date(2021, 8, 1);
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DNAMES = ['S','M','T','W','T','F','S'];
+    const _now = new Date();
+    let calD = new Date(_now.getFullYear(), _now.getMonth(), 1);
+    let calM = new Date(_now.getFullYear(), _now.getMonth(), 1);
     let selectedD = null, selectedM = null;
 
     function buildCal(date, gridId, labelId, selDay, prefix) {
       document.getElementById(labelId).textContent = MONTHS[date.getMonth()] + ' ' + date.getFullYear();
-      const grid = document.getElementById(gridId);
+      const grid  = document.getElementById(gridId);
       const first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-      const days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+      const days  = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+      const todayD = _now.getDate(), todayM = _now.getMonth(), todayY = _now.getFullYear();
       let html = DNAMES.map(d => `<div class="cal-head">${d}</div>`).join('');
       for (let i = 0; i < first; i++) html += `<div class="cal-cell cal-empty"></div>`;
       for (let d = 1; d <= days; d++) {
-        const isToday = (d === 18 && date.getMonth() === 8 && date.getFullYear() === 2021);
-        const isSel = (d === selDay);
+        const isToday = (d === todayD && date.getMonth() === todayM && date.getFullYear() === todayY);
+        const isSel   = (d === selDay);
         let cls = 'cal-cell';
         if (isSel) cls += ' cal-selected'; else if (isToday) cls += ' cal-today';
         html += `<div class="${cls}" onclick="selectDay(${d},'${prefix}')">${d}</div>`;
       }
       grid.innerHTML = html;
     }
+
     function selectDay(d, p) {
-      if (p === 'd') { selectedD = d; buildCal(calD, 'd-cal-grid', 'd-cal-label', d, 'd'); }
-      else { selectedM = d; buildCal(calM, 'm-cal-grid', 'm-cal-label', d, 'm'); }
+      if (p === 'd') { selectedD = d; buildCal(calD,'d-cal-grid','d-cal-label',d,'d'); }
+      else           { selectedM = d; buildCal(calM,'m-cal-grid','m-cal-label',d,'m'); }
     }
+
     function changeMonth(dir, p) {
-      if (p === 'd') { calD.setMonth(calD.getMonth() + dir); buildCal(calD, 'd-cal-grid', 'd-cal-label', selectedD, 'd'); }
-      else { calM.setMonth(calM.getMonth() + dir); buildCal(calM, 'm-cal-grid', 'm-cal-label', selectedM, 'm'); }
+      if (p === 'd') { calD.setMonth(calD.getMonth()+dir); buildCal(calD,'d-cal-grid','d-cal-label',selectedD,'d'); }
+      else           { calM.setMonth(calM.getMonth()+dir); buildCal(calM,'m-cal-grid','m-cal-label',selectedM,'m'); }
     }
 
     /* ══════════════════════════════════════════════
@@ -750,15 +2012,27 @@
     function openMobFilter() {
       document.getElementById('mob-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
-      ['flagship', 'core', 'entry', 'mont', 'evian', 'lausanne', 'montreux'].forEach(k => {
-        const d = document.getElementById('d-' + k), m = document.getElementById('m-' + k);
+      ['flagship','core','entry','nyon','evian','lausanne','montreux','guided','training','solo','group','relay','team'].forEach(k => {
+        const d = document.getElementById('d-'+k), m = document.getElementById('m-'+k);
         if (d && m) m.checked = d.checked;
       });
+      const de = document.getElementById('d-event-type'), me = document.getElementById('m-event-type');
+      if (de && me) me.checked = de.checked;
+      ['classique','lgsa','legendaire','signature'].forEach(k => {
+        const d = document.getElementById('d-col-'+k), m = document.getElementById('m-col-'+k);
+        if (d && m) m.checked = d.checked;
+      });
+      const ms = document.getElementById('m-swim-filters');
+      const mm = document.getElementById('m-merch-filters');
+      if (ms) ms.style.display = (currentMainTab==='swim-events') ? '' : 'none';
+      if (mm) mm.style.display = (currentMainTab==='merchandise') ? '' : 'none';
     }
+
     function closeMobFilter() {
       document.getElementById('mob-overlay').classList.remove('open');
       document.body.style.overflow = '';
     }
+
     function closeMobIfOutside(e) {
       if (e.target === document.getElementById('mob-overlay')) closeMobFilter();
     }
@@ -766,10 +2040,209 @@
     /* ══════════════════════════════════════════════
        INIT
     ══════════════════════════════════════════════ */
-    buildCal(calD, 'd-cal-grid', 'd-cal-label', null, 'd');
-    buildCal(calM, 'm-cal-grid', 'm-cal-label', null, 'm');
+    buildCal(calD,'d-cal-grid','d-cal-label',null,'d');
+    buildCal(calM,'m-cal-grid','m-cal-label',null,'m');
     applyFilters();
+    updateCartUI();
+  </script>
+
+  <!-- ══ EmailJS SDK ══ -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    /* ══════════════════════════════════════════════
+       EMAILJS CONFIGURATION
+       ─────────────────────────────────────────────
+       HOW TO SET UP:
+       1. Create a free account at https://emailjs.com
+       2. Add an Email Service (Gmail, Outlook, etc.)
+          → copy the Service ID into EMAILJS_SERVICE_ID
+       3. Create two Email Templates:
+          a) Client confirmation template → EMAILJS_TEMPLATE_CLIENT
+          b) LGSA notification template  → EMAILJS_TEMPLATE_LGSA
+          Available template variables:
+            {{to_name}}     — customer name
+            {{to_email}}    — customer email
+            {{reference}}   — e.g. LGSA-LA-CLASSIQUE-84720
+            {{product}}     — event / product name
+            {{amount}}      — e.g. CHF 80.75
+            {{currency}}    — EUR / USD / CHF
+            {{discount}}    — discount label or "None"
+            {{iban}}        — BE15 9670 1762 1630
+            {{bic}}         — TRWIBEB1XXX
+            {{bank_name}}   — Wise, Rue du Trône 100, Brussels
+       4. Copy your Public Key into EMAILJS_PUBLIC_KEY
+       5. Set LGSA_EMAIL to your organisation's inbox
+    ══════════════════════════════════════════════ */
+    const EMAILJS_PUBLIC_KEY    = 'YOUR_EMAILJS_PUBLIC_KEY';   // ← replace
+    const EMAILJS_SERVICE_ID    = 'YOUR_SERVICE_ID';           // ← replace
+    const EMAILJS_TEMPLATE_CLIENT = 'YOUR_CLIENT_TEMPLATE_ID'; // ← replace
+    const EMAILJS_TEMPLATE_LGSA   = 'YOUR_LGSA_TEMPLATE_ID';  // ← replace
+    const LGSA_EMAIL            = 'tdavies@lgsa.com';             // ← replace with real LGSA inbox
+
+    // Initialise EmailJS once
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    }
+
+    /* ─── IBAN auto-formatter ─── */
+    function formatIBANInput(input) {
+      let v = input.value.replace(/\s+/g,'').toUpperCase();
+      v = v.replace(/[^A-Z0-9]/g,'');
+      // Insert space every 4 chars
+      input.value = v.replace(/(.{4})/g,'$1 ').trim();
+    }
+
+    /* ─── Validate and submit payer form → show confirmation step ─── */
+    function submitPayerForm() {
+      const fields = {
+        name:    document.getElementById('payer-name'),
+        email:   document.getElementById('payer-email'),
+        bank:    document.getElementById('payer-bank'),
+        iban:    document.getElementById('payer-iban'),
+        bic:     document.getElementById('payer-bic'),
+        country: document.getElementById('payer-country'),
+      };
+      const errEl = document.getElementById('banktx-form-err');
+      const errTx = document.getElementById('banktx-form-err-text');
+
+      // Clear previous errors
+      Object.values(fields).forEach(f => f && f.classList.remove('err'));
+      errEl.classList.remove('show');
+
+      let ok = true; let firstErrMsg = '';
+
+      const req = (el, msg) => {
+        if (!el || !el.value.trim()) { el && el.classList.add('err'); if (!firstErrMsg) firstErrMsg = msg; ok = false; }
+      };
+      const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      req(fields.name,    'Account holder name is required.');
+      if (!emailRx.test(fields.email.value.trim())) {
+        fields.email.classList.add('err'); if (!firstErrMsg) firstErrMsg = 'Enter a valid email address.'; ok = false;
+      }
+      req(fields.bank,    'Bank name is required.');
+      // IBAN: strip spaces, check length + format
+      const rawIBAN = fields.iban.value.replace(/\s/g,'');
+      if (rawIBAN.length < 15 || !/^[A-Z]{2}[A-Z0-9]+$/.test(rawIBAN)) {
+        fields.iban.classList.add('err'); if (!firstErrMsg) firstErrMsg = 'Enter a valid IBAN (e.g. CH56 0483 5012…).'; ok = false;
+      }
+      req(fields.country, 'Please select your country.');
+
+      if (!ok) { errTx.textContent = firstErrMsg; errEl.classList.add('show'); return; }
+
+      // ── All valid — populate confirmation summary ──
+      document.getElementById('confirm-name-display').textContent   = fields.name.value.trim();
+      document.getElementById('banktx-confirm-email-display').textContent = fields.email.value.trim();
+      document.getElementById('confirm-bank-display').textContent   = fields.bank.value.trim();
+      document.getElementById('confirm-iban-display').textContent   = fields.iban.value.trim();
+      document.getElementById('confirm-amount-display').textContent = document.getElementById('banktx-amount')?.textContent || '—';
+      document.getElementById('confirm-ref-display').textContent    = document.getElementById('banktx-reference')?.textContent || '—';
+
+      // Hide payer form body + footer, show confirm step
+      document.getElementById('banktx-footer').style.display          = 'none';
+      document.getElementById('banktx-email-footer-hint').style.display = 'block';
+      document.getElementById('banktx-email-form').classList.add('show');
+      document.getElementById('banktx-body').scrollTop = 0;
+    }
+
+    function backToTransferDetails() {
+      document.getElementById('banktx-email-form').classList.remove('show');
+      document.getElementById('banktx-email-footer-hint').style.display = 'none';
+      document.getElementById('banktx-footer').style.display            = '';
+      document.getElementById('banktx-form-err').classList.remove('show');
+      document.getElementById('banktx-email-err').classList.remove('show');
+    }
+
+    function skipEmailAndComplete() {
+      document.getElementById('banktx-email-form').classList.remove('show');
+      document.getElementById('banktx-email-footer-hint').style.display = 'none';
+      document.getElementById('banktx-body').style.display  = 'none';
+      document.getElementById('banktx-success').classList.add('show');
+      document.getElementById('banktx-success-sent').style.display = 'none';
+    }
+
+    /* ─── Build email params from payer form fields ─── */
+    function buildEmailParams() {
+      const clientName  = document.getElementById('payer-name')?.value.trim()  || '—';
+      const clientEmail = document.getElementById('payer-email')?.value.trim() || '—';
+      const clientBank  = document.getElementById('payer-bank')?.value.trim()  || '—';
+      const clientIBAN  = document.getElementById('payer-iban')?.value.trim()  || '—';
+      const clientBIC   = document.getElementById('payer-bic')?.value.trim()   || '—';
+      const refCode     = document.getElementById('banktx-reference')?.textContent  || '—';
+      const product     = document.getElementById('banktx-product-name')?.textContent || '—';
+      const amount      = document.getElementById('banktx-amount')?.textContent || '—';
+      const currency    = _bankCurrency || 'EUR';
+      const discount    = _appliedDiscount ? `${_appliedDiscount.code} (${_appliedDiscount.label})` : 'None';
+      return {
+        to_name:      clientName,
+        to_email:     clientEmail,
+        payer_bank:   clientBank,
+        payer_iban:   clientIBAN,
+        payer_bic:    clientBIC,
+        reference:    refCode,
+        product:      product,
+        amount:       amount,
+        currency:     currency,
+        discount:     discount,
+        lgsa_iban:    'BE15 9670 1762 1630',
+        lgsa_bic:     'TRWIBEB1XXX',
+        lgsa_bank:    'Wise, Rue du Trône 100, 3rd floor, Brussels, 1050, Belgium',
+        lgsa_email:   LGSA_EMAIL,
+        reply_to:     clientEmail,
+      };
+    }
+
+    /* ─── Main send function ─── */
+    async function sendConfirmationEmails() {
+      const clientEmail = document.getElementById('payer-email')?.value.trim() || '';
+      const btn         = document.getElementById('banktx-email-send-btn');
+      const errEl       = document.getElementById('banktx-email-err');
+      const errTx       = document.getElementById('banktx-email-err-text');
+
+      btn.classList.add('loading');
+      btn.disabled = true;
+      errEl.classList.remove('show');
+
+      const params = buildEmailParams();
+
+      const isConfigured = (
+        typeof emailjs !== 'undefined' &&
+        EMAILJS_PUBLIC_KEY      !== 'YOUR_EMAILJS_PUBLIC_KEY' &&
+        EMAILJS_SERVICE_ID      !== 'YOUR_SERVICE_ID' &&
+        EMAILJS_TEMPLATE_CLIENT !== 'YOUR_CLIENT_TEMPLATE_ID'
+      );
+
+      try {
+        if (isConfigured) {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CLIENT, { ...params });
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_LGSA,   { ...params, to_email: LGSA_EMAIL, to_name: 'LGSA Team' });
+        } else {
+          await new Promise(r => setTimeout(r, 1200));
+          console.info('📧 EmailJS not configured. Would send to:', clientEmail, '\nParams:', params);
+        }
+
+        btn.classList.remove('loading');
+        document.getElementById('banktx-email-form').classList.remove('show');
+        document.getElementById('banktx-email-footer-hint').style.display = 'none';
+        document.getElementById('banktx-body').style.display  = 'none';
+        document.getElementById('banktx-success').classList.add('show');
+
+        const sentEl  = document.getElementById('banktx-success-sent');
+        const emailEl = document.getElementById('banktx-success-email');
+        if (sentEl && emailEl && clientEmail) {
+          emailEl.textContent  = clientEmail;
+          sentEl.style.display = 'flex';
+        }
+        showToast(isConfigured ? `Confirmation sent to ${clientEmail}` : 'Demo mode: configure EmailJS to send real emails.');
+
+      } catch (err) {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        console.error('EmailJS error:', err);
+        errTx.textContent = 'Failed to send email. Please try again or skip.';
+        errEl.classList.add('show');
+      }
+    }
   </script>
 </body>
-
 </html>
