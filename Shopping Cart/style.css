@@ -4365,6 +4365,7 @@ input[type="checkbox"] {
   height: 13px;
   flex-shrink: 0;
   cursor: pointer;
+  display: none;
 }
 
 .swimmer-hear-option label {
