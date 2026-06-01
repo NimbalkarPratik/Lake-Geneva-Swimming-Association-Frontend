@@ -986,7 +986,7 @@ code {
 }
 
 .max-w-\[1280px\] {
-    max-width: 1320px
+    max-width: 1500px
 }
 
 .max-w-\[576px\] {
@@ -3635,7 +3635,7 @@ code {
 }
 
 .container_03 {
-    background-image: url("https://api.builder.io/api/v1/image/assets/TEMP/f4f9b4a93ed0b3f85eaea2b04da21d13ee7114ec?width=560");
+    background-image: url("container_02_img.png");
     background-size: 100% 100%;
 }
 
@@ -3685,7 +3685,7 @@ code {
 }
 
 .header_main {
-    margin: 0 2rem;
+    margin: 0 1rem;
 }
 
 ul li {
@@ -3741,7 +3741,7 @@ ul li {
     }
 
     .top_heading {
-        font-size: clamp(22px, 4.3vw, 56px);
+        font-size: clamp(18px, 2.3vw, 56px);
         width: 245px;
         position: absolute;
         top: 35px;
@@ -3751,7 +3751,7 @@ ul li {
     }
 
     .top_header_02 {
-        font-size: clamp(21px, 4.3vw, 56px);
+        font-size: clamp(18px, 2.3vw, 56px);
         width: 220px;
         position: absolute;
         top: 95px;
