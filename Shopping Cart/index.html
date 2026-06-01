@@ -1770,7 +1770,7 @@
                 <input type="radio" name="sw-hear" value="word" /><label>Word of mouth</label>
               </div>
               <div class="swimmer-hear-option" onclick="selectHear(this, 'other')">
-                <input type="radio" name="sw-hear" value="other" /><label>Other (please specify)</label>
+                <input type="radio" name="sw-hear" value="other" /><label>Other</label>
               </div>
             </div>
             <div id="swimmer-hear-other-wrap" style="display: none; margin-top: 6px">
@@ -3134,14 +3134,20 @@
     }
 
     function selectHear(el, val) {
+      console.log("clicked", val);
+
       document
         .querySelectorAll(".swimmer-hear-option")
         .forEach((o) => o.classList.remove("selected"));
+
       el.classList.add("selected");
-      el.querySelector('input[type="radio"]').checked = true;
+
+      const radio = el.querySelector('input[type="radio"]');
+      radio.checked = true;
+
+      console.log(radio.checked);
+
       _selectedHear = val;
-      const ow = document.getElementById("swimmer-hear-other-wrap");
-      if (ow) ow.style.display = val === "other" ? "block" : "none";
     }
 
     function submitSwimmerDetails() {
