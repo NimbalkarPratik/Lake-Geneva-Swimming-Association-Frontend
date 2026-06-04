@@ -87,6 +87,7 @@
               <span id="d-cal-label"></span>
               <button onclick="changeMonth(1, 'd')">&#8250;</button>
             </div>
+            <div class="date-filter-hint" id="d-date-filter-hint">Pick a date to show matching events.</div>
             <div class="cal-grid" id="d-cal-grid"></div>
           </div>
         </div>
@@ -109,21 +110,19 @@
           </div>
           <div class="place-group">
             <div class="check-row">
-              <input type="checkbox" id="d-nyon" onchange="applyFilters()" /><label for="d-nyon">Nyon/Yvoire</label>
+              <input type="checkbox" id="d-nyon" onchange="applyFilters()" /><label for="d-nyon">Nyon</label>
             </div>
             <div class="check-row">
-              <input type="checkbox" id="d-evian" onchange="applyFilters()" /><label
-                for="d-evian">Evian-les-Bains</label>
+              <input type="checkbox" id="d-yvoire" onchange="applyFilters()" /><label for="d-yvoire">Yvoire</label>
             </div>
             <div class="check-row">
-              <input type="checkbox" id="d-lausanne" onchange="applyFilters()" /><label
-                for="d-lausanne">Lausanne/Evian-les-Bains</label>
+              <input type="checkbox" id="d-lausanne" onchange="applyFilters()" /><label for="d-lausanne">Lausanne</label>
             </div>
-          </div>
-          <div class="place-group">
             <div class="check-row">
-              <input type="checkbox" id="d-montreux" onchange="applyFilters()" /><label for="d-montreux">Geneva /
-                Montreux</label>
+              <input type="checkbox" id="d-evian" onchange="applyFilters()" /><label for="d-evian">Evian-les-Bains</label>
+            </div>
+            <div class="check-row">
+              <input type="checkbox" id="d-veytaux" onchange="applyFilters()" /><label for="d-veytaux">Veytaux</label>
             </div>
           </div>
         </div>
@@ -200,8 +199,9 @@
         </p>
         <div class="product-grid" id="product-grid">
           <div class="product-card" onclick="showDetail('la-signature-140')" data-id="la-signature-140"
-            data-type="flagship" data-place="geneva mont-voisin" data-eventtype="event"
-            data-participation="solo relay team">
+            data-type="flagship" data-place="geneva veytaux" data-eventtype="event"
+            data-participation="solo relay team"
+            data-dates="2026-06-28:2026-07-02,2026-07-05:2026-07-09,2026-07-19:2026-07-23,2026-07-26:2026-07-30,2026-09-27:2026-10-01">
             <div class="product-img img-signature-140">
               <span class="badge badge-flagship">Flagship</span>
             </div>
@@ -255,8 +255,9 @@
           </div>
 
           <div class="product-card" onclick="showDetail('la-signature-70')" data-id="la-signature-70"
-            data-type="flagship" data-place="geneva mont-voisin" data-eventtype="event"
-            data-participation="solo relay team">
+            data-type="flagship" data-place="geneva veytaux" data-eventtype="event"
+            data-participation="solo relay team"
+            data-dates="2026-06-28:2026-07-02,2026-07-05:2026-07-09,2026-07-19:2026-07-23,2026-07-26:2026-07-30,2026-09-27:2026-10-01">
             <div class="product-img img-signature-70">
               <span class="badge badge-flagship">Flagship</span>
             </div>
@@ -310,7 +311,8 @@
           </div>
 
           <div class="product-card" onclick="showDetail('swim-stronger')" data-id="swim-stronger" data-type="core"
-            data-place="evian" data-eventtype="training" data-participation="solo group">
+            data-place="evian" data-eventtype="training" data-participation="solo group"
+            data-dates="2026-07-01:2026-07-05,2026-07-06:2026-07-10">
             <div class="product-img img-swim-stronger">
               <span class="badge badge-core">Core</span>
             </div>
@@ -364,7 +366,8 @@
           </div>
 
           <div class="product-card" onclick="showDetail('la-classique')" data-id="la-classique" data-type="core"
-            data-place="montreux" data-eventtype="event" data-participation="solo group relay team">
+            data-place="veytaux" data-eventtype="event" data-participation="solo group relay team"
+            data-dates="2026-07-11:2026-07-12">
             <div class="product-img img-la-classique">
               <span class="badge badge-core">Core</span>
             </div>
@@ -417,7 +420,8 @@
           </div>
 
           <div class="product-card" onclick="showDetail('guided-classique')" data-id="guided-classique" data-type="core"
-            data-place="lausanne" data-eventtype="guided" data-participation="solo group relay team">
+            data-place="lausanne" data-eventtype="guided" data-participation="solo group relay team"
+            data-dates="2026-08-03:2026-08-08,2026-08-17:2026-08-22,2026-08-24:2026-08-29,2026-09-28:2026-10-03">
             <div class="product-img img-guided-classique">
               <span class="badge badge-core">Core</span>
             </div>
@@ -471,7 +475,7 @@
           </div>
 
           <div class="product-card" onclick="showDetail('la-nyvoirienne')" data-id="la-nyvoirienne" data-type="entry"
-            data-place="nyon" data-eventtype="event" data-participation="solo group" data-hidden="1"
+            data-place="nyon yvoire" data-eventtype="event" data-participation="solo group" data-hidden="1"
             style="display: none">
             <div class="product-img img-la-nyvoirienne">
               <span class="badge badge-entry">Entry</span>
@@ -525,7 +529,8 @@
           </div>
 
           <div class="product-card" onclick="showDetail('guided-nyvoirienne')" data-id="guided-nyvoirienne"
-            data-type="entry" data-place="nyon" data-eventtype="guided" data-participation="solo group relay">
+            data-type="entry" data-place="nyon yvoire" data-eventtype="guided" data-participation="solo group relay"
+            data-dates="2026-08-03:2026-08-08,2026-08-17:2026-08-22,2026-08-24:2026-08-29,2026-09-28:2026-10-03">
             <div class="product-img img-guided-nyvo">
               <span class="badge badge-entry">Entry</span>
             </div>
@@ -1492,6 +1497,7 @@
               <button onclick="changeMonth(-1, 'm')">&#8249;</button><span id="m-cal-label"></span><button
                 onclick="changeMonth(1, 'm')">&#8250;</button>
             </div>
+            <div class="date-filter-hint" id="m-date-filter-hint">Pick a date to show matching events.</div>
             <div class="cal-grid" id="m-cal-grid"></div>
           </div>
         </div>
@@ -1517,20 +1523,20 @@
           <div class="place-group">
             <div class="place-group-name">Around Geneva</div>
             <div class="check-row">
-              <input type="checkbox" id="m-nyon" onchange="syncMobile('nyon')" /><label for="m-nyon">Nyon/Yvoire</label>
+              <input type="checkbox" id="m-nyon" onchange="syncMobile('nyon')" /><label for="m-nyon">Nyon</label>
             </div>
             <div class="check-row">
-              <input type="checkbox" id="m-evian" onchange="syncMobile('evian')" /><label
-                for="m-evian">Evian-les-Bains</label>
+              <input type="checkbox" id="m-yvoire" onchange="syncMobile('yvoire')" /><label for="m-yvoire">Yvoire</label>
             </div>
             <div class="check-row">
-              <input type="checkbox" id="m-lausanne" onchange="syncMobile('lausanne')" /><label
-                for="m-lausanne">Lausanne/Evian-les-Bains</label>
+              <input type="checkbox" id="m-lausanne" onchange="syncMobile('lausanne')" /><label for="m-lausanne">Lausanne</label>
             </div>
-          </div>
-          <div class="check-row">
-            <input type="checkbox" id="m-montreux" onchange="syncMobile('montreux')" /><label for="m-montreux">Geneva /
-              Montreux</label>
+            <div class="check-row">
+              <input type="checkbox" id="m-evian" onchange="syncMobile('evian')" /><label for="m-evian">Evian-les-Bains</label>
+            </div>
+            <div class="check-row">
+              <input type="checkbox" id="m-veytaux" onchange="syncMobile('veytaux')" /><label for="m-veytaux">Veytaux</label>
+            </div>
           </div>
         </div>
         <div class="filter-section">
@@ -1703,7 +1709,17 @@
         <div class="swimmer-form" id="swimmer-form">
           <div class="swimmer-field">
             <label for="sw-phone">Phone Number<span class="req">*</span></label>
-            <input type="tel" id="sw-phone" placeholder="+41 79 000 00 00" autocomplete="tel" />
+            <div class="phone-input-group">
+              <select id="sw-phone-country" aria-label="Country code">
+                <option value="+41">🇨🇭 +41 Switzerland</option>
+                <option value="+33">🇫🇷 +33 France</option>
+                <option value="+44">🇬🇧 +44 United Kingdom</option>
+                <option value="+1">🇺🇸 +1 United States</option>
+                <option value="+49">🇩🇪 +49 Germany</option>
+                <option value="+34">🇪🇸 +34 Spain</option>
+              </select>
+              <input type="tel" id="sw-phone" placeholder="79 000 00 00" autocomplete="tel" inputmode="tel" pattern="[0-9\s()+-]*" oninput="this.value=this.value.replace(/[^0-9\s()+-]/g,'')" />
+            </div>
           </div>
 
           <div class="swimmer-field">
@@ -1721,6 +1737,7 @@
                 <div class="swimmer-field" style="margin-top: 4px">
                   <label for="sw-team">Team Name<span class="req">*</span></label>
                   <input type="text" id="sw-team" placeholder="e.g. Les Dauphins de Genève" />
+                  <div class="swimmer-field-note">Make sure to write your team name exactly as you wish it to appear on a certificate, including the right case! Offensive or inappropriate names will not be accepted.</div>
                 </div>
               </div>
             </div>
@@ -1853,6 +1870,7 @@
   <script>
     /* ═══ CART STATE ═══ */
     let cart = {};
+    let removeall = false
     const DISCOUNT_CODES = {
       LGSA10: { type: "percent", value: 10, label: "10% off" },
       SWIM20: { type: "percent", value: 20, label: "20% off" },
@@ -1880,8 +1898,20 @@
       merch: "Merch",
     };
 
-    /* ── CHANGE 1: addToCart accepts imgUrl (7th param) ── */
+    function getCatalogItem(id) {
+      return products[id] || null;
+    }
+
+    /* ── CHANGE 1: use central product data for cart prices ── */
     function addToCart(id, name, price, type, imgClass, btnEl, imgUrl) {
+      const spec = getCatalogItem(id);
+      if (spec) {
+        price = spec.price;
+        name = spec.cartName || spec.title || name;
+        type = spec.type || type;
+        imgClass = spec.imgClass || imgClass;
+        imgUrl = spec.imgUrl || imgUrl;
+      }
       if (cart[id]) {
         cart[id].qty += 1;
       } else {
@@ -1893,6 +1923,7 @@
           imgClass,
           qty: 1,
           imgUrl: imgUrl || null,
+          priceSchedule: spec?.priceSchedule || null,
         };
       }
       updateCartUI();
@@ -1903,6 +1934,16 @@
 
     function removeFromCart(id) {
       const el = document.getElementById("cart-item-" + id);
+      // if(removeall) {
+      //   console.log("cart : ",cart);
+      //   // cart = null;
+      //   Object.values(cart).forEach(item => {
+      //     Object.keys(item).forEach(key => {
+      //       item[key] = null;
+      //     });
+      //   });
+      //   console.log("cart after : ",cart);
+      // }
       if (el) {
         el.classList.add("cart-item-removing");
         setTimeout(() => {
@@ -1930,7 +1971,7 @@
       if (pe)
         pe.textContent =
           "€" +
-          (cart[id].price * cart[id].qty).toLocaleString("en-EU", {
+          getCartItemLineTotal(cart[id]).toLocaleString("en-EU", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           });
@@ -1973,18 +2014,21 @@
       footer.style.display = "";
 
       let html = `
-    <div class="cart-clear-row">
-      <button class="cart-clear-btn" onclick="clearCart()">
-        <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>Clear all
-      </button>
-    </div>`;
+    <div class="cart-items-scroll">
+      <div class="cart-clear-row">
+        <button class="cart-clear-btn" onclick="clearCart()">
+          <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>Clear all
+        </button>
+      </div>`;
+
+    console.log("cart items : ", items);
 
       items.forEach((item) => {
-        const lineTotal = (item.price * item.qty).toLocaleString("en-EU", {
+        const lineTotal = getCartItemLineTotal(item).toLocaleString("en-EU", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         });
-        const unitPrice = item.price.toLocaleString("en-EU", {
+        const unitPrice = getCartItemUnitPrice(item).toLocaleString("en-EU", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         });
@@ -2018,7 +2062,9 @@
       </div>`;
       });
 
+      html += `</div><div class="cart-static-section">`;
       html += buildDiscountSectionHTML() + buildCartSummaryHTML();
+      html += `</div>`;
       body.innerHTML = html;
     }
 
@@ -2041,7 +2087,10 @@
 
     function buildCartSummaryHTML() {
       const items = Object.values(cart);
-      const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+      const subtotal = items.reduce(
+        (s, i) => s + getCartItemLineTotal(i),
+        0,
+      );
       const wiseFee = items.length > 0 ? 1.84 : 0;
       const fmt = (n) =>
         n.toLocaleString("en-EU", {
@@ -2058,7 +2107,7 @@
         discountRow = `<div class="cart-summary-row" style="color:var(--teal-dark);font-weight:600;"><span>Discount <span class="cart-discount-applied-tag">${_appliedDiscount.code}</span></span><span>−€${fmt(discountAmt)}</span></div>`;
       }
       const total = Math.max(0, subtotal - discountAmt) + wiseFee;
-      return `<div class="cart-summary-section"><div class="cart-summary-row"><span>Subtotal (${items.reduce((s, i) => s + i.qty, 0)} item${items.reduce((s, i) => s + i.qty, 0) !== 1 ? "s" : ""})</span><span>€${fmt(subtotal)}</span></div>${discountRow}<div class="cart-summary-row"><span>Transfer fee</span><span>~€${fmt(wiseFee)}</span></div><div class="cart-summary-row total"><span>Total</span><span>€${fmt(total)}</span></div></div>`;
+      return `<div class="cart-summary-section"><div class="cart-summary-row"><span>Subtotal (${items.reduce((s, i) => s + i.qty, 0)} item${items.reduce((s, i) => s + i.qty, 0) !== 1 ? "s" : ""})</span><span>€${fmt(subtotal)}</span></div>${discountRow}<div class="cart-summary-row"><span>Shipping</span><span>~€${fmt(wiseFee)}</span></div><div class="cart-summary-row total"><span>Total</span><span>€${fmt(total)}</span></div></div>`;
     }
 
     function updateCartSummary() {
@@ -2116,6 +2165,64 @@
       }
     }
 
+    function getCartItemLineTotal(item) {
+      if (item.priceSchedule) {
+        const qty = item.qty;
+        if (item.priceSchedule[qty] != null) return item.priceSchedule[qty];
+        const qtyKeys = Object.keys(item.priceSchedule)
+          .map(Number)
+          .sort((a, b) => a - b);
+        const maxQty = qtyKeys[qtyKeys.length - 1];
+        if (qty > maxQty) {
+          return item.priceSchedule[maxQty];
+        }
+        const nearest = qtyKeys.find((q) => q >= qty);
+        return item.priceSchedule[nearest] || item.price * qty;
+      }
+      return item.price * item.qty;
+    }
+
+    function getCartItemUnitPrice(item) {
+      return getCartItemLineTotal(item) / item.qty;
+    }
+
+    function syncCatalogPrices() {
+      const fmtPrice = (val) =>
+        val.toLocaleString("en-EU", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      Object.entries(products).forEach(([id, p]) => {
+        const priceLabel =
+          p.priceLabel || (p.price != null ? `€ ${fmtPrice(p.price)}` : "");
+        const productPriceEl = document.querySelector(
+          `.product-card[data-id="${id}"] .product-price`,
+        );
+        if (productPriceEl) {
+          const currentText = productPriceEl.textContent.trim();
+          const isSimplePrice =
+            !currentText.includes("pp") &&
+            !currentText.includes(",") &&
+            !currentText.includes("–") &&
+            !currentText.includes("-");
+          if (isSimplePrice) productPriceEl.textContent = priceLabel;
+        }
+
+        const merchBtn = document.getElementById(`atc-${id}`);
+        if (merchBtn) {
+          const merchCard = merchBtn.closest(".merch-card");
+          const merchPrice = merchCard?.querySelector(".merch-price");
+          if (merchPrice) merchPrice.textContent = priceLabel;
+        }
+
+        const upsellItem = document.getElementById(`upsell-item-${id}`);
+        if (upsellItem) {
+          const upsellPrice = upsellItem.querySelector(".upsell-item-price");
+          if (upsellPrice) upsellPrice.textContent = priceLabel;
+        }
+      });
+    }
+
     /* ── CHANGE 4: switchMainTabById helper ── */
     function switchMainTabById(tabId) {
       const cm = document.getElementById("catalog-main");
@@ -2143,17 +2250,17 @@
       const items = Object.values(cart);
       if (!items.length) return;
       closeCart();
-      if (items.length === 1) {
+      if (items.length === 1 && items[0].qty === 1) {
         _pendingWise = { type: "product", id: items[0].id };
         const p = products[items[0].id];
         if (!p)
           _pendingWise = {
             type: "custom",
             name: items[0].name,
-            amount: items[0].price * items[0].qty,
+            amount: getCartItemLineTotal(items[0]),
           };
       } else {
-        const sub = items.reduce((s, i) => s + i.price * i.qty, 0);
+        const sub = items.reduce((s, i) => s + getCartItemLineTotal(i), 0);
         _pendingWise = {
           type: "custom",
           name: items.map((i) => `${i.name} x${i.qty}`).join(", "),
@@ -2188,8 +2295,8 @@
         title: "La Signature 70",
         badge: "Flagship",
         badgeClass: "badge-flagship",
-        price: 645,
-        priceLabel: "€645",
+        price: 7000,
+        priceLabel: "€ 7,000",
         imgStyle:
           "background-image:url('assets/LA_Signature_70.png');background-color:#0d2d5e;filter:hue-rotate(10deg) brightness(.95);",
         cartId: "la-signature-70",
@@ -2236,8 +2343,8 @@
         title: "La Signature 140",
         badge: "Flagship",
         badgeClass: "badge-flagship",
-        price: 1250,
-        priceLabel: "€1,250",
+        price: 12000,
+        priceLabel: "€ 12,000",
         imgStyle:
           "background-image:url('assets/LA_Signature_140.png');background-color:#1a3a6e;",
         cartId: "la-signature-140",
@@ -2250,21 +2357,20 @@
         ],
         distanceRoute: [
           "Distance: approx. 140 km (two full crossings back-to-back).",
-          "Route: Geneva → Montreux → Geneva, or agreed variant.",
+          "Route: Geneva → Veytaux → Geneva, or agreed variant.",
           "Detailed route briefing and contingency planning for each attempt.",
           "Day/night transitions managed by dedicated crew.",
         ],
         safetySupport: [
           "Full crew on water 24/7: pilot, observer, medic-trained support.",
           "Advanced night-swimming protocol with lighting and signalling.",
-          "Elite open-water credentials, full medical assessment and training log required.",
-          "Comprehensive event insurance and emergency evacuation plan mandatory.",
+          "Self-assessment swim and a medical assessment.",
         ],
         whatsIncluded: [
           "All route planning, permits and cross-border authority liaison.",
-          "Two escort boats, full crew, feeds and nutrition coordination.",
+          "Boat, full crew, feeds and nutrition coordination.",
           "Real-time GPS tracking for supporters.",
-          "Signature 140 finisher recognition: bespoke certificate, medal and hall-of-records listing.",
+          "Signature 140 finisher recognition: bespoke certificate, medal and LGSA List of Legends listing.",
         ],
         entryLogistics: {
           "Travel & access": [
@@ -2273,10 +2379,10 @@
             "Full logistics, accommodation and crew travel guidance on acceptance.",
           ],
           "Price & entry terms": [
-            "From €12,000 per attempt (solo or two-person relay).",
+            "From €12,000 per attempt.",
             "Non-refundable application fee; milestone payments after acceptance.",
             "Multi-day weather window required; dates may shift significantly.",
-            "Full bespoke contract, waiver and cancellation policy provided.",
+            "Waiver and cancellation policy provided.",
           ],
         },
       },
@@ -2284,8 +2390,8 @@
         title: "Swim Stronger",
         badge: "Core",
         badgeClass: "badge-core",
-        price: 145,
-        priceLabel: "€145",
+        price: 1500,
+        priceLabel: "€ 1,500",
         imgStyle:
           "background-image:url('assets/core_01_img.png');background-color:#2a5298;",
         cartId: "swim-stronger",
@@ -2296,13 +2402,13 @@
           "Mix of technique, endurance and mindset sessions.",
         ],
         distanceRoute: [
-          "Daily swims from ~1–5+ km, building towards 5–13 km capability.",
+          "2x daily swims of 3-5km. Building Towards optional 10km",
           "Shoreline loops and crossing-style routes, chosen for conditions.",
           "Clear daily plan shared in advance.",
         ],
         safetySupport: [
           "LGSA coaching team plus safety support for all water sessions.",
-          "Minimum: able to swim at least 2 km continuous in open water; age 18+.",
+          "Minimum: able to swim at least 3 km continuous in open water; age 18+.",
           "Health questionnaire and appropriate insurance required.",
         ],
         whatsIncluded: [
@@ -2327,8 +2433,8 @@
         title: "La Classique",
         badge: "Core",
         badgeClass: "badge-core",
-        price: 85,
-        priceLabel: "€85",
+        price: 325,
+        priceLabel: "€ 325",
         imgStyle:
           "background-image:url('assets/core_02_img.png');background-color:#2a7060;",
         cartId: "la-classique",
@@ -2347,14 +2453,13 @@
         safetySupport: [
           "LGSA-run event with professional safety team.",
           "Dedicated kayaker required for each swimmer or booked via LGSA.",
-          "Strong marathon-swim fitness; minimum 8–10 km open-water experience.",
+          "Strong marathon-swim fitness.",
           "Wetsuit and medical rules set in the official regulations.",
         ],
         whatsIncluded: [
           "Event entry and on-water safety support.",
           "Feed stations (drinks and energy) along the course.",
           "Official La Classique swim cap and medal.",
-          "One-way event-day ferry transport between Évian and Lausanne.",
         ],
         entryLogistics: {
           "Travel & Access": [
@@ -2363,7 +2468,7 @@
             "Full logistics and kit list in event information pack.",
           ],
           "Price, Entry & Terms": [
-            "Entry fee: €XXX per swimmer.",
+            "Entry fee: €325 per swimmer.",
             "Entries non-refundable and non-transferable except if cancelled.",
             "Event rules and waiver accepted at registration.",
           ],
@@ -2373,8 +2478,14 @@
         title: "Guided Classique",
         badge: "Core",
         badgeClass: "badge-core",
-        price: 65,
-        priceLabel: "€65",
+        price: 950,
+        priceLabel: "€ 950-1p, € 1,200-2p<br />€ 1,400-3p, € 1,550-4p",
+        priceSchedule: {
+          1: 950,
+          2: 1200,
+          3: 1400,
+          4: 1550,
+        },
         imgStyle:
           "background-image:url('assets/core_03_img.png');background-color:#3a6cb5;",
         cartId: "guided-classique",
@@ -2394,7 +2505,7 @@
           "Dedicated escort boat with pilot and observer.",
           "Pre-swim safety briefing and feed plan.",
           "Minimum: recent 8–10 km open-water swim; age 18+.",
-          "Wetsuit rules based on water temperature and LGSA guidance.",
+          "Wetsuit optional with seperate classification.",
         ],
         whatsIncluded: [
           "Escort boat, pilot, observer and route planning.",
@@ -2455,7 +2566,7 @@
             "Detailed travel plan and timetable in the event information pack.",
           ],
           "Price & entry terms": [
-            "Entry fee: €XXX per swimmer.",
+            "Entry fee: € 45 per swimmer.",
             "Entries non-refundable and non-transferable except if cancelled by organiser.",
             "Rules and waiver accepted at registration.",
           ],
@@ -2465,15 +2576,21 @@
         title: "Guided Nyvoirienne",
         badge: "Entry",
         badgeClass: "badge-entry",
-        price: 35,
-        priceLabel: "€35",
+        price: 750,
+        priceLabel: "€ 750-1p, € 950-2p<br />€ 1,100-3p, € 1,200-4p",
+        priceSchedule: {
+          1: 750,
+          2: 950,
+          3: 1100,
+          4: 1200,
+        },
         imgStyle:
           "background-image:url('assets/entry_02_img.png');background-color:#3a7bd5;",
         cartId: "guided-nyvoirienne",
         cartName: "Guided Nyvoirienne",
         swimOverview: [
           "7 km guided cross-border swim on the Petit Lac.",
-          "Nyon (Switzerland) to Yvoire or Nernier (France), or reverse.",
+          "Nyon (Switzerland) to Yvoire (France), or reverse.",
           "Solo, relay or small-group format.",
         ],
         distanceRoute: [
@@ -2489,13 +2606,12 @@
         ],
         whatsIncluded: [
           "Escort boat, pilot and route planning.",
-          "Standard on-boat feeds (water/basic energy).",
           "Guidance on return logistics between Nyon and Yvoire/Nernier.",
           "Completion certificate.",
         ],
         entryLogistics: {
           "Travel & access": [
-            "Nyon: ~20–25 minutes by train from Geneva.",
+            "15 minutes from geneva to nyon by train.",
             "Easy train/bus/taxi connections to Nyon from Geneva and Lausanne.",
             "Meeting point, timing and travel suggestions in confirmation email.",
           ],
@@ -2511,8 +2627,8 @@
         title: "Lake Geneva Initiation",
         badge: "Entry",
         badgeClass: "badge-entry",
-        price: 25,
-        priceLabel: "€25",
+        price: 180,
+        priceLabel: "€ 180",
         imgStyle:
           "background-image:url('assets/entry_03_img.png');background-color:#1a4a7e;",
         cartId: "lake-geneva-initiation",
@@ -2525,7 +2641,6 @@
         distanceRoute: [
           "Distance: up to 2 km, agreed with group on the day.",
           "Route: sheltered loop or short out-and-back from a Geneva lakeside spot.",
-          "Calm water chosen wherever possible.",
         ],
         safetySupport: [
           "LGSA coach in the water plus shore/boat support.",
@@ -2538,12 +2653,14 @@
           "Safety cover throughout the session.",
           "Short debrief and Q&A on open-water basics.",
           "Participation certificate.",
+          "We provide some packed lunch under 10CHF."
         ],
         entryLogistics: {
           "Travel & access": [
             "Nearest city: Geneva.",
             "Easy tram/bus or taxi from central Geneva to the meeting point.",
             "Exact location and timing confirmed by email.",
+            "it’s only 20 min walk from main train station Geneva Cornavin."
           ],
           "Price & entry terms": [
             "From CHF XXX per person.",
@@ -2551,6 +2668,90 @@
             "Weather-related reschedule offered where needed; full T&Cs at checkout.",
           ],
         },
+      },
+      "lgsa-swim-cap": {
+        title: "LGSA Swim Cap",
+        badge: "Merch",
+        badgeClass: "badge-core",
+        price: 12,
+        priceLabel: "€ 12.00",
+        type: "merch",
+        cartId: "lgsa-swim-cap",
+        cartName: "LGSA Swim Cap",
+        imgUrl:
+          "http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/6689b16fdf12ff3d07c64a9d/1777581186011/Copy+of+Pre-order+today%21+%283%29.png?format=300w",
+      },
+      "signature-swim-cap": {
+        title: "Signature Swim Cap",
+        badge: "Merch",
+        badgeClass: "badge-core",
+        price: 15,
+        priceLabel: "€ 15.00",
+        type: "merch",
+        cartId: "signature-swim-cap",
+        cartName: "Signature Swim Cap",
+        imgUrl:
+          "http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/6662dd2847546a7f6bae272c/1777581186011/LGSA-Swimcap-updated.jpg?format=300w",
+      },
+      "classique-tee": {
+        title: "Classique Tee",
+        badge: "Merch",
+        badgeClass: "badge-core",
+        price: 55,
+        priceLabel: "€ 55.00",
+        type: "merch",
+        cartId: "classique-tee",
+        cartName: "Classique Tee",
+        imgUrl:
+          "http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/68a7401cc1bfc45b6dbf8e41/1755791390839/unisex-basic-softstyle-t-shirt-light-blue-right-front-68a7400d6e91e.jpg?format=300w",
+      },
+      "lgsa-tee": {
+        title: "LGSA Tee",
+        badge: "Merch",
+        badgeClass: "badge-core",
+        price: 55,
+        priceLabel: "€ 55.00",
+        type: "merch",
+        cartId: "lgsa-tee",
+        cartName: "LGSA Tee",
+        imgUrl:
+          "http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69982c89ebdc5f236e9b917f/1771580557469/unisex-premium-t-shirt-navy-front-69982c7b467f4.jpg?format=300w",
+      },
+      "signature-tee": {
+        title: "Signature Tee",
+        badge: "Merch",
+        badgeClass: "badge-core",
+        price: 55,
+        priceLabel: "€ 55.00",
+        type: "merch",
+        cartId: "signature-tee",
+        cartName: "Signature Tee",
+        imgUrl:
+          "http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69b3fd16b5b4d71f19191d9c/1773403416474/unisex-premium-t-shirt-white-front-69b3fd0c427e6.jpg?format=300w",
+      },
+      "classique-hoodie": {
+        title: "Classique Hoodie",
+        badge: "Merch",
+        badgeClass: "badge-core",
+        price: 100,
+        priceLabel: "€ 100.00",
+        type: "merch",
+        cartId: "classique-hoodie",
+        cartName: "Classique Hoodie",
+        imgUrl:
+          "http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69b9417ad93579030626aeb8/1773748606799/unisex-essential-eco-hoodie-french-navy-front-69b9416f22859.jpg?format=300w",
+      },
+      "signature-hoodie": {
+        title: "Signature Hoodie",
+        badge: "Merch",
+        badgeClass: "badge-core",
+        price: 100,
+        priceLabel: "€ 100.00",
+        type: "merch",
+        cartId: "signature-hoodie",
+        cartName: "Signature Hoodie",
+        imgUrl:
+          "http://static1.squarespace.com/static/5d3f0b4e7a5c4300017db833/625b07e949cb197a851f0221/69b95328d93579030626bb2d/1773753132045/unisex-essential-eco-hoodie-white-front-69b953205cd15.jpg?format=300w",
       },
     };
 
@@ -2784,6 +2985,7 @@
 
     /* ═══ PAYMENT METHOD ═══ */
     function openPaymentMethod() {
+      console.log("openPaymentMethod")
       const p =
         _pendingWise && _pendingWise.type === "product"
           ? products[_pendingWise.id]
@@ -2809,6 +3011,7 @@
     }
 
     function closePaymentMethod() {
+      consle.log("closePaymentMethod")
       document.getElementById("paymethod-overlay").classList.remove("open");
       document.body.style.overflow = "";
       _pendingWise = null;
@@ -3086,6 +3289,7 @@
       if (form) {
         [
           "sw-phone",
+          "sw-phone-country",
           "sw-team",
           "sw-address",
           "sw-city",
@@ -3100,6 +3304,8 @@
             el.classList.remove("err");
           }
         });
+        const countryEl = document.getElementById("sw-phone-country");
+        if (countryEl) countryEl.value = "+41";
       }
       setRelay(false);
       _selectedHear = null;
@@ -3119,6 +3325,8 @@
     }
     function closeSwimmerDetails() {
       document.getElementById("swimmer-overlay").classList.remove("open");
+      // removeall = true;
+      // removeFromCart();
       document.body.style.overflow = "";
     }
     function skipSwimmerDetails() {
@@ -3145,7 +3353,9 @@
       const radio = el.querySelector('input[type="radio"]');
       radio.checked = true;
 
-      console.log(radio.checked);
+      console.log("el : ",el);
+      const otherWrap = document.getElementById("swimmer-hear-other-wrap");
+      if (otherWrap) otherWrap.style.display = val === "other" ? "" : "none";
 
       _selectedHear = val;
     }
@@ -3167,6 +3377,15 @@
         }
       };
       req("sw-phone", "Phone number");
+      const phoneEl = document.getElementById("sw-phone");
+      if (phoneEl && phoneEl.value.trim()) {
+        const phoneValue = phoneEl.value.trim();
+        if (!/^[0-9\s()+-]+$/.test(phoneValue)) {
+          phoneEl.classList.add("err");
+          if (!msg) msg = "Phone number must contain only digits and valid symbols.";
+          ok = false;
+        }
+      }
       if (_isRelayGroup) req("sw-team", "Team name");
       req("sw-address", "Address");
       req("sw-city", "City");
@@ -3197,6 +3416,7 @@
       document.getElementById("swimmer-form").style.display = "none";
       document.getElementById("swimmer-footer").style.display = "none";
       document.getElementById("swimmer-success").classList.add("show");
+      sendToGoogleSheet(buildGoogleSheetPayload());
       showToast("Booking complete! Details saved.");
     }
 
@@ -3268,9 +3488,10 @@
         core = document.getElementById("d-core").checked,
         entry = document.getElementById("d-entry").checked;
       const nyon = document.getElementById("d-nyon").checked,
+        yvoire = document.getElementById("d-yvoire").checked,
         evian = document.getElementById("d-evian").checked,
         lausanne = document.getElementById("d-lausanne").checked,
-        montreux = document.getElementById("d-montreux").checked,
+        veytaux = document.getElementById("d-veytaux").checked,
         geneva = document.getElementById("d-geneva").checked;
       const guided = document.getElementById("d-guided").checked,
         eventType = document.getElementById("d-event-type").checked,
@@ -3280,7 +3501,7 @@
         relay = document.getElementById("d-relay").checked,
         team = document.getElementById("d-team").checked;
       const anyType = flagship || core || entry,
-        anyPlace = nyon || evian || lausanne || montreux || geneva,
+        anyPlace = nyon || yvoire || evian || lausanne || veytaux || geneva,
         anyEType = guided || eventType || training,
         anyPart = solo || group || relay || team;
       const typeMap = { flagship, core, entry };
@@ -3298,7 +3519,8 @@
             (nyon && place.includes("nyon")) ||
             (evian && place.includes("evian")) ||
             (lausanne && place.includes("lausanne")) ||
-            (montreux && place.includes("montreux")) ||
+            (veytaux && place.includes("veytaux")) ||
+            (yvoire && place.includes("yvoire")) ||
             (geneva && place.includes("geneva"));
           const etOk =
             !anyEType ||
@@ -3312,7 +3534,9 @@
             (group && parts.includes("group")) ||
             (relay && parts.includes("relay")) ||
             (team && parts.includes("team"));
-          card.style.display = tOk && plOk && etOk && partOk ? "" : "none";
+          const selectedDate = getSelectedFilterDate();
+          const dateOk = !selectedDate || dateMatchesCard(card, selectedDate);
+          card.style.display = tOk && plOk && etOk && partOk && dateOk ? "" : "none";
         });
     }
 
@@ -3339,9 +3563,10 @@
         entry: ["d-entry", "m-entry"],
         geneva: ["d-geneva", "m-geneva"],
         nyon: ["d-nyon", "m-nyon"],
+        yvoire: ["d-yvoire", "m-yvoire"],
         evian: ["d-evian", "m-evian"],
         lausanne: ["d-lausanne", "m-lausanne"],
-        montreux: ["d-montreux", "m-montreux"],
+        veytaux: ["d-veytaux", "m-veytaux"],
         guided: ["d-guided", "m-guided"],
         "event-type": ["d-event-type", "m-event-type"],
         solo: ["d-solo", "m-solo"],
@@ -3424,11 +3649,41 @@
     function selectDay(d, p) {
       if (p === "d") {
         selectedD = d;
+        selectedM = null;
         buildCal(calD, "d-cal-grid", "d-cal-label", d, "d");
+        updateDateFilterHint("d");
       } else {
         selectedM = d;
+        selectedD = null;
         buildCal(calM, "m-cal-grid", "m-cal-label", d, "m");
+        updateDateFilterHint("m");
       }
+      applyFilters();
+    }
+    function getSelectedFilterDate() {
+      if (selectedD) return new Date(calD.getFullYear(), calD.getMonth(), selectedD);
+      if (selectedM) return new Date(calM.getFullYear(), calM.getMonth(), selectedM);
+      return null;
+    }
+    function updateDateFilterHint(prefix) {
+      const date = getSelectedFilterDate();
+      const hint = date
+        ? `Showing events for ${date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}.`
+        : "Pick a date to show matching events.";
+      const target = document.getElementById(prefix === "m" ? "m-date-filter-hint" : "d-date-filter-hint");
+      if (target) target.textContent = hint;
+    }
+    function dateMatchesCard(card, date) {
+      const ranges = (card.dataset.dates || "").split(",").map((r) => r.trim()).filter(Boolean);
+      if (!ranges.length) return false;
+      const selectedTs = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+      return ranges.some((range) => {
+        const [start, end] = range.split(":").map((v) => v.trim());
+        if (!start) return false;
+        const from = new Date(start);
+        const to = end ? new Date(end) : new Date(start);
+        return selectedTs >= new Date(from.getFullYear(), from.getMonth(), from.getDate()).getTime() && selectedTs <= new Date(to.getFullYear(), to.getMonth(), to.getDate()).getTime();
+      });
     }
     function changeMonth(dir, p) {
       if (p === "d") {
@@ -3493,9 +3748,80 @@
     const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
     const EMAILJS_TEMPLATE_CLIENT = "YOUR_CLIENT_TEMPLATE_ID";
     const EMAILJS_TEMPLATE_LGSA = "YOUR_LGSA_TEMPLATE_ID";
+    const GOOGLE_SHEETS_WEBHOOK_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL";
     const LGSA_EMAIL = "tdavies@lgsa.com";
     if (typeof emailjs !== "undefined")
       emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+    async function sendToGoogleSheet(payload) {
+      if (!GOOGLE_SHEETS_WEBHOOK_URL || GOOGLE_SHEETS_WEBHOOK_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL")) {
+        console.info("Google Sheets webhook not configured. Payload:", payload);
+        return;
+      }
+      try {
+        const resp = await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        if (!resp.ok) {
+          throw new Error(`Sheet save failed: ${resp.status} ${resp.statusText}`);
+        }
+        let result;
+        try {
+          result = await resp.json();
+        } catch (_err) {
+          result = await resp.text();
+        }
+        console.info("Google Sheets save result:", result);
+      } catch (err) {
+        console.error("Failed to save data to Google Sheets:", err);
+      }
+    }
+
+    function buildGoogleSheetPayload() {
+      const swimmerData = {
+        name: document.getElementById("sw-team")?.value.trim() || "",
+        phone_country: document.getElementById("sw-phone-country")?.value || "",
+        phone: document.getElementById("sw-phone")?.value.trim() || "",
+        address: document.getElementById("sw-address")?.value.trim() || "",
+        city: document.getElementById("sw-city")?.value.trim() || "",
+        province: document.getElementById("sw-province")?.value.trim() || "",
+        postal: document.getElementById("sw-postal")?.value.trim() || "",
+        hear_about: document.getElementById("sw-hear-other")?.value.trim() || _selectedHear || "",
+      };
+      const items = Object.values(cart).map((item) => ({
+        id: item.id,
+        name: item.name,
+        qty: item.qty,
+        unit_price: item.price,
+        total: item.price * item.qty,
+      }));
+      const subtotal = items.reduce((sum, item) => sum + item.total, 0);
+      let discountAmt = 0;
+      if (_appliedDiscount) {
+        discountAmt =
+          _appliedDiscount.type === "percent"
+            ? subtotal * (_appliedDiscount.value / 100)
+            : Math.min(_appliedDiscount.value, subtotal);
+      }
+      const wiseFee = items.length > 0 ? 1.84 : 0;
+      return {
+        timestamp: new Date().toISOString(),
+        order_reference: `LGSA-${Math.floor(Math.random() * 1000000)}`,
+        cart_items: items,
+        subtotal: subtotal,
+        discount: _appliedDiscount ? `${_appliedDiscount.code} (${_appliedDiscount.label})` : "None",
+        discount_amount: discountAmt,
+        fee: wiseFee,
+        total: Math.max(0, subtotal - discountAmt) + wiseFee,
+        currency: "EUR",
+        payment_method: "Wise",
+        swimmer: swimmerData,
+      };
+    }
 
     function formatIBANInput(input) {
       let v = input.value
@@ -3602,6 +3928,7 @@
     /* ═══ INIT ═══ */
     buildCal(calD, "d-cal-grid", "d-cal-label", null, "d");
     buildCal(calM, "m-cal-grid", "m-cal-label", null, "m");
+    syncCatalogPrices();
     applyFilters();
     updateCartUI();
   </script>
