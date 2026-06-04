@@ -44,6 +44,7 @@ input[type="checkbox"] {
   --text-muted: #6b7a90;
   --text-dark: #1a2540;
   --cart-accent: #f0841a;
+  --royal-blue: #2a5298;
 }
 
 .topbar {
@@ -139,7 +140,7 @@ input[type="checkbox"] {
   position: absolute;
   top: -5px;
   right: -5px;
-  background: var(--orange);
+  background: var(--royal-blue);
   color: white;
   font-size: 10px;
   font-weight: 700;
@@ -277,21 +278,35 @@ input[type="checkbox"] {
 
 .cart-drawer-body {
   flex: 1;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding: 0;
+  min-height: 0;
 }
 
-.cart-drawer-body::-webkit-scrollbar {
+.cart-items-scroll {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.cart-items-scroll::-webkit-scrollbar {
   width: 4px;
 }
 
-.cart-drawer-body::-webkit-scrollbar-track {
+.cart-items-scroll::-webkit-scrollbar-track {
   background: #f4f6fa;
 }
 
-.cart-drawer-body::-webkit-scrollbar-thumb {
+.cart-items-scroll::-webkit-scrollbar-thumb {
   background: #c8d0de;
   border-radius: 2px;
+}
+
+.cart-static-section {
+  flex-shrink: 0;
+  border-top-style: outset;
 }
 
 .cart-empty {
@@ -350,7 +365,7 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 18px 8px;
+  padding: 5px 18px 5px;
   border-bottom: 1px solid #f0f3f8;
   gap: 8px;
 }
@@ -582,7 +597,7 @@ input[type="checkbox"] {
 }
 
 .cart-summary-section {
-  padding: 14px 18px 10px;
+  padding: 5px 18px 5px;
   background: #f8f9fb;
   border-top: 1px solid #eaecf2;
   border-bottom: 1px solid #eaecf2;
@@ -640,7 +655,7 @@ input[type="checkbox"] {
 }
 
 .cart-drawer-footer {
-  padding: 16px 18px 20px;
+  padding: 5px 18px 5px;
   background: white;
   border-top: 1px solid #eaecf2;
   flex-shrink: 0;
@@ -648,7 +663,7 @@ input[type="checkbox"] {
 
 .cart-checkout-btn {
   width: 100%;
-  background: var(--orange);
+  background: var(--royal-blue);
   color: white;
   border: none;
   border-radius: 10px;
@@ -666,7 +681,7 @@ input[type="checkbox"] {
 }
 
 .cart-checkout-btn:hover {
-  background: var(--orange-dark);
+  background: var(--royal-blue);
   transform: translateY(-1px);
 }
 
@@ -821,7 +836,7 @@ input[type="checkbox"] {
   width: var(--sidebar-w);
   flex-shrink: 0;
   background: #dcf7ff;
-  padding: 10px 5px 0 14px;
+  padding: 10px 10px 0 10px;
   min-height: calc(89vh - 48px);
   border-right: 1px solid var(--border);
   position: sticky;
@@ -842,7 +857,7 @@ input[type="checkbox"] {
 }
 
 .filter-label {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -864,22 +879,29 @@ input[type="checkbox"] {
 }
 
 .cal-nav span {
-  font-size: 10px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text-dark);
 }
 
 .cal-nav button {
   background: none;
-  border: none;
-  font-size: 13px;
+  border: 1px solid #acc1ff;
+  font-size: 30px;
   color: var(--text-muted);
-  padding: 0 3px;
+  padding: 0 10px;
   line-height: 1;
+  margin: 0 1px;
 }
 
 .cal-nav button:hover {
   color: var(--navy);
+}
+
+.date-filter-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
 }
 
 .cal-grid {
@@ -889,7 +911,7 @@ input[type="checkbox"] {
 }
 
 .cal-head {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   text-align: center;
   color: var(--text-muted);
@@ -931,7 +953,7 @@ input[type="checkbox"] {
 }
 
 .cal-cell.cal-selected {
-  background: var(--teal);
+  background: var(--royal-blue);
   color: white;
   border-radius: 50%;
   width: 18px;
@@ -958,7 +980,7 @@ input[type="checkbox"] {
 }
 
 .check-row label {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-dark);
   line-height: 1.3;
 }
@@ -984,41 +1006,47 @@ input[type="checkbox"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(232 246 255);
-  padding: 0 20px;
-  margin-bottom: 0;
+  background: linear-gradient(180deg, rgba(241,248,255,0.95), rgba(230,242,255,0.95));
+  border: 1px solid rgba(64, 120, 181, 0.16);
+  border-radius: 999px;
+  padding: 8px;
+  margin-bottom: 16px;
   position: sticky;
   top: 100px;
   z-index: 100;
-  gap: 1px;
+  gap: 8px;
+  box-shadow: 0 12px 32px rgba(21, 53, 99, 0.06);
 }
 
 .main-tab-btn {
-  background: #fff;
-  border: none;
+  background: transparent;
+  border: 0.5px solid var(--royal-blue);
+  border-radius: 999px;
   font-family: "Source Sans 3", sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
-  padding: 16px 20px 14px;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
+  padding: 14px 24px;
   cursor: pointer;
   transition:
     color 0.15s,
-    border-color 0.15s;
+    background-color 0.15s,
+    transform 0.15s,
+    box-shadow 0.15s;
   white-space: nowrap;
-  width: 130px;
+  min-width: 140px;
 }
 
 .main-tab-btn:hover {
   color: var(--text-dark);
+  transform: translateY(-1px);
 }
 
 .main-tab-btn.active {
   color: var(--text-dark);
   font-weight: 600;
-  border-bottom: 2px solid var(--text-dark);
+  background: #ffffff;
+  box-shadow: 0 12px 24px rgba(20, 56, 110, 0.08);
 }
 
 .main-tab-panel {
@@ -1096,7 +1124,7 @@ input[type="checkbox"] {
 }
 
 .product-img {
-  height: 215px;
+  height: 140px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -1117,7 +1145,7 @@ input[type="checkbox"] {
 
 .img-swim-stronger {
   background-image: url("assets/Swim_Stronger.png");
-  background-size: cover;
+  background-size: 100% 100%;
   background-color: #2a5298;
 }
 
@@ -1207,6 +1235,7 @@ input[type="checkbox"] {
 
 .product-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding-top: 8px;
@@ -1231,7 +1260,7 @@ input[type="checkbox"] {
 .btn-view-link {
   font-size: 11px;
   font-weight: 600;
-  color: var(--orange);
+  color: var(--royal-blue);
   background: none;
   border: none;
   padding: 0;
@@ -1243,7 +1272,7 @@ input[type="checkbox"] {
 }
 
 .btn-view-link:hover {
-  color: var(--orange-dark);
+  color: var(--royal-blue);
   text-decoration: underline;
 }
 
@@ -1551,7 +1580,7 @@ input[type="checkbox"] {
 }
 
 .btn-book-now {
-  background: var(--orange);
+  background: var(--royal-blue);
   color: white;
   border: none;
   border-radius: 6px;
@@ -1565,7 +1594,7 @@ input[type="checkbox"] {
 }
 
 .btn-book-now:hover {
-  background: var(--orange-dark);
+  background: var(--royal-blue);
 }
 
 .btn-book-now svg {
@@ -1920,7 +1949,7 @@ input[type="checkbox"] {
 
 .upsell-proceed-btn {
   width: 100%;
-  background: var(--orange);
+  background: var(--royal-blue);
   color: white;
   border: none;
   border-radius: 10px;
@@ -1937,7 +1966,7 @@ input[type="checkbox"] {
 }
 
 .upsell-proceed-btn:hover {
-  background: var(--orange-dark);
+  background: var(--royal-blue);
   transform: translateY(-1px);
 }
 
@@ -3194,7 +3223,7 @@ input[type="checkbox"] {
 
 /* DISCOUNT */
 .cart-discount-wrap {
-  padding: 12px 18px 10px;
+  padding: 5px 18px 5px;
   border-bottom: 1px solid #f0f3f8;
 }
 
@@ -3910,7 +3939,7 @@ input[type="checkbox"] {
 }
 
 .cart-tnc-link:hover {
-  color: var(--orange);
+  color: var(--royal-blue);
 }
 
 /* T&C Popup */
@@ -4232,6 +4261,29 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.phone-input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.phone-input-group select {
+  max-width: 150px;
+  min-width: 135px;
+  width: auto;
+}
+
+.phone-input-group input {
+  flex: 1;
+}
+
+.swimmer-field-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-top: 4px;
 }
 
 .swimmer-field label {
@@ -4669,8 +4721,9 @@ input[type="checkbox"] {
   }
 
   .main-tab-btn {
-    padding: 12px 14px 10px;
+    padding: 12px 18px 10px;
     font-size: 13px;
+    min-width: auto;
   }
 
   .cart-drawer {
