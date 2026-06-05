@@ -636,6 +636,9 @@
             </div>
           </div>
         </div>
+        <a class="paymethod-tnc-link-btn" onclick="openPrivacy()">
+          Read Privacy Policy
+        </a>
       </div>
 
       <!-- MERCHANDISE TAB -->
@@ -905,6 +908,9 @@
             </div>
           </div>
         </div>
+        <a class="paymethod-tnc-link-btn" onclick="openPrivacy()">
+          Read Privacy Policy
+        </a>
       </div>
     </main>
 
@@ -1121,13 +1127,16 @@
         <div class="paymethod-body-label">How would you like to pay?</div>
         <!-- T&C block -->
         <div class="paymethod-tnc-block">
-          <a class="paymethod-tnc-link-btn" onclick="openTnC()">
-            <svg viewBox="0 0 24 24">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-            </svg>
-            Read Terms &amp; Conditions
-          </a>
+          <div class="paymethod-links-row">
+            <a class="paymethod-tnc-link-btn" onclick="openTnC()">
+              <svg viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+              Read Terms &amp; Conditions
+            </a>
+            
+          </div>
           <div class="paymethod-tnc-check-row">
             <input type="checkbox" id="paymethod-tnc-check" onchange="togglePaymentCards()" />
             <label for="paymethod-tnc-check">I have read and agree to the
@@ -1856,6 +1865,113 @@
         <button class="swimmer-skip-btn" onclick="skipSwimmerDetails()">
           Skip for now →
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVACY POLICY OVERLAY -->
+  <div class="privacy-overlay" id="privacy-overlay" onclick="closePrivacyIfOutside(event)">
+    <div class="privacy-panel">
+      <div class="privacy-header">
+        <div class="privacy-header-title">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>Privacy Policy
+        </div>
+        <button class="privacy-close-btn" onclick="closePrivacy()">✕</button>
+      </div>
+      <div class="privacy-body">
+        <div class="privacy-meta">Last Updated: 4 June 2026</div>
+        
+        <p>Welcome to lgsa.com. We organise open water swimming events and officially ratify swim attempts across Lake Geneva (Lac Léman). Because our activities take place in a cross-border region and serve swimmers primarily across Europe, we are deeply committed to protecting your personal data.</p>
+        
+        <p>This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website (hosted on Squarespace) or register for our events. Our data practices are designed to comply with the European Union's General Data Protection Regulation (GDPR) and the Swiss Federal Act on Data Protection (FADP).</p>
+        
+        <div class="privacy-section-title">1. Data Controller and Contact Information</div>
+        <p>For the purposes of European and Swiss data protection laws, the data controller is the entity responsible for your personal data. If you have any questions, concerns, or wish to exercise your legal rights regarding your data, please contact us directly:</p>
+        <ul>
+          <li><strong>Email:</strong> info@lgsa.com</li>
+        </ul>
+        
+        <div class="privacy-section-title">2. The Personal Data We Collect</div>
+        <p>We only collect personal data that is necessary to provide you with our services, fulfil our contractual obligations, ensure your safety during events, or improve your experience on our website.</p>
+        
+        <div class="privacy-subsection-title">A. Data You Voluntarily Provide to Us</div>
+        <ul>
+          <li><strong>Identity, Contact, and Demographic Data:</strong> First and last names, date of birth, sex, email addresses, phone numbers, and shipping addresses. We collect your date of birth and sex to verify age requirements and to properly categorise official swim classifications and results.</li>
+          <li><strong>Booking &amp; Athletic Information:</strong> When you register for an open water event or submit a swim ratification request via our third-party booking platform (Checkfront), we collect your swim pace and swim history.</li>
+          <li><strong>Health and Safety Data (Special Category Data):</strong> Due to the extreme and challenging nature of open water swimming in Lake Geneva, we require athletes to submit a medical check (medical certificate) and a self-assessment swim. This information is not collected via the website but is shared with us securely via email. Under the GDPR, medical data is classified as "special category data" and is handled with the highest levels of confidentiality.</li>
+          <li><strong>Exclusion of Payment Card Data:</strong> To protect your financial security, we do not collect, process, or store your credit card or bank account details. Online payments are handled securely and directly off-site by our payment processor, Stripe, or via manual direct bank transfer.</li>
+        </ul>
+        
+        <div class="privacy-subsection-title">B. Data Collected Automatically</div>
+        <p>When you visit lgsa.com, we and our third-party service providers automatically collect certain technical information from your browser or device, including:</p>
+        <ul>
+          <li>IP addresses</li>
+          <li>Browser types and versions</li>
+          <li>Device types and operating systems</li>
+          <li>Geographic location data (at a regional or city level)</li>
+        </ul>
+        
+        <div class="privacy-section-title">3. Cookies and Tracking Technologies</div>
+        <p>We use cookies and similar tracking pixels to optimise our website, measure performance, and deliver relevant marketing.</p>
+        <ul>
+          <li><strong>Essential Cookies:</strong> Necessary for the technical operation, security, and basic functionality of our website platform (Squarespace).</li>
+          <li><strong>Analytics Trackers:</strong> We use Google Analytics and PostHog to understand how visitors interact with our site, helping us improve layout, navigation, and content.</li>
+          <li><strong>Advertising &amp; Retargeting Pixels:</strong> We utilise the Facebook Pixel and LinkedIn Pixel to track the effectiveness of our social media campaigns and deliver relevant advertisements to individuals who have expressed interest in our swims.</li>
+        </ul>
+        <p>You can manage or disable non-essential cookies via your web browser settings or through our cookie consent banner.</p>
+        
+        <div class="privacy-section-title">4. How We Use Your Data (Legal Basis for Processing)</div>
+        <p>Under the GDPR and Swiss FADP, we must have a valid legal basis to process your personal data. We use your information for the following purposes:</p>
+        <ul>
+          <li><strong>Performance of a Contract &amp; Safety Verification:</strong> To process your event bookings, evaluate your physical preparedness for extreme swims using your swim history and pace, coordinate event logistics, verify age and category requirements, and officially validate and ratify your swim attempts across Lake Geneva.</li>
+          <li><strong>Processing Special Category (Health) Data:</strong> We process your medical checks and swim self-assessments based on your explicit consent (provided when you email these documents to us) and because it is vital for ensuring your health, safety, and physical welfare during high-risk sporting activities on the lake.</li>
+          <li><strong>Fulfilment of Orders:</strong> To print, pack, and ship any merchandise orders you place via our third-party print-to-order shipping partners.</li>
+          <li><strong>Legitimate Interests:</strong> To analyse website traffic trends, optimise our platform functionality, protect against fraudulent activities, and maintain internal organisational records.</li>
+          <li><strong>Consent:</strong> To send you marketing emails and newsletters regarding upcoming swims, events, or organisation updates. You can withdraw this consent at any time by clicking the "unsubscribe" link in any email.</li>
+        </ul>
+        
+        <div class="privacy-section-title">5. Third-Party Data Sharing and Subprocessors</div>
+        <p>We do not sell your personal data. We only share your data with trusted, essential third-party service providers (subprocessors) who perform critical operational functions on our behalf.</p>
+        <p>Our core data partners include:</p>
+        <ul>
+          <li><strong>Booking Operations:</strong> Checkfront (where your official event account and registration details reside)</li>
+          <li><strong>Payment Processing:</strong> Stripe</li>
+          <li><strong>Customer Relationship Management (CRM) &amp; Marketing:</strong> HubSpot</li>
+          <li><strong>Infrastructure &amp; Email:</strong> Google Workspace and Squarespace</li>
+          <li><strong>Physical Merchandise Fulfilment:</strong> Third-party print-to-order shipping partners</li>
+        </ul>
+        
+        <div class="privacy-section-title">6. International Data Transfers</div>
+        <p>Because we utilise standard-setting cloud software tools based in the United States (such as Google Workspace, Stripe, and HubSpot), your personal data may be transferred to, stored, and processed outside of the European Economic Area (EEA) and Switzerland.</p>
+        <p>To ensure your data remains robustly protected, we only transfer data to third countries that are recognised as providing an adequate level of data protection, or where the recipient has entered into Standard Contractual Clauses (SCCs) approved by the European Commission and the Swiss Federal Data Protection and Information Commissioner (FDPIC).</p>
+        
+        <div class="privacy-section-title">7. Data Retention and Deletion</div>
+        <p>We retain your personal data only for as long as necessary to fulfil the purposes for which it was collected, including for the purposes of satisfying any legal, accounting, safety, or regulatory reporting requirements.</p>
+        <ul>
+          <li><strong>Health and Medical Data:</strong> Medical certificates and health self-assessments submitted via email are retained only for the duration necessary to safely clear you for your scheduled event and to address any immediate post-event liability windows, after which they are securely deleted.</li>
+          <li><strong>Sporting Records:</strong> Official swim ratification records (e.g., successful completions of crossing Lac Léman, age group, sex/category, swim history, and official paces) are archived permanently as part of our historic sporting registry, unless you explicitly request their removal.</li>
+        </ul>
+        
+        <div class="privacy-section-title">8. Age Restrictions</div>
+        <p>Our services, events, and website are directed at adults and competitive youth athletes. We do not intentionally target or collect personal data from children under the age of 16 without explicit, verifiable parental or legal guardian consent. If we learn that we have inadvertently collected data from a minor under 16 without authorisation, we will delete it immediately.</p>
+        
+        <div class="privacy-section-title">9. Your Legal Rights (GDPR &amp; FADP)</div>
+        <p>If you are a resident of the EEA, UK, or Switzerland, you hold specific, powerful statutory rights regarding your personal data. You can exercise these rights at any time by emailing us at info@lgsa.com:</p>
+        <ul>
+          <li><strong>Right of Access:</strong> You have the right to request a copy of the personal data we hold about you.</li>
+          <li><strong>Right to Rectification:</strong> You can request that we correct inaccurate or incomplete personal data.</li>
+          <li><strong>Right to Erasure ("Right to be Forgotten"):</strong> You can request that we delete your personal data, subject to certain legal exceptions (such as our need to comply with financial audits or legal obligations).</li>
+          <li><strong>Right to Restrict or Object to Processing:</strong> You can object to our processing of your data for direct marketing or based on our legitimate interests.</li>
+          <li><strong>Right to Data Portability:</strong> You have the right to request that we transfer your data to another organisation or directly to you in a structured, machine-readable format.</li>
+          <li><strong>Right to Withdraw Consent:</strong> Where our processing is based on your consent (such as marketing emails or the submission of medical documents), you have the right to withdraw that consent at any time.</li>
+          <li><strong>Right to Lodge a Complaint:</strong> You have the right to lodge a complaint with a supervisory authority in your country of residence if you believe our processing violates data protection laws.</li>
+        </ul>
+        <p>We will respond to all legitimate requests within 30 days. We may ask you to verify your identity before fulfilling the request to protect your privacy and security.</p>
+      </div>
+      <div class="privacy-footer">
+        <button class="privacy-close-btn-btn" onclick="closePrivacy()">Close</button>
       </div>
     </div>
   </div>
@@ -3011,7 +3127,6 @@
     }
 
     function closePaymentMethod() {
-      consle.log("closePaymentMethod")
       document.getElementById("paymethod-overlay").classList.remove("open");
       document.body.style.overflow = "";
       _pendingWise = null;
@@ -3277,6 +3392,19 @@
       const swCheck = document.getElementById("sw-tnc");
       if (swCheck) swCheck.checked = true;
       closeTnC();
+    }
+
+    /* ═══ PRIVACY POLICY POPUP ═══ */
+    function openPrivacy() {
+      document.getElementById("privacy-overlay").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function closePrivacy() {
+      document.getElementById("privacy-overlay").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    function closePrivacyIfOutside(e) {
+      if (e.target === document.getElementById("privacy-overlay")) closePrivacy();
     }
 
     /* ═══ SWIMMER DETAILS POPUP ═══ */
