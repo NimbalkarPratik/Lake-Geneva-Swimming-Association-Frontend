@@ -3844,6 +3844,7 @@ input[type="checkbox"] {
 .paymethod-links-row {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
   flex-direction: column;
 }
 
@@ -3854,32 +3855,30 @@ input[type="checkbox"] {
 }
 
 .paymethod-tnc-link-btn {
-      display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    background: none;
-    /* border: 0.5px solid var(--border); */
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--navy);
-    cursor: pointer;
-    text-decoration: none;
-    /* transition: background 0.15s, border-color 0.15s; */
-    font-family: "Source Sans 3", sans-serif;
-    width: 30%;
-    height: 20px;
-    right: 0;
-    position: absolute;
-    margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #f7fbff;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+  font-family: "Source Sans 3", sans-serif;
+  width: auto;
+  position: static;
+  margin-top: 0;
 }
 
 .paymethod-tnc-link-btn:hover {
-  /* background: #e4eaf5; */
+  background: #e8efff;
   border-color: var(--navy);
-  text-decoration-line: underline;
+  text-decoration: none;
 }
 
 .paymethod-tnc-link-btn svg {
