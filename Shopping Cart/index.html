@@ -3558,43 +3558,37 @@
 
     /* ═══ WISE DIRECT ═══ */
     const WISE_FEE = 1.84;
-    const WISE_TEST_FULL_DISCOUNT = true;
     let _wiseCurrentId = null;
     function openWiseDirect(productId) {
       const p = products[productId];
       if (!p) return;
       _wiseCurrentId = productId;
-      const fee = WISE_TEST_FULL_DISCOUNT ? 0 : WISE_FEE;
-      const total = WISE_TEST_FULL_DISCOUNT ? 0 : p.price + fee;
+      const total = (p.price + WISE_FEE).toFixed(2);
       document.getElementById("wise-product-name").textContent = p.title;
-      document.getElementById("wise-amount").textContent =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : p.priceLabel;
-      document.getElementById("wise-fee-entry").textContent =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : p.priceLabel;
+      document.getElementById("wise-amount").textContent = p.priceLabel;
+      document.getElementById("wise-fee-entry").textContent = p.priceLabel;
       document.getElementById("wise-fee-wise").textContent =
-        `~€${fee.toFixed(2)}`;
-      document.getElementById("wise-fee-total").textContent = `€${total.toFixed(2)}`;
+        `~€${WISE_FEE.toFixed(2)}`;
+      document.getElementById("wise-fee-total").textContent = `€${total}`;
       document.getElementById("wise-overlay").classList.add("open");
       document.body.style.overflow = "hidden";
     }
 
     function openWiseCustomDirect(name, amount) {
       _wiseCurrentId = null;
-      const fee = WISE_TEST_FULL_DISCOUNT ? 0 : WISE_FEE;
-      const total = WISE_TEST_FULL_DISCOUNT ? 0 : amount + fee;
+      const total = (amount + WISE_FEE).toFixed(2);
       const fmt = (n) =>
         n.toLocaleString("en-EU", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         });
       document.getElementById("wise-product-name").textContent = name;
-      document.getElementById("wise-amount").textContent =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${fmt(amount)}`;
+      document.getElementById("wise-amount").textContent = `€${fmt(amount)}`;
       document.getElementById("wise-fee-entry").textContent =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${fmt(amount)}`;
+        `€${fmt(amount)}`;
       document.getElementById("wise-fee-wise").textContent =
-        `~€${fee.toFixed(2)}`;
-      document.getElementById("wise-fee-total").textContent = `€${total.toFixed(2)}`;
+        `~€${WISE_FEE.toFixed(2)}`;
+      document.getElementById("wise-fee-total").textContent = `€${total}`;
       document.getElementById("wise-overlay").classList.add("open");
       document.body.style.overflow = "hidden";
     }
@@ -3611,10 +3605,9 @@
       const ref = p
         ? encodeURIComponent(p.title)
         : encodeURIComponent("Lake Geneva Cart");
-      const rawAmt = p
+      const amt = p
         ? p.price
         : Object.values(cart).reduce((s, i) => s + i.price * i.qty, 0);
-      const amt = WISE_TEST_FULL_DISCOUNT ? 0 : rawAmt;
       window.open(
         `https://wise.com/pay/me/YOUR_WISE_USERNAME?amount=${amt}&currency=EUR&reference=${ref}`,
         "_blank",
