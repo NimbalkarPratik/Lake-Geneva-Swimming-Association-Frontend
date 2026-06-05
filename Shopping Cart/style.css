@@ -837,11 +837,12 @@ input[type="checkbox"] {
   flex-shrink: 0;
   background: #dcf7ff;
   padding: 10px 10px 0 10px;
-  min-height: calc(89vh - 48px);
   border-right: 1px solid var(--border);
   position: sticky;
+  top: 100px;
+  height: calc(100vh - 100px);
   overflow-y: auto;
-  max-height: calc(100vh - 48px);
+  overscroll-behavior: contain;
 }
 
 .sidebar-title {
@@ -3840,30 +3841,45 @@ input[type="checkbox"] {
   gap: 10px;
 }
 
+.paymethod-links-row {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+@media (min-width: 600px) {
+  .paymethod-links-row {
+    flex-direction: row;
+  }
+}
+
 .paymethod-tnc-link-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: #f0f4fa;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--navy);
-  cursor: pointer;
-  text-decoration: none;
-  transition:
-    background 0.15s,
-    border-color 0.15s;
-  font-family: "Source Sans 3", sans-serif;
-  width: 100%;
-  justify-content: center;
+      display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: none;
+    /* border: 0.5px solid var(--border); */
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    text-decoration: none;
+    /* transition: background 0.15s, border-color 0.15s; */
+    font-family: "Source Sans 3", sans-serif;
+    width: 30%;
+    height: 20px;
+    right: 0;
+    position: absolute;
+    margin-top: 10px;
 }
 
 .paymethod-tnc-link-btn:hover {
-  background: #e4eaf5;
+  /* background: #e4eaf5; */
   border-color: var(--navy);
+  text-decoration-line: underline;
 }
 
 .paymethod-tnc-link-btn svg {
@@ -4113,6 +4129,180 @@ input[type="checkbox"] {
 .tnc-dismiss-btn:hover {
   border-color: var(--navy);
   color: var(--navy);
+}
+
+/* Privacy Policy Modal */
+.privacy-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  background: rgba(13, 34, 64, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.privacy-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.privacy-panel {
+  background: #fff;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(13, 34, 64, 0.28);
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.privacy-overlay.open .privacy-panel {
+  transform: translateY(0) scale(1);
+}
+
+.privacy-header {
+  background: linear-gradient(135deg, #2db88a 0%, #1a9970 100%);
+  padding: 20px 24px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.privacy-header-title {
+  font-family: "Merriweather", serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.privacy-header-title svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: white;
+  stroke-width: 2;
+}
+
+.privacy-close-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.privacy-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.privacy-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 26px;
+}
+
+.privacy-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.privacy-body::-webkit-scrollbar-thumb {
+  background: #c8d0de;
+  border-radius: 2px;
+}
+
+.privacy-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.privacy-body p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.privacy-body ul {
+  padding-left: 18px;
+  margin-bottom: 14px;
+}
+
+.privacy-body li {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 6px;
+  list-style: disc;
+}
+
+.privacy-section-title {
+  font-family: "Merriweather", serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 20px 0 8px;
+}
+
+.privacy-section-title:first-child {
+  margin-top: 0;
+}
+
+.privacy-subsection-title {
+  font-family: "Merriweather", serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 14px 0 6px;
+}
+
+.privacy-footer {
+  padding: 14px 24px 18px;
+  border-top: 1px solid #eaecf2;
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.privacy-close-btn-btn {
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.privacy-close-btn-btn:hover {
+  background: var(--teal-dark);
 }
 
 /* Swimmer Details Popup */
