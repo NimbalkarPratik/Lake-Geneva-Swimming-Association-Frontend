@@ -636,9 +636,6 @@
             </div>
           </div>
         </div>
-        <a class="paymethod-tnc-link-btn">
-          Read Privacy Policy
-        </a>
       </div>
 
       <!-- MERCHANDISE TAB -->
@@ -908,9 +905,6 @@
             </div>
           </div>
         </div>
-        <a class="paymethod-tnc-link-btn">
-          Read Privacy Policy
-        </a>
       </div>
     </main>
 
@@ -1125,7 +1119,7 @@
       </div>
       <div class="paymethod-body">
         <div class="paymethod-body-label">How would you like to pay?</div>
-        <!-- T&C block -->
+        <!-- T&C + Privacy block -->
         <div class="paymethod-tnc-block">
           <div class="paymethod-links-row">
             <a class="paymethod-tnc-link-btn" onclick="openTnC()">
@@ -1135,13 +1129,25 @@
               </svg>
               Read Terms &amp; Conditions
             </a>
-            
+            <a class="paymethod-tnc-link-btn" onclick="openPrivacy()">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              Read Privacy Policy
+            </a>
           </div>
           <div class="paymethod-tnc-check-row">
             <input type="checkbox" id="paymethod-tnc-check" onchange="togglePaymentCards()" />
             <label for="paymethod-tnc-check">I have read and agree to the
               <button class="cart-tnc-link" onclick="openTnC()">
                 Terms &amp; Conditions
+              </button></label>
+          </div>
+          <div class="paymethod-tnc-check-row">
+            <input type="checkbox" id="paymethod-privacy-check" onchange="togglePaymentCards()" />
+            <label for="paymethod-privacy-check">I have read and agree to the
+              <button class="cart-tnc-link" onclick="openPrivacy()">
+                Privacy Policy
               </button></label>
           </div>
         </div>
@@ -3364,11 +3370,13 @@
       /* legacy — kept for safety, not used */
     }
     function togglePaymentCards() {
-      const checked = document.getElementById("paymethod-tnc-check")?.checked;
+      const tncChecked = document.getElementById("paymethod-tnc-check")?.checked;
+      const privacyChecked = document.getElementById("paymethod-privacy-check")?.checked;
       const opts = document.getElementById("paymethod-options");
+      const enabled = tncChecked && privacyChecked;
       if (opts) {
-        opts.style.opacity = checked ? "1" : "0.4";
-        opts.style.pointerEvents = checked ? "auto" : "none";
+        opts.style.opacity = enabled ? "1" : "0.4";
+        opts.style.pointerEvents = enabled ? "auto" : "none";
       }
     }
     function openTnC() {
