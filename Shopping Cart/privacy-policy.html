@@ -276,9 +276,9 @@
   <div class="privacy-topbar">
     <div class="privacy-topbar-logo"></div>
     <div class="privacy-topbar-center">Privacy Policy</div>
-    <div class="privacy-topbar-right">
-      <a href="index.html" class="privacy-back-btn">← Back to Shop</a>
-    </div>
+    <!-- <div class="privacy-topbar-right">
+      <a href="index.html" class="privacy-back-btn" onclick="goBackToShop(event)">← Back to Shop</a>
+    </div> -->
   </div>
 
   <!-- CONTAINER -->
@@ -449,7 +449,7 @@
           Have questions about this privacy policy? Contact us at <strong>info@lgsa.com</strong>
         </div>
         <div class="privacy-footer-links">
-          <a href="index.html" class="privacy-footer-link">Back to Shop</a>
+          <a href="index.html" class="privacy-footer-link" onclick="goBackToShop(event)">Back to Shop</a>
           <span>•</span>
           <a href="mailto:info@lgsa.com" class="privacy-footer-link">Contact Us</a>
         </div>
@@ -463,6 +463,17 @@
       © 2026 Lake Geneva Swimming Association (LGSA). All rights reserved.
     </div>
   </div>
+
+  <script>
+    function goBackToShop(event) {
+      event.preventDefault();
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "index.html";
+      }
+    }
+  </script>
 </body>
 
 </html>
