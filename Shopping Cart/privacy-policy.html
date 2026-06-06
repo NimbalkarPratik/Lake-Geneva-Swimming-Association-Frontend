@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Lake Geneva Swimming Association (LGSA)</title>
+  <meta name="description"
+    content="Read LGSA's comprehensive privacy policy. We comply with GDPR and Swiss FADP to protect your personal data." />
+  <meta name="keywords" content="privacy policy, GDPR, data protection, LGSA, Lake Geneva swimming" />
+  <link rel="icon" type="image/x-icon" href="assets/Favicon.png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 14px;
+    }
+
+    body {
+      font-family: "Source Sans 3", sans-serif;
+      color: #1a1a1a;
+      background: #f8f9fb;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    :root {
+      --navy: #0d2240;
+      --teal: #2db88a;
+      --border: #d8dde8;
+      --text-muted: #6b7a90;
+      --text-dark: #1a2540;
+    }
+
+    .privacy-topbar {
+      background: #fff;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .privacy-topbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-image: url("assets/main_logo.png");
+      background-size: 100% 100%;
+      height: 80px;
+      width: 80px;
+    }
+
+    .privacy-topbar-center {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .privacy-topbar-right {
+      display: flex;
+      gap: 12px;
+    }
+
+    .privacy-back-btn {
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .privacy-back-btn:hover {
+      background: #f0f4fa;
+      border-color: var(--navy);
+    }
+
+    .privacy-container {
+      max-width: 780px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .privacy-header {
+      background: linear-gradient(135deg, royalblue 0%, #4170ad 100%);
+      border-radius: 18px;
+      padding: 40px 36px;
+      color: white;
+      margin-bottom: 32px;
+      box-shadow: 0 8px 24px rgba(45, 184, 138, 0.15);
+    }
+
+    .privacy-header-title {
+      font-family: "Merriweather", serif;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .privacy-header-sub {
+      font-size: 14px;
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    .privacy-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .privacy-content {
+      background: white;
+      border-radius: 12px;
+      padding: 40px 36px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      line-height: 1.8;
+    }
+
+    .privacy-content p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .privacy-content ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .privacy-content li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      list-style: disc;
+    }
+
+    .privacy-section-title {
+      font-family: "Merriweather", serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 28px 0 12px;
+    }
+
+    .privacy-section-title:first-child {
+      margin-top: 0;
+    }
+
+    .privacy-subsection-title {
+      font-family: "Merriweather", serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin: 18px 0 8px;
+    }
+
+    .privacy-footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .privacy-footer-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .privacy-footer-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .privacy-footer-link {
+      font-size: 12px;
+      color: var(--navy);
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.15s;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .privacy-footer-link:hover {
+      color: var(--teal);
+    }
+
+    .privacy-page-footer {
+      background: #f8f9fb;
+      padding: 32px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .privacy-page-footer-text {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+      .privacy-topbar {
+        height: auto;
+        padding: 12px 16px;
+      }
+
+      .privacy-topbar-logo {
+        height: 60px;
+        width: 60px;
+      }
+
+      .privacy-topbar-center {
+        font-size: 14px;
+      }
+
+      .privacy-header {
+        padding: 28px 20px;
+      }
+
+      .privacy-header-title {
+        font-size: 24px;
+      }
+
+      .privacy-content {
+        padding: 24px 18px;
+      }
+
+      .privacy-section-title {
+        font-size: 15px;
+      }
+
+      .privacy-container {
+        margin: 24px auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <div class="privacy-topbar">
+    <div class="privacy-topbar-logo"></div>
+    <div class="privacy-topbar-center">Privacy Policy</div>
+    <div class="privacy-topbar-right">
+      <a href="index.html" class="privacy-back-btn">← Back to Shop</a>
+    </div>
+  </div>
+
+  <!-- CONTAINER -->
+  <div class="privacy-container">
+    <!-- HEADER -->
+    <div class="privacy-header">
+      <div class="privacy-header-title">Privacy Policy</div>
+      <div class="privacy-header-sub">
+        We are committed to protecting your personal data in compliance with GDPR and Swiss data protection laws.
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="privacy-content">
+      <div class="privacy-meta">Last Updated: 4 June 2026</div>
+
+      <p>Welcome to lgsa.com. We organise open water swimming events and officially ratify swim attempts across Lake
+        Geneva (Lac Léman). Because our activities take place in a cross-border region and serve swimmers primarily
+        across Europe, we are deeply committed to protecting your personal data.</p>
+
+      <p>This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our
+        website (hosted on Squarespace) or register for our events. Our data practices are designed to comply with the
+        European Union's General Data Protection Regulation (GDPR) and the Swiss Federal Act on Data Protection (FADP).
+      </p>
+
+      <div class="privacy-section-title">1. Data Controller and Contact Information</div>
+      <p>For the purposes of European and Swiss data protection laws, the data controller is the entity responsible for
+        your personal data. If you have any questions, concerns, or wish to exercise your legal rights regarding your
+        data, please contact us directly:</p>
+      <ul>
+        <li><strong>Email:</strong> info@lgsa.com</li>
+      </ul>
+
+      <div class="privacy-section-title">2. The Personal Data We Collect</div>
+      <p>We only collect personal data that is necessary to provide you with our services, fulfil our contractual
+        obligations, ensure your safety during events, or improve your experience on our website.</p>
+
+      <div class="privacy-subsection-title">A. Data You Voluntarily Provide to Us</div>
+      <ul>
+        <li><strong>Identity, Contact, and Demographic Data:</strong> First and last names, date of birth, sex, email
+          addresses, phone numbers, and shipping addresses. We collect your date of birth and sex to verify age
+          requirements and to properly categorise official swim classifications and results.</li>
+        <li><strong>Booking &amp; Athletic Information:</strong> When you register for an open water event or submit a
+          swim ratification request via our third-party booking platform (Checkfront), we collect your swim pace and
+          swim history.</li>
+        <li><strong>Health and Safety Data (Special Category Data):</strong> Due to the extreme and challenging nature
+          of open water swimming in Lake Geneva, we require athletes to submit a medical check (medical certificate) and
+          a self-assessment swim. This information is not collected via the website but is shared with us securely via
+          email. Under the GDPR, medical data is classified as "special category data" and is handled with the highest
+          levels of confidentiality.</li>
+        <li><strong>Exclusion of Payment Card Data:</strong> To protect your financial security, we do not collect,
+          process, or store your credit card or bank account details. Online payments are handled securely and directly
+          off-site by our payment processor, Stripe, or via manual direct bank transfer.</li>
+      </ul>
+
+      <div class="privacy-subsection-title">B. Data Collected Automatically</div>
+      <p>When you visit lgsa.com, we and our third-party service providers automatically collect certain technical
+        information from your browser or device, including:</p>
+      <ul>
+        <li>IP addresses</li>
+        <li>Browser types and versions</li>
+        <li>Device types and operating systems</li>
+        <li>Geographic location data (at a regional or city level)</li>
+      </ul>
+
+      <div class="privacy-section-title">3. Cookies and Tracking Technologies</div>
+      <p>We use cookies and similar tracking pixels to optimise our website, measure performance, and deliver relevant
+        marketing.</p>
+      <ul>
+        <li><strong>Essential Cookies:</strong> Necessary for the technical operation, security, and basic functionality
+          of our website platform (Squarespace).</li>
+        <li><strong>Analytics Trackers:</strong> We use Google Analytics and PostHog to understand how visitors interact
+          with our site, helping us improve layout, navigation, and content.</li>
+        <li><strong>Advertising &amp; Retargeting Pixels:</strong> We utilise the Facebook Pixel and LinkedIn Pixel to
+          track the effectiveness of our social media campaigns and deliver relevant advertisements to individuals who
+          have expressed interest in our swims.</li>
+      </ul>
+      <p>You can manage or disable non-essential cookies via your web browser settings or through our cookie consent
+        banner.</p>
+
+      <div class="privacy-section-title">4. How We Use Your Data (Legal Basis for Processing)</div>
+      <p>Under the GDPR and Swiss FADP, we must have a valid legal basis to process your personal data. We use your
+        information for the following purposes:</p>
+      <ul>
+        <li><strong>Performance of a Contract &amp; Safety Verification:</strong> To process your event bookings, evaluate
+          your physical preparedness for extreme swims using your swim history and pace, coordinate event logistics,
+          verify age and category requirements, and officially validate and ratify your swim attempts across Lake Geneva.
+        </li>
+        <li><strong>Processing Special Category (Health) Data:</strong> We process your medical checks and swim
+          self-assessments based on your explicit consent (provided when you email these documents to us) and because it
+          is vital for ensuring your health, safety, and physical welfare during high-risk sporting activities on the
+          lake.</li>
+        <li><strong>Fulfilment of Orders:</strong> To print, pack, and ship any merchandise orders you place via our
+          third-party print-to-order shipping partners.</li>
+        <li><strong>Legitimate Interests:</strong> To analyse website traffic trends, optimise our platform
+          functionality, protect against fraudulent activities, and maintain internal organisational records.</li>
+        <li><strong>Consent:</strong> To send you marketing emails and newsletters regarding upcoming swims, events, or
+          organisation updates. You can withdraw this consent at any time by clicking the "unsubscribe" link in any
+          email.</li>
+      </ul>
+
+      <div class="privacy-section-title">5. Third-Party Data Sharing and Subprocessors</div>
+      <p>We do not sell your personal data. We only share your data with trusted, essential third-party service
+        providers (subprocessors) who perform critical operational functions on our behalf.</p>
+      <p>Our core data partners include:</p>
+      <ul>
+        <li><strong>Booking Operations:</strong> Checkfront (where your official event account and registration details
+          reside)</li>
+        <li><strong>Payment Processing:</strong> Stripe</li>
+        <li><strong>Customer Relationship Management (CRM) &amp; Marketing:</strong> HubSpot</li>
+        <li><strong>Infrastructure &amp; Email:</strong> Google Workspace and Squarespace</li>
+        <li><strong>Physical Merchandise Fulfilment:</strong> Third-party print-to-order shipping partners</li>
+      </ul>
+
+      <div class="privacy-section-title">6. International Data Transfers</div>
+      <p>Because we utilise standard-setting cloud software tools based in the United States (such as Google Workspace,
+        Stripe, and HubSpot), your personal data may be transferred to, stored, and processed outside of the European
+        Economic Area (EEA) and Switzerland.</p>
+      <p>To ensure your data remains robustly protected, we only transfer data to third countries that are recognised as
+        providing an adequate level of data protection, or where the recipient has entered into Standard Contractual
+        Clauses (SCCs) approved by the European Commission and the Swiss Federal Data Protection and Information
+        Commissioner (FDPIC).</p>
+
+      <div class="privacy-section-title">7. Data Retention and Deletion</div>
+      <p>We retain your personal data only for as long as necessary to fulfil the purposes for which it was collected,
+        including for the purposes of satisfying any legal, accounting, safety, or regulatory reporting requirements.</p>
+      <ul>
+        <li><strong>Health and Medical Data:</strong> Medical certificates and health self-assessments submitted via
+          email are retained only for the duration necessary to safely clear you for your scheduled event and to address
+          any immediate post-event liability windows, after which they are securely deleted.</li>
+        <li><strong>Sporting Records:</strong> Official swim ratification records (e.g., successful completions of
+          crossing Lac Léman, age group, sex/category, swim history, and official paces) are archived permanently as
+          part of our historic sporting registry, unless you explicitly request their removal.</li>
+      </ul>
+
+      <div class="privacy-section-title">8. Age Restrictions</div>
+      <p>Our services, events, and website are directed at adults and competitive youth athletes. We do not intentionally
+        target or collect personal data from children under the age of 16 without explicit, verifiable parental or legal
+        guardian consent. If we learn that we have inadvertently collected data from a minor under 16 without
+        authorisation, we will delete it immediately.</p>
+
+      <div class="privacy-section-title">9. Your Legal Rights (GDPR &amp; FADP)</div>
+      <p>If you are a resident of the EEA, UK, or Switzerland, you hold specific, powerful statutory rights regarding
+        your personal data. You can exercise these rights at any time by emailing us at info@lgsa.com:</p>
+      <ul>
+        <li><strong>Right of Access:</strong> You have the right to request a copy of the personal data we hold about
+          you.</li>
+        <li><strong>Right to Rectification:</strong> You can request that we correct inaccurate or incomplete personal
+          data.</li>
+        <li><strong>Right to Erasure ("Right to be Forgotten"):</strong> You can request that we delete your personal
+          data, subject to certain legal exceptions (such as our need to comply with financial audits or legal
+          obligations).</li>
+        <li><strong>Right to Restrict or Object to Processing:</strong> You can object to our processing of your data
+          for direct marketing or based on our legitimate interests.</li>
+        <li><strong>Right to Data Portability:</strong> You have the right to request that we transfer your data to
+          another organisation or directly to you in a structured, machine-readable format.</li>
+        <li><strong>Right to Withdraw Consent:</strong> Where our processing is based on your consent (such as marketing
+          emails or the submission of medical documents), you have the right to withdraw that consent at any time.</li>
+        <li><strong>Right to Lodge a Complaint:</strong> You have the right to lodge a complaint with a supervisory
+          authority in your country of residence if you believe our processing violates data protection laws.</li>
+      </ul>
+      <p>We will respond to all legitimate requests within 30 days. We may ask you to verify your identity before
+        fulfilling the request to protect your privacy and security.</p>
+
+      <!-- FOOTER -->
+      <div class="privacy-footer">
+        <div class="privacy-footer-text">
+          Have questions about this privacy policy? Contact us at <strong>info@lgsa.com</strong>
+        </div>
+        <div class="privacy-footer-links">
+          <a href="index.html" class="privacy-footer-link">Back to Shop</a>
+          <span>•</span>
+          <a href="mailto:info@lgsa.com" class="privacy-footer-link">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE FOOTER -->
+  <div class="privacy-page-footer">
+    <div class="privacy-page-footer-text">
+      © 2026 Lake Geneva Swimming Association (LGSA). All rights reserved.
+    </div>
+  </div>
+</body>
+
+</html>
