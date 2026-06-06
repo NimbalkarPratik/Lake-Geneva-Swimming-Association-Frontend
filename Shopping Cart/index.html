@@ -2202,8 +2202,8 @@
     </div>
   </div>`;
       if (a)
-        return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input ok" type="text" value="${a.code}" readonly><button class="cart-discount-apply" onclick="removeDiscount()" style="background:#e05555">Remove</button></div><div style="margin-top:6px;font-size:12px;color:#475569;">Applied: ${a.label}</div></div>`;
-      return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input" type="text" id="discount-input" placeholder="Enter code (LGSA100, LGSA10, LGSA15, LGSA20)" maxlength="20" onkeydown="if(event.key==='Enter')applyDiscountCode()"><button class="cart-discount-apply" onclick="applyDiscountCode()">Apply</button></div><div class="cart-discount-invalid" id="discount-invalid" style="display:none;font-size:11px;color:#e05555;margin-top:5px;font-weight:500;">Invalid promo code.</div><div style="margin-top:6px;font-size:12px;color:#475569;">Use LGSA100 for full test discount or LGSA10/LGSA15/LGSA20 for percent off.</div></div>`;
+        return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input ok" type="text" value="${a.code}" readonly><button class="cart-discount-apply" onclick="removeDiscount()" style="background:#e05555">Remove</button></div></div>`;
+      return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input" type="text" id="discount-input" placeholder="Enter code here" maxlength="20" onkeydown="if(event.key==='Enter')applyDiscountCode()"><button class="cart-discount-apply" onclick="applyDiscountCode()">Apply</button></div><div class="cart-discount-invalid" id="discount-invalid" style="display:none;font-size:11px;color:#e05555;margin-top:5px;font-weight:500;">Invalid promo code.</div></div>`;
     }
 
     function buildCartSummaryHTML() {
@@ -3361,6 +3361,14 @@
     }
     function removeDiscount() {
       _appliedDiscount = null;
+      const input = document.getElementById("discount-input");
+      if (input) {
+        input.classList.remove("err");
+      }
+      const invalidEl = document.getElementById("discount-invalid");
+      if (invalidEl) {
+        invalidEl.style.display = "none";
+      }
       updateCartUI();
     }
 
