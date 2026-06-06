@@ -2143,7 +2143,6 @@
         </button>
       </div>`;
 
-    console.log("cart items : ", items);
 
       items.forEach((item) => {
         const lineTotal = getCartItemLineTotal(item).toLocaleString("en-EU", {
@@ -3107,13 +3106,12 @@
 
     /* ═══ PAYMENT METHOD ═══ */
     function openPaymentMethod() {
-      console.log("openPaymentMethod")
       const p =
         _pendingWise && _pendingWise.type === "product"
           ? products[_pendingWise.id]
           : null;
       const el = document.getElementById("paymethod-header-amount");
-      if (p) el.textContent = `${p.title} · ${p.priceLabel}`;
+      if (p) el.innerHTML = `${p.title} · ${p.priceLabel}`;
       else if (_pendingWise && _pendingWise.type === "custom")
         el.textContent =
           "€" +
@@ -3478,7 +3476,6 @@
     }
 
     function selectHear(el, val) {
-      console.log("clicked", val);
 
       document
         .querySelectorAll(".swimmer-hear-option")
@@ -3489,7 +3486,6 @@
       const radio = el.querySelector('input[type="radio"]');
       radio.checked = true;
 
-      console.log("el : ",el);
       const otherWrap = document.getElementById("swimmer-hear-other-wrap");
       if (otherWrap) otherWrap.style.display = val === "other" ? "" : "none";
 
@@ -3566,14 +3562,14 @@
       _wiseCurrentId = productId;
       const fee = WISE_TEST_FULL_DISCOUNT ? 0 : WISE_FEE;
       const total = WISE_TEST_FULL_DISCOUNT ? 0 : p.price + fee;
-      document.getElementById("wise-product-name").textContent = p.title;
-      document.getElementById("wise-amount").textContent =
+      document.getElementById("wise-product-name").innerHTML = p.title;
+      document.getElementById("wise-amount").innerHTML =
         WISE_TEST_FULL_DISCOUNT ? "€0.00" : p.priceLabel;
-      document.getElementById("wise-fee-entry").textContent =
+      document.getElementById("wise-fee-entry").innerHTML =
         WISE_TEST_FULL_DISCOUNT ? "€0.00" : p.priceLabel;
-      document.getElementById("wise-fee-wise").textContent =
+      document.getElementById("wise-fee-wise").innerHTML =
         `~€${fee.toFixed(2)}`;
-      document.getElementById("wise-fee-total").textContent = `€${total.toFixed(2)}`;
+      document.getElementById("wise-fee-total").innerHTML = `€${total.toFixed(2)}`;
       document.getElementById("wise-overlay").classList.add("open");
       document.body.style.overflow = "hidden";
     }
