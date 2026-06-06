@@ -1472,7 +1472,7 @@
             <span>Entry fee</span><span id="wise-fee-entry">—</span>
           </div>
           <div class="wise-fee-row">
-            <span>Wise transfer fee</span><span id="wise-fee-wise">~€1.84</span>
+            <span>Wise transfer fee</span><span id="wise-fee-wise">~€0.00</span>
           </div>
           <div class="wise-fee-row total">
             <span>You pay</span><span id="wise-fee-total">—</span>
@@ -1994,10 +1994,10 @@
     let cart = {};
     let removeall = false
     const DISCOUNT_CODES = {
+      LGSA100: { type: "percent", value: 100, label: "100% off (test)" },
       LGSA10: { type: "percent", value: 10, label: "10% off" },
-      SWIM20: { type: "percent", value: 20, label: "20% off" },
-      WELCOME5: { type: "fixed", value: 5, label: "€5 off" },
-      LGSA2025: { type: "percent", value: 15, label: "15% off" },
+      LGSA15: { type: "percent", value: 15, label: "15% off" },
+      LGSA20: { type: "percent", value: 20, label: "20% off" },
     };
     let _appliedDiscount = null;
     const EXCHANGE_RATES = {
@@ -2202,8 +2202,8 @@
     </div>
   </div>`;
       if (a)
-        return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input ok" type="text" value="${a.code}" readonly><button class="cart-discount-apply" style="background:var(--teal)" disabled>Applied ✓</button></div></div>`;
-      return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input" type="text" id="discount-input" placeholder="Enter code here" maxlength="20" onkeydown="if(event.key==='Enter')applyDiscountCode()"><button class="cart-discount-apply" onclick="applyDiscountCode()">Apply</button></div><div class="cart-discount-invalid" id="discount-invalid" style="display:none;font-size:11px;color:#e05555;margin-top:5px;font-weight:500;">Invalid promo code.</div></div>`;
+        return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input ok" type="text" value="${a.code}" readonly><button class="cart-discount-apply" onclick="removeDiscount()" style="background:#e05555">Remove</button></div><div style="margin-top:6px;font-size:12px;color:#475569;">Applied: ${a.label}</div></div>`;
+      return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input" type="text" id="discount-input" placeholder="Enter code (LGSA100, LGSA10, LGSA15, LGSA20)" maxlength="20" onkeydown="if(event.key==='Enter')applyDiscountCode()"><button class="cart-discount-apply" onclick="applyDiscountCode()">Apply</button></div><div class="cart-discount-invalid" id="discount-invalid" style="display:none;font-size:11px;color:#e05555;margin-top:5px;font-weight:500;">Invalid promo code.</div><div style="margin-top:6px;font-size:12px;color:#475569;">Use LGSA100 for full test discount or LGSA10/LGSA15/LGSA20 for percent off.</div></div>`;
     }
 
     function buildCartSummaryHTML() {
@@ -2212,7 +2212,7 @@
         (s, i) => s + getCartItemLineTotal(i),
         0,
       );
-      const wiseFee = items.length > 0 ? 1.84 : 0;
+      const wiseFee = items.length > 0 ? WISE_FEE : 0;
       const fmt = (n) =>
         n.toLocaleString("en-EU", {
           minimumFractionDigits: 2,
@@ -3364,6 +3364,18 @@
       updateCartUI();
     }
 
+    function getDiscountedAmount(amount) {
+      if (!_appliedDiscount) return amount;
+      if (_appliedDiscount.type === "percent") {
+        return Math.max(0, amount * (1 - _appliedDiscount.value / 100));
+      }
+      return Math.max(0, amount - _appliedDiscount.value);
+    }
+
+    function getDiscountSuffix() {
+      return _appliedDiscount ? ` (${_appliedDiscount.label})` : "";
+    }
+
     function toggleCheckoutBtn() {
       /* legacy — kept for safety, not used */
     }
@@ -3553,7 +3565,7 @@
     }
 
     /* ═══ WISE DIRECT ═══ */
-    const WISE_FEE = 1.84;
+    const WISE_FEE = 0;
     const WISE_TEST_FULL_DISCOUNT = true;
     let _wiseCurrentId = null;
     function openWiseDirect(productId) {
@@ -3561,12 +3573,15 @@
       if (!p) return;
       _wiseCurrentId = productId;
       const fee = WISE_TEST_FULL_DISCOUNT ? 0 : WISE_FEE;
-      const total = WISE_TEST_FULL_DISCOUNT ? 0 : p.price + fee;
-      document.getElementById("wise-product-name").innerHTML = p.title;
+      const baseAmount = p.price;
+      const discountedAmount = getDiscountedAmount(baseAmount);
+      const total = WISE_TEST_FULL_DISCOUNT ? 0 : discountedAmount + fee;
+      document.getElementById("wise-product-name").innerHTML =
+        p.title + getDiscountSuffix();
       document.getElementById("wise-amount").innerHTML =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : p.priceLabel;
+        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${discountedAmount.toFixed(2)}`;
       document.getElementById("wise-fee-entry").innerHTML =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : p.priceLabel;
+        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${discountedAmount.toFixed(2)}`;
       document.getElementById("wise-fee-wise").innerHTML =
         `~€${fee.toFixed(2)}`;
       document.getElementById("wise-fee-total").innerHTML = `€${total.toFixed(2)}`;
@@ -3577,17 +3592,19 @@
     function openWiseCustomDirect(name, amount) {
       _wiseCurrentId = null;
       const fee = WISE_TEST_FULL_DISCOUNT ? 0 : WISE_FEE;
-      const total = WISE_TEST_FULL_DISCOUNT ? 0 : amount + fee;
+      const discountedAmount = getDiscountedAmount(amount);
+      const total = WISE_TEST_FULL_DISCOUNT ? 0 : discountedAmount + fee;
       const fmt = (n) =>
         n.toLocaleString("en-EU", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         });
-      document.getElementById("wise-product-name").textContent = name;
+      document.getElementById("wise-product-name").textContent =
+        name + getDiscountSuffix();
       document.getElementById("wise-amount").textContent =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${fmt(amount)}`;
+        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${fmt(discountedAmount)}`;
       document.getElementById("wise-fee-entry").textContent =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${fmt(amount)}`;
+        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${fmt(discountedAmount)}`;
       document.getElementById("wise-fee-wise").textContent =
         `~€${fee.toFixed(2)}`;
       document.getElementById("wise-fee-total").textContent = `€${total.toFixed(2)}`;
@@ -3610,7 +3627,8 @@
       const rawAmt = p
         ? p.price
         : Object.values(cart).reduce((s, i) => s + i.price * i.qty, 0);
-      const amt = WISE_TEST_FULL_DISCOUNT ? 0 : rawAmt;
+      const discountedAmt = getDiscountedAmount(rawAmt);
+      const amt = WISE_TEST_FULL_DISCOUNT ? 0 : discountedAmt;
       window.open(
         `https://wise.com/pay/me/YOUR_WISE_USERNAME?amount=${amt}&currency=EUR&reference=${ref}`,
         "_blank",
@@ -3946,7 +3964,7 @@
             ? subtotal * (_appliedDiscount.value / 100)
             : Math.min(_appliedDiscount.value, subtotal);
       }
-      const wiseFee = items.length > 0 ? 1.84 : 0;
+      const wiseFee = items.length > 0 ? WISE_FEE : 0;
       return {
         timestamp: new Date().toISOString(),
         order_reference: `LGSA-${Math.floor(Math.random() * 1000000)}`,
