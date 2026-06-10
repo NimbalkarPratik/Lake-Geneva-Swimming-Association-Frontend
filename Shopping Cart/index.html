@@ -148,11 +148,11 @@
             <input type="checkbox" id="d-group" onchange="applyFilters()" /><label for="d-group">Group</label>
           </div>
           <div class="check-row">
-            <input type="checkbox" id="d-relay" onchange="applyFilters()" /><label for="d-relay">Relay</label>
+            <input type="checkbox" id="d-relay-team" onchange="applyFilters()" /><label for="d-relay-team">Relay Team</label>
           </div>
-          <div class="check-row">
+          <!-- <div class="check-row">
             <input type="checkbox" id="d-team" onchange="applyFilters()" /><label for="d-team">Team</label>
-          </div>
+          </div> -->
         </div>
       </div>
       <div id="merch-filters" style="display: none">
@@ -200,7 +200,7 @@
         <div class="product-grid" id="product-grid">
           <div class="product-card" onclick="showDetail('la-signature-140')" data-id="la-signature-140"
             data-type="flagship" data-place="geneva veytaux" data-eventtype="event"
-            data-participation="solo relay team"
+            data-participation="solo relay-team"
             data-dates="2026-06-28:2026-07-02,2026-07-05:2026-07-09,2026-07-19:2026-07-23,2026-07-26:2026-07-30,2026-09-27:2026-10-01">
             <div class="product-img img-signature-140">
               <span class="badge badge-flagship">Flagship</span>
@@ -256,7 +256,7 @@
 
           <div class="product-card" onclick="showDetail('la-signature-70')" data-id="la-signature-70"
             data-type="flagship" data-place="geneva veytaux" data-eventtype="event"
-            data-participation="solo relay team"
+            data-participation="solo relay-team"
             data-dates="2026-06-28:2026-07-02,2026-07-05:2026-07-09,2026-07-19:2026-07-23,2026-07-26:2026-07-30,2026-09-27:2026-10-01">
             <div class="product-img img-signature-70">
               <span class="badge badge-flagship">Flagship</span>
@@ -366,7 +366,7 @@
           </div>
 
           <div class="product-card" onclick="showDetail('la-classique')" data-id="la-classique" data-type="core"
-            data-place="veytaux" data-eventtype="event" data-participation="solo group relay team"
+            data-place="Lausanne evian" data-eventtype="event" data-participation="solo"
             data-dates="2026-07-11:2026-07-12">
             <div class="product-img img-la-classique">
               <span class="badge badge-core">Core</span>
@@ -420,7 +420,7 @@
           </div>
 
           <div class="product-card" onclick="showDetail('guided-classique')" data-id="guided-classique" data-type="core"
-            data-place="lausanne" data-eventtype="guided" data-participation="solo group relay team"
+            data-place="lausanne evian" data-eventtype="guided" data-participation="solo group relay-team"
             data-dates="2026-08-03:2026-08-08,2026-08-17:2026-08-22,2026-08-24:2026-08-29,2026-09-28:2026-10-03">
             <div class="product-img img-guided-classique">
               <span class="badge badge-core">Core</span>
@@ -429,7 +429,7 @@
               <div class="product-title">Guided Classique</div>
               <div class="product-desc">
                 Full-day 13km guided swim for experienced swimmers; available
-                solo, group, or relay.
+                solo, group, or relayTeam.
               </div>
               <div class="product-stats">
                 <span class="stat-item"><svg viewBox="0 0 24 24">
@@ -529,7 +529,7 @@
           </div>
 
           <div class="product-card" onclick="showDetail('guided-nyvoirienne')" data-id="guided-nyvoirienne"
-            data-type="entry" data-place="nyon yvoire" data-eventtype="guided" data-participation="solo group relay"
+            data-type="entry" data-place="nyon yvoire" data-eventtype="guided" data-participation="solo group relay-team"
             data-dates="2026-08-03:2026-08-08,2026-08-17:2026-08-22,2026-08-24:2026-08-29,2026-09-28:2026-10-03">
             <div class="product-img img-guided-nyvo">
               <span class="badge badge-entry">Entry</span>
@@ -538,7 +538,7 @@
               <div class="product-title">Guided Nyvoirienne</div>
               <div class="product-desc">
                 Scenic 7km guided swim for moderately experienced swimmers;
-                solo, group, or relay.
+                solo, group, or Team.
               </div>
               <div class="product-stats">
                 <span class="stat-item"><svg viewBox="0 0 24 24">
@@ -1129,7 +1129,7 @@
               </svg>
               Read Terms &amp; Conditions
             </a>
-            <a class="paymethod-tnc-link-btn" href="privacy-policy.html" target="_blank">
+            <a class="paymethod-tnc-link-btn" onclick="openPrivacy()">
               <svg viewBox="0 0 24 24">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
@@ -1208,7 +1208,7 @@
 
   <!-- BANK TRANSFER POPUP -->
   <div class="banktx-overlay" id="banktx-overlay">
-    <div class="banktx-panel">
+    <!-- <div class="banktx-panel">
       <div class="banktx-header">
         <div class="banktx-header-left">
           <div class="banktx-header-icon">
@@ -1326,7 +1326,7 @@
                 <option value="OTHER">🌍 Other</option>
               </select>
             </div>
-          </div>
+          </div> -->
           <div class="banktx-form-err" id="banktx-form-err">
             <svg viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="10" />
@@ -1334,7 +1334,7 @@
               <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg><span id="banktx-form-err-text">Please fill in all required fields.</span>
           </div>
-          <div class="banktx-secure-row">
+          <!-- <div class="banktx-secure-row">
             <svg viewBox="0 0 24 24">
               <rect x="3" y="11" width="18" height="11" rx="2" />
               <path d="M7 11V7a5 5 0 0110 0v4" />
@@ -1403,9 +1403,6 @@
               <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" />
             </svg>Confirm Transfer &amp; Send Email</span>
         </button>
-        <button class="banktx-email-skip" onclick="skipEmailAndComplete()">
-          Skip email — complete without confirmation →
-        </button>
       </div>
       <div id="banktx-email-footer-hint" style="display: none; padding: 0 22px 16px; text-align: center">
         <div class="banktx-email-skip" onclick="backToTransferDetails()" style="cursor: pointer">
@@ -1435,6 +1432,210 @@
           Done — Complete My Booking
         </button>
       </div>
+    </div> -->
+
+    <div class="banktx-panel">
+
+      <!-- Header -->
+      <div class="banktx-header">
+        <div class="banktx-header-left">
+          <div class="banktx-header-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M3 10l9-6 9 6"/><line x1="8" y1="10" x2="8" y2="21"/><line x1="16" y1="10" x2="16" y2="21"/><line x1="12" y1="10" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <div class="banktx-header-title">Bank Transfer Details</div>
+            <div class="banktx-header-sub">Lake Geneva Swimming Association</div>
+          </div>
+        </div>
+        <!-- <button class="banktx-close-btn" onclick="closeBankTransfer(); openSwimmerDetails();">✕</button> -->
+      </div>
+
+      <!-- Scrollable body -->
+      <div class="banktx-body" id="banktx-body">
+
+        <!-- Currency Selector -->
+        <div class="banktx-currency-wrap">
+          <div class="banktx-currency-label">Select Currency</div>
+          <div class="banktx-currency-tabs">
+            <button class="banktx-cur-btn active" id="cur-btn-EUR" onclick="selectBankCurrency('EUR')">
+              <span class="banktx-cur-symbol">€</span>
+              <span class="banktx-cur-code">EUR</span>
+              <span class="banktx-cur-rate">Euro</span>
+            </button>
+            <button class="banktx-cur-btn" id="cur-btn-USD" onclick="selectBankCurrency('USD')">
+              <span class="banktx-cur-symbol">$</span>
+              <span class="banktx-cur-code">USD</span>
+              <span class="banktx-cur-rate">≈ 1.08/€</span>
+            </button>
+            <button class="banktx-cur-btn" id="cur-btn-CHF" onclick="selectBankCurrency('CHF')">
+              <span class="banktx-cur-symbol">₣</span>
+              <span class="banktx-cur-code">CHF</span>
+              <span class="banktx-cur-rate">≈ 0.95/€</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Amount bar -->
+        <div class="banktx-amount-bar">
+          <div>
+            <div class="banktx-amount-label">Amount to Transfer</div>
+            <div class="banktx-amount-product" id="banktx-product-name">—</div>
+          </div>
+          <div class="banktx-amount-value" id="banktx-amount">—</div>
+        </div>
+        <div class="banktx-rate-note" id="banktx-rate-note" style="display:none"></div>
+
+        <!-- Bank details -->
+        <div class="banktx-section-label">Beneficiary & Account Details</div>
+        <div class="banktx-details">
+
+          <div class="banktx-row">
+            <div class="banktx-row-left">
+              <div class="banktx-row-key">Account Name</div>
+              <div class="banktx-row-val">Lake Geneva Swimming Association Limited</div>
+            </div>
+            <button class="banktx-copy-btn" onclick="copyBankField(this, 'Lake Geneva Swimming Association Limited')">
+              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+
+          <div class="banktx-row">
+            <div class="banktx-row-left">
+              <div class="banktx-row-key">IBAN</div>
+              <div class="banktx-row-val mono">BE15 9670 1762 1630</div>
+            </div>
+            <button class="banktx-copy-btn" onclick="copyBankField(this, 'BE15967017621630')">
+              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+
+          <div class="banktx-row">
+            <div class="banktx-row-left">
+              <div class="banktx-row-key">SWIFT / BIC</div>
+              <div class="banktx-row-val mono">TRWIBEB1XXX</div>
+            </div>
+            <button class="banktx-copy-btn" onclick="copyBankField(this, 'TRWIBEB1XXX')">
+              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+
+          <div class="banktx-row">
+            <div class="banktx-row-left">
+              <div class="banktx-row-key">Bank Name &amp; Address</div>
+              <div class="banktx-row-val" style="font-size:12px;line-height:1.5;">Wise<br>Rue du Trône 100, 3rd floor<br>Brussels, 1050, Belgium</div>
+            </div>
+            <button class="banktx-copy-btn" onclick="copyBankField(this, 'Wise, Rue du Trône 100, 3rd floor, Brussels, 1050, Belgium')">
+              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+
+          <div class="banktx-row">
+            <div class="banktx-row-left">
+              <div class="banktx-row-key">Payment Reference</div>
+              <div class="banktx-row-val mono" id="banktx-reference">—</div>
+            </div>
+            <button class="banktx-copy-btn" id="banktx-ref-copy-btn" onclick="copyBankField(this, document.getElementById('banktx-reference').textContent)">
+              <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Reference warning -->
+        <div class="banktx-ref-note">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="banktx-ref-note-text">
+            <strong>Important:</strong> Include the payment reference exactly as shown above so we can match your transfer to your booking.
+          </div>
+        </div>
+
+        <!-- How to steps -->
+        <div class="banktx-section-label">How it works</div>
+        <div class="banktx-steps">
+          <div class="banktx-step">
+            <div class="banktx-step-num">1</div>
+            <div class="banktx-step-text">Log in to your <strong>online banking app</strong> and initiate a new transfer.</div>
+          </div>
+          <div class="banktx-step">
+            <div class="banktx-step-num">2</div>
+            <div class="banktx-step-text">Enter the <strong>IBAN, SWIFT/BIC</strong> and account details above.</div>
+          </div>
+          <div class="banktx-step">
+            <div class="banktx-step-num">3</div>
+            <div class="banktx-step-text">Set the <strong>amount and currency</strong> as shown above and add the reference code.</div>
+          </div>
+          <div class="banktx-step">
+            <div class="banktx-step-num">4</div>
+            <div class="banktx-step-text">Click <strong>"I've Sent the Transfer"</strong> below — we'll confirm your booking by email within 1–2 business days.</div>
+          </div>
+        </div>
+
+      </div><!-- end banktx-body -->
+
+      <!-- Footer -->
+      <div class="banktx-footer" id="banktx-footer">
+        <button class="banktx-confirm-btn" onclick="showBankEmailForm()">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          I've Sent the Transfer
+        </button>
+        <button class="banktx-back-btn" onclick="backToPaymentMethod()">← Back to payment options</button>
+      </div>
+
+      <!-- Email capture form (shown after clicking "I've Sent") -->
+      <div class="banktx-email-form" id="banktx-email-form">
+        <div class="banktx-email-form-title">Send Confirmation Email</div>
+        <div class="banktx-email-form-sub">We'll email your reference code and booking details to you and notify LGSA.</div>
+
+        <div class="banktx-email-field">
+          <label for="banktx-client-name">Your Name</label>
+          <input type="text" id="banktx-client-name" placeholder="e.g. Jean-Pierre Blanc" autocomplete="name">
+        </div>
+        <div class="banktx-email-field">
+          <label for="banktx-client-email">Your Email Address</label>
+          <input type="email" id="banktx-client-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+
+        <div class="banktx-email-err-msg" id="banktx-email-err">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="banktx-email-err-text">Please fill in all fields.</span>
+        </div>
+
+        <button class="banktx-email-send-btn" id="banktx-email-send-btn" onclick="sendConfirmationEmails()">
+          <div class="btn-spinner"></div>
+          <span class="btn-label" style="display:flex;align-items:center;gap:7px;">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+            Send Confirmation &amp; Complete
+          </span>
+        </button>
+        <button class="banktx-email-skip" onclick="skipEmailAndComplete()">Skip — I don't need email confirmation →</button>
+      </div>
+
+      <!-- Email footer hint -->
+      <div id="banktx-email-footer-hint" style="display:none;padding:0 22px 16px;text-align:center;">
+        <div class="banktx-email-skip" onclick="backToTransferDetails()" style="cursor:pointer;">
+          ← Back to transfer details
+        </div>
+      </div>
+
+      <!-- Success screen -->
+      <div class="banktx-success" id="banktx-success">
+        <div class="banktx-success-icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Transfer Noted!</h3>
+        <p>Thanks — we'll verify your transfer and confirm your booking within <strong>1–2 business days</strong>.</p>
+        <div class="banktx-success-sent" id="banktx-success-sent" style="display:none">
+          <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          Confirmation sent to <strong id="banktx-success-email"></strong>
+        </div>
+        <button class="banktx-success-close" onclick="closeBankTransfer(); openSwimmerDetails();">Done</button>
+      </div>
+
     </div>
   </div>
 
@@ -1472,7 +1673,7 @@
             <span>Entry fee</span><span id="wise-fee-entry">—</span>
           </div>
           <div class="wise-fee-row">
-            <span>Wise transfer fee</span><span id="wise-fee-wise">~€0.00</span>
+            <span>Wise transfer fee</span><span id="wise-fee-wise">~€1.84</span>
           </div>
           <div class="wise-fee-row total">
             <span>You pay</span><span id="wise-fee-total">—</span>
@@ -1577,11 +1778,11 @@
             <input type="checkbox" id="m-group" onchange="syncMobile('group')" /><label for="m-group">Group</label>
           </div>
           <div class="check-row">
-            <input type="checkbox" id="m-relay" onchange="syncMobile('relay')" /><label for="m-relay">Relay</label>
+            <input type="checkbox" id="m-relay-team" onchange="syncMobile('relay-team')" /><label for="m-relay-team">Relay Team</label>
           </div>
-          <div class="check-row">
+          <!-- <div class="check-row">
             <input type="checkbox" id="m-team" onchange="syncMobile('team')" /><label for="m-team">Team</label>
-          </div>
+          </div> -->
         </div>
       </div>
       <div id="m-merch-filters" style="display: none">
@@ -1868,9 +2069,9 @@
           </svg>
           Complete Booking
         </button>
-        <button class="swimmer-skip-btn" onclick="skipSwimmerDetails()">
+        <!-- <button class="swimmer-skip-btn" onclick="skipSwimmerDetails()">
           Skip for now →
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
@@ -1994,10 +2195,10 @@
     let cart = {};
     let removeall = false
     const DISCOUNT_CODES = {
-      LGSA100: { type: "percent", value: 100, label: "100% off (test)" },
       LGSA10: { type: "percent", value: 10, label: "10% off" },
-      LGSA15: { type: "percent", value: 15, label: "15% off" },
-      LGSA20: { type: "percent", value: 20, label: "20% off" },
+      SWIM20: { type: "percent", value: 20, label: "20% off" },
+      WELCOME5: { type: "fixed", value: 5, label: "€5 off" },
+      LGSA2025: { type: "percent", value: 15, label: "15% off" },
     };
     let _appliedDiscount = null;
     const EXCHANGE_RATES = {
@@ -2143,6 +2344,7 @@
         </button>
       </div>`;
 
+    console.log("cart items : ", items);
 
       items.forEach((item) => {
         const lineTotal = getCartItemLineTotal(item).toLocaleString("en-EU", {
@@ -2202,7 +2404,7 @@
     </div>
   </div>`;
       if (a)
-        return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input ok" type="text" value="${a.code}" readonly><button class="cart-discount-apply" onclick="removeDiscount()" style="background:#e05555">Remove</button></div></div>`;
+        return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input ok" type="text" value="${a.code}" readonly><button class="cart-discount-apply" style="background:var(--teal)" disabled>Applied ✓</button></div></div>`;
       return `${addMoreRow}<div class="cart-discount-wrap"><div class="cart-discount-label"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Promo Code</div><div class="cart-discount-row"><input class="cart-discount-input" type="text" id="discount-input" placeholder="Enter code here" maxlength="20" onkeydown="if(event.key==='Enter')applyDiscountCode()"><button class="cart-discount-apply" onclick="applyDiscountCode()">Apply</button></div><div class="cart-discount-invalid" id="discount-invalid" style="display:none;font-size:11px;color:#e05555;margin-top:5px;font-weight:500;">Invalid promo code.</div></div>`;
     }
 
@@ -2212,7 +2414,7 @@
         (s, i) => s + getCartItemLineTotal(i),
         0,
       );
-      const wiseFee = items.length > 0 ? WISE_FEE : 0;
+      const wiseFee = items.length > 0 ? 1.84 : 0;
       const fmt = (n) =>
         n.toLocaleString("en-EU", {
           minimumFractionDigits: 2,
@@ -2472,7 +2674,7 @@
         cartName: "La Signature 140",
         swimOverview: [
           "140 km length of Lake Geneva.",
-          "For elite solo swimmers or two-person relay teams.",
+          "For elite solo swimmers or upto 6 people relay teams. Or even more people if a non-standard relay, upon special request.", 
           "Application, Medical form and Self-assessment required for LGSA trophy swim.",
           "Typical duration: 3 days continuous.",
         ],
@@ -2545,7 +2747,7 @@
           ],
           "Price & entry terms": [
             "From CHF X'XXX per person for 5-day camp.",
-            "Deposit at registration; balance due X weeks before start.",
+            "Deposit at registration; the balance is due before end of april in the year of your camp.",
             "Clear cancellation / deferral policy in booking conditions.",
           ],
         },
@@ -2774,7 +2976,8 @@
           "Safety cover throughout the session.",
           "Short debrief and Q&A on open-water basics.",
           "Participation certificate.",
-          "We provide some packed lunch under 10CHF."
+          "We provide some packed lunch under 10CHF.",
+          "Target Friday, Saturday and Sunday. Tourists visit Geneva for weekend city break."
         ],
         entryLogistics: {
           "Travel & access": [
@@ -3106,12 +3309,13 @@
 
     /* ═══ PAYMENT METHOD ═══ */
     function openPaymentMethod() {
+      console.log("openPaymentMethod")
       const p =
         _pendingWise && _pendingWise.type === "product"
           ? products[_pendingWise.id]
           : null;
       const el = document.getElementById("paymethod-header-amount");
-      if (p) el.innerHTML = `${p.title} · ${p.priceLabel}`;
+      if (p) el.textContent = `${p.title} · ${p.priceLabel}`;
       else if (_pendingWise && _pendingWise.type === "custom")
         el.textContent =
           "€" +
@@ -3149,50 +3353,150 @@
     }
 
     /* ═══ BANK TRANSFER ═══ */
+
+    // function openBankTransfer() {
+    //   const p   = _pendingWise && _pendingWise.type === 'product' ? products[_pendingWise.id] : null;
+    //   const fmt = n => n.toLocaleString('en-EU', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+    //   // Determine base EUR amount (apply discount if any)
+    //   let baseEUR = 0;
+    //   if (p) {
+    //     baseEUR = p.price;
+    //   } else if (_pendingWise && _pendingWise.type === 'custom') {
+    //     baseEUR = _pendingWise.amount;
+    //   }
+    //   // Apply cart discount if present
+    //   if (_appliedDiscount) {
+    //     if (_appliedDiscount.type === 'percent') baseEUR = baseEUR * (1 - _appliedDiscount.value / 100);
+    //     else baseEUR = Math.max(0, baseEUR - _appliedDiscount.value);
+    //   }
+    //   _bankBaseAmountEUR = baseEUR;
+    //   _bankCurrency = 'EUR';
+
+    //   // Populate name and reference
+    //   const nameEl = document.getElementById('banktx-product-name');
+    //   const refEl  = document.getElementById('banktx-reference');
+    //   if (p) {
+    //     nameEl.textContent = p.title + (_appliedDiscount ? ` (${_appliedDiscount.label})` : '');
+    //     refEl.textContent  = `LGSA-${p.title.replace(/\s+/g,'-').toUpperCase()}-${Date.now().toString().slice(-5)}`;
+    //   } else if (_pendingWise) {
+    //     nameEl.textContent = _pendingWise.name;
+    //     refEl.textContent  = `LGSA-ORDER-${Date.now().toString().slice(-5)}`;
+    //   }
+
+    //   // Set amount display (EUR default)
+    //   updateBankAmountDisplay();
+
+    //   // Reset currency tabs
+    //   ['EUR','USD','CHF'].forEach(c => {
+    //     document.getElementById(`cur-btn-${c}`)?.classList.remove('active');
+    //   });
+    //   document.getElementById('cur-btn-EUR')?.classList.add('active');
+
+    //   // Reset success / body visibility
+    //   document.getElementById('banktx-body').style.display   = '';
+    //   document.getElementById('banktx-footer').style.display = '';
+    //   document.getElementById('banktx-success').classList.remove('show');
+
+    //   document.getElementById('banktx-overlay').classList.add('open');
+    //   document.body.style.overflow = 'hidden';
+    // }
+
     function openBankTransfer() {
-      const p =
-        _pendingWise && _pendingWise.type === "product"
-          ? products[_pendingWise.id]
-          : null;
-      const fmt = (n) =>
-        n.toLocaleString("en-EU", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        });
-      let baseEUR = p
-        ? p.price
-        : _pendingWise && _pendingWise.type === "custom"
-          ? _pendingWise.amount
-          : 0;
+      console.log("openBankTransfer")
+      const p   = _pendingWise && _pendingWise.type === 'product' ? products[_pendingWise.id] : null;
+      const fmt = n => n.toLocaleString('en-EU', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+      // Determine base EUR amount (apply discount if any)
+      let baseEUR = 0;
+      if (p) {
+        baseEUR = p.price;
+      } else if (_pendingWise && _pendingWise.type === 'custom') {
+        baseEUR = _pendingWise.amount;
+      }
+      // Apply cart discount if present
       if (_appliedDiscount) {
-        baseEUR =
-          _appliedDiscount.type === "percent"
-            ? baseEUR * (1 - _appliedDiscount.value / 100)
-            : Math.max(0, baseEUR - _appliedDiscount.value);
+        if (_appliedDiscount.type === 'percent') baseEUR = baseEUR * (1 - _appliedDiscount.value / 100);
+        else baseEUR = Math.max(0, baseEUR - _appliedDiscount.value);
       }
       _bankBaseAmountEUR = baseEUR;
-      _bankCurrency = "EUR";
-      const nameEl = document.getElementById("banktx-product-name");
-      const refEl = document.getElementById("banktx-reference");
+      _bankCurrency = 'EUR';
+
+      // Populate name and reference
+      const nameEl = document.getElementById('banktx-product-name');
+      const refEl  = document.getElementById('banktx-reference');
       if (p) {
-        nameEl.textContent =
-          p.title + (_appliedDiscount ? ` (${_appliedDiscount.label})` : "");
-        refEl.textContent = `LGSA-${p.title.replace(/\s+/g, "-").toUpperCase()}-${Date.now().toString().slice(-5)}`;
+        nameEl.textContent = p.title + (_appliedDiscount ? ` (${_appliedDiscount.label})` : '');
+        refEl.textContent  = `LGSA-${p.title.replace(/\s+/g,'-').toUpperCase()}-${Date.now().toString().slice(-5)}`;
       } else if (_pendingWise) {
         nameEl.textContent = _pendingWise.name;
-        refEl.textContent = `LGSA-ORDER-${Date.now().toString().slice(-5)}`;
+        refEl.textContent  = `LGSA-ORDER-${Date.now().toString().slice(-5)}`;
       }
+
+      // Set amount display (EUR default)
       updateBankAmountDisplay();
-      ["EUR", "USD", "CHF"].forEach((c) =>
-        document.getElementById("cur-btn-" + c)?.classList.remove("active"),
-      );
-      document.getElementById("cur-btn-EUR")?.classList.add("active");
-      document.getElementById("banktx-body").style.display = "";
-      document.getElementById("banktx-footer").style.display = "";
-      document.getElementById("banktx-success").classList.remove("show");
-      document.getElementById("banktx-overlay").classList.add("open");
-      document.body.style.overflow = "hidden";
+
+      // Reset currency tabs
+      ['EUR','USD','CHF'].forEach(c => {
+        document.getElementById(`cur-btn-${c}`)?.classList.remove('active');
+      });
+      document.getElementById('cur-btn-EUR')?.classList.add('active');
+
+      // Reset success / body visibility
+      document.getElementById('banktx-body').style.display   = '';
+      document.getElementById('banktx-footer').style.display = '';
+      document.getElementById('banktx-success').classList.remove('show');
+
+      document.getElementById('banktx-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
+
+
+
+    // function openBankTransfer() {
+    //   const p =
+    //     _pendingWise && _pendingWise.type === "product"
+    //       ? products[_pendingWise.id]
+    //       : null;
+    //   const fmt = (n) =>
+    //     n.toLocaleString("en-EU", {
+    //       minimumFractionDigits: 2,
+    //       maximumFractionDigits: 2,
+    //     });
+    //   let baseEUR = p
+    //     ? p.price
+    //     : _pendingWise && _pendingWise.type === "custom"
+    //       ? _pendingWise.amount
+    //       : 0;
+    //   if (_appliedDiscount) {
+    //     baseEUR =
+    //       _appliedDiscount.type === "percent"
+    //         ? baseEUR * (1 - _appliedDiscount.value / 100)
+    //         : Math.max(0, baseEUR - _appliedDiscount.value);
+    //   }
+    //   _bankBaseAmountEUR = baseEUR;
+    //   _bankCurrency = "EUR";
+    //   const nameEl = document.getElementById("banktx-product-name");
+    //   const refEl = document.getElementById("banktx-reference");
+    //   if (p) {
+    //     nameEl.textContent =
+    //       p.title + (_appliedDiscount ? ` (${_appliedDiscount.label})` : "");
+    //     refEl.textContent = `LGSA-${p.title.replace(/\s+/g, "-").toUpperCase()}-${Date.now().toString().slice(-5)}`;
+    //   } else if (_pendingWise) {
+    //     nameEl.textContent = _pendingWise.name;
+    //     refEl.textContent = `LGSA-ORDER-${Date.now().toString().slice(-5)}`;
+    //   }
+    //   updateBankAmountDisplay();
+    //   ["EUR", "USD", "CHF"].forEach((c) =>
+    //     document.getElementById("cur-btn-" + c)?.classList.remove("active"),
+    //   );
+    //   document.getElementById("cur-btn-EUR")?.classList.add("active");
+    //   document.getElementById("banktx-body").style.display = "";
+    //   document.getElementById("banktx-footer").style.display = "";
+    //   document.getElementById("banktx-success").classList.remove("show");
+    //   document.getElementById("banktx-overlay").classList.add("open");
+    //   document.body.style.overflow = "hidden";
+    // }
 
     function updateBankAmountDisplay() {
       const cur = EXCHANGE_RATES[_bankCurrency];
@@ -3322,6 +3626,15 @@
       document.getElementById("banktx-body").scrollTop = 0;
     }
 
+    function showBankEmailForm() {
+      // Hide footer, reveal email form + back hint
+      document.getElementById('banktx-footer').style.display = 'none';
+      document.getElementById('banktx-email-form').classList.add('show');
+      document.getElementById('banktx-email-footer-hint').style.display = 'block';
+      // Scroll panel to top
+      document.getElementById('banktx-body').scrollTop = 0;
+    }
+
     function backToTransferDetails() {
       document.getElementById("banktx-email-form").classList.remove("show");
       document.getElementById("banktx-email-footer-hint").style.display =
@@ -3361,27 +3674,7 @@
     }
     function removeDiscount() {
       _appliedDiscount = null;
-      const input = document.getElementById("discount-input");
-      if (input) {
-        input.classList.remove("err");
-      }
-      const invalidEl = document.getElementById("discount-invalid");
-      if (invalidEl) {
-        invalidEl.style.display = "none";
-      }
       updateCartUI();
-    }
-
-    function getDiscountedAmount(amount) {
-      if (!_appliedDiscount) return amount;
-      if (_appliedDiscount.type === "percent") {
-        return Math.max(0, amount * (1 - _appliedDiscount.value / 100));
-      }
-      return Math.max(0, amount - _appliedDiscount.value);
-    }
-
-    function getDiscountSuffix() {
-      return _appliedDiscount ? ` (${_appliedDiscount.label})` : "";
     }
 
     function toggleCheckoutBtn() {
@@ -3496,6 +3789,7 @@
     }
 
     function selectHear(el, val) {
+      console.log("clicked", val);
 
       document
         .querySelectorAll(".swimmer-hear-option")
@@ -3506,6 +3800,7 @@
       const radio = el.querySelector('input[type="radio"]');
       radio.checked = true;
 
+      console.log("el : ",el);
       const otherWrap = document.getElementById("swimmer-hear-other-wrap");
       if (otherWrap) otherWrap.style.display = val === "other" ? "" : "none";
 
@@ -3562,60 +3857,64 @@
       if (!ok) {
         errTx.textContent = msg;
         errEl.classList.add("show");
+
+         errEl.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
         return;
       }
       /* success */
       document.getElementById("swimmer-form").style.display = "none";
       document.getElementById("swimmer-footer").style.display = "none";
       document.getElementById("swimmer-success").classList.add("show");
-      sendToGoogleSheet(buildGoogleSheetPayload());
-      showToast("Booking complete! Details saved.");
+      const payload = buildGoogleSheetPayload();
+      console.log(payload);
+      sendToGoogleSheet(payload)
+      .then((saved) => {
+
+      if (saved) {
+        showToast("Booking complete! Details saved.");
+      } else {
+        showToast("Booking completed but sheet save failed.");
+      }});
+      // showToast("Booking complete! Details saved.");
     }
 
     /* ═══ WISE DIRECT ═══ */
-    const WISE_FEE = 0;
-    const WISE_TEST_FULL_DISCOUNT = true;
+    const WISE_FEE = 1.84;
     let _wiseCurrentId = null;
     function openWiseDirect(productId) {
       const p = products[productId];
       if (!p) return;
       _wiseCurrentId = productId;
-      const fee = WISE_TEST_FULL_DISCOUNT ? 0 : WISE_FEE;
-      const baseAmount = p.price;
-      const discountedAmount = getDiscountedAmount(baseAmount);
-      const total = WISE_TEST_FULL_DISCOUNT ? 0 : discountedAmount + fee;
-      document.getElementById("wise-product-name").innerHTML =
-        p.title + getDiscountSuffix();
-      document.getElementById("wise-amount").innerHTML =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${discountedAmount.toFixed(2)}`;
-      document.getElementById("wise-fee-entry").innerHTML =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${discountedAmount.toFixed(2)}`;
-      document.getElementById("wise-fee-wise").innerHTML =
-        `~€${fee.toFixed(2)}`;
-      document.getElementById("wise-fee-total").innerHTML = `€${total.toFixed(2)}`;
+      const total = (p.price + WISE_FEE).toFixed(2);
+      document.getElementById("wise-product-name").textContent = p.title;
+      console.log("p.priceLabel : ",p.priceLabel,p);
+      document.getElementById("wise-amount").textContent = p.priceLabel;
+      document.getElementById("wise-fee-entry").textContent = p.priceLabel;
+      document.getElementById("wise-fee-wise").textContent =
+        `~€${WISE_FEE.toFixed(2)}`;
+      document.getElementById("wise-fee-total").textContent = `€${total}`;
       document.getElementById("wise-overlay").classList.add("open");
       document.body.style.overflow = "hidden";
     }
 
     function openWiseCustomDirect(name, amount) {
       _wiseCurrentId = null;
-      const fee = WISE_TEST_FULL_DISCOUNT ? 0 : WISE_FEE;
-      const discountedAmount = getDiscountedAmount(amount);
-      const total = WISE_TEST_FULL_DISCOUNT ? 0 : discountedAmount + fee;
+      const total = (amount + WISE_FEE).toFixed(2);
       const fmt = (n) =>
         n.toLocaleString("en-EU", {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         });
-      document.getElementById("wise-product-name").textContent =
-        name + getDiscountSuffix();
-      document.getElementById("wise-amount").textContent =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${fmt(discountedAmount)}`;
+      document.getElementById("wise-product-name").textContent = name;
+      document.getElementById("wise-amount").textContent = `€${fmt(amount)}`;
       document.getElementById("wise-fee-entry").textContent =
-        WISE_TEST_FULL_DISCOUNT ? "€0.00" : `€${fmt(discountedAmount)}`;
+        `€${fmt(amount)}`;
       document.getElementById("wise-fee-wise").textContent =
-        `~€${fee.toFixed(2)}`;
-      document.getElementById("wise-fee-total").textContent = `€${total.toFixed(2)}`;
+        `~€${WISE_FEE.toFixed(2)}`;
+      document.getElementById("wise-fee-total").textContent = `€${total}`;
       document.getElementById("wise-overlay").classList.add("open");
       document.body.style.overflow = "hidden";
     }
@@ -3632,11 +3931,9 @@
       const ref = p
         ? encodeURIComponent(p.title)
         : encodeURIComponent("Lake Geneva Cart");
-      const rawAmt = p
+      const amt = p
         ? p.price
         : Object.values(cart).reduce((s, i) => s + i.price * i.qty, 0);
-      const discountedAmt = getDiscountedAmount(rawAmt);
-      const amt = WISE_TEST_FULL_DISCOUNT ? 0 : discountedAmt;
       window.open(
         `https://wise.com/pay/me/YOUR_WISE_USERNAME?amount=${amt}&currency=EUR&reference=${ref}`,
         "_blank",
@@ -3663,12 +3960,12 @@
         training = document.getElementById("d-training").checked;
       const solo = document.getElementById("d-solo").checked,
         group = document.getElementById("d-group").checked,
-        relay = document.getElementById("d-relay").checked,
-        team = document.getElementById("d-team").checked;
+        relayTeam = document.getElementById("d-relay-team").checked
+        // team = document.getElementById("d-team").checked;
       const anyType = flagship || core || entry,
         anyPlace = nyon || yvoire || evian || lausanne || veytaux || geneva,
         anyEType = guided || eventType || training,
-        anyPart = solo || group || relay || team;
+        anyPart = solo || group || relayTeam; // || team;
       const typeMap = { flagship, core, entry };
       document
         .querySelectorAll("#product-grid .product-card")
@@ -3697,8 +3994,8 @@
             !anyPart ||
             (solo && parts.includes("solo")) ||
             (group && parts.includes("group")) ||
-            (relay && parts.includes("relay")) ||
-            (team && parts.includes("team"));
+            (relayTeam && parts.includes("relay-team"))
+            // (team && parts.includes("team"));
           const selectedDate = getSelectedFilterDate();
           const dateOk = !selectedDate || dateMatchesCard(card, selectedDate);
           card.style.display = tOk && plOk && etOk && partOk && dateOk ? "" : "none";
@@ -3736,7 +4033,7 @@
         "event-type": ["d-event-type", "m-event-type"],
         solo: ["d-solo", "m-solo"],
         group: ["d-group", "m-group"],
-        relay: ["d-relay", "m-relay"],
+        relayTeam: ["d-relay-team", "m-relay-team"],
         training: ["d-training", "m-training"],
         team: ["d-team", "m-team"],
       };
@@ -3776,7 +4073,7 @@
       "November",
       "December",
     ];
-    const DNAMES = ["S", "M", "T", "W", "T", "F", "S"];
+    const DNAMES = ["M", "T", "W", "T", "F", "S", "S"];
     const _now = new Date();
     let calD = new Date(_now.getFullYear(), _now.getMonth(), 1),
       calM = new Date(_now.getFullYear(), _now.getMonth(), 1);
@@ -3786,7 +4083,8 @@
       document.getElementById(labelId).textContent =
         MONTHS[date.getMonth()] + " " + date.getFullYear();
       const grid = document.getElementById(gridId);
-      const first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+      let first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+      first = first === 0 ? 6 : first - 1;
       const days = new Date(
         date.getFullYear(),
         date.getMonth() + 1,
@@ -3877,8 +4175,8 @@
         "training",
         "solo",
         "group",
-        "relay",
-        "team",
+        "relayTeam",
+        // "team",
       ].forEach((k) => {
         const d = document.getElementById("d-" + k),
           m = document.getElementById("m-" + k);
@@ -3911,44 +4209,42 @@
     /* ═══ EMAILJS ═══ */
     const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
     const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-    const EMAILJS_TEMPLATE_CLIENT = "YOUR_CLIENT_TEMPLATE_ID";
-    const EMAILJS_TEMPLATE_LGSA = "YOUR_LGSA_TEMPLATE_ID";
-    const GOOGLE_SHEETS_WEBHOOK_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL";
+    const EMAILJS_TEMPLATE_CLIENT = "tdavies@lgsa.com";
+    const EMAILJS_TEMPLATE_LGSA = "tdavies@lgsa.com";
+    const GOOGLE_SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyUkhSWLSXOO8Kjym1s4zH2eQ8mtRKBoKMHladknXmvrj5CXjK4R96yE8jN9eNzU_t4EA/exec";
     const LGSA_EMAIL = "tdavies@lgsa.com";
     if (typeof emailjs !== "undefined")
       emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
     async function sendToGoogleSheet(payload) {
-      if (!GOOGLE_SHEETS_WEBHOOK_URL || GOOGLE_SHEETS_WEBHOOK_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL")) {
-        console.info("Google Sheets webhook not configured. Payload:", payload);
-        return;
-      }
       try {
-        const resp = await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-        if (!resp.ok) {
-          throw new Error(`Sheet save failed: ${resp.status} ${resp.statusText}`);
-        }
-        let result;
-        try {
-          result = await resp.json();
-        } catch (_err) {
-          result = await resp.text();
-        }
-        console.info("Google Sheets save result:", result);
+
+        await fetch(
+          GOOGLE_SHEETS_WEBHOOK_URL,
+          {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(payload)
+          }
+        );
+
+        console.log("Data sent");
+
+        return true;
+
       } catch (err) {
-        console.error("Failed to save data to Google Sheets:", err);
+
+        console.error(err);
+
+        return false;
       }
     }
 
     function buildGoogleSheetPayload() {
       const swimmerData = {
+        // name: document.getElementById("banktx-client-name")?.value.trim() || "",
         name: document.getElementById("sw-team")?.value.trim() || "",
+        mail: document.getElementById("banktx-client-email")?.value.trim() || "",
         phone_country: document.getElementById("sw-phone-country")?.value || "",
         phone: document.getElementById("sw-phone")?.value.trim() || "",
         address: document.getElementById("sw-address")?.value.trim() || "",
@@ -3960,6 +4256,7 @@
       const items = Object.values(cart).map((item) => ({
         id: item.id,
         name: item.name,
+        mail: item.mail,
         qty: item.qty,
         unit_price: item.price,
         total: item.price * item.qty,
@@ -3972,11 +4269,13 @@
             ? subtotal * (_appliedDiscount.value / 100)
             : Math.min(_appliedDiscount.value, subtotal);
       }
-      const wiseFee = items.length > 0 ? WISE_FEE : 0;
+      const wiseFee = items.length > 0 ? 1.84 : 0;
       return {
         timestamp: new Date().toISOString(),
-        order_reference: `LGSA-${Math.floor(Math.random() * 1000000)}`,
-        cart_items: items,
+        // order_reference: `LGSA-${Math.floor(Math.random() * 1000000)}`,
+        order_reference: `LGSA-${Date.now()}`,
+        // cart_items: items,
+        cart_items: JSON.stringify(items),
         subtotal: subtotal,
         discount: _appliedDiscount ? `${_appliedDiscount.code} (${_appliedDiscount.label})` : "None",
         discount_amount: discountAmt,
@@ -4031,8 +4330,12 @@
     }
 
     async function sendConfirmationEmails() {
-      const clientEmail =
-        document.getElementById("payer-email")?.value.trim() || "";
+      const clientName = document.getElementById("banktx-client-name")?.value.trim() || "—";
+      const clientEmail = document.getElementById("banktx-client-email")?.value.trim() || "";
+      if(!clientName || !clientEmail) {
+        showToast("Please provide your name and email to receive a confirmation.");
+        return;
+      }
       const btn = document.getElementById("banktx-email-send-btn");
       const errEl = document.getElementById("banktx-email-err");
       const errTx = document.getElementById("banktx-email-err-text");
