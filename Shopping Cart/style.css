@@ -86,6 +86,41 @@ input[type="checkbox"] {
   gap: 10px;
 }
 
+.home-btn {
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.18s, transform 0.15s;
+  position: absolute;
+  right: 1%;
+}
+
+.home-btn:hover {
+  background: var(--teal-dark);
+  transform: scale(1.02);
+}
+
+.date-clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--navy);
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-left: 10px;
+  padding: 0;
+}
+
+.date-clear-btn:hover {
+  color: var(--teal-dark);
+}
+
 .btn-mobile-filter {
   display: none;
   align-items: center;
@@ -870,6 +905,7 @@ input[type="checkbox"] {
 .cal-wrap {
   width: 100%;
   background: #fff;
+  padding: 1px 0;
 }
 
 .cal-nav {
@@ -903,6 +939,9 @@ input[type="checkbox"] {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 2px;
 }
 
 .cal-grid {
@@ -921,6 +960,7 @@ input[type="checkbox"] {
 }
 
 .cal-cell {
+  position: relative;
   font-size: 13px;
   text-align: center;
   padding: 3px 1px;
@@ -931,8 +971,127 @@ input[type="checkbox"] {
   transition: background 0.12s;
 }
 
+.calender {
+  border: 2px solid lightgray;
+}
+
+.legendary ul {
+  list-style: none;
+  padding: 10px 0 0 5px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.legendary li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Green */
+.training {
+  background-color: #28a745;
+}
+
+/* Royal Blue */
+.guided {
+  background-color: #4169e1;
+}
+
+/* Yellow */
+.event {
+  background-color: #ffc107;
+}
+
 .cal-cell:hover:not(.cal-empty):not(.cal-today) {
   background: #f0f4fa;
+}
+
+.cal-cell.cal-has-event::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+.cal-cell.cal-has-event.cal-available::after {
+  background: var(--teal);
+}
+
+.cal-cell.cal-no-event::after {
+  background: #e04b4b;
+}
+
+.cal-cell.cal-has-event.cal-full::after {
+  background: #e04b4b;
+}
+
+.google-calendar-panel {
+  margin-bottom: 20px;
+  background: #f9fbff;
+  border: 1px solid #d8dee8;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.google-calendar-header {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.google-calendar-list {
+  display: grid;
+  gap: 10px;
+}
+
+.google-event-card {
+  background: white;
+  border: 1px solid #e9edf4;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.google-event-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.google-event-time {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.google-event-desc {
+  font-size: 13px;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.google-calendar-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
 .cal-cell.cal-empty {
@@ -1059,6 +1218,14 @@ input[type="checkbox"] {
   display: block;
 }
 
+.filter_greyout {
+  filter: grayscale(100%);
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  user-select: none;
+}
+
 .page-title {
   font-family: "Merriweather", serif;
   font-size: 34px;
@@ -1125,7 +1292,7 @@ input[type="checkbox"] {
 }
 
 .product-img {
-  height: 140px;
+  height: 210px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -1325,6 +1492,19 @@ input[type="checkbox"] {
   display: block;
 }
 
+.available-day{
+
+  background:#28a745;
+  color:white;
+  border-radius:50%;
+}
+
+.unavailable-day{
+
+  background:#dc3545;
+  color:white;
+  border-radius:50%;
+}
 .badge-coming-soon {
   position: absolute;
   top: 8px;
@@ -4868,6 +5048,9 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 768px) {
+  .home-btn {
+    font-size: 8px;
+  }
   .sidebar {
     display: none;
   }
