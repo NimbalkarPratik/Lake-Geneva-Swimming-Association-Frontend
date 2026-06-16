@@ -2128,9 +2128,9 @@
               Send Confirmation &amp; Complete
             </span>
           </button>
-          <button class="banktx-email-skip" onclick="skipEmailAndComplete()">
+          <!-- <button class="banktx-email-skip" onclick="skipEmailAndComplete()">
             Skip — I don't need email confirmation →
-          </button>
+          </button> -->
         </div>
 
         <!-- Email footer hint -->
@@ -2647,7 +2647,7 @@
 
             <div class="swimmer-field">
               <label for="sw-postal"
-                >Postal Code<span class="req">*</span></label
+                >Post Code<span class="req">*</span></label
               >
               <input
                 type="text"
@@ -4605,6 +4605,7 @@
       }
 
       function showBankEmailForm() {
+        console.log("showBankEmailForm function");
         // Hide footer, reveal email form + back hint
         document.getElementById("banktx-footer").style.display = "none";
         document.getElementById("banktx-email-form").classList.add("show");
@@ -4848,7 +4849,7 @@
         if (_isRelayGroup) req("sw-team", "Team name");
         req("sw-address", "Address");
         req("sw-city", "City");
-        req("sw-postal", "Postal code");
+        req("sw-postal", "Post code");
         if (!_selectedHear) {
           if (!msg) msg = "Please select how you heard about us.";
           ok = false;
@@ -5515,6 +5516,13 @@
       }
 
       function buildGoogleSheetPayload() {
+        const today = new Date();
+
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yy = String(today.getFullYear()).slice(-2);
+        const formattedDate = `${dd}${mm}${yy}`;
+        console.log("build google sheet : ",today, dd, mm, yy, formattedDate);
         const swimmerData = {
           name:
             document.getElementById("banktx-client-name")?.value.trim() || "",
@@ -5527,7 +5535,7 @@
           address: document.getElementById("sw-address")?.value.trim() || "",
           city: document.getElementById("sw-city")?.value.trim() || "",
           province: document.getElementById("sw-province")?.value.trim() || "",
-          postal: document.getElementById("sw-postal")?.value.trim() || "",
+          post: document.getElementById("sw-postal")?.value.trim() || "",
           hear_about:
             document.getElementById("sw-hear-other")?.value.trim() ||
             _selectedHear ||
@@ -5550,12 +5558,20 @@
               : Math.min(_appliedDiscount.value, subtotal);
         }
         const wiseFee = items.length > 0 ? WISE_FEE : 0;
+        const formattedItems = items
+          .map(item =>
+            `ID: ${item.id}, Name: ${item.name}, Qty: ${item.qty}, Unit Price: ${item.unit_price}, Total: ${item.total}`
+          )
+          .join("\n");
+
+        console.log(formattedItems);
         return {
           timestamp: new Date().toISOString(),
           // order_reference: `LGSA-${Math.floor(Math.random() * 1000000)}`,
-          order_reference: `LGSA-${Date.now()}`,
+          //order_reference: `LGSA-${Date.now()}`,
+          order_reference: `LGSA_${formattedDate}`,
           // cart_items: items,
-          cart_items: JSON.stringify(items),
+          cart_items: formattedItems,
           subtotal: subtotal,
           discount: _appliedDiscount
             ? `${_appliedDiscount.code} (${_appliedDiscount.label})`
