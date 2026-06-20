@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LGSA — Legends and Awards</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        color: #1a1a1a;
+        line-height: 1.6;
+        background: #f0f4f8;
+        overflow-x: hidden;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      input,
+      select {
+        font-family: inherit;
+      }
+
+      :root {
+        --blue: #0052cc;
+        --blue-dark: #003a8c;
+        --navy: #0a1628;
+        --white: #ffffff;
+        --bg: #f0f4f8;
+        --gray-50: #f7f8fa;
+        --gray-100: #e2e6ec;
+        --gray-200: #d0d5dd;
+        --gray-400: #8c919a;
+        --gray-600: #4a4f57;
+        --gray-900: #1a1a1a;
+        --max-w: 1100px;
+        --nav-h: 110px;
+      }
+
+      /* ══ NAV ══ */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: var(--white);
+        border-bottom: 1px solid var(--gray-100);
+        height: var(--nav-h);
+      }
+      .nav-inner {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .nav-logo svg {
+        width: 44px;
+        height: 44px;
+      }
+      .nav-logo-text {
+        font-size: 8px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.2;
+        color: var(--navy);
+        letter-spacing: 0.5px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 55px;
+        align-items: center;
+      }
+      .nav-links a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--gray-600);
+        transition: color 0.2s;
+        text-decoration: underline;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--blue);
+      }
+      .nav-cta {
+        background: var(--blue);
+        color: var(--white);
+        padding: 10px 22px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background 0.2s;
+        display: inline-block;
+      }
+      .nav-cta:hover {
+        background: var(--blue-dark);
+      }
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        padding: 8px;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--gray-900);
+        transition: all 0.3s;
+      }
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--white);
+        z-index: 99;
+        flex-direction: column;
+        padding: 32px 24px;
+        gap: 24px;
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--gray-900);
+        padding: 8px 0;
+        border-bottom: 1px solid var(--gray-100);
+      }
+
+      /* ══ HERO ══ */
+      .hero {
+        margin-top: var(--nav-h);
+        position: relative;
+        min-height: 30em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: var(--navy);
+        z-index: 0;
+        background-size: 100% 100%;
+        background-position: center;
+      }
+      .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* background: linear-gradient(
+          180deg,
+          rgba(10, 22, 40, 0.35) 0%,
+          rgba(10, 22, 40, 0.7) 100%
+        );
+        z-index: 1; */
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 48px 54px;
+        max-width: 700px;
+        left: 28%;
+      }
+      .hero h1 {
+        font-family: sans-serif;
+        font-size: clamp(30px, 5.5vw, 40px);
+        font-weight: 600;
+        color: var(--white);
+        line-height: 1.3;
+        margin-bottom: 16px;
+        font-style: italic;
+        text-align: left;
+      }
+      .hero .hero-sub {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(22px, 3vw, 32px);
+        font-weight: 700;
+        color: var(--white);
+        font-style: italic;
+        opacity: 0.9;
+      }
+
+      /* ══ TABS ══ */
+      .tabs-bar {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        padding: 40px 24px 0;
+        background: var(--bg);
+      }
+      .tab-btn {
+        padding: 12px 32px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--gray-400);
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+      .tab-btn:hover {
+        color: var(--gray-900);
+      }
+      .tab-btn.active {
+        color: var(--gray-900);
+        border-bottom-color: var(--gray-900);
+      }
+
+      /* ══ CONTROLS ══ */
+      .controls {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 28px 24px;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+      .search-box {
+        flex: 1;
+        min-width: 200px;
+        position: relative;
+      }
+      .search-box input {
+        width: 100%;
+        padding: 12px 44px 12px 16px;
+        border: 1px solid var(--gray-200);
+        border-radius: 10px;
+        font-size: 14px;
+        background: var(--white);
+        outline: none;
+        transition: border 0.2s;
+      }
+      .search-box input:focus {
+        border-color: var(--blue);
+      }
+      .search-box .search-icon {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-400);
+        pointer-events: none;
+      }
+
+      /* Custom dropdown */
+      .dropdown {
+        position: relative;
+        min-width: 200px;
+      }
+      .dropdown-toggle {
+        width: 100%;
+        padding: 12px 40px 12px 16px;
+        border: 1px solid var(--gray-200);
+        border-radius: 10px;
+        font-size: 14px;
+        background: var(--white);
+        cursor: pointer;
+        text-align: left;
+        color: var(--gray-600);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: border 0.2s;
+      }
+      .dropdown-toggle:hover,
+      .dropdown-toggle.open {
+        border-color: var(--blue);
+      }
+      .dropdown-toggle svg {
+        flex-shrink: 0;
+        transition: transform 0.2s;
+      }
+      .dropdown-toggle.open svg {
+        transform: rotate(180deg);
+      }
+      .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        z-index: 20;
+        display: none;
+        overflow: hidden;
+      }
+      .dropdown-menu.show {
+        display: block;
+      }
+      .dropdown-option {
+        padding: 10px 16px;
+        font-size: 14px;
+        color: var(--gray-600);
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .dropdown-option:hover {
+        background: var(--gray-50);
+        color: var(--blue);
+      }
+      .dropdown-option.selected {
+        color: var(--blue);
+        font-weight: 600;
+      }
+
+      /* ══ TABLE ══ */
+      .table-wrap {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 0 24px 60px;
+      }
+      .table-container {
+        background: var(--white);
+        border-radius: 14px;
+        border: 1px solid var(--gray-100);
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 700px;
+      }
+      thead th {
+        padding: 14px 18px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--gray-400);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        text-align: left;
+        border-bottom: 2px solid var(--gray-100);
+        white-space: nowrap;
+      }
+      tbody td {
+        padding: 14px 18px;
+        font-size: 14px;
+        color: var(--gray-900);
+        border-bottom: 1px solid var(--gray-100);
+        white-space: nowrap;
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      tbody tr:hover {
+        background: var(--gray-50);
+      }
+      .flag-cell {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .flag-emoji {
+        font-size: 16px;
+      }
+      .no-results {
+        padding: 40px;
+        text-align: center;
+        color: var(--gray-400);
+        font-size: 15px;
+      }
+      .lgsa_main_logo {
+        height: 94%;
+        width: 7%;
+      }
+
+      /* ══ RESPONSIVE ══ */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .nav .nav-cta {
+          display: none;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+        .hero {
+          min-height: 260px;
+        }
+        .controls {
+          flex-direction: column;
+        }
+        .dropdown {
+          min-width: unset;
+          width: 100%;
+        }
+        .search-box {
+          min-width: unset;
+        }
+        .tab-btn {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero {
+          min-height: 220px;
+        }
+        .hero h1 {
+          font-size: 22px;
+        }
+        .tab-btn {
+          padding: 10px 14px;
+          font-size: 13px;
+        }
+        thead th,
+        tbody td {
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+        .lgsa_main_logo {
+          height: 80%;
+          width: 23%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══ NAV ═══ -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <img
+          src="assets/LGSA_LOGO.png"
+          alt="Lake Geneva Swimming Association"
+          class="lgsa_main_logo"
+          onclick="toggleMenu()"
+        />
+        <div class="nav-links">
+          <a href="#">Swim Collection</a>
+          <a href="./legends_and_awards.html">Legends and Awards</a>
+          <a href="#">Resources & blogs</a>
+          <a href="#">FAQ</a>
+          <a href="#">Corporate</a>
+        </div>
+        <a href="/Shopping_Cart/index.html" target="_blank" class="nav-cta"
+          >Plan & Book</a
+        >
+        <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="lgsa_website.html">Home</a>
+      <a href="#" onclick="toggleMenu()">Swim Collection</a>
+      <a href="#" class="active" onclick="toggleMenu()">Legends and Awards</a>
+      <a href="#" onclick="toggleMenu()">Resources & blogs</a>
+      <a href="#" onclick="toggleMenu()">FAQ</a>
+      <a href="#" class="nav-cta" onclick="toggleMenu()">Book a Meeting</a>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-content" id="heroContent">
+        <h1 id="heroTitle">
+          Every crossing tells a story.<br />These are the ones that became
+          legend
+        </h1>
+        <div class="hero-sub" id="heroSub">~Solo Legends</div>
+      </div>
+    </section>
+
+    <!-- ═══ TABS ═══ -->
+    <div class="tabs-bar">
+      <button
+        class="tab-btn active"
+        data-tab="legends"
+        onclick="switchTab('legends')"
+      >
+        Legends
+      </button>
+      <button class="tab-btn" data-tab="awards" onclick="switchTab('awards')">
+        Awards
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="hallOfFame"
+        onclick="switchTab('hallOfFame')"
+      >
+        Hall of Fame
+      </button>
+    </div>
+
+    <!-- ═══ CONTROLS ═══ -->
+    <div class="controls" id="controls"></div>
+
+    <!-- ═══ TABLE ═══ -->
+    <div class="table-wrap">
+      <div class="table-container" id="tableContainer"></div>
+    </div>
+
+    <script>
+      /* ══════════════════════════════════════
+   DATA
+   ══════════════════════════════════════ */
+
+      const FLAGS = {
+        Switzerland: "🇨🇭",
+        USA: "🇺🇸",
+        "United Kingdom": "🇬🇧",
+        Australia: "🇦🇺",
+        Denmark: "🇩🇰",
+        France: "🇫🇷",
+        Canada: "🇨🇦",
+        Mexico: "🇲🇽",
+        Germany: "🇩🇪",
+        Ireland: "🇮🇪",
+        Netherlands: "🇳🇱",
+        "South Africa": "🇿🇦",
+        Spain: "🇪🇸",
+        Italy: "🇮🇹",
+        Brazil: "🇧🇷",
+        "New Zealand": "🇳🇿",
+        Japan: "🇯🇵",
+        India: "🇮🇳",
+        Sweden: "🇸🇪",
+        Belgium: "🇧🇪",
+        Austria: "🇦🇹",
+        "Czech Republic": "🇨🇿",
+      };
+      
+      const Legend_Slide_Images = [
+        "assets/legend_slide_1.png",
+        "assets/legend_slide_2.jpg",
+        "assets/legend_slide_3.png",
+      ]
+
+      const LEGENDS_SOLO = [
+        {
+          name: "Alain Charmey",
+          nat: "Switzerland",
+          age: 37,
+          route: "Villeneuve to Bains des Pâquis",
+          date: "31 Aug - 1 Sept 2016",
+          time: "",
+        },
+        {
+          name: "Courtney Moates Paulk",
+          nat: "USA",
+          age: 38,
+          route: "Chillon Castle to Bains des Pâquis",
+          date: "31 Aug - 1 Sept 2016",
+          time: "",
+        },
+        {
+          name: "Mark Sheridan",
+          nat: "United Kingdom",
+          age: 42,
+          route: "Chillon Castle to Bains des Pâquis",
+          date: "25 - 26 Sept 2025",
+          time: "28:36:00",
+        },
+        {
+          name: "Stève Stievenart",
+          nat: "Australia",
+          age: 33,
+          route: "Villeneuve to Bains des Pâquis",
+          date: "31 Aug - 1 Sept 2016",
+          time: "33:23:15",
+        },
+        {
+          name: "Arleen Gonzalez",
+          nat: "Denmark",
+          age: 52,
+          route: "Château de Chillon to the Bay of Thonon",
+          date: "18 - 19 July 2016",
+          time: "35:58:45",
+        },
+        {
+          name: "Emily Stausboll",
+          nat: "France",
+          age: 39,
+          route: "Chillon Castle to Bains des Pâquis",
+          date: "31 Aug - 1 Sept 2016",
+          time: "22:42:30",
+        },
+        {
+          name: "Helen Conway",
+          nat: "Canada",
+          age: 47,
+          route: "Villeneuve to Bains des Pâquis",
+          date: "31 Aug - 1 Sept 2016",
+          time: "22:42:30",
+        },
+        {
+          name: "Samantha Farrow",
+          nat: "Mexico",
+          age: 39,
+          route: "Chillon Castle to Bains des Pâquis",
+          date: "31 Aug - 1 Sept 2016",
+          time: "22:42:30",
+        },
+        {
+          name: "Thomas Keller",
+          nat: "Germany",
+          age: 44,
+          route: "Villeneuve to Bains des Pâquis",
+          date: "15 - 16 Aug 2018",
+          time: "24:15:00",
+        },
+        {
+          name: "Fiona O'Brien",
+          nat: "Ireland",
+          age: 36,
+          route: "Chillon Castle to Bains des Pâquis",
+          date: "22 - 23 July 2019",
+          time: "26:10:45",
+        },
+        {
+          name: "Lars van Dijk",
+          nat: "Netherlands",
+          age: 41,
+          route: "Château de Chillon to the Bay of Thonon",
+          date: "5 - 6 Sept 2020",
+          time: "30:22:10",
+        },
+        {
+          name: "Claire du Pont",
+          nat: "France",
+          age: 34,
+          route: "Villeneuve to Bains des Pâquis",
+          date: "12 - 13 Aug 2021",
+          time: "25:45:30",
+        },
+      ];
+
+      const LEGENDS_RELAY = [
+        {
+          name: "Team Helvetica",
+          nat: "Switzerland",
+          age: "-",
+          route: "Villeneuve to Bains des Pâquis",
+          date: "31 Aug - 1 Sept 2016",
+          time: "18:22:00",
+        },
+        {
+          name: "Atlantic Dolphins",
+          nat: "United Kingdom",
+          age: "-",
+          route: "Chillon Castle to Bains des Pâquis",
+          date: "25 - 26 Sept 2019",
+          time: "16:45:30",
+        },
+        {
+          name: "Les Nageurs du Lac",
+          nat: "France",
+          age: "-",
+          route: "Villeneuve to Bains des Pâquis",
+          date: "14 - 15 Aug 2020",
+          time: "19:10:15",
+        },
+        {
+          name: "Maple Swimmers",
+          nat: "Canada",
+          age: "-",
+          route: "Chillon Castle to Bains des Pâquis",
+          date: "3 - 4 Sept 2021",
+          time: "17:30:00",
+        },
+        {
+          name: "Down Under Aquatics",
+          nat: "Australia",
+          age: "-",
+          route: "Château de Chillon to the Bay of Thonon",
+          date: "20 - 21 July 2018",
+          time: "20:05:45",
+        },
+        {
+          name: "Viva Geneva",
+          nat: "United Kingdom",
+          age: "-",
+          route: "Chillon Castle to Bains des Pâquis",
+          date: "8 - 9 Sept 2022",
+          time: "22:03:44",
+        },
+      ];
+
+      const SOLO_FILTERS = [
+        "Lake Geneva Solos",
+        "Lake Neuchâtel Solos",
+        "Lake Biel Solos",
+        "Adventure Swims and Non-Standard Routes",
+      ];
+
+      const AWARDS_DATA = [
+        {
+          award: "TO BE NAMED",
+          detail: "For the fastest relay of the year (standard category).",
+          recipient: "Flying Rabbits",
+          nat: "France",
+          route: "Chillon Castle to Bains des Pâquis",
+          time: "",
+        },
+        {
+          award: "TO BE NAMED",
+          detail: "For the fastest relay of the year (special category).",
+          recipient: "Viva Geneva",
+          nat: "United Kingdom",
+          route: "Chillon Castle to Bains des Pâquis",
+          time: "22hrs 03mins 44secs",
+        },
+        {
+          award: "Endurance Award",
+          detail: "For outstanding solo distance.",
+          recipient: "Mark Sheridan",
+          nat: "United Kingdom",
+          route: "Chillon Castle to Bains des Pâquis",
+          time: "28:36:00",
+        },
+        {
+          award: "Spirit of the Lake",
+          detail: "For sportsmanship and community.",
+          recipient: "Arleen Gonzalez",
+          nat: "Denmark",
+          route: "Château de Chillon to the Bay of Thonon",
+          time: "",
+        },
+        {
+          award: "Rising Star",
+          detail: "For exceptional debut crossing.",
+          recipient: "Emily Stausboll",
+          nat: "France",
+          route: "Chillon Castle to Bains des Pâquis",
+          time: "22:42:30",
+        },
+      ];
+      const AWARD_YEARS = [
+        "2015 LGSA Awards",
+        "2016 LGSA Awards",
+        "2017 LGSA Awards",
+        "2018 LGSA Awards",
+        "2019 LGSA Awards",
+      ];
+
+      const HOF_DATA = [
+        {
+          name: "Alain Charmey",
+          nat: "Switzerland",
+          inducted: 2017,
+          category: "Solo Pioneer",
+          crossings: 3,
+        },
+        {
+          name: "Mark Sheridan",
+          nat: "United Kingdom",
+          inducted: 2025,
+          category: "Endurance",
+          crossings: 2,
+        },
+        {
+          name: "Team Helvetica",
+          nat: "Switzerland",
+          inducted: 2018,
+          category: "Relay Excellence",
+          crossings: 5,
+        },
+        {
+          name: "Arleen Gonzalez",
+          nat: "Denmark",
+          inducted: 2020,
+          category: "Spirit Award",
+          crossings: 4,
+        },
+        {
+          name: "Courtney Moates Paulk",
+          nat: "USA",
+          inducted: 2019,
+          category: "International Ambassador",
+          crossings: 2,
+        },
+      ];
+
+      /* ══════════════════════════════════════
+   HERO CONFIG PER TAB
+   ══════════════════════════════════════ */
+      const HERO_CONFIG = {
+        legends: {
+          title:
+            "Every crossing tells a story.<br>These are the ones that became legend",
+          sub: "~Solo Legends",
+          bg: "linear-gradient(135deg,#0a2a5c 0%,#0d3b7a 40%,#1a5fa0 70%,#2980b9 100%)",
+        },
+        legendsRelay: {
+          title:
+            "Every crossing tells a story.<br>These are the ones that became legend",
+          sub: "~Relay Legends",
+          bg: "linear-gradient(135deg,#0a2a5c 0%,#0d3b7a 40%,#1a5fa0 70%,#2980b9 100%)",
+        },
+        awards: {
+          title:
+            "LGSA Awards that honour<br>endurance, spirit and<br>open-water excellence",
+          sub: "~Awards",
+          bg: "linear-gradient(135deg,#1a3a5c 0%,#2c5f8a 40%,#3a80b0 70%,#4a9ac8 100%)",
+        },
+        hallOfFame: {
+          title:
+            "Honouring the greatest<br>open-water swimmers<br>of our generation",
+          sub: "~Hall of Fame",
+          bg: "linear-gradient(135deg,#0d1b2a 0%,#1b3a5c 40%,#2c5f7a 70%,#1a4a6a 100%)",
+        },
+      };
+
+      /* ══════════════════════════════════════
+   STATE
+   ══════════════════════════════════════ */
+      let currentTab = "legends";
+      let legendType = "solo";
+      let searchQuery = "";
+      let selectedFilter = "";
+
+      /* ══════════════════════════════════════
+   TAB SWITCHING
+   ══════════════════════════════════════ */
+
+      const heroBg = document.querySelector(".hero-bg");
+      let currentIndex = 0;
+      heroBg.style.backgroundImage = `url(${Legend_Slide_Images[currentIndex]})`;
+      setInterval(() => {
+        currentIndex++;
+        if(currentIndex >= Legend_Slide_Images.length){
+            currentIndex = 0;
+        }
+        heroBg.style.backgroundImage = `url(${Legend_Slide_Images[currentIndex]})`;
+      },3000);
+      function switchTab(tab) {
+        currentTab = tab;
+        searchQuery = "";
+        selectedFilter = "";
+        legendType = "solo";
+
+        document.querySelectorAll(".tab-btn").forEach((b) => {
+          b.classList.toggle("active", b.dataset.tab === tab);
+        });
+
+        updateHero();
+        renderControls();
+        renderTable();
+      }
+
+      function updateHero() {
+        let key = currentTab;
+        if (currentTab === "legends" && legendType === "relay")
+          key = "legendsRelay";
+        const cfg = HERO_CONFIG[key];
+        document.getElementById("heroTitle").innerHTML = cfg.title;
+        document.getElementById("heroSub").textContent = cfg.sub;
+        document.getElementById("heroBg").style.background = cfg.bg;
+      }
+
+      /* ══════════════════════════════════════
+   CONTROLS RENDERING
+   ══════════════════════════════════════ */
+      function renderControls() {
+        const c = document.getElementById("controls");
+        let html = `
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search" value="${searchQuery}" oninput="onSearch(this.value)">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </div>
+  `;
+
+        if (currentTab === "legends") {
+          html += buildDropdown(
+            "legendDD",
+            "Select Legend",
+            ["Solo Legends", "Relay Legends"],
+            legendType === "relay" ? "Relay Legends" : "Solo Legends",
+          );
+          html += buildDropdown(
+            "filterDD",
+            "Filter",
+            legendType === "solo" ? SOLO_FILTERS : SOLO_FILTERS,
+            selectedFilter,
+          );
+        } else if (currentTab === "awards") {
+          html += buildDropdown(
+            "filterDD",
+            "Filter",
+            AWARD_YEARS,
+            selectedFilter,
+          );
+        } else {
+          html += buildDropdown(
+            "filterDD",
+            "Filter",
+            [
+              "All",
+              "Solo Pioneer",
+              "Endurance",
+              "Relay Excellence",
+              "Spirit Award",
+              "International Ambassador",
+            ],
+            selectedFilter,
+          );
+        }
+
+        c.innerHTML = html;
+      }
+
+      function buildDropdown(id, placeholder, options, selected) {
+        const label = selected || placeholder;
+        let opts = "";
+        options.forEach((o) => {
+          opts += `<div class="dropdown-option${o === selected ? " selected" : ""}" onclick="selectOption('${id}','${o.replace(/'/g, "\\'")}')">${o}</div>`;
+        });
+        return `
+    <div class="dropdown" id="${id}">
+      <button class="dropdown-toggle" onclick="toggleDropdown('${id}')">
+        <span>${label}</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="dropdown-menu">${opts}</div>
+    </div>
+  `;
+      }
+
+      function toggleDropdown(id) {
+        const dd = document.getElementById(id);
+        const toggle = dd.querySelector(".dropdown-toggle");
+        const menu = dd.querySelector(".dropdown-menu");
+        const isOpen = menu.classList.contains("show");
+
+        // Close all
+        document
+          .querySelectorAll(".dropdown-menu")
+          .forEach((m) => m.classList.remove("show"));
+        document
+          .querySelectorAll(".dropdown-toggle")
+          .forEach((t) => t.classList.remove("open"));
+
+        if (!isOpen) {
+          menu.classList.add("show");
+          toggle.classList.add("open");
+        }
+      }
+
+      function selectOption(ddId, value) {
+        if (ddId === "legendDD") {
+          legendType = value === "Relay Legends" ? "relay" : "solo";
+          selectedFilter = "";
+          updateHero();
+          renderControls();
+        } else if (ddId === "filterDD") {
+          selectedFilter = selectedFilter === value ? "" : value;
+          renderControls();
+        }
+        renderTable();
+      }
+
+      function onSearch(val) {
+        searchQuery = val.toLowerCase();
+        renderTable();
+      }
+
+      // Close dropdowns on outside click
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".dropdown")) {
+          document
+            .querySelectorAll(".dropdown-menu")
+            .forEach((m) => m.classList.remove("show"));
+          document
+            .querySelectorAll(".dropdown-toggle")
+            .forEach((t) => t.classList.remove("open"));
+        }
+      });
+
+      /* ══════════════════════════════════════
+   TABLE RENDERING
+   ══════════════════════════════════════ */
+      function renderTable() {
+        const tc = document.getElementById("tableContainer");
+
+        if (currentTab === "legends") {
+          renderLegendsTable(tc);
+        } else if (currentTab === "awards") {
+          renderAwardsTable(tc);
+        } else {
+          renderHallOfFameTable(tc);
+        }
+      }
+
+      function renderLegendsTable(tc) {
+        const data = legendType === "relay" ? LEGENDS_RELAY : LEGENDS_SOLO;
+        let filtered = data;
+
+        if (searchQuery) {
+          filtered = filtered.filter(
+            (r) =>
+              r.name.toLowerCase().includes(searchQuery) ||
+              r.nat.toLowerCase().includes(searchQuery) ||
+              r.route.toLowerCase().includes(searchQuery),
+          );
+        }
+
+        if (!filtered.length) {
+          tc.innerHTML = '<div class="no-results">No results found.</div>';
+          return;
+        }
+
+        let rows = filtered
+          .map(
+            (r) => `
+    <tr>
+      <td>${r.name}</td>
+      <td><div class="flag-cell"><span class="flag-emoji">${FLAGS[r.nat] || ""}</span> ${r.nat}</div></td>
+      <td>${r.age}</td>
+      <td>${r.route}</td>
+      <td>${r.date}</td>
+      <td>${r.time || "—"}</td>
+    </tr>
+  `,
+          )
+          .join("");
+
+        tc.innerHTML = `
+    <table>
+      <thead><tr><th>Name</th><th>Nationality</th><th>Age</th><th>Route</th><th>Date</th><th>Time</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+      }
+
+      function renderAwardsTable(tc) {
+        let filtered = AWARDS_DATA;
+
+        if (searchQuery) {
+          filtered = filtered.filter(
+            (r) =>
+              r.award.toLowerCase().includes(searchQuery) ||
+              r.recipient.toLowerCase().includes(searchQuery) ||
+              r.route.toLowerCase().includes(searchQuery),
+          );
+        }
+
+        if (!filtered.length) {
+          tc.innerHTML = '<div class="no-results">No results found.</div>';
+          return;
+        }
+
+        let rows = filtered
+          .map(
+            (r) => `
+    <tr>
+      <td><strong>${r.award}</strong><br><span style="font-size:12px;color:var(--gray-400);font-style:italic">${r.detail}</span></td>
+      <td>${r.recipient}</td>
+      <td><div class="flag-cell"><span class="flag-emoji">${FLAGS[r.nat] || ""}</span> ${r.nat}</div></td>
+      <td>${r.route}</td>
+      <td>${r.time || "—"}</td>
+    </tr>
+  `,
+          )
+          .join("");
+
+        tc.innerHTML = `
+    <table>
+      <thead><tr><th>Award</th><th>Recipient</th><th>Nationality</th><th>Route</th><th>Time</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+      }
+
+      function renderHallOfFameTable(tc) {
+        let filtered = HOF_DATA;
+
+        if (selectedFilter && selectedFilter !== "All") {
+          filtered = filtered.filter((r) => r.category === selectedFilter);
+        }
+        if (searchQuery) {
+          filtered = filtered.filter(
+            (r) =>
+              r.name.toLowerCase().includes(searchQuery) ||
+              r.nat.toLowerCase().includes(searchQuery) ||
+              r.category.toLowerCase().includes(searchQuery),
+          );
+        }
+
+        if (!filtered.length) {
+          tc.innerHTML = '<div class="no-results">No results found.</div>';
+          return;
+        }
+
+        let rows = filtered
+          .map(
+            (r) => `
+    <tr>
+      <td>${r.name}</td>
+      <td><div class="flag-cell"><span class="flag-emoji">${FLAGS[r.nat] || ""}</span> ${r.nat}</div></td>
+      <td>${r.inducted}</td>
+      <td>${r.category}</td>
+      <td>${r.crossings}</td>
+    </tr>
+  `,
+          )
+          .join("");
+
+        tc.innerHTML = `
+    <table>
+      <thead><tr><th>Name</th><th>Nationality</th><th>Inducted</th><th>Category</th><th>Crossings</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+      }
+
+      /* ══════════════════════════════════════
+   MOBILE MENU
+   ══════════════════════════════════════ */
+      function toggleMenu() {
+        const m = document.getElementById("mobileMenu");
+        m.classList.toggle("open");
+        const bars = document.querySelectorAll(".nav-hamburger span");
+        const open = m.classList.contains("open");
+        bars[0].style.transform = open
+          ? "rotate(45deg) translate(5px,5px)"
+          : "";
+        bars[1].style.opacity = open ? "0" : "1";
+        bars[2].style.transform = open
+          ? "rotate(-45deg) translate(5px,-5px)"
+          : "";
+      }
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          document.getElementById("mobileMenu").classList.remove("open");
+          document.querySelectorAll(".nav-hamburger span").forEach((b) => {
+            b.style.transform = "";
+            b.style.opacity = "1";
+          });
+        }
+      });
+
+      /* ══ INIT ══ */
+      renderControls();
+      renderTable();
+    </script>
+  </body>
+</html>
