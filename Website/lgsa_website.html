@@ -1,1 +1,1154 @@
 
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LGSA — Lake Geneva Swimming Association | Corporate</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── RESET ── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        color: #1a1a1a;
+        line-height: 1.6;
+        overflow-x: hidden;
+        background: #e2eefa;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      button {
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* ── VARIABLES ── */
+      :root {
+        --blue: #0052cc;
+        --blue-dark: #003a8c;
+        --navy: #0a1628;
+        --white: #ffffff;
+        --gray-50: #f7f8fa;
+        --gray-100: #ebedf0;
+        --gray-400: #8c919a;
+        --gray-600: #4a4f57;
+        --gray-900: #1a1a1a;
+        --max-w: 1200px;
+        --nav-h: 110px;
+      }
+
+      /* ── NAV ── */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: var(--white);
+        border-bottom: 1px solid var(--gray-100);
+        height: var(--nav-h);
+      }
+      .nav-inner {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .nav-logo svg {
+        width: 44px;
+        height: 44px;
+      }
+      .nav-logo-text {
+        font-size: 8px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.2;
+        color: var(--navy);
+        letter-spacing: 0.5px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 55px;
+        align-items: center;
+      }
+      .nav-links a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--gray-600);
+        transition: color 0.2s;
+        text-decoration: underline;
+      }
+      .nav-links a:hover {
+        color: var(--blue);
+      }
+      .nav-cta {
+        background: var(--blue);
+        color: var(--white);
+        padding: 10px 24px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--blue-dark);
+      }
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        padding: 8px;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--gray-900);
+        transition: all 0.3s;
+      }
+
+      /* Mobile nav */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--white);
+        z-index: 99;
+        flex-direction: column;
+        padding: 32px 24px;
+        gap: 24px;
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--gray-900);
+        padding: 8px 0;
+        border-bottom: 1px solid var(--gray-100);
+      }
+      .mobile-menu .nav-cta {
+        text-align: center;
+        margin-top: 8px;
+        display: block;
+        border-bottom: none;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        margin-top: var(--nav-h);
+        position: relative;
+        min-height: 40em;
+        display: flex;
+        align-items: flex-end;
+        background: var(--navy);
+        overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          #0a2a5c 0%,
+          #0d3b7a 30%,
+          #1a5fa0 60%,
+          #3a80c0 100%
+        );
+        background-image: url("./assets/website_header_image.png");
+        background-size: cover;
+        background-position: center;
+      }
+      /* Simulated photo overlay - boat scene */
+      .hero-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 50% at 65% 30%,
+            rgba(120, 180, 220, 0.3) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 40% 60% at 30% 70%,
+            rgba(10, 30, 60, 0.6) 0%,
+            transparent 60%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(10, 22, 40, 0.7) 100%
+          );
+      }
+      .hero-bg::after {
+        content: "ACTUAL IMAGE OF 2023 PARTICIPANTS";
+        position: absolute;
+        top: 16px;
+        right: 24px;
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 0 24px 48px;
+        width: 100%;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(36px, 5vw, 56px);
+        font-weight: 800;
+        color: var(--white);
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+      .hero p {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 420px;
+        margin-bottom: 28px;
+        line-height: 1.6;
+      }
+      .hero-cta {
+        display: inline-block;
+        background: var(--blue);
+        color: var(--white);
+        padding: 14px 28px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+      .hero-cta:hover {
+        background: var(--blue-dark);
+      }
+      .hero-tag {
+        position: relative;
+        z-index: 2;
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 0 24px;
+        width: 100%;
+      }
+      .hero-tag-text {
+        font-size: 10px;
+        letter-spacing: 2px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.45);
+        text-transform: uppercase;
+        padding: 16px 0 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 32px;
+      }
+
+      /* ── PROGRAMS SECTION ── */
+      .programs {
+        padding: 80px 24px;
+        max-width: 90%;
+        margin: 0 5%;
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 32px;
+      }
+      .programs-main {
+      }
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 2.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 12px;
+      }
+      .programs-main > h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 3.5vw, 40px);
+        font-weight: 800;
+        color: var(--gray-900);
+        margin-bottom: 32px;
+        line-height: 1.15;
+      }
+
+      /* Program cards grid */
+      .program-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .program-card {
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+      }
+      .card-light {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-100);
+      }
+      .card-light .card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: var(--white);
+        border: 1px solid var(--gray-100);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: auto;
+      }
+      .card-light h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        margin-top: 16px;
+        color: var(--gray-900);
+      }
+      .card-light p {
+        font-size: 14px;
+        color: var(--gray-600);
+        line-height: 1.5;
+      }
+
+      .card-image {
+        /* background: linear-gradient(135deg, #0052cc, #003a8c); */
+        color: var(--white);
+        justify-content: flex-end;
+        background-image: url("./assets/Lake_Front_image.png");
+        background-size: 100% 100%;
+        background-position: center;
+      }
+      .card-image::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* background: linear-gradient(
+          180deg,
+          rgba(0, 82, 204, 0.2) 0%,
+          rgba(0, 58, 140, 0.85) 100%
+        ); */
+        z-index: 1;
+      }
+      .card-image > * {
+        position: relative;
+        z-index: 2;
+      }
+      .card-image h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .card-image p {
+        font-size: 14px;
+        opacity: 0.9;
+        line-height: 1.5;
+      }
+
+      /* Signature card - full width */
+      .signature-card {
+        grid-column: 1/-1;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        min-height: 230px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 32px;
+        color: var(--white);
+        background: linear-gradient(135deg, #1a3a5c 0%, #0d2a4a 100%);
+        margin-top: 4px;
+        background-image: url("./assets/Overlay_img.png");
+        background-size: 100% 100%;
+        background-position: center;
+      }
+      .signature-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgb(52 76 111 / 85%) 0%, rgba(10, 22, 40, 0.3) 100%);
+        z-index: 1;
+      }
+      .signature-card > * {
+        position: relative;
+        z-index: 2;
+      }
+      .signature-badge {
+        display: inline-block;
+        background: var(--blue);
+        color: var(--white);
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        width: fit-content;
+      }
+      .signature-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        line-height: 1.2;
+      }
+      .signature-card p {
+        font-size: 14px;
+        opacity: 0.8;
+        max-width: 340px;
+        line-height: 1.5;
+      }
+
+      /* ── WHY LGSA SIDEBAR ── */
+      .why-lgsa {
+        background: var(--gray-50);
+        border-radius: 16px;
+        padding: 20px 32px;
+        border: 1px solid var(--gray-100);
+        height: fit-content;
+        width: 120%;
+      }
+      .why-lgsa .eyebrow {
+        margin-bottom: 8px;
+      }
+      .why-lgsa h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 14px;
+        color: var(--gray-900);
+      }
+      .why-item {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 13px;
+        align-items: flex-start;
+      }
+      .why-item:last-of-type {
+        margin-bottom: 0;
+      }
+      .why-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin-top: 2px;
+        color: var(--blue);
+      }
+      .why-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      .why-item h4 {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--gray-900);
+        margin-bottom: 2px;
+      }
+      .why-item p {
+        font-size: 13px;
+        color: var(--gray-600);
+        line-height: 1.5;
+      }
+
+      /* Flags and image */
+      .why-bottom {
+        margin-top: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .flags {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+      .flag {
+        width: 24px;
+        height: 16px;
+        border-radius: 2px;
+        display: inline-block;
+      }
+      .flag-fr {
+        background: linear-gradient(
+          90deg,
+          #0055a4 33%,
+          #fff 33%,
+          #fff 66%,
+          #ef4135 66%
+        );
+      }
+      .flag-ch {
+        background: #d52b1e;
+        position: relative;
+      }
+      .flag-ch::after {
+        content: "+";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .flag-gb {
+        background: linear-gradient(
+          90deg,
+          #012169 33%,
+          #c8102e 33%,
+          #c8102e 66%,
+          #012169 66%
+        );
+      }
+      .why-image {
+        border-radius: 10px;
+        overflow: hidden;
+        height: 165px;
+        background: linear-gradient(135deg, #2980b9, #27ae60);
+        position: relative;
+        background-image: url("./assets/why_lgsa_grp_img.png");
+        background-size: 100% 100%;
+        background-position: center;
+      }
+      /* .why-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 50%,
+          rgba(0, 0, 0, 0.15) 100%
+        );
+      } */
+
+      /* ── CTA BANNER ── */
+      .cta-banner {
+        background: var(--navy);
+        text-align: center;
+        padding: 64px 24px;
+        position: relative;
+        overflow: hidden;
+        background-image: url("./assets/main_bottom_image.png");
+        background-size: 100% 100%;
+        background-position: center;
+      }
+      .cta-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 82, 204, 0.15) 0%,
+          transparent 50%
+        );
+      }
+      .cta-banner > * {
+        position: relative;
+        z-index: 2;
+      }
+      .cta-banner h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 4vw, 42px);
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 12px;
+      }
+      .cta-banner p {
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.65);
+        margin-bottom: 32px;
+      }
+      .cta-banner-btn {
+        display: inline-block;
+        background: var(--blue);
+        color: var(--white);
+        padding: 14px 32px;
+        border-radius: 6px;
+        font-size: 18px;
+        font-weight: 600;
+        transition: background 0.2s;
+        border: none;
+        width: 18%;
+      }
+      .cta-banner-btn:hover {
+        background: var(--blue-dark);
+      }
+      .cta-charity {
+        display: flex;
+        align-items: flex-start;
+        gap: 25px;
+        /* justify-content: center; */
+        /* margin-top: 26px; */
+        /* padding-top: 20px; */
+        position: relative;
+        top: 32px;
+        left: -3px;
+      }
+      .charity-logo {
+        width: 7.2%;
+        height: 100px;
+        background: var(--white);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        background-image: url(./assets/bottom_logo.png);
+        background-size: 100% 100%;
+        background-position: center;
+      }
+      .charity-logo svg {
+        width: 100%;
+        height: 100%;
+      }
+      .charity-text {
+        text-align: left;
+        font-size: 12px;
+        color: #fff;
+        max-width: 260px;
+        line-height: 1.5;
+        margin-top: 24px;
+      }
+
+      /* ── FOOTER ── */
+      .footer {
+        background: #052B79;
+        border-top: 1px solid var(--gray-100);
+        padding: 40px 24px;
+        text-align: center;
+        margin: 40px 0 0 0;
+        height: 155px;
+      }
+      .footer-links {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        font-size: 14px;
+        color: var(--white);
+        font-weight: 500;
+        transition: color 0.2s;
+        text-decoration: underline;
+      }
+      .footer-links a:hover {
+        color: var(--blue);
+      }
+      .footer-socials {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .footer-socials a {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        transition: all 0.2s;
+        text-decoration: underline;
+      }
+      .footer-socials a:hover {
+        color: var(--blue);
+      }
+      .footer-socials a svg {
+        width: 20px;
+        height: 20px;
+      }
+      .footer-bottom {
+        font-size: 13px;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .footer-flag {
+        display: inline-block;
+        width: 16px;
+        height: 11px;
+        background: #d52b1e;
+        border-radius: 1px;
+        position: relative;
+        vertical-align: middle;
+      }
+      .footer-flag::after {
+        content: "+";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 9px;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .lgsa_main_logo {
+            height: 94%;
+            width: 7%;
+        }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 1024px) {
+        .programs {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .why-lgsa {
+          max-width: 600px;
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+        .nav-hamburger {
+          display: flex;
+        }
+        .hero {
+          min-height: 440px;
+        }
+        .hero h1 {
+          font-size: 32px;
+        }
+        .programs {
+          padding: 48px 20px;
+        }
+        .program-cards {
+          grid-template-columns: 1fr;
+        }
+        .signature-card {
+          min-height: 180px;
+        }
+        .why-lgsa {
+          padding: 28px 24px;
+        }
+        .cta-banner {
+          padding: 48px 20px;
+        }
+        .footer-links {
+          gap: 20px;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero {
+          min-height: 380px;
+        }
+        .hero h1 {
+          font-size: 28px;
+        }
+        .hero p {
+          font-size: 14px;
+        }
+        .hero-content {
+          padding: 0 20px 36px;
+        }
+        .programs-main > h2 {
+          font-size: 26px;
+        }
+        .program-card {
+          padding: 24px;
+          min-height: 180px;
+        }
+        .cta-banner h2 {
+          font-size: 26px;
+        }
+        .footer-links {
+          flex-direction: column;
+          gap: 12px;
+          align-items: center;
+        }
+        .lgsa_main_logo {
+          height: 80%;
+          width: 23%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══ NAVIGATION ═══ -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <img src="assets/LGSA_LOGO.png" alt="Lake Geneva Swimming Association" class="lgsa_main_logo">
+        <div class="nav-links">
+          <a href="#">Swim Collection</a>
+          <a href="./legends_and_awards.html">Legends and Awards</a>
+          <a href="#">Resources & blogs</a>
+          <a href="#">FAQ</a>
+          <a href="#">Corporate</a>
+        </div>
+        <a href="/Shopping_Cart/index.html" target="_blank" class="nav-cta">Plan & Book</a>
+        <button class="nav-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#" onclick="toggleMenu()">Swim Collection</a>
+      <a href="#" onclick="toggleMenu()">Legends and Awards</a>
+      <a href="#" onclick="toggleMenu()">Resources & blogs</a>
+      <a href="#" onclick="toggleMenu()">FAQ</a>
+      <a href="#" onclick="toggleMenu()">Corporate</a>
+      <a href="#" class="nav-cta" onclick="toggleMenu()">Plan & Book</a>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <h1>Lead differently.<br />Out on the lake.</h1>
+        <p>
+          Leadership and wellbeing experiences on Lake Geneva for teams that
+          need something real.
+        </p>
+        <a href="/Shopping_Cart/index.html" target="_blank" class="hero-cta">Book a 20-min meeting</a>
+        <div class="hero-tag-text">
+          FOR HR, LEADERSHIP, SALES & STRATEGY & CSR EVENTS
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROGRAMS + WHY LGSA ═══ -->
+    <section class="programs">
+      <div class="programs-main">
+        <div class="eyebrow">Our Programs</div>
+        <h2>Elite Leadership Interventions</h2>
+
+        <div class="program-cards">
+          <!-- Card 1: Leadership Under Pressure -->
+          <div class="program-card card-light">
+            <div class="card-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#0052CC"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            </div>
+            <h3>Leadership Under Pressure</h3>
+            <p>Build calm, trust and resilience under real conditions.</p>
+          </div>
+
+          <!-- Card 2: Lakefront Retreats -->
+          <div class="program-card card-image">
+            <h3>Lakefront Retreats & Wellbeing</h3>
+            <p>
+              Leadership meets, strategy offsites, or sales events—customised by
+              the lake.
+            </p>
+          </div>
+        </div>
+
+        <!-- Signature Card -->
+        <div class="signature-card">
+          <div class="signature-badge">Signature</div>
+          <h3>Annual Signature<br />Team Challenge</h3>
+          <p>
+            A rare shared experience with pride, meaning and lasting recall.
+          </p>
+        </div>
+      </div>
+
+      <!-- Why LGSA Sidebar -->
+      <aside class="why-lgsa">
+        <div class="eyebrow">The Gold Standard</div>
+        <h2>Why the LGSA</h2>
+
+        <div class="why-item">
+          <div class="why-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
+          <div>
+            <h4>10 years on Lake Geneva</h4>
+            <p>Europe's largest alpine lake experts.</p>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <div>
+            <h4>Safety-led</h4>
+            <p>Aligned with international safety standards.</p>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <div>
+            <h4>Premium delivery</h4>
+            <p>
+              White-glove corporate experience.<br />From transfer to
+              Accommodation.
+            </p>
+          </div>
+        </div>
+
+        <div class="why-item">
+          <div class="why-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+              />
+            </svg>
+          </div>
+          <div>
+            <h4>Guinness World Records™</h4>
+            <p>Recognised partner for world-class swims.</p>
+          </div>
+        </div>
+
+        <div class="why-bottom">
+          <!-- <div class="flags">
+            <span class="flag flag-fr"></span>
+            <span class="flag flag-ch"></span>
+            <span class="flag flag-gb"></span>
+          </div> -->
+          <div class="why-image"></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ═══ CTA BANNER ═══ -->
+    <section class="cta-banner">
+      <h2>One conversation. Clear fit.</h2>
+      <p>
+        We'll help you choose the right format for your team, goals and timing.
+      </p>
+      <a href="/Shopping_Cart/index.html" target="_blank" class="cta-banner-btn">Fix a meeting</a>
+      <div class="cta-charity">
+        <div class="charity-logo">
+          <!-- <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+           <rect width="48" height="48" rx="4" fill="#1a1a1a" />
+            <text
+              x="24"
+              y="20"
+              text-anchor="middle"
+              font-size="6"
+              font-weight="800"
+              fill="#fff"
+              font-family="Inter"
+            >
+              THE
+            </text>
+            <text
+              x="24"
+              y="30"
+              text-anchor="middle"
+              font-size="7"
+              font-weight="800"
+              fill="#fff"
+              font-family="Inter"
+            >
+              BRAIN
+            </text>
+            <text
+              x="24"
+              y="40"
+              text-anchor="middle"
+              font-size="5"
+              font-weight="700"
+              fill="#e74c3c"
+              font-family="Inter"
+            >
+              TUMOUR
+            </text>
+          </svg> -->
+        </div>
+        <div class="charity-text">
+          LGSA is proud to associate &<br />support fund raising for<br />The
+          Brain Tumour Charity.
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Newsletter signup</a>
+        <a href="#">Resources</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#" aria-label="Instagram">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" />
+            <circle cx="12" cy="12" r="5" />
+            <circle
+              cx="17.5"
+              cy="6.5"
+              r="1.5"
+              fill="currentColor"
+              stroke="none"
+            />
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+            />
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"
+            />
+          </svg>
+        </a>
+      </div>
+      <div class="footer-bottom">
+        Lake Geneva, Switzerland <span class="footer-flag"></span>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("mobileMenu").classList.toggle("open");
+        const bars = document.querySelectorAll(".nav-hamburger span");
+        const open = document
+          .getElementById("mobileMenu")
+          .classList.contains("open");
+        bars[0].style.transform = open
+          ? "rotate(45deg) translate(5px,5px)"
+          : "";
+        bars[1].style.opacity = open ? "0" : "1";
+        bars[2].style.transform = open
+          ? "rotate(-45deg) translate(5px,-5px)"
+          : "";
+      }
+
+      // Close mobile menu on resize
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          document.getElementById("mobileMenu").classList.remove("open");
+          const bars = document.querySelectorAll(".nav-hamburger span");
+          bars.forEach((b) => {
+            b.style.transform = "";
+            b.style.opacity = "1";
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
