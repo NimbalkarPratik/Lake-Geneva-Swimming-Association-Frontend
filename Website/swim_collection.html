@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LGSA Swims — Lake Geneva Swimming Association</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a2a3a;
+  --lake-blue: #2c6faa;
+  --lake-light: #4a9eda;
+  --gold: #c5973e;
+  --cream: #f8f6f1;
+  --white: #ffffff;
+  --text-dark: #2a2a2a;
+  --text-mid: #5a5a5a;
+  --text-light: #8a8a8a;
+  --border: #e0ddd6;
+  --section-bg: #f2f0eb;
+  --red-accent: #c0392b;
+  --green-accent: #27ae60;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  background: var(--cream);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.topbar-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--navy);
+}
+.topbar-logo img {
+  height: 48px;
+  width: auto;
+}
+.topbar-logo span {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.topbar-nav {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.topbar-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text-mid);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.topbar-nav a:hover,
+.topbar-nav a.active {
+  color: var(--lake-blue);
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1e3d5c 50%, var(--lake-blue) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 40px 70px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,120 Q150,80 300,120 T600,120 T900,120 T1200,120 V200 H0 Z' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E") repeat-x bottom;
+  background-size: 1200px 200px;
+  pointer-events: none;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  margin-bottom: 16px;
+  position: relative;
+}
+.hero p {
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 300;
+  opacity: 0.85;
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── SWIM SELECTOR ── */
+.swim-selector {
+  max-width: 1100px;
+  margin: -36px auto 60px;
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+}
+.swim-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.swim-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+}
+.swim-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+.swim-card.active {
+  border-color: var(--lake-blue);
+  box-shadow: 0 8px 30px rgba(44,111,170,0.2);
+}
+.swim-card .distance-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--lake-blue), var(--lake-light));
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+.swim-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.swim-card .route {
+  font-size: 12px;
+  color: var(--text-light);
+  font-weight: 500;
+}
+.swim-card .chevron {
+  margin-top: 12px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--section-bg);
+  line-height: 24px;
+  font-size: 12px;
+  color: var(--text-mid);
+  transition: all 0.3s;
+}
+.swim-card.active .chevron {
+  background: var(--lake-blue);
+  color: var(--white);
+  transform: rotate(180deg);
+}
+
+/* ── DROPDOWN PANELS ── */
+.swim-panels {
+  max-width: 1100px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+}
+.swim-panel {
+  display: none;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+  overflow: hidden;
+  animation: panelSlide 0.4s ease;
+}
+.swim-panel.active { display: block; }
+
+@keyframes panelSlide {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Panel Header */
+.panel-header {
+  display: flex;
+  align-items: stretch;
+  min-height: 340px;
+}
+.panel-header-img {
+  flex: 0 0 45%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.panel-header-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26,42,58,0.3), transparent);
+}
+.panel-header-content {
+  flex: 1;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.panel-header-content .swim-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--lake-blue);
+  margin-bottom: 12px;
+}
+.panel-header-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.panel-header-content .subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+.panel-header-content .description {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  max-width: 520px;
+}
+.btn-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 12px 28px;
+  background: var(--lake-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: fit-content;
+}
+.btn-book:hover { background: #245d92; }
+
+/* Panel Sections */
+.panel-body { padding: 0 44px 48px; }
+
+.panel-section {
+  padding: 36px 0;
+  border-top: 1px solid var(--border);
+}
+.panel-section:first-child { border-top: none; }
+
+.panel-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+.panel-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.panel-section p,
+.panel-section li {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+.panel-section ul,
+.panel-section ol {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+.panel-section li { margin-bottom: 6px; }
+
+/* Entry Includes Grid */
+.includes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.include-item {
+  background: var(--section-bg);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.include-item .icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+.include-item span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+/* Route Map */
+.route-map {
+  margin-top: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.route-map img {
+  width: 100%;
+  display: block;
+}
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.faq-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.faq-q {
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  user-select: none;
+}
+.faq-q::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--lake-blue);
+  transition: transform 0.2s;
+}
+.faq-item.open .faq-q::after {
+  content: '−';
+}
+.faq-a {
+  display: none;
+  padding: 0 20px 16px;
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* Results Tables */
+.results-table-wrap {
+  overflow-x: auto;
+  margin-top: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.results-table thead {
+  background: var(--navy);
+  color: var(--white);
+}
+.results-table th {
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.results-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+.results-table tbody tr:hover {
+  background: rgba(44,111,170,0.03);
+}
+.results-table tbody tr:last-child td { border-bottom: none; }
+
+/* Distances Grid (Escape) */
+.distances-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+.distance-card {
+  background: var(--section-bg);
+  border-radius: 10px;
+  padding: 24px 16px;
+  text-align: center;
+}
+.distance-card .dist {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--lake-blue);
+  margin-bottom: 8px;
+}
+.distance-card p {
+  font-size: 12px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* Status Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.status-badge.on-hold {
+  background: #fef3e0;
+  color: #d4770b;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 36px 40px;
+  font-size: 13px;
+}
+.footer a {
+  color: var(--lake-light);
+  text-decoration: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .swim-cards { grid-template-columns: repeat(2, 1fr); }
+  .panel-header { flex-direction: column; }
+  .panel-header-img { flex: none; height: 220px; }
+  .panel-header-content { padding: 32px 24px; }
+  .panel-body { padding: 0 24px 36px; }
+  .includes-grid { grid-template-columns: 1fr 1fr; }
+  .distances-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .topbar-nav { display: none; }
+}
+
+@media (max-width: 600px) {
+  .swim-cards { grid-template-columns: 1fr; }
+  .topbar { padding: 0 16px; }
+  .hero { padding: 60px 20px 50px; }
+  .swim-selector { padding: 0 12px; }
+  .swim-panels { padding: 0 12px; }
+  .includes-grid { grid-template-columns: 1fr; }
+  .distances-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="./lgsa_website.html" class="topbar-logo">
+    <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1568643443903-U61Y74RTK49PZFUBZD29/LGSA+Logo+%286%29+smaller.png" alt="LGSA Logo">
+    <span>Lake Geneva Swimming Association</span>
+  </a>
+  <nav class="topbar-nav">
+    <a href="./lgsa_website.html">Home</a>
+    <a href="https://www.lgsa.com/en/what-is-the-lgsa">About</a>
+    <a href="./swim_collection.html" class="active">Swims</a>
+    <!-- <a href="./legends_and_awards.html">Legends</a> -->
+     <a href="./legends_and_awards.html">Legends</a>
+    <a href="https://www.lgsa.com/en/boutique">Boutique</a>
+    <a href="https://www.lgsa.com/en/contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>LGSA Guided Swims</h1>
+  <p>Choose your adventure. Select a swim below to explore routes, requirements, results and more.</p>
+</section>
+
+<!-- SWIM SELECTOR CARDS -->
+<div class="swim-selector">
+  <div class="swim-cards">
+    <div class="swim-card" data-panel="classique" onclick="openPanel('classique')">
+      <div class="distance-badge">13 KM</div>
+      <h3>Guided Classique</h3>
+      <div class="route">Lausanne → Évian-les-Bains</div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="swim-card" data-panel="nyvoirienne" onclick="openPanel('nyvoirienne')">
+      <div class="distance-badge">7 KM</div>
+      <h3>Guided Nyvoirienne</h3>
+      <div class="route">Nyon → Yvoire</div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="swim-card" data-panel="signature" onclick="openPanel('signature')">
+      <div class="distance-badge">70 KM</div>
+      <h3>Signature</h3>
+      <div class="route">Chillon Castle → Geneva</div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="swim-card" data-panel="escape" onclick="openPanel('escape')">
+      <div class="distance-badge">6.2 KM</div>
+      <h3>Escape Léman</h3>
+      <div class="route">Open Water → Évian-les-Bains</div>
+      <div class="chevron">▼</div>
+    </div>
+  </div>
+</div>
+
+<!-- SWIM PANELS -->
+<div class="swim-panels">
+
+  <!-- ═══════════════ CLASSIQUE ═══════════════ -->
+  <div class="swim-panel" id="panel-classique">
+    <div class="panel-header">
+      <div class="panel-header-img" style="background-image:url('https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1589553176529-I6ERNSZI03YDXARNBD6E/LGSA+Classique+results+social+sharing+image.jpg')"></div>
+      <div class="panel-header-content">
+        <div class="swim-label">Guided Swim</div>
+        <h2>Guided Classique</h2>
+        <div class="subtitle">The International Swim across Lake Geneva</div>
+        <p class="description">13km between Lausanne and Évian-les-Bains. This border-busting adventure traverses Lake Geneva at its widest point — a must for serious open-water swimmers and an ideal setting for a swimming holiday. Swim solo, in relay or as a group.</p>
+        <a href="https://lgsa.checkfront.com/reserve/?category_id=3" class="btn-book" target="_blank">Book Now →</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <!-- Entry Includes -->
+      <div class="panel-section">
+        <h3>Entry Includes</h3>
+        <div class="includes-grid">
+          <div class="include-item"><div class="icon">🚤</div><span>Escort boat, pilot &amp; lifeguard</span></div>
+          <div class="include-item"><div class="icon">🏅</div><span>Commemorative souvenir</span></div>
+          <div class="include-item"><div class="icon">🧢</div><span>Swim hat</span></div>
+        </div>
+      </div>
+      <!-- Route Map -->
+      <div class="panel-section">
+        <h3>Swim Route</h3>
+        <div class="route-map">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1590081151931-A3LRLGK7RI7681GCZIRP/LGSA+Classique+route+with+flags.png" alt="Classique Route Map">
+        </div>
+      </div>
+      <!-- How To -->
+      <div class="panel-section">
+        <h3>How to Attempt</h3>
+        <ol>
+          <li><strong>Choose your dates</strong> — Book as early as possible (no later than 31st March). Bookings cover the entire swim window; specific days cannot be selected.</li>
+          <li><strong>Secure your dates</strong> — Agree on T&Cs and pay a non-refundable deposit.</li>
+          <li><strong>Complete paperwork</strong> — Swimmer Information form, LGSA Medical and Self-Assessment Swim forms (after 1 Jan, at least 2 weeks before window start).</li>
+          <li><strong>Meet deadlines</strong> — Deposit upon booking; balance within 90 days or before 30 April. Registration may be cancelled if incomplete by 31 March.</li>
+          <li><strong>Late applications</strong> — Possible by arrangement only. Speak with the LGSA Secretary first.</li>
+        </ol>
+      </div>
+      <!-- FAQ -->
+      <div class="panel-section">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item"><div class="faq-q">What is the route?</div><div class="faq-a">Lausanne (Switzerland) to Évian-les-Bains (France). Direction depends on weather. Your escort boat guides you.</div></div>
+        <div class="faq-item"><div class="faq-q">When is the best time to swim?</div><div class="faq-a">Warmest water is typically July–August (18°C–25°C). Water quality is rated 'excellent'.</div></div>
+        <div class="faq-item"><div class="faq-q">Is there a time limit?</div><div class="faq-a">Typical completion: 3–6 hours. Maximum limit: 7 hours.</div></div>
+        <div class="faq-item"><div class="faq-q">Are wetsuits allowed?</div><div class="faq-a">Yes. Wetsuit swims are recorded under a separate classification.</div></div>
+        <div class="faq-item"><div class="faq-q">Can I swim in a relay or group?</div><div class="faq-a">Yes. Groups of up to 4 swimmers (must swim same pace) or relay teams.</div></div>
+        <div class="faq-item"><div class="faq-q">Is it a race or event?</div><div class="faq-a">No — it's a private guided swim arranged for you/your group.</div></div>
+      </div>
+      <!-- Results -->
+      <div class="panel-section">
+        <h3>Recent Successful Solo Swims</h3>
+        <div class="results-table-wrap">
+          <table class="results-table">
+            <thead><tr><th>Name</th><th>Nationality</th><th>Date</th><th>Time</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Henri Dhonte</td><td>France</td><td>15 Jul 2025</td><td>03:32:50</td><td>Wetsuit</td></tr>
+              <tr><td>Luc Garcia</td><td>France</td><td>24 Jul 2025</td><td>06:48:00</td><td>Wetsuit</td></tr>
+              <tr><td>Benoît Delahaye</td><td>France</td><td>28 Jul 2025</td><td>04:38:55</td><td>Wetsuit</td></tr>
+              <tr><td>Anthony Macdonald</td><td>United Kingdom</td><td>5 Aug 2025</td><td>04:37:56</td><td></td></tr>
+              <tr><td>Nicolas Tarlier</td><td>France</td><td>11 Aug 2025</td><td>06:08:41</td><td></td></tr>
+              <tr><td>Vicky Stewart</td><td>Switzerland</td><td>13 Aug 2025</td><td>06:52:00</td><td></td></tr>
+              <tr><td>Carole Mauprivez</td><td>France</td><td>18 Aug 2025</td><td>05:43:00</td><td></td></tr>
+              <tr><td>David Girardine</td><td>Switzerland</td><td>19 Aug 2025</td><td>11:23:17</td><td>2-way, Wetsuit</td></tr>
+              <tr><td>Philippe Laville</td><td>France</td><td>25 Aug 2025</td><td>05:16:00</td><td>Wetsuit</td></tr>
+              <tr><td>Ting Lim</td><td>France</td><td>3 Sep 2025</td><td>04:55:00</td><td></td></tr>
+              <tr><td>Edwina Harrison</td><td>Australia</td><td>5 Sep 2025</td><td>06:36:33</td><td></td></tr>
+              <tr><td>Diego Swine</td><td>Belgium</td><td>19 Sep 2025</td><td>04:40:47</td><td>Wetsuit</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ NYVOIRIENNE ═══════════════ -->
+  <div class="swim-panel" id="panel-nyvoirienne">
+    <div class="panel-header">
+      <div class="panel-header-img" style="background-image:url('https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1638368734035-7WTESCPO4HQW6C9OFUR7/e5bf3f9212495bd7f7c5b5592f64d963d67499b1_COVER.jpg')"></div>
+      <div class="panel-header-content">
+        <div class="swim-label">Guided Swim</div>
+        <h2>Guided Nyvoirienne</h2>
+        <div class="subtitle">The International Swim across the Petit Lac</div>
+        <p class="description">7km between Nyon and Yvoire. A border-busting adventure over a shorter distance — swim across the Petit Lac between the beautiful town of Nyon (Switzerland) and the medieval village Yvoire (France). Solo, relay, or group.</p>
+        <a href="https://lgsa.checkfront.com/reserve/?category_id=3" class="btn-book" target="_blank">Book Now →</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="panel-section">
+        <h3>Entry Includes</h3>
+        <div class="includes-grid">
+          <div class="include-item"><div class="icon">🚤</div><span>Escort boat, pilot &amp; lifeguard</span></div>
+          <div class="include-item"><div class="icon">🏅</div><span>Commemorative souvenir</span></div>
+          <div class="include-item"><div class="icon">🧢</div><span>Swim hat</span></div>
+        </div>
+      </div>
+      <div class="panel-section">
+        <h3>Swim Route</h3>
+        <div class="route-map">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1b8d1ba7-2f14-4a96-861e-d9b2f9a325c4/Screenshot+2021-12-01+at+14.44.34.png" alt="Nyvoirienne Route Map">
+        </div>
+      </div>
+      <div class="panel-section">
+        <h3>How to Attempt</h3>
+        <ol>
+          <li><strong>Choose your dates</strong> — Book early (no later than 31st March). Full swim window only.</li>
+          <li><strong>Secure your dates</strong> — T&Cs agreement and non-refundable deposit.</li>
+          <li><strong>Complete paperwork</strong> — Swimmer Information, Medical and Self-Assessment forms required.</li>
+          <li><strong>Meet deadlines</strong> — Deposit upon booking; balance within 90 days or before 30 April.</li>
+          <li><strong>Late applications</strong> — By arrangement only. Contact the LGSA Secretary.</li>
+        </ol>
+      </div>
+      <div class="panel-section">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item"><div class="faq-q">What is the route?</div><div class="faq-a">Nyon (Switzerland) to Nernier or Yvoire (France), depending on distance and conditions.</div></div>
+        <div class="faq-item"><div class="faq-q">Is there a time limit?</div><div class="faq-a">Typical: 1.5–3.5 hours. Maximum: 4.5 hours.</div></div>
+        <div class="faq-item"><div class="faq-q">Are wetsuits allowed?</div><div class="faq-a">Yes. Wetsuit swims recorded separately.</div></div>
+        <div class="faq-item"><div class="faq-q">Can I swim in a relay or group?</div><div class="faq-a">Yes. Up to 4 swimmers (same pace) or relay teams.</div></div>
+        <div class="faq-item"><div class="faq-q">Best time to swim?</div><div class="faq-a">Warmest water July–August, 18°C–25°C. Water quality 'excellent'.</div></div>
+      </div>
+      <div class="panel-section">
+        <h3>Recent Successful Solo Swims</h3>
+        <div class="results-table-wrap">
+          <table class="results-table">
+            <thead><tr><th>Name</th><th>Nationality</th><th>Date</th><th>Time</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Philippe Galland</td><td>Switzerland</td><td>7 Aug 2025</td><td>01:56:56</td><td>Wetsuit</td></tr>
+              <tr><td>Maria Kolosanova</td><td>Russia</td><td>27 Aug 2025</td><td>03:24:21</td><td></td></tr>
+              <tr><td>Maikel Van Der Velden</td><td>Germany</td><td>10 Sep 2025</td><td>02:19:29</td><td>Wetsuit</td></tr>
+              <tr><td>Esteban Petite</td><td>Switzerland</td><td>13 Sep 2025</td><td>02:33:55</td><td>Wetsuit</td></tr>
+              <tr><td>Steven Feld</td><td>USA</td><td>3 Jul 2023</td><td>02:38:55</td><td></td></tr>
+              <tr><td>Vicki Stewart</td><td>Switzerland / UK</td><td>22 Jul 2024</td><td>03:31:36</td><td></td></tr>
+              <tr><td>Laura Burns</td><td>USA</td><td>30 Aug 2024</td><td>03:57:48</td><td></td></tr>
+              <tr><td>Daniel F. Forero Sánchez</td><td>Colombia</td><td>30 Aug 2024</td><td>02:05:12</td><td>Wetsuit</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SIGNATURE ═══════════════ -->
+  <div class="swim-panel" id="panel-signature">
+    <div class="panel-header">
+      <div class="panel-header-img" style="background-image:url('https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1591800982038-MM4DA8GOJYHX0YB4EPTJ/19023393_658660134327914_2203123398127172764_o%2B%25281%2529.jpg')"></div>
+      <div class="panel-header-content">
+        <div class="swim-label">Ultimate Challenge</div>
+        <h2>The Signature</h2>
+        <div class="subtitle">The Ultimate Trophy Swim Across Lake Geneva</div>
+        <p class="description">~70km from Chillon Castle to Bains des Pâquis, Geneva — twice the length of the English Channel. Made entirely of fresh alpine water. Considered one of the toughest open-water swims in the world. Average duration: 28 hours.</p>
+        <a href="https://lgsa.checkfront.com/reserve/?category_id=6" class="btn-book" target="_blank">Book Now →</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="panel-section">
+        <h3>Swim Route</h3>
+        <div class="route-map">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1568730110155-548L1ZEORFQAHY3BB47W/Swim+Lake+Geneva+Signature" alt="Signature Route Map">
+        </div>
+      </div>
+      <div class="panel-section">
+        <h3>Self-Assessment Requirements</h3>
+        <p style="margin-bottom:12px"><strong>Solo attempt:</strong> Two swims over two consecutive days — 10 hours (day 1) and 7 hours (day 2) in water ≤18°C, without exiting, no wetsuit or buoyancy aids. Completed within 18 months of your swim window.</p>
+        <p><strong>Relay attempt:</strong> Two 2-hour swims on the same day in water ≤18°C, same conditions. Team leader uploads all forms.</p>
+      </div>
+      <div class="panel-section">
+        <h3>Training Considerations</h3>
+        <div class="includes-grid" style="grid-template-columns:repeat(2,1fr)">
+          <div class="include-item"><div class="icon">📏</div><span><strong>Distance</strong> — 70km+, over 2× the English Channel</span></div>
+          <div class="include-item"><div class="icon">🌡️</div><span><strong>Cold</strong> — Temps can drop to ≤18°C at night</span></div>
+          <div class="include-item"><div class="icon">🤢</div><span><strong>Nausea</strong> — Seasickness prevention essential</span></div>
+          <div class="include-item"><div class="icon">🌙</div><span><strong>Night swimming</strong> — Near-complete darkness likely</span></div>
+        </div>
+      </div>
+      <div class="panel-section">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item"><div class="faq-q">What are the requirements?</div><div class="faq-a">Certified self-assessment swim: 10-hour + 7-hour swims on consecutive days (solo) or two 2-hour swims same day (relay), in water ≤18°C without wetsuit.</div></div>
+        <div class="faq-item"><div class="faq-q">How long does it take?</div><div class="faq-a">Maximum 36 hours. Average ~28 hours (~2.5 km/h).</div></div>
+        <div class="faq-item"><div class="faq-q">Is the water clean?</div><div class="faq-a">Water quality 'excellent'. Temps 18°C–25°C, but can change abruptly.</div></div>
+        <div class="faq-item"><div class="faq-q">Do people not make it?</div><div class="faq-a">Some don't, due to fatigue, hypothermia, or conditions. As Churchill said — success is going from failure to failure without loss of enthusiasm.</div></div>
+        <div class="faq-item"><div class="faq-q">Do you provide support crew?</div><div class="faq-a">No — support crew is your responsibility. Essential to have a reliable crew who knows your habits.</div></div>
+      </div>
+      <div class="panel-section">
+        <h3>Gallery</h3>
+        <div class="gallery-grid">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1591800982038-MM4DA8GOJYHX0YB4EPTJ/19023393_658660134327914_2203123398127172764_o%2B%25281%2529.jpg" alt="Signature gallery 1">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1591723860235-GRSGI6UYKB4JDZYI6ERQ/d175419d-470f-45d4-8ca9-6d7f840e1295%2B%25281%2529.jpg" alt="Signature gallery 2">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1591800814661-E3WLBYXULDI74VSC1SSA/IMG_1355.JPG" alt="Signature gallery 3">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1568653657342-XR1B23HKE2PTW7TJERUE/19055490_658658620994732_4409028865964131327_o+%281%29.jpg" alt="Signature gallery 4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ESCAPE LÉMAN ═══════════════ -->
+  <div class="swim-panel" id="panel-escape">
+    <div class="panel-header">
+      <div class="panel-header-img" style="background-image:url('https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/620180d9-baf6-4e09-bee2-f42ac9e166f1/LGSA2019-108+%284%29.jpg')"></div>
+      <div class="panel-header-content">
+        <div class="swim-label">Adventure Event</div>
+        <h2>Escape Léman</h2>
+        <div class="subtitle">The Ultimate Lake Geneva Adventure</div>
+        <span class="status-badge on-hold">⏸ On hold until further notice</span>
+        <p class="description">An adventure swim combining excitement, iconic sailing, and multiple distances. Board one of Lake Geneva's iconic lateen sailing vessels, cruise across the lake, then swim 6.2km, 1.5km, 750m, or 200m back to Évian-les-Bains.</p>
+        <a href="https://share.hsforms.com/1u8yELl7eSPSaLA-itflSDA3khng" class="btn-book" target="_blank" style="background:var(--gold)">Subscribe for Updates →</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="panel-section">
+        <h3>Entry Includes</h3>
+        <div class="includes-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="include-item"><div class="icon">⛵</div><span>Transport on iconic lateen boats</span></div>
+          <div class="include-item"><div class="icon">🛟</div><span>Professional water safety team</span></div>
+          <div class="include-item"><div class="icon">🧢</div><span>Event swim hat &amp; medal</span></div>
+        </div>
+      </div>
+      <div class="panel-section">
+        <h3>Swim Distances</h3>
+        <div class="distances-grid">
+          <div class="distance-card"><div class="dist">6.2km</div><p>Start at the Franco-Swiss border. The full adventure.</p></div>
+          <div class="distance-card"><div class="dist">1.5km</div><p>Popular open-water challenge or Classique warm-down.</p></div>
+          <div class="distance-card"><div class="dist">750m</div><p>Sprint to finish — great for triathletes.</p></div>
+          <div class="distance-card"><div class="dist">200m</div><p>Perfect introduction to open-water swimming.</p></div>
+        </div>
+      </div>
+      <div class="panel-section">
+        <h3>Swim Route</h3>
+        <div class="route-map">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1590684451317-DC4SGYO8GPMGVZZ117NG/LGSA+Escape+Le%CC%81man+route+with+flags+FR.png" alt="Escape Léman Route">
+        </div>
+      </div>
+      <div class="panel-section">
+        <h3>Frequently Asked Questions</h3>
+        <div class="faq-item"><div class="faq-q">Is it a race?</div><div class="faq-a">No — it's an adventure swim celebrating your achievement. Not timed competitively.</div></div>
+        <div class="faq-item"><div class="faq-q">Will there be feed stations?</div><div class="faq-a">Yes, every ~2km for the 6.2km distance only (water, energy bars, gels).</div></div>
+        <div class="faq-item"><div class="faq-q">Can I bring my own kayaker?</div><div class="faq-a">Yes, but they integrate into the safety team. Personal feeding kayakers allowed additionally.</div></div>
+        <div class="faq-item"><div class="faq-q">Can I wear a tow-float?</div><div class="faq-a">Mandatory for 6.2km and all skins swimmers. Optional for wetsuited 1.5km/750m/200m.</div></div>
+        <div class="faq-item"><div class="faq-q">Is there a cut-off time?</div><div class="faq-a">6.2km: 36 min/km cut-off. Last swimmers finish around 1pm. This is a hard stop.</div></div>
+      </div>
+      <div class="panel-section">
+        <h3>About the Barques du Léman</h3>
+        <p>Meet the largest lateen sailing boats in the world! The original Savoie was built in 1896. The current replica "Savoie 513" honours its ancestor. The Neptune dates from 1904 and was gifted by the State of Geneva for its preservation. Step aboard and let your lacustrine adventure begin!</p>
+        <div class="gallery-grid" style="margin-top:16px; grid-template-columns:repeat(4,1fr)">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1580403488958-SC57GI4K3MTBL2BL2TTM/Barque+la+Savoie+a%CC%80+Thonon.jpg" alt="Barque 1">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1582485552876-47F7PH1EPZH70TJMLEMN/Barque%2Bla%2BSavoie%2Bet%2Bun%2Bautre%2Bbateau.jpg" alt="Barque 2">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1591285713950-0CUE5E8O5O6RU6CNW9GT/From+the+association+Savoie+oreille+1+%281%29.jpg" alt="Barque 3">
+          <img src="https://images.squarespace-cdn.com/content/v1/5d3f0b4e7a5c4300017db833/1581008237508-VXEVPHCZLPF9NC0813BY/IMG_9539.JPG" alt="Barque 4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2025 Lake Geneva Swimming Association · <a href="https://www.lgsa.com" target="_blank">lgsa.com</a></p>
+</footer>
+
+<script>
+function openPanel(id) {
+  const cards = document.querySelectorAll('.swim-card');
+  const panels = document.querySelectorAll('.swim-panel');
+  const clickedCard = document.querySelector(`.swim-card[data-panel="${id}"]`);
+  const targetPanel = document.getElementById(`panel-${id}`);
+
+  // If already active, close it
+  if (clickedCard.classList.contains('active')) {
+    clickedCard.classList.remove('active');
+    targetPanel.classList.remove('active');
+    return;
+  }
+
+  // Close all
+  cards.forEach(c => c.classList.remove('active'));
+  panels.forEach(p => p.classList.remove('active'));
+
+  // Open selected
+  clickedCard.classList.add('active');
+  targetPanel.classList.add('active');
+
+  // Scroll to panel
+  setTimeout(() => {
+    targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// FAQ accordion
+document.addEventListener('click', function(e) {
+  const q = e.target.closest('.faq-q');
+  if (!q) return;
+  const item = q.parentElement;
+  // Close siblings
+  item.parentElement.querySelectorAll('.faq-item').forEach(i => {
+    if (i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open');
+});
+</script>
+</body>
+</html>
