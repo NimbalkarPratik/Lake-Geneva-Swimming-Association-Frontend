@@ -1248,6 +1248,43 @@
       </main>
 
       <div class="detail-wrap" id="detail-wrap"></div>
+
+      <div class="booking-overlay" id="booking-overlay" onclick="closeBookingPopupIfOutside(event)">
+        <div class="booking-panel">
+          <div class="booking-header">
+            <div class="booking-header-info">
+              <div class="booking-header-label">Event booking</div>
+              <div class="booking-header-title" id="booking-event-name">Choose a date</div>
+              <div class="booking-event-availability" id="booking-availability">Availability: 10 spots per date</div>
+            </div>
+            <button class="booking-close-btn" onclick="closeBookingPopup()">✕</button>
+          </div>
+          <div class="booking-body">
+            <div class="single">
+              <div class="cal-wrap">
+                <div class="cal-nav">
+                  <button onclick="changeBookingMonth(-1,'booking-d')">&#8249;</button>
+                  <span id="booking-cal-label"></span>
+                  <button onclick="changeBookingMonth(1,'booking-d')">&#8250;</button>
+                </div>
+                <div class="date-filter-hint" id="booking-date-filter-hint">
+                  Select an available date for this event.
+                </div>
+                <div class="cal-grid" id="booking-cal-grid"></div>
+              </div>
+            </div>
+            <div class="booking-selected-date" id="booking-selected-date">
+              No date selected.
+            </div>
+            <div class="booking-availability-note" id="booking-availability-note">
+              Each event date has 10 spots available.
+            </div>
+          </div>
+          <div class="booking-footer">
+            <button class="btn-book-now" onclick="confirmBookingDate()">Confirm date & continue</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- UPSELL POPUP -->
@@ -3565,6 +3602,8 @@
         { key: "safetySupport", label: "Safety & Support" },
         { key: "whatsIncluded", label: "What's included" },
         { key: "entryLogistics", label: "Entry & Logistics" },
+        { key: "dates", label: "Dates" },
+        { key: "prices", label: "Prices" },
       ];
 
       /* ═══ PRODUCTS ═══ */
@@ -4074,6 +4113,56 @@
         return `<p class="tab-placeholder">Content coming soon.</p>`;
       }
 
+      function getProductPriceTerms(product) {
+        if (!product?.entryLogistics) return null;
+        return (
+          product.entryLogistics["Price & entry terms"] ||
+          product.entryLogistics["Price, Entry & Terms"] ||
+          product.entryLogistics["Price, entry terms"] ||
+          null
+        );
+      }
+
+      function renderPricesTab(product) {
+        const terms = getProductPriceTerms(product);
+        if (!terms || !terms.length)
+          return `<p class="tab-placeholder">Price and entry terms are not available.</p>`;
+        return `<div class="tab-sub-title">Price & entry terms</div><ul class="tab-bullet-list">${terms
+          .map((line) => `<li>${line}</li>`)
+          .join("")}</ul>`;
+      }
+
+      function renderEntryLogisticsTab(product) {
+        if (!product?.entryLogistics)
+          return `<p class="tab-placeholder">Entry & logistics details are not available.</p>`;
+        const copy = { ...product.entryLogistics };
+        delete copy["Price & entry terms"];
+        delete copy["Price, Entry & Terms"];
+        delete copy["Price, entry terms"];
+        if (!Object.keys(copy).length)
+          return `<p class="tab-placeholder">Entry & logistics details are not available.</p>`;
+        return renderTabBody(copy);
+      }
+
+      function renderDatesTab(product) {
+        if (!product || product.type === "merch")
+          return `<p class="tab-placeholder">No event dates available for this item.</p>`;
+        if (!googleEventsLoaded)
+          return `<p class="tab-placeholder">Loading event dates...</p>`;
+        const dateSet = getProductEventDateSet(product.cartId);
+        const dates = Array.from(dateSet).sort();
+        if (!dates.length)
+          return `<p class="tab-placeholder">No event dates available for this swim.</p>`;
+        return `<div class="tab-sub-title">Event dates</div>
+        <ul class="tab-bullet-list">${dates
+          .map(
+            (key) =>
+              ``,
+          )
+          .join("")}</ul>
+          `;
+      }
+
       function showDetail(id) {
         const p = products[id];
         if (!p) return;
@@ -4089,9 +4178,21 @@
             `<button class="tab-btn${i === 0 ? " active" : ""}" onclick="switchTab('${id}','${t.key}',this)">${t.label}</button>`,
         ).join("");
         const tabPanels = TABS.map(
-          (t, i) =>
-            `<div class="tab-panel${i === 0 ? " active" : ""}" id="panel-${id}-${t.key}"><div class="tab-section-title">${t.label}</div>${renderTabBody(p[t.key])}</div>`,
+          (t, i) => {
+            let content = "";
+            if (t.key === "prices") content = renderPricesTab(p);
+            else if (t.key === "dates") content = renderDatesTab(p);
+            else if (t.key === "entryLogistics") content = renderEntryLogisticsTab(p);
+            else content = renderTabBody(p[t.key]);
+            return `<div class="tab-panel${i === 0 ? " active" : ""}" id="panel-${id}-${t.key}"><div class="tab-section-title">${t.label}</div>${content}</div>`;
+          },
         ).join("");
+        if (!googleEventsLoaded && p.type !== "merch") {
+          loadGoogleCalendarEvents().then(() => {
+            const datesPanel = document.getElementById(`panel-${id}-dates`);
+            if (datesPanel) datesPanel.innerHTML = renderDatesTab(p);
+          });
+        }
         const imgCls = p.imgStyle.includes("0d2d5e")
           ? "img-signature-70"
           : p.imgStyle.includes("flagged")
@@ -4172,6 +4273,7 @@
       }
 
       function backToCatalog() {
+        clearSelectedDate('d');
         document.getElementById("catalog-main").style.display = "";
         const dw = document.getElementById("detail-wrap");
         dw.classList.remove("active");
@@ -4181,29 +4283,260 @@
 
       /* ═══ UPSELL ═══ */
       let _pendingWise = null;
+      const EVENT_MAX_AVAILABILITY = 10;
+      let _bookingEventId = null;
+      let _bookingEventDateSet = new Set();
+      let _bookingSelectedDate = null;
+      let _bookingSelectedEndDate = null;
+      let _bookingCalD = null;
       function openWise(productId) {
         const p = products[productId];
         if (!p) return;
-        const selectedDate = getSelectedFilterDate();
-        const hasEvent = selectedDate
-          ? getEventsForDate(selectedDate).length > 0
-          : false;
         const requiresDate = p.type !== "merch";
-        if (requiresDate && (!selectedDate || !hasEvent)) {
-          showToast(
-            "Please select a valid event date on the calendar before booking.",
+        if (requiresDate) {
+          const dates = getProductEventDateSet(productId);
+          if (!dates.size && !googleEventsLoaded) {
+            showToast("Loading event availability...");
+            loadGoogleCalendarEvents().then(() => openWise(productId));
+            return;
+          }
+          if (!dates.size) {
+            showToast(
+              "No event dates are available for this booking at the moment.",
+            );
+            return;
+          }
+          _bookingEventId = productId;
+          _bookingSelectedDate = null;
+          _bookingSelectedEndDate = null;
+          _bookingEventDateSet = dates;
+          _bookingCalD = new Date(_now.getFullYear(), _now.getMonth(), 1);
+          document.getElementById("booking-event-name").textContent = p.title;
+          document.getElementById(
+            "booking-availability",
+          ).textContent = `Availability: ${EVENT_MAX_AVAILABILITY} spots per date`;
+          document.getElementById(
+            "booking-selected-date",
+          ).textContent = "No date selected.";
+          document.getElementById(
+            "booking-availability-note",
+          ).textContent = `Each event date has ${EVENT_MAX_AVAILABILITY} spots available.`;
+          buildBookingCal(
+            _bookingCalD,
+            "booking-cal-grid",
+            "booking-cal-label",
+            null,
+            "booking-d",
           );
+          document.getElementById("booking-overlay").classList.add("open");
+          document.body.style.overflow = "hidden";
           return;
         }
         _pendingWise = {
           type: "product",
           id: productId,
-          date: selectedDate ? selectedDate.toISOString() : null,
-          dateKey: selectedDate ? normalizeDateKey(selectedDate) : null,
+          date: null,
+          dateKey: null,
         };
-        syncUpsellItemStates();
-        document.getElementById("upsell-overlay").classList.add("open");
-        document.body.style.overflow = "hidden";
+        openPaymentMethod();
+      }
+
+      function getProductEventDateSet(productId) {
+        const set = new Set();
+        const matcher = getProductEventMatcher(productId);
+        if (!matcher) return set;
+        googleEvents.forEach((event) => {
+          const summary = (event.summary || "").toLowerCase();
+          if (!matcher.test(summary)) return;
+          if (!(event.start instanceof Date) || Number.isNaN(event.start.getTime())) return;
+          const endDate =
+            event.end instanceof Date && !Number.isNaN(event.end.getTime())
+              ? new Date(event.end)
+              : new Date(event.start);
+          const inclusiveEnd = new Date(endDate);
+          if (event.isAllDay || isMidnight(endDate)) {
+            inclusiveEnd.setDate(inclusiveEnd.getDate() - 1);
+          }
+          if (inclusiveEnd < event.start) {
+            inclusiveEnd.setTime(event.start.getTime());
+          }
+          for (
+            let d = new Date(event.start);
+            d <= inclusiveEnd;
+            d.setDate(d.getDate() + 1)
+          ) {
+            set.add(normalizeDateKey(d));
+          }
+        });
+        return set;
+      }
+
+      function getProductEventMatcher(productId) {
+        const map = {
+          "la-signature-70": /la signature\s*70/i,
+          "la-signature-140": /la signature\s*140/i,
+          "la-classique": /la classique/i,
+          "guided-classique": /guided classique/i,
+          "guided-nyvoirienne": /guided nyvoirienne/i,
+          "la-nyvoirienne": /la nyvoirienne/i,
+          "lake-geneva-initiation": /lake geneva initiation/i,
+          "swim-stronger": /swim stronger|swim camp|training camp/i,
+        };
+        return map[productId] || null;
+      }
+
+      function buildBookingCal(date, gridId, labelId, selDay, prefix) {
+        document.getElementById(labelId).textContent =
+          MONTHS[date.getMonth()] + " " + date.getFullYear();
+        const grid = document.getElementById(gridId);
+        const first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+        const startOffset = first === 0 ? 6 : first - 1;
+        const days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        const td = _now.getDate(),
+          tm = _now.getMonth(),
+          ty = _now.getFullYear();
+        const selectedKeyStart = _bookingSelectedDate
+          ? normalizeDateKey(_bookingSelectedDate)
+          : null;
+        const selectedKeyEnd = _bookingSelectedEndDate
+          ? normalizeDateKey(_bookingSelectedEndDate)
+          : null;
+        let html = DNAMES.map((d) => `<div class="cal-head">${d}</div>`).join("");
+        for (let i = 0; i < startOffset; i++)
+          html += `<div class="cal-cell cal-empty"></div>`;
+        for (let d = 1; d <= days; d++) {
+          const cellDate = new Date(date.getFullYear(), date.getMonth(), d);
+          const dateKey = normalizeDateKey(cellDate);
+          const isToday =
+            d === td && date.getMonth() === tm && date.getFullYear() === ty;
+          let isSelected = false;
+          if (selectedKeyStart && selectedKeyEnd) {
+            isSelected = dateKey >= selectedKeyStart && dateKey <= selectedKeyEnd;
+          } else if (selectedKeyStart) {
+            isSelected = selectedKeyStart === dateKey;
+          }
+          const isAllowed = _bookingEventDateSet.has(dateKey);
+          let cls = "cal-cell";
+          if (!isAllowed) {
+            cls += " cal-disabled";
+          } else {
+            cls += " cal-has-event cal-available";
+          }
+          if (isSelected) cls += " cal-selected";
+          const onclick = isAllowed
+            ? `onclick="bookingSelectDay(${d}, '${prefix}')"`
+            : "";
+          html += `<div class="${cls}" ${onclick}>${d}</div>`;
+        }
+        grid.innerHTML = html;
+      }
+
+      function changeBookingMonth(dir, prefix) {
+        if (prefix === "booking-d") {
+          _bookingCalD.setMonth(_bookingCalD.getMonth() + dir);
+          buildBookingCal(
+            _bookingCalD,
+            "booking-cal-grid",
+            "booking-cal-label",
+            null,
+            "booking-d",
+          );
+        }
+      }
+
+      function bookingSelectDay(d, prefix) {
+        const cal = prefix === "booking-d" ? _bookingCalD : _bookingCalM;
+        const clicked = new Date(cal.getFullYear(), cal.getMonth(), d);
+        const dateKey = normalizeDateKey(clicked);
+        if (!_bookingEventDateSet.has(dateKey)) return;
+
+        // If clicked date already equals current selected range, toggle off
+        const selStartKey = _bookingSelectedDate
+          ? normalizeDateKey(_bookingSelectedDate)
+          : null;
+        const selEndKey = _bookingSelectedEndDate
+          ? normalizeDateKey(_bookingSelectedEndDate)
+          : null;
+        if (selStartKey && selEndKey && dateKey === selStartKey && dateKey === selEndKey) {
+          _bookingSelectedDate = null;
+          _bookingSelectedEndDate = null;
+        } else {
+          // Expand to contiguous range within _bookingEventDateSet
+          let start = new Date(clicked);
+          let end = new Date(clicked);
+
+          // expand backwards
+          while (true) {
+            const prev = new Date(start);
+            prev.setDate(prev.getDate() - 1);
+            const k = normalizeDateKey(prev);
+            if (_bookingEventDateSet.has(k)) start = prev; else break;
+          }
+          // expand forwards
+          while (true) {
+            const next = new Date(end);
+            next.setDate(next.getDate() + 1);
+            const k = normalizeDateKey(next);
+            if (_bookingEventDateSet.has(k)) end = next; else break;
+          }
+
+          _bookingSelectedDate = start;
+          _bookingSelectedEndDate = end;
+        }
+
+        buildBookingCal(
+          _bookingCalD,
+          "booking-cal-grid",
+          "booking-cal-label",
+          null,
+          "booking-d",
+        );
+
+        const selectedText = _bookingSelectedDate
+          ? `Selected: ${_bookingSelectedDate.toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })} — ${_bookingSelectedEndDate.toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}`
+          : "No date selected.";
+        document.getElementById("booking-selected-date").textContent =
+          selectedText;
+      }
+
+      function confirmBookingDate() {
+        if (!_bookingSelectedDate || !_bookingEventId) {
+          showToast("Please select an available date before continuing.");
+          return;
+        }
+        _pendingWise = {
+          type: "product",
+          id: _bookingEventId,
+          date: _bookingSelectedDate.toISOString(),
+          dateEnd: _bookingSelectedEndDate
+            ? _bookingSelectedEndDate.toISOString()
+            : null,
+          dateKey: normalizeDateKey(_bookingSelectedDate),
+          dateKeyEnd: _bookingSelectedEndDate
+            ? normalizeDateKey(_bookingSelectedEndDate)
+            : null,
+        };
+        closeBookingPopup();
+        openPaymentMethod();
+      }
+
+      function closeBookingPopup() {
+        document.getElementById("booking-overlay").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      function closeBookingPopupIfOutside(e) {
+        if (e.target === document.getElementById("booking-overlay")) {
+          closeBookingPopup();
+        }
       }
 
       function syncUpsellItemStates() {
@@ -4286,8 +4619,28 @@
             ? products[_pendingWise.id]
             : null;
         const el = document.getElementById("paymethod-header-amount");
-        if (p) el.textContent = `${p.title} · ${p.priceLabel}`;
-        else if (_pendingWise && _pendingWise.type === "custom")
+        if (p) {
+          el.textContent = `${p.title} · ${p.priceLabel}`;
+          if (_pendingWise.date) {
+            if (_pendingWise.dateEnd) {
+              el.textContent += ` · ${new Date(_pendingWise.date).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}–${new Date(_pendingWise.dateEnd).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}`;
+            } else {
+              el.textContent += ` · ${new Date(_pendingWise.date).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}`;
+            }
+          }
+        } else if (_pendingWise && _pendingWise.type === "custom")
           el.textContent =
             "€" +
             _pendingWise.amount.toLocaleString("en-EU", {
@@ -5330,6 +5683,33 @@
           renderGoogleCalendarPanel();
         }
       }
+      function getEventTypeForCell(cellDate) {
+        const dateKey = normalizeDateKey(cellDate);
+        for (const event of googleEvents) {
+          if (!event || !event.summary) continue;
+          const start = event.start instanceof Date ? event.start : new Date(event.start);
+          const endDate =
+            event.end instanceof Date && !Number.isNaN(event.end.getTime())
+              ? new Date(event.end)
+              : new Date(start);
+          const inclusiveEnd = new Date(endDate);
+          if (event.isAllDay || isMidnight(endDate)) {
+            inclusiveEnd.setDate(inclusiveEnd.getDate() - 1);
+          }
+          if (inclusiveEnd < start) {
+            inclusiveEnd.setTime(start.getTime());
+          }
+          const startKey = normalizeDateKey(start);
+          const endKey = normalizeDateKey(inclusiveEnd);
+          if (dateKey < startKey || dateKey > endKey) continue;
+          const summary = (event.summary || "").toLowerCase();
+          if (/training camp|swim camp|training/i.test(summary)) return "training";
+          if (/guided/i.test(summary)) return "guided";
+          if (/event|classic|signature|nyvoirienne|initiation|stronger/i.test(summary)) return "event";
+        }
+        return null;
+      }
+
       function buildCal(date, gridId, labelId, selDay, prefix) {
         document.getElementById(labelId).textContent =
           MONTHS[date.getMonth()] + " " + date.getFullYear();
@@ -5363,6 +5743,7 @@
           );
           const cellDate = new Date(date.getFullYear(), date.getMonth(), d);
           const hasEvent = googleEventDateSet.has(dateKey);
+          const eventType = hasEvent ? getEventTypeForCell(cellDate) : null;
           let cls = "cal-cell";
           if (hasEvent) {
             cls += " cal-has-event cal-available";
@@ -5371,6 +5752,7 @@
           }
           if (isSel) cls += " cal-selected";
           else if (isToday) cls += " cal-today";
+          if (eventType) cls += ` ${eventType}`;
           html += `<div class="${cls}" onclick="selectDay(${d},'${prefix}')">${d}</div>`;
         }
         grid.innerHTML = html;
@@ -5582,13 +5964,15 @@
           currency: "EUR",
           payment_method: "Wise",
           swimmer: swimmerData,
-          booking:
+                booking:
             _pendingWise && _pendingWise.type === "product"
               ? {
                   product_id: _pendingWise.id,
                   product_title: products[_pendingWise.id]?.title || "",
                   booking_date: _pendingWise.date || "",
+                  booking_date_end: _pendingWise.dateEnd || "",
                   booking_date_key: _pendingWise.dateKey || "",
+                  booking_date_key_end: _pendingWise.dateKeyEnd || "",
                 }
               : null,
         };
