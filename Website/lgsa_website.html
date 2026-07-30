@@ -9,6 +9,7 @@
       rel="stylesheet"
     />
     <link href="./lgsa-website_style.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="./assets/Favicon.png" />
     <style>
       /* ── RESET ── */
       *,
@@ -101,6 +102,8 @@
         display: flex;
         gap: 55px;
         align-items: center;
+        position: absolute;
+        left: 29%;
       }
       .nav-links a {
         font-size: 14px;
@@ -120,6 +123,8 @@
         font-size: 14px;
         font-weight: 600;
         transition: background 0.2s;
+        position: absolute;
+        right: 2%;
       }
       .nav-cta:hover {
         background: var(--blue-dark);
@@ -130,6 +135,8 @@
         gap: 5px;
         background: none;
         padding: 8px;
+        position: absolute;
+        right: 2%;
       }
       .nav-hamburger span {
         display: block;
@@ -749,7 +756,9 @@
       }
       .lgsa_main_logo {
           height: 72%;
-          width: 8%;
+          width: 6%;
+          position: absolute;
+          left: 2%;
       }
 
       /* Privacy Policy Modal */
@@ -1060,7 +1069,7 @@
         </button>
       </div>
     </nav>
-            <section class="section_2 relative w-full" style="min-height: 514px;">
+            <section class="section_2 relative w-full" style="min-height: 525px;">
                 <div class="absolute inset-0" style="background: linear-gradient(269deg, rgba(255, 255, 255, 0) -0.47%, rgba(0, 0, 0, 0.3) 99.13%);">
                 </div>
                 <div class="absolute lg:block header_image_top top-4 right-4">
@@ -1190,16 +1199,22 @@
                 <div class="absolute inset-0 bottom_main_image">
                 </div>
                 <div class="absolute inset-0 bg-[rgba(0,31,58,0.50)]"></div>
-                <div class="absolute inset-0 opacity-10" style="background: radial-gradient(249.34% 51.04%, rgb(0, 94, 178) 0%, rgba(0, 94, 178, 0) 50%, rgba(0, 94, 178, 0) 100%);">
+                <div class="absolute inset-0 opacity-10"
+                    style="background: radial-gradient(249.34% 51.04%, rgb(0, 94, 178) 0%, rgba(0, 94, 178, 0) 50%, rgba(0, 94, 178, 0) 100%);">
                 </div>
-                <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 py-16 min-h-[262px]">
-                    <h2 class="text-white font-bold leading-[1.2] tracking-[-0.02em] mb-4 lower_section_heading" style="font-size: clamp(28px, 3.5vw, 40px);">One conversation. Clear fit.</h2>
+                <div
+                    class="relative z-10 flex flex-col items-center justify-center text-center px-6 py-16 min-h-[262px]">
+                    <h2 class="text-white font-bold leading-[1.2] tracking-[-0.02em] mb-4 lower_section_heading"
+                        style="font-size: clamp(28px, 3.5vw, 40px);">One conversation. Clear fit.</h2>
                     <p class="text-white/80 text-[16px] font-medium leading-[1.5] mb-8 max-w-[535px]">We'll help you
                         choose the right format for your team, goals and timing.</p>
-                    <button onclick="openPopup()" class="bg-[#005EB2] text-white text-[14px] font-semibold tracking-[0.7px] px-10 py-3 hover:bg-blue-800 transition-colors fix_a_meeting_btn">Fix
+                    <button onclick="openPopup()"
+                        class="bg-[#005EB2] text-white text-[14px] font-semibold tracking-[0.7px] px-10 py-3 hover:bg-blue-800 transition-colors fix_a_meeting_btn">Fix
                         a meeting</button>
                 </div>
-                <div class="absolute bottom-4 left-5 flex items-end gap-3"><img src="https://api.builder.io/api/v1/image/assets/TEMP/ab65158cc42cce0a22f636c8957c80a9ef4d3098?width=184" alt="LGSA" class="w-[92px] h-auto object-contain bg-white p-1">
+                <div class="absolute bottom-4 left-5 flex items-end gap-3"><img
+                        src="https://api.builder.io/api/v1/image/assets/TEMP/ab65158cc42cce0a22f636c8957c80a9ef4d3098?width=184"
+                        alt="LGSA" class="w-[92px] h-auto object-contain bg-white p-1">
                     <p class="text-white text-[10px] font-normal leading-snug max-w-[140px] charity_text">LGSA is proud to associate
                         &amp; support in aid of The Brain Tumour Charity</p>
                 </div>
