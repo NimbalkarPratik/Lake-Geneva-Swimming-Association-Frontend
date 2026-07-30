@@ -465,7 +465,7 @@
                 <span class="badge badge-core">Core</span>
               </div>
               <div class="product-body">
-                <div class="product-title">Swim Stronger</div>
+                <div class="product-title">swim stronger swim camp</div>
                 <div class="product-desc">
                   5-day training camp to improve technique, endurance, and open
                   water performance.
@@ -3209,7 +3209,99 @@
       }
 
       /* ── CHANGE 1: use central product data for cart prices ── */
-      function addToCart(id, name, price, type, imgClass, btnEl, imgUrl) {
+      function isBookingRequired(type) {
+        return !!type && type !== "merch" && type !== "merchandise";
+      }
+
+      function formatBookingDateRange(dateValue, dateEndValue) {
+        const parseDate = (value) => {
+          if (!value) return null;
+          const parsed = value instanceof Date ? value : new Date(value);
+          return Number.isNaN(parsed.getTime()) ? null : parsed;
+        };
+        const start = parseDate(dateValue);
+        if (!start) return "";
+        const startText = start.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+        const end = parseDate(dateEndValue);
+        if (!end) return startText;
+        return `${startText} – ${end.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })}`;
+      }
+
+      function getBookingDateSummary(item) {
+        if (!item) return "";
+        if (item.bookingDateLabel) return item.bookingDateLabel;
+        return formatBookingDateRange(item.bookingDate, item.bookingDateEnd);
+      }
+
+      function prepareBookingSelection(productId, flow) {
+        const p = products[productId];
+        if (!p) return;
+        const context = flow?.context || {};
+        const effectiveType = p.type || context.type || "flagship";
+        const requiresDate = isBookingRequired(effectiveType);
+        if (!requiresDate) {
+          addToCart(
+            productId,
+            context.name || p.title || productId,
+            context.price || p.price,
+            context.type || effectiveType,
+            context.imgClass || p.imgClass,
+            context.btnEl,
+            context.imgUrl || p.imgUrl,
+          );
+          return;
+        }
+
+        const dates = getProductEventDateSet(productId);
+        if (!dates.size && !googleEventsLoaded) {
+          showToast("Loading event availability...");
+          loadGoogleCalendarEvents().then(() => prepareBookingSelection(productId, flow));
+          return;
+        }
+        if (!dates.size) {
+          showToast("No event dates are available for this booking at the moment.");
+          return;
+        }
+
+        _bookingEventId = productId;
+        _bookingSelectedDate = null;
+        _bookingSelectedEndDate = null;
+        _bookingEventDateSet = dates;
+        _bookingCalD = new Date(_now.getFullYear(), _now.getMonth(), 1);
+        _bookingFlow = flow;
+        document.getElementById("booking-event-name").textContent =
+          context.name || p.title || productId;
+        document.getElementById("booking-availability").textContent =
+          `Availability: ${EVENT_MAX_AVAILABILITY} spots per date`;
+        document.getElementById("booking-selected-date").textContent =
+          "No date selected.";
+        document.getElementById("booking-availability-note").textContent =
+          `Each event date has ${EVENT_MAX_AVAILABILITY} spots available.`;
+        const confirmBtn = document.getElementById("booking-confirm-btn");
+        if (confirmBtn) {
+          confirmBtn.textContent =
+            flow?.kind === "cart" ? "Confirm date & add to cart" : "Confirm date & continue";
+        }
+        buildBookingCal(
+          _bookingCalD,
+          "booking-cal-grid",
+          "booking-cal-label",
+          null,
+          "booking-d",
+        );
+        document.getElementById("booking-overlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function addToCart(id, name, price, type, imgClass, btnEl, imgUrl, selectedBooking) {
         const spec = getCatalogItem(id);
         if (spec) {
           price = spec.price;
@@ -3217,6 +3309,13 @@
           type = spec.type || type;
           imgClass = spec.imgClass || imgClass;
           imgUrl = spec.imgUrl || imgUrl;
+        }
+        if (isBookingRequired(type) && !(selectedBooking && selectedBooking.date)) {
+          prepareBookingSelection(id, {
+            kind: "cart",
+            context: { id, name, price, type, imgClass, btnEl, imgUrl },
+          });
+          return;
         }
         if (cart[id]) {
           const maxQty = getMaxQtyForItem(cart[id]);
@@ -3235,6 +3334,11 @@
             qty: 1,
             imgUrl: imgUrl || null,
             priceSchedule: spec?.priceSchedule || null,
+            bookingDate: selectedBooking?.date || null,
+            bookingDateEnd: selectedBooking?.dateEnd || null,
+            bookingDateLabel: selectedBooking?.dateLabel || null,
+            bookingDateKey: selectedBooking?.dateKey || null,
+            bookingDateKeyEnd: selectedBooking?.dateKeyEnd || null,
           };
         }
         updateCartUI();
@@ -3355,12 +3459,17 @@
             : "";
           const imgCls = item.imgUrl ? "" : "" + item.imgClass;
           const imgBg = item.imgUrl ? "background:none;" : "";
+          const bookingDateSummary = getBookingDateSummary(item);
+          const bookingDateHtml = bookingDateSummary
+            ? `<div class="cart-item-date"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${bookingDateSummary}</div>`
+            : "";
           html += `
       <div class="cart-item" id="cart-item-${item.id}">
         <div class="cart-item-img ${imgCls}" style="${imgBg}">${imgInner}</div>
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
           <div class="cart-item-meta"><span class="cart-item-badge ${badgeCls}">${badgeLbl}</span>Lake Geneva</div>
+          ${bookingDateHtml}
           <div class="cart-qty-row">
             <button class="qty-btn qty-minus" onclick="updateQty('${item.id}',-1)">−</button>
             <div class="qty-value" id="qty-val-${item.id}">${item.qty}</div>
@@ -3570,20 +3679,25 @@
         const items = Object.values(cart);
         if (!items.length) return;
         closeCart();
-        if (items.length === 1 && items[0].qty === 1) {
-          _pendingWise = { type: "product", id: items[0].id };
-          const p = products[items[0].id];
-          if (!p)
-            _pendingWise = {
-              type: "custom",
-              name: items[0].name,
-              amount: getCartItemLineTotal(items[0]),
-            };
+        const singleItem = items.length === 1 && items[0].qty === 1;
+        if (singleItem && items[0].id && products[items[0].id]) {
+          _pendingWise = {
+            type: "product",
+            id: items[0].id,
+            date: items[0].bookingDate || null,
+            dateEnd: items[0].bookingDateEnd || null,
+            dateKey: items[0].bookingDateKey || null,
+            dateKeyEnd: items[0].bookingDateKeyEnd || null,
+          };
         } else {
           const sub = items.reduce((s, i) => s + getCartItemLineTotal(i), 0);
+          const itemLabels = items.map((i) => {
+            const dateText = getBookingDateSummary(i);
+            return `${i.name}${dateText ? ` (${dateText})` : ""} x${i.qty}`;
+          });
           _pendingWise = {
             type: "custom",
-            name: items.map((i) => `${i.name} x${i.qty}`).join(", "),
+            name: itemLabels.join(", "),
             amount: sub,
           };
         }
@@ -4431,56 +4545,12 @@
       let _bookingSelectedDate = null;
       let _bookingSelectedEndDate = null;
       let _bookingCalD = null;
+      let _bookingFlow = null;
       function openWise(productId) {
-        const p = products[productId];
-        if (!p) return;
-        const requiresDate = p.type !== "merch";
-        if (requiresDate) {
-          const dates = getProductEventDateSet(productId);
-          if (!dates.size && !googleEventsLoaded) {
-            showToast("Loading event availability...");
-            loadGoogleCalendarEvents().then(() => openWise(productId));
-            return;
-          }
-          if (!dates.size) {
-            showToast(
-              "No event dates are available for this booking at the moment.",
-            );
-            return;
-          }
-          _bookingEventId = productId;
-          _bookingSelectedDate = null;
-          _bookingSelectedEndDate = null;
-          _bookingEventDateSet = dates;
-          _bookingCalD = new Date(_now.getFullYear(), _now.getMonth(), 1);
-          document.getElementById("booking-event-name").textContent = p.title;
-          document.getElementById(
-            "booking-availability",
-          ).textContent = `Availability: ${EVENT_MAX_AVAILABILITY} spots per date`;
-          document.getElementById(
-            "booking-selected-date",
-          ).textContent = "No date selected.";
-          document.getElementById(
-            "booking-availability-note",
-          ).textContent = `Each event date has ${EVENT_MAX_AVAILABILITY} spots available.`;
-          buildBookingCal(
-            _bookingCalD,
-            "booking-cal-grid",
-            "booking-cal-label",
-            null,
-            "booking-d",
-          );
-          document.getElementById("booking-overlay").classList.add("open");
-          document.body.style.overflow = "hidden";
-          return;
-        }
-        _pendingWise = {
-          type: "product",
-          id: productId,
-          date: null,
-          dateKey: null,
-        };
-        openPaymentMethod();
+        prepareBookingSelection(productId, {
+          kind: "payment",
+          context: { id: productId },
+        });
       }
 
       function getProductEventDateSet(productId) {
@@ -4560,7 +4630,7 @@
           const isAllowed = _bookingEventDateSet.has(dateKey);
           let cls = "cal-cell";
           if (!isAllowed) {
-            cls += " cal-disabled";
+            cls += " cal-disabled cal-no-event";
           } else {
             cls += " cal-has-event cal-available";
           }
@@ -4654,9 +4724,7 @@
           showToast("Please select an available date before continuing.");
           return;
         }
-        _pendingWise = {
-          type: "product",
-          id: _bookingEventId,
+        const selectedBooking = {
           date: _bookingSelectedDate.toISOString(),
           dateEnd: _bookingSelectedEndDate
             ? _bookingSelectedEndDate.toISOString()
@@ -4665,14 +4733,38 @@
           dateKeyEnd: _bookingSelectedEndDate
             ? normalizeDateKey(_bookingSelectedEndDate)
             : null,
+          dateLabel: formatBookingDateRange(
+            _bookingSelectedDate,
+            _bookingSelectedEndDate,
+          ),
         };
         closeBookingPopup();
+        if (_bookingFlow?.kind === "cart") {
+          const ctx = _bookingFlow.context || {};
+          addToCart(
+            ctx.id,
+            ctx.name,
+            ctx.price,
+            ctx.type,
+            ctx.imgClass,
+            ctx.btnEl,
+            ctx.imgUrl,
+            selectedBooking,
+          );
+          return;
+        }
+        _pendingWise = {
+          type: "product",
+          id: _bookingEventId,
+          ...selectedBooking,
+        };
         openPaymentMethod();
       }
 
       function closeBookingPopup() {
         document.getElementById("booking-overlay").classList.remove("open");
         document.body.style.overflow = "";
+        _bookingFlow = null;
       }
 
       function closeBookingPopupIfOutside(e) {
