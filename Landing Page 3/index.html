@@ -1,1 +1,1319 @@
 
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lake Geneva Swimming Association</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Font substitution: 'Beau Rivage' is not a Google Font. Replaced with 'Dancing Script' (cursive accent), matching existing LGSA site convention. -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;700&family=Dancing+Script:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="./assets/Favicon.png" />
+    <style>
+      /* ===== CSS Variables ===== */
+      :root {
+        --color-white: #ffffff;
+        --color-black: #000000;
+        --color-text-dark: #000613;
+        --color-link-blue: #287dd7;
+        --color-primary-blue: #005eb2;
+        --color-panel-blue: #0078ff;
+        --color-icon-blue: #3d99ff;
+        --color-light-bg: #f0fbff;
+        --color-cursive-blue: #afe5fa;
+        --color-footer-navy: #052b79;
+        --color-overlay-25: rgba(0, 0, 0, 0.25);
+        --color-overlay-40: rgba(0, 0, 0, 0.4);
+
+        --font-body: "Inter", sans-serif;
+        --font-nav: "DM Sans", sans-serif;
+        --font-cursive: "Dancing Script", cursive;
+
+        --radius-sm: 5px;
+        --radius-md: 25px;
+        --radius-lg: 30px;
+        --radius-pill: 50px;
+
+        --container-max: 1280px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-body);
+        color: var(--color-text-dark);
+        background: var(--color-white);
+        overflow-x: hidden;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+      .container {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* ===== Placeholder image utility ===== */
+      /* All image placeholders use a blue-toned gradient per project convention.
+     Replace background-image with the real asset URL noted in each comment. */
+      .placeholder-img {
+        background: linear-gradient(
+          135deg,
+          #bcdffb 0%,
+          #7fb9ee 50%,
+          #4a8fd6 100%
+        );
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* ===================================================
+     HEADER / NAV
+     Source: Rectangle 4 / Rectangle 34, logo "image001 (2)",
+     nav links (DM Sans 14px 700), "Book a Meeting" button
+  =================================================== */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--color-white);
+        height: 100px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+      }
+      .header-inner {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .site-logo {
+        width: 86px;
+        height: 86px;
+        flex-shrink: 0; /* guard: prevents logo collapse on mobile flex rows */
+        position: absolute;
+        /* overflow: hidden; */
+        left: 2%;
+      }
+      /* Placeholder for: image001 (2).png (LGSA logo) */
+      .site-logo {
+        /* background:radial-gradient(circle at 35% 30%,#bfe3ff,#005eb2 80%); */
+        background-image: url("./assets/LGSA_LOGO.png");
+        background-size: 100% 100%;
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+      .nav-link {
+        font-family: var(--font-nav);
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 140%;
+        letter-spacing: -0.025em;
+        color: var(--color-black);
+        white-space: nowrap;
+        transition: color 0.2s ease;
+      }
+      .nav-link:hover {
+        color: var(--color-primary-blue);
+      }
+
+      .btn-book {
+        background: var(--color-primary-blue);
+        color: var(--color-white);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+        text-align: center;
+        padding: 12px 24px;
+        border-radius: 2px;
+        white-space: nowrap;
+        transition: background 0.2s ease;
+        position: absolute;
+        right: 2%;
+      }
+      .btn-book:hover {
+        background: #00478a;
+      }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+      }
+      .nav-toggle span {
+        width: 26px;
+        height: 2px;
+        background: var(--color-text-dark);
+      }
+
+      /* ===================================================
+     HERO
+     Source: "waves big img.png" full-bleed background,
+     heading, subhead, circular photo "image 11"
+  =================================================== */
+      .hero {
+        position: relative;
+        min-height: clamp(580px, 85vh, 760px);
+        padding: clamp(72px, 8vw, 112px) 0 clamp(84px, 8vw, 120px);
+        background-image: url("./assets/waves_big.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+        align-items: center;
+        gap: clamp(24px, 3.5vw, 54px);
+      }
+      .hero-text {
+        max-width: 560px;
+        padding-top: 16px;
+        justify-self: start;
+      }
+      .hero-title {
+        font-size: clamp(2.25rem, 4.2vw, 4.375rem);
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        color: var(--color-white);
+      }
+      .hero-title .cursive {
+        display: block;
+        font-family: var(--font-cursive);
+        font-weight: 700;
+        font-size: clamp(2.8rem, 6vw, 5.9rem);
+        line-height: 0.9;
+        color: #afe5fa;
+        margin: 8px 0 10px;
+      }
+      .hero-subtitle {
+        margin-top: 20px;
+        font-size: clamp(1rem, 1.55vw, 1.25rem);
+        font-weight: 500;
+        line-height: 1.4;
+        letter-spacing: 0.3px;
+        text-transform: capitalize;
+        color: var(--color-white);
+        max-width: 500px;
+      }
+      .hero-cta {
+        margin-top: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 180px;
+        padding: 14px 28px;
+        background: var(--color-white);
+        color: var(--color-primary-blue);
+        font-size: clamp(1rem, 1.3vw, 1.125rem);
+        font-weight: 600;
+        letter-spacing: -0.8px;
+        border-radius: var(--radius-pill);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .hero-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Hero photo + floating price badges */
+      .hero-visual {
+        position: relative;
+        width: 100%;
+        min-height: clamp(320px, 42vw, 500px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-photo {
+        position: relative;
+        width: min(100%, 420px);
+        max-width: 420px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        border: 7px solid rgba(255, 255, 255, 0.9);
+        background-image: url("./assets/hero_circle_image.png");
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .price-badge {
+        position: absolute;
+        width: clamp(95px, 15vw, 135px);
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        background: #007abe;
+        border: 8px solid rgba(43, 146, 186, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--color-white);
+        padding: 8px;
+      }
+      .price-badge .price {
+        font-size: clamp(1rem, 2vw, 1.75rem);
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .price-badge .label {
+        font-size: clamp(0.78rem, 1.1vw, 1rem);
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        padding: 0 6px;
+        line-height: 1.15;
+      }
+      .badge-nyvoirienne {
+        top: 2%;
+        left: 70%;
+      }
+      .badge-initiation {
+        right: 78%;
+        bottom: 2%;
+      }
+      .badge-signature {
+        right: 1%;
+        top: 72%;
+      }
+
+      /* Wave mask divider between hero and icon strip */
+      .wave-divider {
+        position: relative;
+        width: 100%;
+        height: 120px;
+        margin-top: -40px;
+        z-index: 3;
+      }
+      .wave-divider svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      /* ===================================================
+     ICON STRIP
+     Source: Rectangle 32 (#F0FBFF band), Swim/Explore/Celebrate/Awards
+  =================================================== */
+      .icon-strip {
+        background: var(--color-light-bg);
+        padding: 48px 0;
+      }
+      .icon-strip-inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 56px;
+      }
+      .icon-strip-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .icon-strip-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        flex-shrink: 0;
+      }
+      /* Placeholders for: (swim).png, confetti.png, medal.png icons */
+      .icon-strip-icon.icon-swim {
+        /* background:linear-gradient(135deg,#bcdffb,#3d99ff); */
+        background-image: url("./assets/sign_01.png");
+        background-size: 100% 100%;
+      }
+      .icon-strip-icon.icon-explore {
+        /* background:linear-gradient(135deg,#bcdffb,#0078ff); */
+        background-image: url("./assets/sign_02.png");
+        background-size: 100% 100%;
+      }
+      .icon-strip-icon.icon-celebrate {
+        /* background:linear-gradient(135deg,#bcdffb,#287dd7); */
+        background-image: url("./assets/sign_03.png");
+        background-size: 100% 100%;
+      }
+      .icon-strip-icon.icon-awards {
+        /* background:linear-gradient(135deg,#bcdffb,#005eb2); */
+        background-image: url("./assets/sign_04.png");
+        background-size: 100% 100%;
+      }
+      .icon-strip-label {
+        font-size: 22px;
+        font-weight: 400;
+        letter-spacing: -0.8px;
+        color: var(--color-black);
+      }
+
+      /* ===================================================
+     EXPERIENCES SECTION
+     Source: Rectangle 7 (#F0FBFF), heading "Experiences",
+     3 photo cards, "Why LGSA" blue panel (Group 8)
+  =================================================== */
+      .experiences {
+        background: var(--color-light-bg);
+        padding: 64px 0;
+      }
+      .experiences-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.75fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .experiences-heading {
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 48px;
+        letter-spacing: -0.8px;
+        color: var(--color-text-dark);
+        margin-bottom: 28px;
+      }
+      .experience-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .experience-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+      .experience-card-img {
+        width: 100%;
+        aspect-ratio: 233/217;
+        border-radius: var(--radius-lg);
+      }
+      /* Placeholders for: full-shot-young-man-surfboard, image001, image.png (experience thumbnails) */
+      .experience-card:nth-child(1) .experience-card-img {
+        /* background:linear-gradient(135deg,#a8d8ff,#005eb2); */
+        background-image: url("./assets/experience_01.png");
+        background-size: 100% 100%;
+      }
+      .experience-card:nth-child(2) .experience-card-img {
+        /* background:linear-gradient(135deg,#ffe9b8,#e0a63c); */
+        background-image: url("./assets/experience_02.png");
+        background-size: 100% 100%;
+      }
+      .experience-card:nth-child(3) .experience-card-img {
+        /* background:linear-gradient(135deg,#cbb8ff,#6a4fd6); */
+        background-image: url("./assets/experience_03.png");
+        background-size: 100% 100%;
+      }
+      .experience-card-title {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 20px;
+        color: var(--color-link-blue);
+      }
+      .experience-card-desc {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: var(--color-black);
+      }
+
+      .why-lgsa-panel {
+        display: grid;
+        grid-template-columns: 107px 1fr;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        min-height: 449px;
+        background-image: url("assets/blue_back.png");
+        background-size: cover;
+      }
+      .why-lgsa-photo {
+        height: 100%;
+      }
+      /* Placeholder for: Screenshot 2026-05-02 204128.png (Why LGSA side photo) */
+      .why-lgsa-photo {
+        /* background:linear-gradient(160deg,#0a2c5c,#005eb2); */
+        /* background-image: url("assets/blue_back.png");
+        background-size: cover; */
+      }
+      .why-lgsa-content {
+        /* background: var(--color-panel-blue); */
+        padding: 36px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .why-lgsa-heading {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 1.15;
+        letter-spacing: -0.8px;
+        color: var(--color-white);
+        margin-bottom: 8px;
+      }
+      .why-lgsa-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .why-lgsa-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-sm);
+        background: var(--color-icon-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .why-lgsa-icon svg {
+        width: 20px;
+        height: 20px;
+        fill: #fefcff;
+      }
+      .why-lgsa-text {
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: -0.8px;
+        color: var(--color-white);
+      }
+
+      /* ===================================================
+     ABOUT / AIMS SECTIONS
+     Source: "About the LGSA" / "Aims of the LGSA" headings
+     with squiggle accent (k.png) + body paragraph
+  =================================================== */
+      .info-section {
+        padding: 72px 0 40px;
+      }
+      .info-heading-wrap {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 24px;
+      }
+      .info-squiggle {
+        width: 39px;
+        height: 7px;
+        border-radius: 4px;
+        background: var(--color-primary-blue);
+      }
+      .info-heading {
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 48px;
+        letter-spacing: -0.8px;
+        color: var(--color-text-dark);
+      }
+      .info-paragraph {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: -0.8px;
+        color: var(--color-black);
+        max-width: 1123px;
+      }
+
+      /* Dual image banner under "About the LGSA" */
+      .dual-banner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 40px;
+      }
+      .dual-banner-panel {
+        position: relative;
+        height: 408px;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
+      /* Placeholder for: La classique medal.jpg */
+      .dual-banner-panel.left {
+        /* background:linear-gradient(150deg,#0a2c5c,#3d99ff); */
+        background-image: url("./assets/about_lgsa_01.png");
+        background-size: 100% 100%;
+      }
+      /* Placeholder for: Screenshot 2026-05-02 204128 (right banner image) */
+      .dual-banner-panel.right {
+        /* background:linear-gradient(150deg,#1c1c1c,#4a4a4a); */
+        /* background-image: url("./assets/about_lgsa_02.png"); */
+        /* background-size: 100% 100%; */
+      }
+      .dual-banner-panel.left::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--color-overlay-25);
+      }
+      .dual-banner-text {
+        position: relative;
+        z-index: 2;
+        padding: 0 40px;
+        color: var(--color-white);
+      }
+      .dual-banner-text .line-bold {
+        font-weight: 700;
+        font-size: 56px;
+        line-height: 1.1;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+      }
+      .dual-banner-text .line-cursive {
+        font-family: var(--font-cursive);
+        font-size: 72px;
+        color: var(--color-cursive-blue);
+        line-height: 1;
+      }
+      .dual-banner-text .line-desc {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 1.4;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        margin-top: 16px;
+        max-width: 420px;
+      }
+
+      /* ===================================================
+     GALLERY STRIP
+     Source: Group 12 — 3 full-height images
+  =================================================== */
+      .gallery-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin: 6% 3%;
+      }
+      .gallery-item {
+        height: 397px;
+      }
+      /* Placeholders for: gallery image, 20250711_GenevaClassique_0048/0062 */
+      .gallery-item:nth-child(1) {
+        /* background:linear-gradient(160deg,#cfe9ff,#5aa6ec); */
+        background-image: url("./assets/aims_lgsa_01.png");
+        background-size: 100% 100%;
+      }
+      .gallery-item:nth-child(2) {
+        /* background:linear-gradient(160deg,#b6d8ff,#2c74c9); */
+        background-image: url("./assets/aims_lgsa_02.png");
+        background-size: 100% 100%;
+      }
+      .gallery-item:nth-child(3) {
+        /* background:linear-gradient(160deg,#9fc9ff,#1c56a3); */
+        background-image: url("./assets/aims_lgsa_03.png");
+        background-size: 100% 100%;
+      }
+
+      /* ===================================================
+     CTA BANNER
+     Source: Group 7, "Ready to Make Waves?" heading,
+     description, "Reserve Your Spot" button
+  =================================================== */
+      .cta-banner {
+        margin: 0 24px 64px;
+        border-radius: var(--radius-md);
+        position: relative;
+        overflow: hidden;
+        min-height: 412px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 48px 24px;
+      }
+      /* Placeholder for: Untitled-2.png (CTA background image) */
+      .cta-banner {
+        /* background:linear-gradient(150deg,#0a2c5c,#3d99ff); */
+        background-image: url("./assets/bottom.png");
+        background-size: 100% 100%;
+      }
+      .cta-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--color-overlay-40);
+      }
+      .cta-content {
+        position: relative;
+        z-index: 2;
+        max-width: 640px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .cta-waves-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .cta-wave-icon {
+        width: 49px;
+        height: 48px;
+      }
+      /* Placeholder for: image 7 / image 8 (decorative wave icons) */
+      .cta-wave-icon.left {
+        background: linear-gradient(135deg, #afe5fa, #3d99ff);
+        border-radius: 50%;
+      }
+      .cta-wave-icon.right {
+        background: linear-gradient(135deg, #3d99ff, #afe5fa);
+        border-radius: 50%;
+        transform: scaleX(-1);
+      }
+      .cta-cursive {
+        font-family: var(--font-cursive);
+        font-size: 64px;
+        color: var(--color-cursive-blue);
+      }
+      .cta-heading {
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 48px;
+        letter-spacing: -0.8px;
+        color: var(--color-white);
+      }
+      /* Placeholder for: image 5.png (decorative rule/rating graphic) */
+      .cta-divider {
+        width: 191px;
+        height: 22px;
+        background: linear-gradient(90deg, transparent, #afe5fa, transparent);
+      }
+      .cta-desc {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 28px;
+        letter-spacing: -0.8px;
+        color: var(--color-white);
+      }
+      .btn-reserve {
+        margin-top: 8px;
+        background: var(--color-white);
+        color: var(--color-primary-blue);
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 30px;
+        letter-spacing: -0.8px;
+        padding: 10px 36px;
+        border-radius: var(--radius-pill);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .btn-reserve:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* ===================================================
+     FOOTER
+     Source: Rectangle 151 (#052B79), footer links,
+     social icons, location
+  =================================================== */
+      .site-footer {
+        background: var(--color-footer-navy);
+        padding: 40px 0 32px;
+      }
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 32px;
+      }
+      .footer-link {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 140%;
+        letter-spacing: -0.025em;
+        color: var(--color-white);
+        transition: opacity 0.2s ease;
+      }
+      .footer-link:hover {
+        opacity: 0.75;
+      }
+      .footer-socials {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+      .footer-social-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .footer-social-icon svg {
+        width: 14px;
+        height: 14px;
+        fill: var(--color-white);
+      }
+      .footer-location {
+        text-align: center;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 140%;
+        letter-spacing: -0.025em;
+        color: var(--color-white);
+      }
+
+      /* ===================================================
+     RESPONSIVE
+  =================================================== */
+      @media (max-width: 1200px) {
+        .price-badge .price {
+          font-size: 18px;
+        }
+        .price-badge .label {
+          font-size: 12px;
+        }
+      }
+      @media (max-width: 1024px) {
+        .hero-heading {
+          font-size: 40px;
+          line-height: 50px;
+        }
+        .hero-subheading {
+          font-size: 26px;
+          line-height: 34px;
+        }
+        .experiences-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .why-lgsa-panel {
+          grid-template-columns: 1fr;
+        }
+        .why-lgsa-photo {
+          height: 160px;
+        }
+        .dual-banner {
+          grid-template-columns: 1fr;
+        }
+        .experience-cards {
+          grid-template-columns: 1fr;
+        }
+        .gallery-strip {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+        .gallery-item {
+            height: 307px;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .hero-title {
+          font-size: clamp(3.25rem, 4.2vw, 4.375rem);
+        }
+        .badge-nyvoirienne {
+          top: 2%;
+          left: 64%;
+        }
+        .badge-initiation {
+          right: 65%;
+          bottom: 3%;
+        }
+        .badge-signature {
+          right: 19%;
+          top: 65%;
+        }
+        .main-nav {
+          position: fixed;
+          top: 100px;
+          left: 0;
+          right: 0;
+          background: var(--color-white);
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+          padding: 0 24px;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+        }
+        .icon-strip-item {
+        gap: 4px;
+      }
+      .icon-strip-inner {
+        gap: 12px;
+      }
+        .main-nav.open {
+          max-height: 400px;
+          padding: 16px 24px;
+        }
+        .nav-link {
+          width: 100%;
+          padding: 12px 0;
+          border-bottom: 1px solid #eee;
+        }
+        .nav-toggle {
+          display: flex;
+        }
+        .header-inner {
+          position: relative;
+        }
+        .hero-inner {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .hero-text {
+          max-width: 100%;
+          padding-top: 0;
+          justify-self: center;
+        }
+        .hero-subtitle {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 620px;
+        }
+        .hero-cta {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .hero-visual {
+          min-height: 21em;
+          width: 100%;
+        }
+        .hero-photo {
+          width: min(72vw, 340px);
+        }
+        .price-badge {
+          width: clamp(90px, 22vw, 122px);
+        }
+        .experience-cards {
+          grid-template-columns: 1fr 1fr;
+        }
+        .gallery-strip {
+          grid-template-columns: 1fr 1fr;
+        }
+        .dual-banner-text .line-bold {
+          font-size: 40px;
+        }
+        .dual-banner-text .line-cursive {
+          font-size: 52px;
+        }
+        .btn-reserve {
+          font-size: 16px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .site-header {
+          height: 80px;
+        }
+        .site-logo {
+          width: 60px;
+          height: 60px;
+        }
+        .hero {
+          padding: 40px 0;
+        }
+        .hero-heading {
+          font-size: 32px;
+          line-height: 40px;
+        }
+        .hero-subheading {
+          font-size: 20px;
+          line-height: 28px;
+        }
+        .icon-strip-inner {
+          gap: 24px;
+        }
+        .icon-strip-label {
+          font-size: 18px;
+        }
+        .info-heading {
+          font-size: 30px;
+          line-height: 36px;
+        }
+        .why-lgsa-heading {
+          font-size: 26px;
+        }
+        .cta-heading {
+          font-size: 30px;
+          line-height: 38px;
+        }
+        .cta-cursive {
+          font-size: 44px;
+        }
+        .hero-inner {
+          padding: 0 20px;
+        }
+        .hero {
+          min-height: auto;
+          padding: 56px 0 72px;
+        }
+        .hero-title {
+          font-size: clamp(2rem, 8vw, 2.8rem);
+        }
+        .hero-title .cursive {
+          font-size: clamp(2.4rem, 10vw, 3.2rem);
+        }
+        .hero-subtitle {
+          font-size: 1rem;
+          margin-top: 16px;
+        }
+        .hero-cta {
+          width: 100%;
+          max-width: 220px;
+        }
+        .hero-visual {
+          min-height: 300px;
+        }
+        .hero-photo {
+          width: min(78vw, 260px);
+          border-width: 5px;
+        }
+        .price-badge {
+          width: clamp(78px, 24vw, 98px);
+          padding: 8px;
+        }
+        .price-badge .price {
+          font-size: 0.95rem;
+        }
+        .price-badge .label {
+          font-size: 0.7rem;
+          line-height: 1.1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#top" class="site-logo" aria-label="LGSA Home"></a>
+        <!-- Placeholder for: image001 (2).png (LGSA logo) -->
+
+        <button class="btn-book" type="button">Book a Meeting</button>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <!-- <section class="hero" id="top">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1 class="hero-heading">Lake Geneva Swimming Association</h1>
+      <p class="hero-subheading">Authenticating marathon swimming in Lake Geneva</p>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo" role="img" aria-label="LGSA open water swimmer"></div>
+    </div>
+  </div>
+</section> -->
+
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            Dive into<span class="cursive">Something</span>Extraordinary
+          </h1>
+          <p class="hero-subtitle">
+            From first strokes to epic lake challenges — unforgettable
+            open-water experiences await
+          </p>
+          <a href="#book" class="hero-cta">Book Now</a>
+        </div>
+        <div class="hero-visual">
+          <!-- placeholder: swimmer hero portrait -->
+          <div class="hero-photo"></div>
+          <div class="price-badge badge-nyvoirienne">
+            <span class="price">£750</span>
+            <span class="label">Guided Nyvoirienne</span>
+          </div>
+          <div class="price-badge badge-initiation">
+            <span class="price">£180</span>
+            <span class="label">Lake Geneva Initiation</span>
+          </div>
+          <div class="price-badge badge-signature">
+            <span class="price">£310</span>
+            <span class="label">La Nyvoirienne</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wave divider between hero and icon strip -->
+    <!-- <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1280 120" preserveAspectRatio="none">
+        <path
+          d="M0,40 C 220,110 420,0 640,50 C 860,100 1060,10 1280,60 L1280,120 L0,120 Z"
+          fill="#f0fbff"
+        ></path>
+      </svg>
+    </div> -->
+
+    <!-- ===== ICON STRIP ===== -->
+    <section class="icon-strip">
+      <div class="container icon-strip-inner">
+        <div class="icon-strip-item">
+          <span class="icon-strip-icon icon-swim"></span>
+          <!-- Placeholder for: (swim) icon.png -->
+          <span class="icon-strip-label">Swim</span>
+        </div>
+        <div class="icon-strip-item">
+          <span class="icon-strip-icon icon-explore"></span>
+          <span class="icon-strip-label">Explore</span>
+        </div>
+        <div class="icon-strip-item">
+          <span class="icon-strip-icon icon-celebrate"></span>
+          <!-- Placeholder for: confetti.png -->
+          <span class="icon-strip-label">Celebrate</span>
+        </div>
+        <div class="icon-strip-item">
+          <span class="icon-strip-icon icon-awards"></span>
+          <!-- Placeholder for: medal.png -->
+          <span class="icon-strip-label">Awards</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCES ===== -->
+    <section class="experiences" id="experiences">
+      <div class="container experiences-grid">
+        <div>
+          <h2 class="experiences-heading">Experiences</h2>
+          <div class="experience-cards">
+            <article class="experience-card">
+              <div class="experience-card-img"></div>
+              <!-- Placeholder for: full-shot-young-man-surfboard -->
+              <h3 class="experience-card-title">Swims</h3>
+              <p class="experience-card-desc">Start your open-water journey.</p>
+            </article>
+            <article class="experience-card">
+              <div class="experience-card-img"></div>
+              <!-- Placeholder for: image001 -->
+              <h3 class="experience-card-title">Awards</h3>
+              <p class="experience-card-desc">
+                Celebrating Outstanding Open Water Achievements
+              </p>
+            </article>
+            <article class="experience-card">
+              <div class="experience-card-img"></div>
+              <!-- Placeholder for: image.png -->
+              <h3 class="experience-card-title">Legends</h3>
+              <p class="experience-card-desc">Meet the LGSA Solo Legends</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="why-lgsa-panel">
+          <div class="why-lgsa-photo"></div>
+          <!-- Placeholder for: Screenshot 2026-05-02 204128.png -->
+          <div class="why-lgsa-content">
+            <h3 class="why-lgsa-heading">Why LGSA</h3>
+
+            <div class="why-lgsa-item">
+              <span class="why-lgsa-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M2 12c3-4 6-4 9 0s6 4 9 0M2 6c3-4 6-4 9 0s6 4 9 0M2 18c3-4 6-4 9 0s6 4 9 0"
+                    stroke="#fefcff"
+                    stroke-width="2"
+                    fill="none"
+                  />
+                </svg>
+              </span>
+              <span class="why-lgsa-text">Breathtaking Lake Routes</span>
+            </div>
+            <div class="why-lgsa-item">
+              <span class="why-lgsa-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6l7-4z"
+                    fill="#fefcff"
+                  />
+                </svg>
+              </span>
+              <span class="why-lgsa-text">Guided &amp; Safe Experiences</span>
+            </div>
+            <div class="why-lgsa-item">
+              <span class="why-lgsa-icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="7" cy="8" r="3" fill="#fefcff" />
+                  <circle cx="17" cy="8" r="3" fill="#fefcff" />
+                  <path
+                    d="M2 20c0-3 3-5 5-5s5 2 5 5M12 20c0-3 3-5 5-5s5 2 5 5"
+                    stroke="#fefcff"
+                    stroke-width="1.5"
+                    fill="none"
+                  />
+                </svg>
+              </span>
+              <span class="why-lgsa-text">Solo, Friends &amp; Team Events</span>
+            </div>
+            <div class="why-lgsa-item">
+              <span class="why-lgsa-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l2.9 6.1L21 9l-4.5 4.4L17.8 20 12 16.8 6.2 20l1.3-6.6L3 9l6.1-0.9L12 2z"
+                    fill="#fefcff"
+                  />
+                </svg>
+              </span>
+              <span class="why-lgsa-text">Adventure You'll Never Forget</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== AIMS OF THE LGSA ===== -->
+    <section class="info-section">
+      <div class="container">
+        <div class="info-heading-wrap">
+          <span class="info-squiggle" aria-hidden="true"></span>
+          <h2 class="info-heading">Aims of the LGSA</h2>
+        </div>
+        <p class="info-paragraph">
+          The Lake Geneva Swimming Association (LGSA) promotes long-distance
+          open water swimming by supporting swimmers and organisations with
+          official Lake Geneva crossings, swim observation, authentication, and
+          guidance. Working in partnership with the relevant authorities, LGSA
+          ensures crossings are conducted safely and in accordance with
+          established regulations while promoting Lake Geneva as one of the
+          world's premier open water swimming destinations.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== GALLERY STRIP ===== -->
+    <section class="gallery-strip" id="gallery" aria-label="LGSA event gallery">
+      <div class="gallery-item"></div>
+      <!-- Placeholder for: gallery image (Geneva Classique) -->
+      <div class="gallery-item"></div>
+      <!-- Placeholder for: 20250711_GenevaClassique_0062.jpg -->
+      <div class="gallery-item"></div>
+      <!-- Placeholder for: 20250711_GenevaClassique_0048.jpg -->
+    </section>
+
+    <!-- ===== CTA BANNER ===== -->
+    <section class="cta-banner">
+      <!-- Placeholder for: Untitled-2.png (CTA background image) -->
+      <div class="cta-content">
+        <div class="cta-waves-row">
+          <span class="cta-wave-icon left" aria-hidden="true"></span>
+          <span class="cta-cursive">Waves?</span>
+          <span class="cta-wave-icon right" aria-hidden="true"></span>
+        </div>
+        <h2 class="cta-heading">Ready to Make</h2>
+        <div class="cta-divider" aria-hidden="true"></div>
+        <!-- Placeholder for: image 5.png (decorative divider graphic) -->
+        <p class="cta-desc">
+          Book your next unforgettable lake adventure and experience the thrill
+          of open-water swimming like never before.
+        </p>
+        <button class="btn-reserve" type="button">Reserve Your Spot</button>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer" id="footer">
+      <div class="container">
+        <nav class="footer-links">
+          <a href="#" class="footer-link">Contact Us</a>
+          <a href="#" class="footer-link">Newsletter signup</a>
+          <a href="#" class="footer-link">Resources</a>
+          <a href="#" class="footer-link">Privacy Policy</a>
+        </nav>
+        <div class="footer-socials">
+          <a href="#" class="footer-social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"
+              />
+            </svg>
+          </a>
+          <a href="#" class="footer-social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2c-2.7 0-3.1 0-4.1.1-1.1 0-1.8.2-2.4.5-.7.3-1.2.6-1.8 1.2C3.1 4.4 2.8 5 2.5 5.6c-.3.6-.5 1.3-.5 2.4C2 9 2 9.3 2 12s0 3.1.1 4.1c0 1.1.2 1.8.5 2.4.3.7.6 1.2 1.2 1.8.6.6 1.1.9 1.8 1.2.6.3 1.3.5 2.4.5C9 22 9.3 22 12 22s3.1 0 4.1-.1c1.1 0 1.8-.2 2.4-.5.7-.3 1.2-.6 1.8-1.2.6-.6.9-1.1 1.2-1.8.3-.6.5-1.3.5-2.4 0-.9 0-1.3 0-4s0-3.1-.1-4.1c0-1.1-.2-1.8-.5-2.4-.3-.7-.6-1.2-1.2-1.8-.6-.6-1.1-.9-1.8-1.2-.6-.3-1.3-.5-2.4-.5C15 2 14.7 2 12 2zm0 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.2-2.6a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"
+              />
+            </svg>
+          </a>
+          <a href="#" class="footer-social-icon" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4V9z"
+              />
+            </svg>
+          </a>
+        </div>
+        <p class="footer-location">Lake Geneva, Switzerland 🇨🇭</p>
+      </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+      // Mobile nav toggle
+      (function () {
+        var toggle = document.getElementById("navToggle");
+        var nav = document.getElementById("mainNav");
+
+        toggle.addEventListener("click", function () {
+          var isOpen = nav.classList.toggle("open");
+          toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+
+        // Close mobile nav after clicking a link
+        nav.querySelectorAll(".nav-link").forEach(function (link) {
+          link.addEventListener("click", function () {
+            nav.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
