@@ -520,6 +520,25 @@ input[type="checkbox"] {
   margin-bottom: 8px;
 }
 
+.cart-item-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--orange-dark);
+  margin-bottom: 8px;
+}
+
+.cart-item-date svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  flex-shrink: 0;
+}
+
 .cart-item-badge {
   display: inline-block;
   font-size: 8px;
@@ -1036,6 +1055,12 @@ input[type="checkbox"] {
   background: var(--teal);
 }
 
+.cal-cell.cal-no-event {
+  background: #fff1f1;
+  color: #b42318;
+  border: 1px solid #f1a3a3;
+}
+
 .cal-cell.cal-has-event.training::after {
   background: #28a745;
 }
@@ -1242,19 +1267,28 @@ input[type="checkbox"] {
 }
 
 .cal-cell.cal-disabled {
-  opacity: 0.45;
+  opacity: 0.55;
   color: #9ca3af;
-  background: #f5f7fb;
+  background: #f8f9fb;
   cursor: default;
+  border: 1px solid #e2e8f0;
 }
 
 .booking-overlay .cal-cell.cal-has-event.cal-available {
   background: #e8f7ef;
+  border-color: #8bcaa8;
 }
 
 .booking-overlay .cal-cell.cal-selected.cal-available {
   background: #28a745;
   color: white;
+  border-color: #28a745;
+}
+
+.booking-overlay .cal-cell.cal-selected.cal-no-event {
+  background: #dc2626;
+  color: white;
+  border-color: #dc2626;
 }
 
 .check-row {
@@ -1431,7 +1465,7 @@ input[type="checkbox"] {
 }
 
 .img-signature-140 {
-  background-image: url("assets/Signature_140.png");
+  background-image: url("assets/signature_140.png");
   background-size: 100% 100%;
   background-color: #1a3a6e;
 }
@@ -1771,14 +1805,18 @@ input[type="checkbox"] {
 
 .tab-bar {
   display: flex;
+  align-items: center;
   border-bottom: 2px solid var(--border);
   margin: 0 0 24px 0;
   gap: 0;
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
   background: var(--bg);
-  padding-top: 4px;
+  padding: 4px 2px 0;
+  flex-wrap: nowrap;
 }
 
 .tab-bar::-webkit-scrollbar {
@@ -1815,6 +1853,11 @@ input[type="checkbox"] {
 .tab-panel {
   display: none;
   padding-bottom: 8px;
+  min-height: 280px;
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
 }
 
 .tab-panel.active {
