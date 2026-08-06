@@ -982,7 +982,7 @@ input[type="checkbox"] {
   position: relative;
   font-size: 13px;
   text-align: center;
-  padding: 3px 1px;
+  padding: 5px 1px;
   border-radius: 3px;
   cursor: pointer;
   color: var(--text-dark);
