@@ -988,6 +988,7 @@ input[type="checkbox"] {
   color: var(--text-dark);
   line-height: 1.4;
   transition: background 0.12s;
+  border: 1px solid lightblue;
 }
 
 .calender {
