@@ -465,7 +465,7 @@
                 <span class="badge badge-core">Core</span>
               </div>
               <div class="product-body">
-                <div class="product-title">swim stronger swim camp</div>
+                <div class="product-title">Swim Stronger Swim Camp</div>
                 <div class="product-desc">
                   5-day training camp to improve technique, endurance, and open
                   water performance.
@@ -4407,7 +4407,7 @@
         const dateSet = getProductEventDateSet(product.cartId);
         const dates = Array.from(dateSet).sort();
         if (!dates.length)
-          return `<p class="tab-placeholder">No event dates available for this swim.</p>`;
+          return `<p class="tab-placeholder">No event dates available for this swim yet.</p>`;
         return `<div class="tab-sub-title">Event dates</div>
         <ul class="tab-bullet-list">${dates
           .map(
@@ -4738,9 +4738,10 @@
             _bookingSelectedEndDate,
           ),
         };
+        const flow = _bookingFlow;
         closeBookingPopup();
-        if (_bookingFlow?.kind === "cart") {
-          const ctx = _bookingFlow.context || {};
+        if (flow?.kind === "cart") {
+          const ctx = flow.context || {};
           addToCart(
             ctx.id,
             ctx.name,
