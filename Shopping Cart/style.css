@@ -876,6 +876,7 @@ input[type="checkbox"] {
 .merch-card {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .page-wrap {
@@ -912,7 +913,7 @@ input[type="checkbox"] {
 }
 
 .filter-label {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1015,71 +1016,41 @@ input[type="checkbox"] {
 }
 
 .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
+  width: 10px;
+  height: 10px;
   display: inline-block;
+  border-radius: 50%;
 }
 
-/* Green */
-.training {
-  /* background-color: #28a745; */
+.dot.training,
+.cal-cell.cal-has-event.training {
+  background-color: var(--orange);
 }
 
-/* Royal Blue */
-.guided {
-  /* background-color: #4169e1; */
+.dot.guided,
+.cal-cell.cal-has-event.guided {
+  background-color: #6186f7;
 }
 
-/* Yellow */
-.event {
-  /* background-color: #ffc107; */
+.dot.event,
+.cal-cell.cal-has-event.event {
+  background-color: #58d0a9;
+}
+
+.cal-cell.cal-has-event.training,
+.cal-cell.cal-has-event.guided,
+.cal-cell.cal-has-event.event {
+  color: white;
 }
 
 .cal-cell:hover:not(.cal-empty):not(.cal-today) {
   background: #f0f4fa;
 }
 
-.cal-cell.cal-has-event::after {
-  content: "";
-  position: absolute;
-  bottom: 1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--orange);
-}
-
-.cal-cell.cal-has-event.cal-available::after {
-  background: var(--teal);
-}
-
 .cal-cell.cal-no-event {
   background: #fff1f1;
   color: #b42318;
   border: 1px solid #f1a3a3;
-}
-
-.cal-cell.cal-has-event.training::after {
-  background: #28a745;
-}
-
-.cal-cell.cal-has-event.guided::after {
-  background: #4169e1;
-}
-
-.cal-cell.cal-has-event.event::after {
-  background: #ffc107;
-}
-
-.cal-cell.cal-no-event::after {
-  background: #e04b4b;
-}
-
-.cal-cell.cal-has-event.cal-full::after {
-  background: #e04b4b;
 }
 
 .google-calendar-panel {
@@ -1167,9 +1138,20 @@ input[type="checkbox"] {
 .cal-cell.cal-selected.training,
 .cal-cell.cal-selected.guided,
 .cal-cell.cal-selected.event {
-  background: rgba(9, 30, 66, 0.08);
-  color: var(--text-dark);
-  border: 1px solid rgba(9, 30, 66, 0.16);
+  color: white;
+  border-color: rgba(9, 30, 66, 0.16);
+}
+
+.cal-cell.cal-selected.training {
+  background: var(--orange);
+}
+
+.cal-cell.cal-selected.guided {
+  background: #4169e1;
+}
+
+.cal-cell.cal-selected.event {
+  background: var(--teal);
 }
 
 .booking-overlay {
@@ -1446,6 +1428,7 @@ input[type="checkbox"] {
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--border);
+  cursor: pointer;
   transition:
     box-shadow 0.18s,
     transform 0.18s;
@@ -1897,9 +1880,44 @@ input[type="checkbox"] {
 .tab-sub-title {
   font-family: "Merriweather", serif;
   font-size: 14px;
-  font-weight: 700;
+  /* font-weight: 700; */
   color: var(--text-dark);
   margin: 16px 0 8px;
+}
+
+.terms-accordion {
+  display: grid;
+  gap: 6px;
+}
+
+.terms-accordion-item {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+}
+
+.terms-accordion-item summary {
+  cursor: pointer;
+  padding: 10px 12px;
+  color: var(--text-dark);
+  font-size: 13px;
+  font-weight: 600;
+  list-style-position: inside;
+}
+
+.terms-accordion-item summary::marker {
+  color: var(--teal);
+}
+
+.terms-accordion-item[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.terms-accordion-content {
+  padding: 10px 12px 12px;
+  color: var(--text-dark);
+  font-size: 13px;
+  line-height: 1.7;
 }
 
 .tab-placeholder {
