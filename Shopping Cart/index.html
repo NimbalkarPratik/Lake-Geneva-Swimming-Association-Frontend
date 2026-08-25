@@ -98,10 +98,15 @@
     <div class="page-wrap">
       <!-- SIDEBAR -->
       <aside class="sidebar">
-        <div class="sidebar-title">Filter</div>
+        <div class="sidebar-title">
+          Filter
+          <button class="date-clear-btn" onclick="clearSelectedDate('d')">
+            Show all events
+          </button>
+        </div>
         <div id="swim-filters">
           <div class="filter-section calender">
-            <span class="filter-label">Select Date</span>
+            <span class="filter-label">Pick a date to show availability</span>
             <div class="cal-wrap">
               <div class="cal-nav">
                 <button onclick="changeMonth(-1, 'd')">&#8249;</button>
@@ -110,7 +115,7 @@
               </div>
               <div class="date-filter-hint" id="d-date-filter-hint">
                 Pick a date to show matching events.
-                <button class="date-clear-btn" onclick="clearSelectedDate('d')">Show all</button>
+                <!-- <button class="date-clear-btn" onclick="clearSelectedDate('d')">Show all</button> -->
               </div>
               <div class="cal-grid" id="d-cal-grid"></div>
             </div>
@@ -283,10 +288,16 @@
       <!-- MAIN -->
       <main class="main" id="catalog-main">
         <div class="main-tab-bar">
-          <button class="main-tab-btn active"onclick="switchMainTab('swim-events', this)">
+          <button
+            class="main-tab-btn active"
+            onclick="switchMainTab('swim-events', this)"
+          >
             Swims
           </button>
-          <button class="main-tab-btn" onclick="switchMainTab('merchandise', this)">
+          <button
+            class="main-tab-btn"
+            onclick="switchMainTab('merchandise', this)"
+          >
             Merchandise
           </button>
           <!-- <button class="main-tab-btn" onclick="switchMainTab('home', this)">
@@ -296,11 +307,11 @@
 
         <!-- SWIM EVENTS TAB -->
         <div class="main-tab-panel active" id="tab-swim-events">
-          <h1 class="page-title">Explore the Deep</h1>
+          <h1 class="page-title">Choose your swim challenge</h1>
           <p class="page-subtitle">
-            Discover elite open water swimming events across the most iconic
-            waters. From beginner initiations to our legendary 70km flagship
-            endurance challenge.
+            Dive into the most stunning waters with iconic swimming events
+            across the lake. From beginner initiations to our legendary 70km
+            flagship endurance challenge.
           </p>
           <!-- <div class="google-calendar-panel" id="google-calendar-panel"></div> -->
           <div class="product-grid" id="product-grid">
@@ -310,7 +321,7 @@
               data-id="la-signature-140"
               data-type="flagship"
               data-place="geneva veytaux"
-              data-eventtype="event"
+              data-eventtype="guided"
               data-participation="solo relay-team"
             >
               <div class="product-img img-signature-140">
@@ -319,8 +330,8 @@
               <div class="product-body">
                 <div class="product-title">La Signature 140</div>
                 <div class="product-desc">
-                  Ultimate 140 km double crossing for elite ultra-endurance
-                  swimmers.
+                  140 km double crossing of Lake Geneva for the ultimate
+                  ultra-swim challenge.
                 </div>
                 <div class="product-stats">
                   <span class="stat-item"
@@ -384,7 +395,7 @@
               data-id="la-signature-70"
               data-type="flagship"
               data-place="geneva veytaux"
-              data-eventtype="event"
+              data-eventtype="guided"
               data-participation="solo relay-team"
             >
               <div class="product-img img-signature-70">
@@ -467,8 +478,8 @@
               <div class="product-body">
                 <div class="product-title">Swim Stronger Swim Camp</div>
                 <div class="product-desc">
-                  5-day training camp to improve technique, endurance, and open
-                  water performance.
+                  multi-day training camp to improve technique, gain confidence
+                  and enhance open water performance.
                 </div>
                 <div class="product-stats">
                   <span class="stat-item"
@@ -531,7 +542,7 @@
               onclick="showDetail('la-classique')"
               data-id="la-classique"
               data-type="core"
-              data-place="Lausanne evian"
+              data-place="lausanne evian"
               data-eventtype="event"
               data-participation="solo"
             >
@@ -614,8 +625,8 @@
               <div class="product-body">
                 <div class="product-title">Guided Classique</div>
                 <div class="product-desc">
-                  Full-day 13km guided swim for experienced swimmers; available
-                  solo, group, or relayTeam.
+                  Iconic 13km guided swim for experienced swimmers. Swim solo,
+                  as a group or as part of a relay team.
                 </div>
                 <div class="product-stats">
                   <span class="stat-item"
@@ -632,7 +643,7 @@
                 </div>
                 <div class="product-footer">
                   <span class="product-price"
-                    >€ 950-1p, € 1,200-2p<br />€ 1,400-3p, € 1,550-4p</span
+                    >from € 950-1p, € 1,200-2p<br />€ 1,400-3p, € 1,550-4p</span
                   >
                   <div class="product-footer-actions">
                     <button
@@ -765,8 +776,8 @@
               <div class="product-body">
                 <div class="product-title">Guided Nyvoirienne</div>
                 <div class="product-desc">
-                  Scenic 7km guided swim for moderately experienced swimmers;
-                  solo, group, or Team.
+                  Scenic 7km guided swim for swimmers looking to increase their
+                  distance. Swim solo, as a group or as part of a relay team.
                 </div>
                 <div class="product-stats">
                   <span class="stat-item"
@@ -783,7 +794,7 @@
                 </div>
                 <div class="product-footer">
                   <span class="product-price"
-                    >€ 750-1p, € 950-2p<br />€ 1,100-3p, € 1,200-4p</span
+                    >from € 750-1p, € 950-2p<br />€ 1,100-3p, € 1,200-4p</span
                   >
                   <div class="product-footer-actions">
                     <button
@@ -1249,23 +1260,37 @@
 
       <div class="detail-wrap" id="detail-wrap"></div>
 
-      <div class="booking-overlay" id="booking-overlay" onclick="closeBookingPopupIfOutside(event)">
+      <div
+        class="booking-overlay"
+        id="booking-overlay"
+        onclick="closeBookingPopupIfOutside(event)"
+      >
         <div class="booking-panel">
           <div class="booking-header">
             <div class="booking-header-info">
               <div class="booking-header-label">Event booking</div>
-              <div class="booking-header-title" id="booking-event-name">Choose a date</div>
-              <div class="booking-event-availability" id="booking-availability">Availability: 10 spots per date</div>
+              <div class="booking-header-title" id="booking-event-name">
+                Choose a date
+              </div>
+              <div class="booking-event-availability" id="booking-availability">
+                Availability: 10 spots per date
+              </div>
             </div>
-            <button class="booking-close-btn" onclick="closeBookingPopup()">✕</button>
+            <button class="booking-close-btn" onclick="closeBookingPopup()">
+              ✕
+            </button>
           </div>
           <div class="booking-body">
             <div class="single">
               <div class="cal-wrap">
                 <div class="cal-nav">
-                  <button onclick="changeBookingMonth(-1,'booking-d')">&#8249;</button>
+                  <button onclick="changeBookingMonth(-1, 'booking-d')">
+                    &#8249;
+                  </button>
                   <span id="booking-cal-label"></span>
-                  <button onclick="changeBookingMonth(1,'booking-d')">&#8250;</button>
+                  <button onclick="changeBookingMonth(1, 'booking-d')">
+                    &#8250;
+                  </button>
                 </div>
                 <div class="date-filter-hint" id="booking-date-filter-hint">
                   Select an available date for this event.
@@ -1276,12 +1301,17 @@
             <div class="booking-selected-date" id="booking-selected-date">
               No date selected.
             </div>
-            <div class="booking-availability-note" id="booking-availability-note">
+            <div
+              class="booking-availability-note"
+              id="booking-availability-note"
+            >
               Each event date has 10 spots available.
             </div>
           </div>
           <div class="booking-footer">
-            <button class="btn-book-now" onclick="confirmBookingDate()">Confirm date & continue</button>
+            <button class="btn-book-now" onclick="confirmBookingDate()">
+              Confirm date & continue
+            </button>
           </div>
         </div>
       </div>
@@ -2294,6 +2324,9 @@
         <div class="mob-sheet-header">
           <h3>Filter</h3>
           <button class="mob-close" onclick="closeMobFilter()">✕</button>
+          <button class="date-clear-btn" onclick="clearSelectedDate('m')">
+            Show all events
+          </button>
         </div>
         <div id="m-swim-filters">
           <div class="filter-section">
@@ -2306,7 +2339,7 @@
               </div>
               <div class="date-filter-hint" id="m-date-filter-hint">
                 Pick a date to show matching events.
-                <button class="date-clear-btn" onclick="clearSelectedDate('m')">Show all</button>
+                <!-- <button class="date-clear-btn" onclick="clearSelectedDate('m')">Show all</button> -->
               </div>
               <div class="cal-grid" id="m-cal-grid"></div>
             </div>
@@ -2499,50 +2532,132 @@
 
           <div class="tnc-section-title">2. Guided Nyvoirienne</div>
           <ul>
-            <li>By ticking the entry box, you agree to the Guided Nyvoirienne terms and conditions.</li>
-            <li>Your contact details must stay up to date and your application must be complete.</li>
-            <li>Your swim may take place at any time within your reserved window depending on conditions, booking priority, and safety.</li>
-            <li>Balances must be paid by 30 April in the swim year or 60 days before your swim window, whichever is sooner.</li>
-            <li>Medical cancellations may be considered with a valid certificate, but refunds are limited according to the LGSA schedule.</li>
-            <li>The LGSA may cancel or restage the swim for safety or operational reasons and will not refund travel or accommodation costs.</li>
-            <li>You must be medically fit, complete the required self-assessment swim, and follow the skippers' safety instructions.</li>
-            <li>Tow-floats and wetsuits are permitted but may be treated as non-standard equipment.</li>
+            <li>
+              By ticking the entry box, you agree to the Guided Nyvoirienne
+              terms and conditions.
+            </li>
+            <li>
+              Your contact details must stay up to date and your application
+              must be complete.
+            </li>
+            <li>
+              Your swim may take place at any time within your reserved window
+              depending on conditions, booking priority, and safety.
+            </li>
+            <li>
+              Balances must be paid by 30 April in the swim year or 60 days
+              before your swim window, whichever is sooner.
+            </li>
+            <li>
+              Medical cancellations may be considered with a valid certificate,
+              but refunds are limited according to the LGSA schedule.
+            </li>
+            <li>
+              The LGSA may cancel or restage the swim for safety or operational
+              reasons and will not refund travel or accommodation costs.
+            </li>
+            <li>
+              You must be medically fit, complete the required self-assessment
+              swim, and follow the skippers' safety instructions.
+            </li>
+            <li>
+              Tow-floats and wetsuits are permitted but may be treated as
+              non-standard equipment.
+            </li>
           </ul>
 
           <div class="tnc-section-title">3. Guided Classique</div>
           <ul>
-            <li>By ticking the entry box, you agree to the Guided Classique terms and conditions.</li>
-            <li>Your contact details must stay up to date and your application must be complete.</li>
-            <li>Your swim may take place at any time within your reserved window depending on weather, booking priority, and safety.</li>
-            <li>Balances must be paid by 30 April in the swim year or 60 days before your swim window, whichever is sooner.</li>
-            <li>Medical cancellations may be considered with a valid certificate, but refunds are limited according to the LGSA schedule.</li>
-            <li>The LGSA may cancel or restage the swim for safety or operational reasons and will not refund travel or accommodation costs.</li>
-            <li>You must be medically fit, complete the required self-assessment swim, and follow the skippers' safety instructions.</li>
-            <li>Tow-floats and wetsuits are permitted but may be treated as non-standard equipment.</li>
+            <li>
+              By ticking the entry box, you agree to the Guided Classique terms
+              and conditions.
+            </li>
+            <li>
+              Your contact details must stay up to date and your application
+              must be complete.
+            </li>
+            <li>
+              Your swim may take place at any time within your reserved window
+              depending on weather, booking priority, and safety.
+            </li>
+            <li>
+              Balances must be paid by 30 April in the swim year or 60 days
+              before your swim window, whichever is sooner.
+            </li>
+            <li>
+              Medical cancellations may be considered with a valid certificate,
+              but refunds are limited according to the LGSA schedule.
+            </li>
+            <li>
+              The LGSA may cancel or restage the swim for safety or operational
+              reasons and will not refund travel or accommodation costs.
+            </li>
+            <li>
+              You must be medically fit, complete the required self-assessment
+              swim, and follow the skippers' safety instructions.
+            </li>
+            <li>
+              Tow-floats and wetsuits are permitted but may be treated as
+              non-standard equipment.
+            </li>
           </ul>
 
           <div class="tnc-section-title">4. LGSA Signature</div>
           <ul>
-            <li>By ticking the entry box, you agree to the LGSA Signature terms and the LGSA Rules.</li>
-            <li>Your contact details must stay up to date and your application must be complete.</li>
-            <li>Your swim may take place at any time within your reserved window depending on conditions and booking priority.</li>
-            <li>Balances must be paid by 30 April in the swim year or 60 days before your swim window, whichever is sooner.</li>
-            <li>Medical cancellations may be considered with a valid certificate, but refunds are limited according to the LGSA schedule.</li>
-            <li>The LGSA may cancel or restage the swim due to weather, water conditions, safety, or permit issues.</li>
-            <li>You must be medically fit, complete the required self-assessment swim, and follow all safety instructions.</li>
-            <li>The swim may be amended in distance, course, or timing for safety and will not qualify for a refund.</li>
+            <li>
+              By ticking the entry box, you agree to the LGSA Signature terms
+              and the LGSA Rules.
+            </li>
+            <li>
+              Your contact details must stay up to date and your application
+              must be complete.
+            </li>
+            <li>
+              Your swim may take place at any time within your reserved window
+              depending on conditions and booking priority.
+            </li>
+            <li>
+              Balances must be paid by 30 April in the swim year or 60 days
+              before your swim window, whichever is sooner.
+            </li>
+            <li>
+              Medical cancellations may be considered with a valid certificate,
+              but refunds are limited according to the LGSA schedule.
+            </li>
+            <li>
+              The LGSA may cancel or restage the swim due to weather, water
+              conditions, safety, or permit issues.
+            </li>
+            <li>
+              You must be medically fit, complete the required self-assessment
+              swim, and follow all safety instructions.
+            </li>
+            <li>
+              The swim may be amended in distance, course, or timing for safety
+              and will not qualify for a refund.
+            </li>
           </ul>
 
-          <div class="tnc-section-title">5. Safety, Medical &amp; Liability</div>
+          <div class="tnc-section-title">
+            5. Safety, Medical &amp; Liability
+          </div>
           <p>
-            Open water swimming is an extreme sport. You certify that you are fit and medically suitable for the swim, that you will disclose material changes in your health, and that you will follow all crew and safety instructions. The LGSA may refuse or stop your attempt if safety concerns arise.
+            Open water swimming is an extreme sport. You certify that you are
+            fit and medically suitable for the swim, that you will disclose
+            material changes in your health, and that you will follow all crew
+            and safety instructions. The LGSA may refuse or stop your attempt if
+            safety concerns arise.
           </p>
           <div class="tnc-section-title">6. Insurance &amp; Photography</div>
           <p>
-            You are responsible for arranging suitable travel and personal insurance where required. The LGSA may use photographs and broadcasts that accurately depict your participation in the event.
+            You are responsible for arranging suitable travel and personal
+            insurance where required. The LGSA may use photographs and
+            broadcasts that accurately depict your participation in the event.
           </p>
           <p style="margin-top: 14px; font-style: italic; font-size: 11px">
-            Last updated: 4 July 2026. These terms apply to the Guided Nyvoirienne, Guided Classique, and LGSA Signature products shown in the booking flow.
+            Last updated: 4 July 2026. These terms apply to the Guided
+            Nyvoirienne, Guided Classique, and LGSA Signature products shown in
+            the booking flow.
           </p>
         </div>
         <div class="tnc-footer">
@@ -2670,9 +2785,7 @@
             </div>
 
             <div class="swimmer-field">
-              <label for="sw-postal"
-                >Post Code<span class="req">*</span></label
-              >
+              <label for="sw-postal">Post Code<span class="req">*</span></label>
               <input
                 type="text"
                 id="sw-postal"
@@ -3263,11 +3376,15 @@
         const dates = getProductEventDateSet(productId);
         if (!dates.size && !googleEventsLoaded) {
           showToast("Loading event availability...");
-          loadGoogleCalendarEvents().then(() => prepareBookingSelection(productId, flow));
+          loadGoogleCalendarEvents().then(() =>
+            prepareBookingSelection(productId, flow),
+          );
           return;
         }
         if (!dates.size) {
-          showToast("No event dates are available for this booking at the moment.");
+          showToast(
+            "No event dates are available for this booking at the moment.",
+          );
           return;
         }
 
@@ -3277,18 +3394,23 @@
         _bookingEventDateSet = dates;
         _bookingCalD = new Date(_now.getFullYear(), _now.getMonth(), 1);
         _bookingFlow = flow;
+        const availability = getBookingAvailability(productId);
         document.getElementById("booking-event-name").textContent =
           context.name || p.title || productId;
         document.getElementById("booking-availability").textContent =
-          `Availability: ${EVENT_MAX_AVAILABILITY} spots per date`;
+          `Availability: ${availability.count} ${availability.unit}`;
         document.getElementById("booking-selected-date").textContent =
           "No date selected.";
         document.getElementById("booking-availability-note").textContent =
-          `Each event date has ${EVENT_MAX_AVAILABILITY} spots available.`;
+          availability.unit === "slot per week"
+            ? `Only ${availability.count} slot is available per week.`
+            : `Each event date has ${availability.count} spots available.`;
         const confirmBtn = document.getElementById("booking-confirm-btn");
         if (confirmBtn) {
           confirmBtn.textContent =
-            flow?.kind === "cart" ? "Confirm date & add to cart" : "Confirm date & continue";
+            flow?.kind === "cart"
+              ? "Confirm date & add to cart"
+              : "Confirm date & continue";
         }
         buildBookingCal(
           _bookingCalD,
@@ -3301,7 +3423,16 @@
         document.body.style.overflow = "hidden";
       }
 
-      function addToCart(id, name, price, type, imgClass, btnEl, imgUrl, selectedBooking) {
+      function addToCart(
+        id,
+        name,
+        price,
+        type,
+        imgClass,
+        btnEl,
+        imgUrl,
+        selectedBooking,
+      ) {
         const spec = getCatalogItem(id);
         if (spec) {
           price = spec.price;
@@ -3310,7 +3441,10 @@
           imgClass = spec.imgClass || imgClass;
           imgUrl = spec.imgUrl || imgUrl;
         }
-        if (isBookingRequired(type) && !(selectedBooking && selectedBooking.date)) {
+        if (
+          isBookingRequired(type) &&
+          !(selectedBooking && selectedBooking.date)
+        ) {
           prepareBookingSelection(id, {
             kind: "cart",
             context: { id, name, price, type, imgClass, btnEl, imgUrl },
@@ -3320,7 +3454,9 @@
         if (cart[id]) {
           const maxQty = getMaxQtyForItem(cart[id]);
           if (maxQty != null && cart[id].qty >= maxQty) {
-            showToast(`Maximum ${maxQty} ${maxQty === 1 ? "slot" : "slots"} allowed for ${name}`);
+            showToast(
+              `Maximum ${maxQty} ${maxQty === 1 ? "slot" : "slots"} allowed for ${name}`,
+            );
             return;
           }
           cart[id].qty += 1;
@@ -3377,7 +3513,9 @@
         if (!cart[id]) return;
         const maxQty = getMaxQtyForItem(cart[id]);
         if (delta > 0 && maxQty != null && cart[id].qty >= maxQty) {
-          showToast(`Maximum ${maxQty} ${maxQty === 1 ? "slot" : "slots"} allowed for ${cart[id].name}`);
+          showToast(
+            `Maximum ${maxQty} ${maxQty === 1 ? "slot" : "slots"} allowed for ${cart[id].name}`,
+          );
           return;
         }
         cart[id].qty += delta;
@@ -3658,7 +3796,9 @@
 
       function goHome() {
         backToCatalog();
-        const homeTabBtn = document.querySelector(".main-tab-btn[onclick*='swim-events']");
+        const homeTabBtn = document.querySelector(
+          ".main-tab-btn[onclick*='swim-events']",
+        );
         if (homeTabBtn) switchMainTab("swim-events", homeTabBtn);
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
@@ -3716,7 +3856,7 @@
 
       /* ═══ TABS ═══ */
       const TABS = [
-        { key: "swimOverview", label: "Swim Overview" },
+        { key: "swimOverview", label: "Camp Overview" },
         { key: "distanceRoute", label: "Distance & route" },
         { key: "safetySupport", label: "Safety & Support" },
         { key: "whatsIncluded", label: "What's included" },
@@ -3735,44 +3875,43 @@
           price: 7000,
           priceLabel: "€ 7,000",
           imgStyle:
-            "background-image:url('assets/LA_Signature_70.png');background-color:#0d2d5e;filter:hue-rotate(10deg) brightness(.95);",
+            "background-image:url('assets/signature_70.jpg');background-color:#1a3a6e;",
           cartId: "la-signature-70",
           cartName: "La Signature 70",
           swimOverview: [
-            "70 km length of Lake Geneva.",
-            "For highly experienced solo swimmers or relay teams.",
-            "Application, Medical form and Self-assessment required for LGSA trophy swim.",
-            "Typical duration: 22–28 hours.",
+            "70km two-way length of Lake Geneva.",
+            "For ultra-marathon solo swimmers or standard relay teams of 6 people. Larger teams subject to special request.",
+            "Swimmer information, medical assessment and self-assessment swim required for the ultimate LGSA trophy swim.",
+            "Typical duration 3 days continuous.",
           ],
           distanceRoute: [
-            "Distance: approx. 70 km point-to-point.",
-            "Typical route: between Geneva to Veytaux.",
-            "Route briefing tailored for each attempt.",
-            "Currents and wind carefully assessed before start.",
+            "Distance: approximately 70km. There and back again along the full length of Lake Geneva.",
+            "Route: between the Château de Chillon, Veytaux, and the Bains des Paquis, Geneva. The starting direction may vary according to the weather and lake conditions.",
+            "Detailed route briefing and contingency planning for each attempt.",
+            "Guaranteed night swimming.",
           ],
           safetySupport: [
-            "Dedicated boats, pilot and observer for the entire swim.",
-            "Full night-swimming and contingency protocols in place.",
-            "Proven marathon-swim history required.",
-            "Medical clearance, self-assessment and insurance mandatory.",
+            "Full dedicated escort crew for the duration of the swim including pilots, observers and trained lifeguard support.",
+            "Night swimming protocols.",
+            "Medical assessment and self-assessment swim required.",
           ],
           whatsIncluded: [
-            "Route planning, permits and local authority liaison.",
-            "Escort boat(s), safety team.",
-            "GPS tracking link for supporters.",
-            "Signature 70 finisher recognition: certificate, medal and official list of Legends.",
+            "All route planning and permits.",
+            "Escort boat and escort crew with skippers and observer lifeguards.",
+            "Real-time GPS tracking.",
+            "La Signature 70 finisher recognition, including certificate and recording in the LGSA List of Legends. Subject to swim conditions.",
           ],
           entryLogistics: {
             "Travel & access": [
-              "Start and finish typically at Geneva and Veytaux.",
-              "Geneva Airport + rail/road to start point.",
-              "Detailed logistics and accommodation guidance provided once accepted.",
+              "Start and finish either at the Bains des Paquis, Geneva, or the Chateau de Chillon, Veytaux. Swim route confirmed up to the day before depending on the weather and lake conditions.",
+              "Easy access by air to Geneva airport (GVA) and rail to Genève Cornavin or Villeneuve Gare VD.",
+              "Full logistics and travel guidance provided upon acceptance.",
             ],
             "Price & entry terms": [
-              "From €7,000 per solo or relay attempt.",
-              "Deposit required, remaining payments after acceptance.",
-              "Date windows highly weather-dependent; flexibility required.",
-              "Bespoke contract, waiver and cancellation terms apply.",
+              "From €7,000 per attempt.",
+              "Non-refundable deposit upon registration; the balance is due before the end of April in the year of your swim.",
+              "Multi-day weather window. The exact start day may be confirmed up to the day before.",
+              "Entry terms and conditions provided.",
             ],
           },
         },
@@ -3787,39 +3926,39 @@
           cartId: "la-signature-140",
           cartName: "La Signature 140",
           swimOverview: [
-            "140 km length of Lake Geneva.",
-            "For elite solo swimmers or upto 6 people relay teams. Or even more people if a non-standard relay, upon special request.",
-            "Application, Medical form and Self-assessment required for LGSA trophy swim.",
-            "Typical duration: 3 days continuous.",
+            "140km two-way length of Lake Geneva.",
+            "For ultra-marathon solo swimmers or standard relay teams of 6 people. Larger teams subject to special request.",
+            "Swimmer information, medical assessment and self-assessment swim required for the ultimate LGSA trophy swim.",
+            "Typical duration 3 days continuous.",
           ],
           distanceRoute: [
-            "Distance: approx. 140 km (two full crossings back-to-back).",
-            "Route: Geneva → Veytaux → Geneva, or agreed variant.",
+            "Distance: approximately 140km. There and back again along the full length of Lake Geneva.",
+            "Route: between the Château de Chillon, Veytaux, and the Bains des Paquis, Geneva. The starting direction may vary according to the weather and lake conditions.",
             "Detailed route briefing and contingency planning for each attempt.",
-            "Day/night transitions managed by dedicated crew.",
+            "Guaranteed night swimming.",
           ],
           safetySupport: [
-            "Full crew on water 24/7: pilot, observer, medic-trained support.",
-            "Advanced night-swimming protocol with lighting and signalling.",
-            "Self-assessment swim and a medical assessment.",
+            "Full dedicated escort crew for the duration of the swim including pilots, observers and trained lifeguard support.",
+            "Night swimming protocols.",
+            "Medical assessment and self-assessment swim required.",
           ],
           whatsIncluded: [
-            "All route planning, permits and cross-border authority liaison.",
-            "Boat, full crew, feeds and nutrition coordination.",
-            "Real-time GPS tracking for supporters.",
-            "Signature 140 finisher recognition: bespoke certificate, medal and LGSA List of Legends listing.",
+            "All route planning and permits.",
+            "Escort boat and escort crew with skippers and observer lifeguards.",
+            "Real-time GPS tracking.",
+            "La Signature 140 finisher recognition, including certificate and recording in the LGSA List of Legends. Subject to swim conditions.",
           ],
           entryLogistics: {
             "Travel & access": [
-              "Start/finish near Geneva city centre.",
-              "Geneva International Airport + rail/road directly to start.",
-              "Full logistics, accommodation and crew travel guidance on acceptance.",
+              "Start and finish either at the Bains des Paquis, Geneva, or the Chateau de Chillon, Veytaux. Swim route confirmed up to the day before depending on the weather and lake conditions.",
+              "Easy access by air to Geneva airport (GVA) and rail to Genève Cornavin or Villeneuve Gare VD.",
+              "Full logistics and travel guidance provided upon acceptance.",
             ],
             "Price & entry terms": [
               "From €12,000 per attempt.",
-              "Non-refundable application fee; milestone payments after acceptance.",
-              "Multi-day weather window required; dates may shift significantly.",
-              "Waiver and cancellation policy provided.",
+              "Non-refundable deposit upon registration; the balance is due before the end of April in the year of your swim.",
+              "Multi-day weather window. The exact start day may be confirmed up to the day before.",
+              "Entry terms and conditions provided.",
             ],
           },
         },
@@ -3834,40 +3973,46 @@
           cartId: "swim-stronger",
           cartName: "Swim Stronger",
           swimOverview: [
-            "5-day open-water training camp on Lake Geneva.",
-            "Based in Évian-les-Bains; aimed at strong improvers and marathon-swim aspirants.",
-            "Mix of technique, endurance and mindset sessions.",
+            "Daily Open Water Sessions: Focused practice in Lake Geneva on sighting, pacing, navigating currents, drafting, and managing open water anxiety.",
+            "Stroke Analysis & Technique Clinics: Expert video analysis and drill recommendations, focusing on efficiency, speed, and shoulder-safe swimming.",
+            "Mental Toughness Training: Workshops and in-water practice dedicated to the psychological aspects of long swims, helping you build the focus and resilience that defines elite swimmers.",
+            "Tailored Feedback: Workouts and coaching adapted to fit each individual athlete, from dedicated lap swimmers, to all levels of triathletes, to Channel aspirants and alums.",
+            "Beautiful Lakeside Location: Stay in the beautiful lakeside surroundings of Evian-les-Bains, a charming spa town with inspiring views of Lake Geneva, the nearby mountains and Lavaux vineyards."
           ],
           distanceRoute: [
-            "2x daily swims of 3-5km. Building Towards optional 10km",
+            "2x daily swims of 3-5km. Building Towards optional 5km",
             "Shoreline loops and crossing-style routes, chosen for conditions.",
             "Clear daily plan shared in advance.",
           ],
           safetySupport: [
             "LGSA coaching team plus safety support for all water sessions.",
-            "Minimum: able to swim at least 3 km continuous in open water; age 18+.",
+            "Minimum: able to swim at least 3 km continuous in the pool or open water; age 18+.",
             "Health questionnaire and appropriate insurance required.",
           ],
           whatsIncluded: [
             "Coaching programme and all on-water sessions.",
             "Workshops on pacing, feeds, safety and mental skills.",
             "Support boat/kayaks as needed.",
-            "Camp briefing pack and post-camp recommendations.",
+            "Kayak escorted open water swims.",
+            "Coached pool sessions focusing on technique.",
+            "Video analysis of your swim stroke.",
+            "Supervision and safety cover for all sessions.",
+            "Lunches",
+            "Two dinners - welcome dinner and dinner at Coach Dutton’s place"
           ],
           entryLogistics: {
             "Travel & access": [
               "Évian-les-Bains via Geneva Airport + train/ferry/road.",
-              "Meeting point and suggested accommodation list provided after booking.",
+              "Full logistics and travel guidance provided upon acceptance.",
             ],
             "Price & entry terms": [
-              "From CHF 1,500 per person for 5-day camp.",
-              "Deposit at registration; the balance is due before end of april in the year of your camp.",
-              "Clear cancellation / deferral policy in booking conditions.",
+              "From CHF 1,500 EUR per person for 5-day camp.",
+              "Non-refundable deposit upon registration; the balance is due before the end of April in the year of your camp."
             ],
           },
         },
         "la-classique": {
-          title: "La Classique",
+          title: "La Classique: The International Swim Across Lake Geneva",
           badge: "Core",
           badgeClass: "badge-core",
           price: 325,
@@ -3877,32 +4022,36 @@
           cartId: "la-classique",
           cartName: "La Classique",
           swimOverview: [
-            "13 km international event across Lake Geneva.",
-            "Lausanne (CH) to Évian-les-Bains (FR).",
-            "Adventure marathon swim with limited entries.",
+            "13km international swim across Lake Geneva, between Lausanne, Switzerland and Évian-les-Bains, France.",
+            "Popular ultra-marathon event along iconic swim route."
           ],
           distanceRoute: [
             'Distance: 13 km "as the crow flies".',
             "Start: Lausanne–Ouchy.",
             "Finish: Parc Dollfus, Évian-les-Bains.",
-            "Course marked and supported by safety boats.",
+            "Swimmers supported and guided along the route by on-water safety teams.",
           ],
           safetySupport: [
-            "LGSA-run event with professional safety team.",
             "Dedicated kayaker required for each swimmer or booked via LGSA.",
             "Strong marathon-swim fitness.",
             "Wetsuit and medical rules set in the official regulations.",
+            "Motorised security boats",
+            "Trained lifeguards and water-safety personnel",
+            "Marker buoys",
+            "Continuous monitoring of lake conditions",
+            "The event is conducted with appropriate authorisation from Swiss and French authorities.",
+            "The event may be postponed or modified if conditions are unsuitable."
           ],
           whatsIncluded: [
-            "Event entry and on-water safety support.",
+            "Event entry and full on-water safety team.",
             "Feed stations (drinks and energy) along the course.",
-            "Official La Classique swim cap and medal.",
+            "Official La Classique swim cap and souvenir.",
           ],
           entryLogistics: {
             "Travel & Access": [
               "Lausanne and Évian connected by ferry and road.",
               "Geneva Airport + rail to Lausanne is typical international route.",
-              "Full logistics and kit list in event information pack.",
+              "Full logistics and travel guidance provided upon acceptance.",
             ],
             "Price, Entry & Terms": [
               "Entry fee: €325 per swimmer.",
@@ -3928,9 +4077,8 @@
           cartId: "guided-classique",
           cartName: "Guided Classique",
           swimOverview: [
-            "Iconic 13 km guided crossing of Lake Geneva.",
-            "Lausanne (CH) to Évian-les-Bains (FR), or reverse.",
-            "Private or small-group format for serious open-water swimmers.",
+            "Guided crossing of iconic 13km international crossing of Lake Geneva, between Lausanne, Switzerland and Évian-les-Bains, France.",
+            "Available to swim as a solo, in a group or as part of a relay.",
           ],
           distanceRoute: [
             "Distance: 13 km point-to-point.",
@@ -3940,27 +4088,23 @@
           ],
           safetySupport: [
             "Dedicated escort boat with pilot and observer.",
-            "Pre-swim safety briefing and feed plan.",
-            "Minimum: recent 8–10 km open-water swim; age 18+.",
+            "Pre-swim safety briefing.",
+            "Medical assessment required.",
             "Wetsuit optional with seperate classification.",
           ],
           whatsIncluded: [
             "Escort boat, pilot, observer and route planning.",
-            "Standard feeds on the boat (drinks/basic nutrition).",
-            "Official LGSA Classique certificate/medal.",
-            "Logistics brief for travel and border crossing.",
+            "LGSA swim hat and official LGSA Guided Classique souvenir."
           ],
           entryLogistics: {
             "Travel & access": [
               "Easy rail access to Lausanne from Geneva/Zurich.",
               "Ferry / road options from Évian back to Switzerland.",
-              "Full meet-point and timing details in confirmation email.",
+              "Full logistics and travel guidance provided upon acceptance.",
             ],
             "Price & entry terms": [
               "For 1 person - 950, 2 people - 1,200, 3 people - 1,400, 4 people - 1,550.",
-              "Deposit on booking; balance due before swim.",
-              "Weather may move start within agreed window; safety first.",
-              "Full terms, waiver and insurance expectations at checkout.",
+              "Non-refundable deposit upon registration; the balance is due before the end of April in the year of your swim."
             ],
           },
         },
@@ -4044,19 +4188,17 @@
           whatsIncluded: [
             "Escort boat, pilot and route planning.",
             "Guidance on return logistics between Nyon and Yvoire/Nernier.",
-            "Completion certificate.",
+            "LGSA swim hat and official LGSA Guided Nyvoirienne souvenir.",
           ],
           entryLogistics: {
             "Travel & access": [
               "15 minutes from geneva to nyon by train.",
               "Easy train/bus/taxi connections to Nyon from Geneva and Lausanne.",
-              "Meeting point, timing and travel suggestions in confirmation email.",
+              "Full logistics and travel guidance provided upon acceptance.",
             ],
             "Price & entry terms": [
               "For 1 person - €750, 2 people - € 950, 3 people - € 1,100, 4 people - € 1,200.",
-              "Deposit to secure your date; balance due before swim.",
-              "Date/time may move within agreed window for safety.",
-              "Full terms, waiver and insurance expectations at checkout.",
+              "Non-refundable deposit upon registration; the balance is due before the end of April in the year of your swim.",
             ],
           },
         },
@@ -4090,12 +4232,11 @@
             "Safety cover throughout the session.",
             "Short debrief and Q&A on open-water basics.",
             "Participation certificate.",
-            "We provide some packed lunch under 10CHF.",
-            "Target Friday, Saturday and Sunday. Tourists visit Geneva for weekend city break.",
+            "We provide some packed lunch."
           ],
           entryLogistics: {
             "Travel & access": [
-              "Nearest city: Geneva.",
+              "Nearest airport Geneva (GVA) and train station Genève Cornavin.",
               "Easy tram/bus or taxi from central Geneva to the meeting point.",
               "Exact location and timing confirmed by email.",
               "it’s only 20 min walk from main train station Geneva Cornavin.",
@@ -4277,7 +4418,7 @@
             "You accept that you may be able to change the nature of your swim from a solo to a relay or group or vice versa provided this is agreed in advance with the LGSA office and that any outstanding balances are paid. You acknowledge and accept that your swim, in the interests of safety, may be amended in the following ways, including but not limited to reducing the distance of the swim, changing the swim course or altering the timings and structure of events. Any changes to your swim will be communicated to you on the day of your swim or sooner if possible. Should your swim be amended in any way you agree that it has still been staged and that you will not be eligible for any refund.",
             "The LGSA reserves the right to use images of you taking part in your Guided Nyvoirienne for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in your Guided Nyvoirienne.",
             "You acknowledge and accept that your skippers will advise on the weather and lake conditions on and before the day of your swim, however you take full responsibility for the final decision to make an attempt. You acknowledge and understand that open water marathon swimming is an extreme sport. You are aware of the risks inherent in attempting an open water marathon swim and the training for such an event, including possible permanent disability or death. You agree to accept and assume all those risks. You hereby waive any and all rights, to the fullest extent permitted by applicable law, to claim for loss or damages against the LGSA and/or any body affiliated thereto and any of the Association officials supervising, observing and organising events, which arise out of your participation in attempting the swim, or any activities incidental thereto. Please note seasickness can be a serious problem for swimmers or support team members on the boat. You undertake full responsibility to make them aware of this.",
-            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip."
+            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip.",
           ],
           "guided-classique": [
             "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the Guided Classique and abide by the following conditions, and any instructions given to you by the organisers/officials of your Guided Classique swim.",
@@ -4294,7 +4435,7 @@
             "You accept that you may be able to change the nature of your swim from a solo to a relay or group or vice versa provided this is agreed in advance with the LGSA office and that any outstanding balances are paid. You acknowledge and accept that your swim, in the interests of safety, may be amended in the following ways, including but not limited to reducing the distance of the swim, changing the swim course or altering the timings and structure of events. Any changes to your swim will be communicated to you on the day of your swim or sooner if possible. Should your swim be amended in any way you agree that it has still been staged and that you will not be eligible for any refund.",
             "The LGSA reserves the right to use images of you taking part in your Guided Classique for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in your Guided Classique.",
             "You acknowledge and accept that your skippers will advise on the weather and lake conditions on and before the day of your swim, however you take full responsibility for the final decision to make an attempt. You acknowledge and understand that open water marathon swimming is an extreme sport. You are aware of the risks inherent in attempting an open water marathon swim and the training for such an event, including possible permanent disability or death. You agree to accept and assume all those risks. You hereby waive any and all rights, to the fullest extent permitted by applicable law, to claim for loss or damages against the LGSA and/or any body affiliated thereto and any of the Association officials supervising, observing and organising events, which arise out of your participation in attempting the swim, or any activities incidental thereto. Please note seasickness can be a serious problem for swimmers or support team members on the boat. You undertake full responsibility to make them aware of this.",
-            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Classique swim. If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip."
+            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Classique swim. If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip.",
           ],
           "la-signature-70": [
             "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the LGSA Signature and abide by the following conditions, and any instructions given to you by the organisers/officials of your LGSA Signature swim.",
@@ -4311,7 +4452,7 @@
             "You accept that you may be able to change the nature of your swim from a solo to a relay or group or vice versa provided this is agreed in advance with the LGSA office and that any outstanding balances are paid. You acknowledge and accept that your swim, in the interests of safety, may be amended in the following ways, including but not limited to reducing the distance of the swim, changing the swim course or altering the timings and structure of events. Any changes to your swim will be communicated to you on the day of your swim or sooner if possible. Should your swim be amended in any way you agree that it has still been staged and that you will not be eligible for any refund.",
             "The LGSA reserves the right to use images of you taking part in your LGSA Signature for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in your LGSA Signature.",
             "You acknowledge and accept that your skippers will advise on the weather and lake conditions on and before the day of your swim, however you take full responsibility for the final decision to make an attempt. You acknowledge and understand that open water marathon swimming is an extreme sport. You are aware of the risks inherent in attempting an open water marathon swim and the training for such an event, including possible permanent disability or death. You agree to accept and assume all those risks. You hereby waive any and all rights, to the fullest extent permitted by applicable law, to claim for loss or damages against the LGSA and/or any body affiliated thereto and any of the Association officials supervising, observing and organising events, which arise out of your participation in attempting the swim, or any activities incidental thereto. Please note seasickness can be a serious problem for swimmers or support team members on the boat. You undertake full responsibility to make them aware of this.",
-            "The LGSA requires that all swimmers have their own open water swimming insurance policy. You ensure that you have your own appropriate insurance policy to cover you and your participation in your swim. In no event will the LGSA be liable to you for any : loss or damage, loss of profit, loss of reputation, loss of business, revenue or goodwill, pledges made by you (or on your behalf) to charity, consequential or indirect loss, injury or sickness due to your negligence. <br> Nothing in this Agreement shall affect our liability for death or personal injury, fraud, or any other liability to the extent it cannot be excluded or limited by law.<br> The LGSA has its own appropriate third-party liability insurance for its own benefit. You acknowledge that you are not entitled to benefit under this insurance from any claim that is made against you by a third party for death, personal injury or damage to property as a result, or in connection with, your negligent actions or omissions whilst taking part in your swim. You will indemnify and keep the LGSA indemnified against any claim made against us by a third party for death, personal injury or damage to property as a result of, or in connection with, your negligent actions or omissions whilst taking part in your swim."
+            "The LGSA requires that all swimmers have their own open water swimming insurance policy. You ensure that you have your own appropriate insurance policy to cover you and your participation in your swim. In no event will the LGSA be liable to you for any : loss or damage, loss of profit, loss of reputation, loss of business, revenue or goodwill, pledges made by you (or on your behalf) to charity, consequential or indirect loss, injury or sickness due to your negligence. <br> Nothing in this Agreement shall affect our liability for death or personal injury, fraud, or any other liability to the extent it cannot be excluded or limited by law.<br> The LGSA has its own appropriate third-party liability insurance for its own benefit. You acknowledge that you are not entitled to benefit under this insurance from any claim that is made against you by a third party for death, personal injury or damage to property as a result, or in connection with, your negligent actions or omissions whilst taking part in your swim. You will indemnify and keep the LGSA indemnified against any claim made against us by a third party for death, personal injury or damage to property as a result of, or in connection with, your negligent actions or omissions whilst taking part in your swim.",
           ],
           "la-signature-140": [
             "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the LGSA Signature and abide by the following conditions, and any instructions given to you by the organisers/officials of your LGSA Signature swim.",
@@ -4328,7 +4469,7 @@
             "You accept that you may be able to change the nature of your swim from a solo to a relay or group or vice versa provided this is agreed in advance with the LGSA office and that any outstanding balances are paid. You acknowledge and accept that your swim, in the interests of safety, may be amended in the following ways, including but not limited to reducing the distance of the swim, changing the swim course or altering the timings and structure of events. Any changes to your swim will be communicated to you on the day of your swim or sooner if possible. Should your swim be amended in any way you agree that it has still been staged and that you will not be eligible for any refund.",
             "The LGSA reserves the right to use images of you taking part in your LGSA Signature for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in your LGSA Signature.",
             "You acknowledge and accept that your skippers will advise on the weather and lake conditions on and before the day of your swim, however you take full responsibility for the final decision to make an attempt. You acknowledge and understand that open water marathon swimming is an extreme sport. You are aware of the risks inherent in attempting an open water marathon swim and the training for such an event, including possible permanent disability or death. You agree to accept and assume all those risks. You hereby waive any and all rights, to the fullest extent permitted by applicable law, to claim for loss or damages against the LGSA and/or any body affiliated thereto and any of the Association officials supervising, observing and organising events, which arise out of your participation in attempting the swim, or any activities incidental thereto. Please note seasickness can be a serious problem for swimmers or support team members on the boat. You undertake full responsibility to make them aware of this.",
-            "The LGSA requires that all swimmers have their own open water swimming insurance policy. You ensure that you have your own appropriate insurance policy to cover you and your participation in your swim. In no event will the LGSA be liable to you for any : loss or damage, loss of profit, loss of reputation, loss of business, revenue or goodwill, pledges made by you (or on your behalf) to charity, consequential or indirect loss, injury or sickness due to your negligence. <br> Nothing in this Agreement shall affect our liability for death or personal injury, fraud, or any other liability to the extent it cannot be excluded or limited by law.<br> The LGSA has its own appropriate third-party liability insurance for its own benefit. You acknowledge that you are not entitled to benefit under this insurance from any claim that is made against you by a third party for death, personal injury or damage to property as a result, or in connection with, your negligent actions or omissions whilst taking part in your swim. You will indemnify and keep the LGSA indemnified against any claim made against us by a third party for death, personal injury or damage to property as a result of, or in connection with, your negligent actions or omissions whilst taking part in your swim."
+            "The LGSA requires that all swimmers have their own open water swimming insurance policy. You ensure that you have your own appropriate insurance policy to cover you and your participation in your swim. In no event will the LGSA be liable to you for any : loss or damage, loss of profit, loss of reputation, loss of business, revenue or goodwill, pledges made by you (or on your behalf) to charity, consequential or indirect loss, injury or sickness due to your negligence. <br> Nothing in this Agreement shall affect our liability for death or personal injury, fraud, or any other liability to the extent it cannot be excluded or limited by law.<br> The LGSA has its own appropriate third-party liability insurance for its own benefit. You acknowledge that you are not entitled to benefit under this insurance from any claim that is made against you by a third party for death, personal injury or damage to property as a result, or in connection with, your negligent actions or omissions whilst taking part in your swim. You will indemnify and keep the LGSA indemnified against any claim made against us by a third party for death, personal injury or damage to property as a result of, or in connection with, your negligent actions or omissions whilst taking part in your swim.",
           ],
           "swim-stronger": [
             "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the Guided Nyvoirienne and abide by the following conditions, and any instructions given to you by the organisers/officials of your Guided Nyvoirienne swim.",
@@ -4344,7 +4485,7 @@
             "You accept that you may be able to change the nature of your swim from a solo to a relay or group or vice versa provided this is agreed in advance with the LGSA office and that any outstanding balances are paid. You acknowledge and accept that your swim, in the interests of safety, may be amended in the following ways, including but not limited to reducing the distance of the swim, changing the swim course or altering the timings and structure of events. Any changes to your swim will be communicated to you on the day of your swim or sooner if possible. Should your swim be amended in any way you agree that it has still been staged and that you will not be eligible for any refund.",
             "The LGSA reserves the right to use images of you taking part in your Guided Nyvoirienne for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in your Guided Nyvoirienne.",
             "You acknowledge and accept that your skippers will advise on the weather and lake conditions on and before the day of your swim, however you take full responsibility for the final decision to make an attempt. You acknowledge and understand that open water marathon swimming is an extreme sport. You are aware of the risks inherent in attempting an open water marathon swim and the training for such an event, including possible permanent disability or death. You agree to accept and assume all those risks. You hereby waive any and all rights, to the fullest extent permitted by applicable law, to claim for loss or damages against the LGSA and/or any body affiliated thereto and any of the Association officials supervising, observing and organising events, which arise out of your participation in attempting the swim, or any activities incidental thereto. Please note seasickness can be a serious problem for swimmers or support team members on the boat. You undertake full responsibility to make them aware of this.",
-            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip."
+            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip.",
           ],
           "la-classique": [
             "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the Guided Nyvoirienne and abide by the following conditions, and any instructions given to you by the organisers/officials of your Guided Nyvoirienne swim.",
@@ -4360,7 +4501,7 @@
             "You accept that you may be able to change the nature of your swim from a solo to a relay or group or vice versa provided this is agreed in advance with the LGSA office and that any outstanding balances are paid. You acknowledge and accept that your swim, in the interests of safety, may be amended in the following ways, including but not limited to reducing the distance of the swim, changing the swim course or altering the timings and structure of events. Any changes to your swim will be communicated to you on the day of your swim or sooner if possible. Should your swim be amended in any way you agree that it has still been staged and that you will not be eligible for any refund.",
             "The LGSA reserves the right to use images of you taking part in your Guided Nyvoirienne for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in your Guided Nyvoirienne.",
             "You acknowledge and accept that your skippers will advise on the weather and lake conditions on and before the day of your swim, however you take full responsibility for the final decision to make an attempt. You acknowledge and understand that open water marathon swimming is an extreme sport. You are aware of the risks inherent in attempting an open water marathon swim and the training for such an event, including possible permanent disability or death. You agree to accept and assume all those risks. You hereby waive any and all rights, to the fullest extent permitted by applicable law, to claim for loss or damages against the LGSA and/or any body affiliated thereto and any of the Association officials supervising, observing and organising events, which arise out of your participation in attempting the swim, or any activities incidental thereto. Please note seasickness can be a serious problem for swimmers or support team members on the boat. You undertake full responsibility to make them aware of this.",
-            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip."
+            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip.",
           ],
           "lake-geneva-initiation": [
             "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the Guided Nyvoirienne and abide by the following conditions, and any instructions given to you by the organisers/officials of your Guided Nyvoirienne swim.",
@@ -4376,15 +4517,25 @@
             "You accept that you may be able to change the nature of your swim from a solo to a relay or group or vice versa provided this is agreed in advance with the LGSA office and that any outstanding balances are paid. You acknowledge and accept that your swim, in the interests of safety, may be amended in the following ways, including but not limited to reducing the distance of the swim, changing the swim course or altering the timings and structure of events. Any changes to your swim will be communicated to you on the day of your swim or sooner if possible. Should your swim be amended in any way you agree that it has still been staged and that you will not be eligible for any refund.",
             "The LGSA reserves the right to use images of you taking part in your Guided Nyvoirienne for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in your Guided Nyvoirienne.",
             "You acknowledge and accept that your skippers will advise on the weather and lake conditions on and before the day of your swim, however you take full responsibility for the final decision to make an attempt. You acknowledge and understand that open water marathon swimming is an extreme sport. You are aware of the risks inherent in attempting an open water marathon swim and the training for such an event, including possible permanent disability or death. You agree to accept and assume all those risks. You hereby waive any and all rights, to the fullest extent permitted by applicable law, to claim for loss or damages against the LGSA and/or any body affiliated thereto and any of the Association officials supervising, observing and organising events, which arise out of your participation in attempting the swim, or any activities incidental thereto. Please note seasickness can be a serious problem for swimmers or support team members on the boat. You undertake full responsibility to make them aware of this.",
-            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip."
-          ]
-
+            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip.",
+          ],
         };
 
         const chosenTerms = eventTerms[productId] || baseTerms;
-        return `<div class="tab-sub-title">Booking terms</div><ul class="tab-bullet-list">${chosenTerms
-          .map((line) => `<li>${line}</li>`)
-          .join("")}</ul>`;
+        const getTermSummary = (term) => {
+          const plainText = term.replace(/<[^>]*>/g, "").trim();
+          const firstSentence = plainText.match(/^.*?[.!?](?:\s|$)/)?.[0].trim();
+          const summary = firstSentence || plainText;
+          return summary.length > 110
+            ? `${summary.slice(0, 107).trimEnd()}...`
+            : summary;
+        };
+        return `<div class="tab-sub-title">Booking terms</div><div class="terms-accordion">${chosenTerms
+          .map(
+            (line) =>
+              `<details class="terms-accordion-item"><summary>${getTermSummary(line)}</summary><div class="terms-accordion-content">${line}</div></details>`,
+          )
+          .join("")}</div>`;
       }
 
       function renderEntryLogisticsTab(product) {
@@ -4407,20 +4558,22 @@
         const dateSet = getProductEventDateSet(product.cartId);
         const dates = Array.from(dateSet).sort();
         if (!dates.length)
-          return `<p class="tab-placeholder">No event dates available for this swim yet.</p>`;
-        return `<div class="tab-sub-title">Event dates</div>
-        <ul class="tab-bullet-list">${dates
-          .map(
-            (key) =>
-              ``,
-          )
-          .join("")}</ul>
+          return `<p class="tab-placeholder">Dates will be confirmed soon.</p>`;
+        return `<div class="tab-sub-title">Use the date picker to select an available window. Please note that your Guided Classique may start at any time during your swim window, to allow for reasonable conditions for an attempt. This is subject to change and requires swimmers to be flexible. You must make sure you are available to swim on any day during your window.</div>
+        <ul class="tab-bullet-list">${dates.map((key) => ``).join("")}</ul>
           `;
       }
 
       function showDetail(id) {
         const p = products[id];
         if (!p) return;
+        if (history.state?.shoppingCartView !== "detail") {
+          history.pushState(
+            { shoppingCartView: "detail", productId: id },
+            "",
+            window.location.href,
+          );
+        }
         const inCart = cart[p.cartId];
         const atcClass = inCart
           ? "btn-add-cart-detail in-cart"
@@ -4432,17 +4585,16 @@
           (t, i) =>
             `<button class="tab-btn${i === 0 ? " active" : ""}" onclick="switchTab('${id}','${t.key}',this)">${t.label}</button>`,
         ).join("");
-        const tabPanels = TABS.map(
-          (t, i) => {
-            let content = "";
-            if (t.key === "prices") content = renderPricesTab(p);
-            else if (t.key === "terms") content = renderTermsTab(p);
-            else if (t.key === "dates") content = renderDatesTab(p);
-            else if (t.key === "entryLogistics") content = renderEntryLogisticsTab(p);
-            else content = renderTabBody(p[t.key]);
-            return `<div class="tab-panel${i === 0 ? " active" : ""}" id="panel-${id}-${t.key}"><div class="tab-section-title">${t.label}</div>${content}</div>`;
-          },
-        ).join("");
+        const tabPanels = TABS.map((t, i) => {
+          let content = "";
+          if (t.key === "prices") content = renderPricesTab(p);
+          else if (t.key === "terms") content = renderTermsTab(p);
+          else if (t.key === "dates") content = renderDatesTab(p);
+          else if (t.key === "entryLogistics")
+            content = renderEntryLogisticsTab(p);
+          else content = renderTabBody(p[t.key]);
+          return `<div class="tab-panel${i === 0 ? " active" : ""}" id="panel-${id}-${t.key}"><div class="tab-section-title">${t.label}</div>${content}</div>`;
+        }).join("");
         if (!googleEventsLoaded && p.type !== "merch") {
           loadGoogleCalendarEvents().then(() => {
             const datesPanel = document.getElementById(`panel-${id}-dates`);
@@ -4529,7 +4681,7 @@
       }
 
       function backToCatalog() {
-        clearSelectedDate('d');
+        clearSelectedDate("d");
         document.getElementById("catalog-main").style.display = "";
         const dw = document.getElementById("detail-wrap");
         dw.classList.remove("active");
@@ -4537,15 +4689,36 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
+      window.addEventListener("popstate", (event) => {
+        if (event.state?.shoppingCartView === "detail") {
+          showDetail(event.state.productId);
+          return;
+        }
+        if (
+          document.getElementById("detail-wrap")?.classList.contains("active")
+        ) {
+          backToCatalog();
+        }
+      });
+
       /* ═══ UPSELL ═══ */
       let _pendingWise = null;
       const EVENT_MAX_AVAILABILITY = 10;
+      const SIGNATURE_WEEKLY_AVAILABILITY = 1;
       let _bookingEventId = null;
       let _bookingEventDateSet = new Set();
       let _bookingSelectedDate = null;
       let _bookingSelectedEndDate = null;
       let _bookingCalD = null;
       let _bookingFlow = null;
+      function getBookingAvailability(productId) {
+        const isSignature =
+          productId === "la-signature-70" || productId === "la-signature-140";
+        return isSignature
+          ? { count: SIGNATURE_WEEKLY_AVAILABILITY, unit: "slot per week" }
+          : { count: EVENT_MAX_AVAILABILITY, unit: "spots per date" };
+      }
+
       function openWise(productId) {
         prepareBookingSelection(productId, {
           kind: "payment",
@@ -4560,7 +4733,11 @@
         googleEvents.forEach((event) => {
           const summary = (event.summary || "").toLowerCase();
           if (!matcher.test(summary)) return;
-          if (!(event.start instanceof Date) || Number.isNaN(event.start.getTime())) return;
+          if (
+            !(event.start instanceof Date) ||
+            Number.isNaN(event.start.getTime())
+          )
+            return;
           const endDate =
             event.end instanceof Date && !Number.isNaN(event.end.getTime())
               ? new Date(event.end)
@@ -4603,7 +4780,11 @@
         const grid = document.getElementById(gridId);
         const first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
         const startOffset = first === 0 ? 6 : first - 1;
-        const days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        const days = new Date(
+          date.getFullYear(),
+          date.getMonth() + 1,
+          0,
+        ).getDate();
         const td = _now.getDate(),
           tm = _now.getMonth(),
           ty = _now.getFullYear();
@@ -4613,7 +4794,9 @@
         const selectedKeyEnd = _bookingSelectedEndDate
           ? normalizeDateKey(_bookingSelectedEndDate)
           : null;
-        let html = DNAMES.map((d) => `<div class="cal-head">${d}</div>`).join("");
+        let html = DNAMES.map((d) => `<div class="cal-head">${d}</div>`).join(
+          "",
+        );
         for (let i = 0; i < startOffset; i++)
           html += `<div class="cal-cell cal-empty"></div>`;
         for (let d = 1; d <= days; d++) {
@@ -4623,7 +4806,8 @@
             d === td && date.getMonth() === tm && date.getFullYear() === ty;
           let isSelected = false;
           if (selectedKeyStart && selectedKeyEnd) {
-            isSelected = dateKey >= selectedKeyStart && dateKey <= selectedKeyEnd;
+            isSelected =
+              dateKey >= selectedKeyStart && dateKey <= selectedKeyEnd;
           } else if (selectedKeyStart) {
             isSelected = selectedKeyStart === dateKey;
           }
@@ -4669,7 +4853,12 @@
         const selEndKey = _bookingSelectedEndDate
           ? normalizeDateKey(_bookingSelectedEndDate)
           : null;
-        if (selStartKey && selEndKey && dateKey === selStartKey && dateKey === selEndKey) {
+        if (
+          selStartKey &&
+          selEndKey &&
+          dateKey === selStartKey &&
+          dateKey === selEndKey
+        ) {
           _bookingSelectedDate = null;
           _bookingSelectedEndDate = null;
         } else {
@@ -4682,14 +4871,16 @@
             const prev = new Date(start);
             prev.setDate(prev.getDate() - 1);
             const k = normalizeDateKey(prev);
-            if (_bookingEventDateSet.has(k)) start = prev; else break;
+            if (_bookingEventDateSet.has(k)) start = prev;
+            else break;
           }
           // expand forwards
           while (true) {
             const next = new Date(end);
             next.setDate(next.getDate() + 1);
             const k = normalizeDateKey(next);
-            if (_bookingEventDateSet.has(k)) end = next; else break;
+            if (_bookingEventDateSet.has(k)) end = next;
+            else break;
           }
 
           _bookingSelectedDate = start;
@@ -4858,7 +5049,9 @@
           el.textContent = `${p.title} · ${p.priceLabel}`;
           if (_pendingWise.date) {
             if (_pendingWise.dateEnd) {
-              el.textContent += ` · ${new Date(_pendingWise.date).toLocaleDateString("en-GB", {
+              el.textContent += ` · ${new Date(
+                _pendingWise.date,
+              ).toLocaleDateString("en-GB", {
                 day: "numeric",
                 month: "short",
                 year: "numeric",
@@ -4868,7 +5061,9 @@
                 year: "numeric",
               })}`;
             } else {
-              el.textContent += ` · ${new Date(_pendingWise.date).toLocaleDateString("en-GB", {
+              el.textContent += ` · ${new Date(
+                _pendingWise.date,
+              ).toLocaleDateString("en-GB", {
                 day: "numeric",
                 month: "short",
                 year: "numeric",
@@ -5484,7 +5679,8 @@
 
       /* ═══ WISE DIRECT ═══ */
       const WISE_FEE = 0;
-      const WISE_PAYMENT_URL = "https://wise.com/pay/business/lakegenevaswimmingassociationlimited?utm_source=open_link";
+      const WISE_PAYMENT_URL =
+        "https://wise.com/pay/business/lakegenevaswimmingassociationlimited?utm_source=open_link";
       const WISE_TEST_FULL_DISCOUNT = false;
       let _wiseCurrentId = null;
       function openWiseDirect(productId) {
@@ -5586,15 +5782,15 @@
         document
           .querySelectorAll("#product-grid .product-card")
           .forEach((card) => {
-            if( card.classList.contains("filter_greyout") ) {
-                card.classList.remove("filter_greyout");
+            if (card.classList.contains("filter_greyout")) {
+              card.classList.remove("filter_greyout");
             }
             if (card.dataset.hidden === "1") {
               card.style.display = "none";
               return;
             } /* permanently hidden */
             const tOk = !anyType || (typeMap[card.dataset.type] ?? false);
-            const place = card.dataset.place || "";
+            const place = (card.dataset.place || "").toLowerCase();
             const plOk =
               !anyPlace ||
               (nyon && place.includes("nyon")) ||
@@ -5619,11 +5815,12 @@
             const dateProductIds = selectedDate
               ? getAllowedProductIdsForDate(selectedDate)
               : null;
-            const dateOk = !dateProductIds || dateProductIds.has(card.dataset.id);
-            if(!tOk || !plOk || !etOk || !partOk || !dateOk) {
+            const dateOk =
+              !dateProductIds || dateProductIds.has(card.dataset.id);
+            if (!tOk || !plOk || !etOk || !partOk || !dateOk) {
               card.classList.add("filter_greyout");
             } else {
-              if( card.classList.contains("filter_greyout") ) {
+              if (card.classList.contains("filter_greyout")) {
                 card.classList.remove("filter_greyout");
               }
             }
@@ -5922,7 +6119,8 @@
         const dateKey = normalizeDateKey(cellDate);
         for (const event of googleEvents) {
           if (!event || !event.summary) continue;
-          const start = event.start instanceof Date ? event.start : new Date(event.start);
+          const start =
+            event.start instanceof Date ? event.start : new Date(event.start);
           const endDate =
             event.end instanceof Date && !Number.isNaN(event.end.getTime())
               ? new Date(event.end)
@@ -5938,9 +6136,15 @@
           const endKey = normalizeDateKey(inclusiveEnd);
           if (dateKey < startKey || dateKey > endKey) continue;
           const summary = (event.summary || "").toLowerCase();
-          if (/training camp|swim camp|training/i.test(summary)) return "training";
+          if (/training camp|swim camp|training/i.test(summary))
+            return "training";
           if (/guided/i.test(summary)) return "guided";
-          if (/event|classic|signature|nyvoirienne|initiation|stronger/i.test(summary)) return "event";
+          if (
+            /event|classic|signature|nyvoirienne|initiation|stronger/i.test(
+              summary,
+            )
+          )
+            return "event";
         }
         return null;
       }
@@ -6135,11 +6339,11 @@
       function buildGoogleSheetPayload() {
         const today = new Date();
 
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
         const yy = String(today.getFullYear()).slice(-2);
         const formattedDate = `${dd}${mm}${yy}`;
-        console.log("build google sheet : ",today, dd, mm, yy, formattedDate);
+        console.log("build google sheet : ", today, dd, mm, yy, formattedDate);
         const swimmerData = {
           name:
             document.getElementById("banktx-client-name")?.value.trim() || "",
@@ -6176,8 +6380,9 @@
         }
         const wiseFee = items.length > 0 ? WISE_FEE : 0;
         const formattedItems = items
-          .map(item =>
-            `ID: ${item.id}, Name: ${item.name}, Qty: ${item.qty}, Unit Price: ${item.unit_price}, Total: ${item.total}`
+          .map(
+            (item) =>
+              `ID: ${item.id}, Name: ${item.name}, Qty: ${item.qty}, Unit Price: ${item.unit_price}, Total: ${item.total}`,
           )
           .join("\n");
 
@@ -6199,7 +6404,7 @@
           currency: "EUR",
           payment_method: "Wise",
           swimmer: swimmerData,
-                booking:
+          booking:
             _pendingWise && _pendingWise.type === "product"
               ? {
                   product_id: _pendingWise.id,
@@ -6324,6 +6529,13 @@
       }
 
       /* ═══ INIT ═══ */
+      if (history.state?.shoppingCartView !== "catalog") {
+        history.replaceState(
+          { shoppingCartView: "catalog" },
+          "",
+          window.location.href,
+        );
+      }
       buildCal(calD, "d-cal-grid", "d-cal-label", null, "d");
       buildCal(calM, "m-cal-grid", "m-cal-label", null, "m");
       loadGoogleCalendarEvents();
