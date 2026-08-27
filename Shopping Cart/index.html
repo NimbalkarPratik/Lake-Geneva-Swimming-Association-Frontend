@@ -150,6 +150,13 @@
                 onchange="applyFilters()"
               /><label for="d-entry">Entry Level</label>
             </div>
+            <div class="check-row">
+              <input
+                type="checkbox"
+                id="d-classique"
+                onchange="applyFilters()"
+              /><label for="d-classique">Classique</label>
+            </div>
           </div>
           <div class="filter-section">
             <span class="filter-label">Select Place</span>
@@ -404,7 +411,7 @@
               <div class="product-body">
                 <div class="product-title">La Signature 70</div>
                 <div class="product-desc">
-                  Legendary 70 km Lake Geneva crossing for experienced solo and
+                  Legendary 70 km Lake Geneva for experienced solo and
                   relay swimmers.
                 </div>
                 <div class="product-stats">
@@ -542,6 +549,7 @@
               onclick="showDetail('la-classique')"
               data-id="la-classique"
               data-type="core"
+              data-category="classique"
               data-place="lausanne evian"
               data-eventtype="event"
               data-participation="solo"
@@ -568,7 +576,7 @@
                   >
                 </div>
                 <div class="product-footer">
-                  <span class="product-price">€ 325 pp</span>
+                  <span class="product-price">from € 325 pp</span>
                   <div class="product-footer-actions">
                     <button
                       class="btn-add-cart"
@@ -615,6 +623,7 @@
               onclick="showDetail('guided-classique')"
               data-id="guided-classique"
               data-type="core"
+              data-category="classique"
               data-place="lausanne evian"
               data-eventtype="guided"
               data-participation="solo group relay-team"
@@ -2367,6 +2376,13 @@
                 onchange="syncMobile('entry')"
               /><label for="m-entry">Entry Level</label>
             </div>
+            <div class="check-row">
+              <input
+                type="checkbox"
+                id="m-classique"
+                onchange="syncMobile('classique')"
+              /><label for="m-classique">Classique</label>
+            </div>
           </div>
           <div class="filter-section">
             <span class="filter-label">Select Place</span>
@@ -2687,6 +2703,31 @@
         <!-- Form -->
         <div class="swimmer-body" id="swimmer-body">
           <div class="swimmer-form" id="swimmer-form">
+            <div class="swimmer-form-row">
+              <div class="swimmer-field">
+                <label for="sw-first-name"
+                  >First Name<span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="sw-first-name"
+                  placeholder="First name"
+                  autocomplete="given-name"
+                />
+              </div>
+              <div class="swimmer-field">
+                <label for="sw-last-name"
+                  >Last Name<span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="sw-last-name"
+                  placeholder="Last name"
+                  autocomplete="family-name"
+                />
+              </div>
+            </div>
+
             <div class="swimmer-field">
               <label for="sw-phone"
                 >Phone Number<span class="req">*</span></label
@@ -4171,12 +4212,12 @@
           cartName: "Guided Nyvoirienne",
           swimOverview: [
             "7 km guided cross-border swim on the Petit Lac.",
-            "Nyon (Switzerland) to Yvoire (France), or reverse.",
+            "Nyon (Switzerland) to Yvoire (France).",
             "Solo, relay or small-group format.",
           ],
           distanceRoute: [
             "Distance: approx. 7 km.",
-            "Typical route: Nyon harbour to Yvoire or Nernier (or reverse).",
+            "Typical route: Nyon harbour to Yvoire or Nernier.",
             "Exact line and direction chosen for best conditions.",
           ],
           safetySupport: [
@@ -4472,20 +4513,26 @@
             "The LGSA requires that all swimmers have their own open water swimming insurance policy. You ensure that you have your own appropriate insurance policy to cover you and your participation in your swim. In no event will the LGSA be liable to you for any : loss or damage, loss of profit, loss of reputation, loss of business, revenue or goodwill, pledges made by you (or on your behalf) to charity, consequential or indirect loss, injury or sickness due to your negligence. <br> Nothing in this Agreement shall affect our liability for death or personal injury, fraud, or any other liability to the extent it cannot be excluded or limited by law.<br> The LGSA has its own appropriate third-party liability insurance for its own benefit. You acknowledge that you are not entitled to benefit under this insurance from any claim that is made against you by a third party for death, personal injury or damage to property as a result, or in connection with, your negligent actions or omissions whilst taking part in your swim. You will indemnify and keep the LGSA indemnified against any claim made against us by a third party for death, personal injury or damage to property as a result of, or in connection with, your negligent actions or omissions whilst taking part in your swim.",
           ],
           "swim-stronger": [
-            "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the Guided Nyvoirienne and abide by the following conditions, and any instructions given to you by the organisers/officials of your Guided Nyvoirienne swim.",
-            "Important information will be emailed to you using the email address provided upon entry and we may send you documentation after the Guided Nyvoirienne. You must make sure you provide up to date contact details and update these details, if there are any changes, by logging in via our online swim platform or contacting the Lake Geneva Swimming Association (LGSA) directly via email. Failure to provide complete and accurate information may result in your application being rejected. The LGSA reserves the right to reject incomplete applications should the missing information not be provided within the deadlines set by the LGSA. Those swimmers with rejected applications will not be allowed to attempt their swim and no refunds will be given.",
-            "Each Guided Nyvoirienne swim may take place on any day and time during the reserved window. The actual day of your swim will be decided based on meteorological conditions and the priority of your booking. Whilst multiple Guided Nyvoirienne bookings in the same window are prioritised according to who booked first, please note that any Signature booking during the same window will take priority. The LGSA asks that you remain flexible and ensure you're available to swim at any point during your swim window.",
-            "You ensure that all requirements are fulfilled within the deadlines given by the LGSA, and that all balances are paid by the 30th of April in the year of your swim, or 60 days before your swim window, whichever is sooner. You accept that all fees paid to the LGSA cannot be transferred, deferred or refunded. You acknowledge and accept your responsibility to ensure that you comply with the requirements of the LGSA. You also acknowledge that your swim may be delayed or cancelled should you not meet these requirements, and no refunds will be given. You acknowledge and accept that the swim will be deemed to have started as soon as you enter the water at the start of your swim attempt. Whenever the swim finishes after this time, the full swim fee will be retained by the LGSA.",
-            "If you're unable to participate due to a serious medical condition or injury that demonstrably prevents your safe participation, you must inform the LGSA immediately via email to secretary [at] lgsa.com You must provide a valid medical certificate issued by a licensed medical professional as proof. This certificate must clearly state the medical reason for your inability to participate. If your cancellation is due to a verified and accepted medical reason, a partial refund may be considered based on the following schedule: Before January 31st in the year of your swim: The LGSA will retain your deposit only., Between January 31st and 45 days before the start of your swim window: The LGSA will retain 50% of the total swim fee. ,Less than 45 days before the start of your swim window: The LGSA will retain 75% of the total swim fee. Submission of a medical certificate doesn't automatically guarantee a refund. All medical cancellation requests are reviewed on a case-by-case basis and require verification and approval by the LGSA. Past refunds for similar or previous cases don't set a precedent for future requests. Refunds won't be given for any other reasons (e.g., change of mind, personal commitments, travel issues unrelated to a medical condition).",
-            "The LGSA may cancel your Guided Nyvoirienne if circumstances beyond our reasonable control arise including but not limited to; poor water quality, water temperature below 14 or above 31 degrees celsius, war, civil or political unrest, terrorism or natural disasters, plague, pandemic or public health concerns, unavailability of key staff due to illness, injury, or other unforeseen circumstances, Revocation of permits by the authorities. In such circumstances we will attempt to restage your Guided Nyvoirienne as soon as possible, either at the same location or an alternative location and no refunds will be given. You will be informed of any changes at your Guided Nyvoirienne as early as possible. The LGSA has no responsibility for any other costs, including but not limited to travel and accommodation. The Classique is staged in some of the most beautiful scenery in the world and we hope you will visit the local area and enjoy your time there.",
-            "You, intending to be legally bound, certify that you consider yourself to be physically and mentally fit to undertake the swim and have not been otherwise informed by a medical practitioner. You will advise the LGSA of any further changes in your medical condition that arise before your swim takes place. You agree to give urine and/or blood samples if requested by the LGSA both during training, before your swim attempt and after your swim attempt. You acknowledge and accept that the provision of certification for a self-assessment swim and medical/health condition in no way implies any representation by the LGSA that you have completed sufficient training or that you are sufficiently fit or healthy to make such an attempt. You undertake to make it clear to your skippers and lifeguards any physical or medical conditions before the start of your swim should it have any potential of requiring special consideration or possible assistance. You ensure to make it known to the skippers and lifeguards the place where medication is stored.For solo attempts you must be older than 16 years on the first day of your swim window. Any swimmer younger than 18 years must provide the LGSA with consent in writing by a parent or legal guardian. Open water swimming involves strenuous exercise. You should therefore undergo a medical check-up, including an ECG test, before you start training for your swim. If you have been unwell or have experienced a change in your wellbeing and/or physical state (such as pregnancy) please consult your doctor. You should under no circumstances attempt your swim if you are not in an appropriate state to do so.",
-            "as specified by the LGSA at least 30 days before the start of their swim window. The required times and distances may vary. Please refer to your self-assessment swim form for more information. You acknowledge and accept that the self-assessment swim alone may not be sufficient preparation to attempt your swim. You are solely responsible for assessing whether you have achieved an appropriate amount (and type) of training, fitness and health before embarking upon your swim attempt and that you will not make the attempt if, for any reason, you have failed to achieve this, whilst still acknowledging that. The LGSA cannot be held responsible for any lack of preparation on your part. When swimming during your attempt you may encounter varying weather conditions including waves and choppy water, therefore you must ensure that you are prepared for all types of weather by swimming regularly in open water. You acknowledge and accept that the swim may be considerably longer/shorter than 7km due to various reasons such as the skipper’s discretionary route. You acknowledge that you are wholly responsible for supplying all personal equipment that you and/or your team might require for your swim, including but not limited to clothing, light sticks, grease and food. Similarly all support team members are responsible for bringing all personal equipment that they might require for your swim, including but not limited to clothing, light sticks, grease and food. The number of support crew will be agreed with the LGSA before the swim. The skipper reserves the right to limit the number of support crew as they see fit. For those swimming as a group, we remind you that each participant accepts to swim at the same speed and keep together as a group. Those faster swimmers will be required to slow down for the others, with a maximum permitted distance imposed between the first swimmer and the last swimmer. Should the group exceed this distance, the slowest swimmers will be taken out of the water to ensure adequate safety cover for the group as a whole. Should this case arise, no refunds will be given.",
-            "Each participant may choose to wear a tow-float during their swim. Remember that this is not a life saving device and should not be treated as such. A tow-float helps with visibility in the water but will not prevent a swimmer from drowning. Should a swimmer complete the crossing with a tow-float, the swim will be attributed to the non-standard equipment category, as per the LGSA Rules.",
-            "Swimmers may wear a neoprene wetsuit during their swim, and such attempts will be attributed to the non-standard equipment category, as per the LGSA Rules.",
-            "You accept that you may be able to change the nature of your swim from a solo to a relay or group or vice versa provided this is agreed in advance with the LGSA office and that any outstanding balances are paid. You acknowledge and accept that your swim, in the interests of safety, may be amended in the following ways, including but not limited to reducing the distance of the swim, changing the swim course or altering the timings and structure of events. Any changes to your swim will be communicated to you on the day of your swim or sooner if possible. Should your swim be amended in any way you agree that it has still been staged and that you will not be eligible for any refund.",
-            "The LGSA reserves the right to use images of you taking part in your Guided Nyvoirienne for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in your Guided Nyvoirienne.",
-            "You acknowledge and accept that your skippers will advise on the weather and lake conditions on and before the day of your swim, however you take full responsibility for the final decision to make an attempt. You acknowledge and understand that open water marathon swimming is an extreme sport. You are aware of the risks inherent in attempting an open water marathon swim and the training for such an event, including possible permanent disability or death. You agree to accept and assume all those risks. You hereby waive any and all rights, to the fullest extent permitted by applicable law, to claim for loss or damages against the LGSA and/or any body affiliated thereto and any of the Association officials supervising, observing and organising events, which arise out of your participation in attempting the swim, or any activities incidental thereto. Please note seasickness can be a serious problem for swimmers or support team members on the boat. You undertake full responsibility to make them aware of this.",
-            "The LGSA has its own appropriate third-party liability insurance in accordance with the law L321-1 of the French ‘code du sport’ which covers the participants, contractors and volunteers for the duration of the Guided Nyvoirienne swim.If you are travelling from abroad, you should have appropriate travel insurance to cover you throughout your trip.",
+            "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the LGSA Swim Camp and abide by the following conditions, and any instructions given to you by the organisers and/or officials of your LGSA Swim Camp.",
+            "Important information will be emailed to you using the email address provided upon entry and we may send you documentation after the LGSA Swim Camp. You must make sure you provide up to date contact details and update these details, if there are any changes, by logging in via our online swim platform or contacting the Lake Geneva Swimming Association (LGSA) directly via email. Failure to provide complete and accurate information may result in your application being rejected. The LGSA reserves the right to reject incomplete applications should the missing information not be provided within the deadlines set by the LGSA. Those swimmers with rejected applications will not be allowed to attend the camp and no refunds will be given.",
+            "You ensure that all requirements are fulfilled within the deadlines given by the LGSA, and that all balances are paid by the 30th of April in the year of your camp, or 60 days before your swim camp, whichever is sooner. You accept that all fees paid to the LGSA cannot be transferred, deferred or refunded. You acknowledge and accept your responsibility to ensure that you comply with the requirements of the LGSA. You also acknowledge that your participation in the camp may be delayed or cancelled should you not meet these requirements, and no refunds will be given. You acknowledge and accept that the camp will be deemed to have started as soon as you enter the water at the start of your camp. Whenever the camp finishes after this time, the full camp fee will be retained by the LGSA.",
+            "If you're unable to participate due to a serious medical condition or injury that demonstrably prevents your safe participation, you must inform the LGSA immediately via email to secretary [at] 'lgsa.com'. You must provide a valid medical certificate issued by a licensed medical professional as proof. This certificate must clearly state the medical reason for your inability to participate. If your cancellation is due to a verified and accepted medical reason, a partial refund may be considered based on the following schedule: Before January 31st in the year of your camp: The LGSA will retain your deposit only., Between January 31st and 45 days before the start of your camp: The LGSA will retain 50% of the total camp fee. , Less than 45 days before the start of your camp window: The LGSA will retain 75% of the total camp fee. Submission of a medical certificate doesn't automatically guarantee a refund. All medical cancellation requests are reviewed on a case-by-case basis and require verification and approval by the LGSA. Past refunds for similar or previous cases don't set a precedent for future requests. Refunds won't be given for any other reasons (e.g., change of mind, personal commitments, travel issues unrelated to a medical condition).",
+            "The LGSA may cancel your LGSA Swim Camp if circumstances beyond our control arise including but not limited to; poor water quality, water temperature below 12 degrees celsius, war, civil or political unrest, terrorism or natural disaster, plague, pandemic or public health concerns., unavailability of key staff due to illness, injury, or other unforeseen circumstances., Revocation of permits by the authorities. In such circumstances More than 30 days before100% credit toward any LGSA swim camp within the next 24 months, or 75% Cash Refund. And Less than 30 days before 100% credit toward any LGSA swim camp within the next 24 months, or 50% Cash Refund. LGSA is not responsible for any additional expenses incurred by participants, including but not limited to airfare, train tickets, accommodation, car rental, meals, visas, or other travel-related costs. Participants are strongly encouraged to purchase travel insurance that covers trip cancellation.",
+            "You, intending to be legally bound, certify that you consider yourself to be physically and mentally fit to undertake the camp and have not been otherwise informed by a medical practitioner. You will advise the LGSA of any further changes in your medical condition that arise before the camp takes place. If you've been unwell or experienced any significant change in your wellbeing or physical state (e.g., pregnancy, new medical condition), please consult your doctor. Under no circumstances should you participate if you're not in an appropriate state of health to do so. You must be 18 years or older at the start of the LGSA Swim Camp. Open water swimming is a physically strenuous activity. We strongly recommend you undergo a comprehensive medical check-up, including an ECG test, before you start training for the LGSA Swim Camp. You undertake to make it clear to the camp staff and lifeguards any physical or medical conditions before the start of the camp should it have any potential of requiring special consideration or possible assistance. You ensure to make it known to the camp staff and lifeguards the place where medication is stored.",
+            "It's your sole responsibility to ensure you're fully prepared for the Lake Geneva Swim Camp. We highly recommend consistent training in open water to familiarise yourself with the environment. During the camp, you may encounter varying conditions, including waves and choppy water; therefore, you must be prepared for all types of weather. Please note that buoyancy differs in freshwater compared to saltwater, and you should ensure you're aware of these differences and are sufficiently prepared for fresh water swimming. The LGSA can't be held responsible for any lack of preparation on your part.",
+            "During the Lake Geneva Swim Camp, all participants must strictly follow the instructions of the organisers and safety staff before, during, and after any swims. Any swim may be abandoned or modified for safety reasons. The LGSA reserves the right to refuse or to ask you to cease your participation in the LGSA Swim Camp immediately and without refund if: You attempt to participate using someone else's entry or are involved in illicit entry changes., You fail to follow any instructions given by LGSA Swim Camp organisers or safety staff., You engage in behaviour which we, in our sole discretion and acting reasonably, believe may: Cause harm or offence to any LGSA Swim Camp organiser, safety staff, or fellow participant., Pose a risk to your own safety, the safety of others, or the environment., Appear to be under the influence of drugs or alcohol., Indicate that you are physically or mentally unfit to participate., Fail to arrive on time at the designated meeting point., Engage in any ambush marketing activity.",
+            "Each participant must wear a tow-float throughout all open-water swims. This is a crucial safety precaution to enhance visibility in the water. It's important to understand that a tow-float isn't a life-saving device and can't be treated as such. It's your responsibility to be able to swim the required distance in varying weather conditions; a tow-float won't prevent a swimmer from drowning.",
+            "Wetsuits are recommended for all swimmers when the water temperature is below 16°C, but their use remains optional.",
+            "The LGSA reserves the right to make any amendments to the LGSA Swim Camp that it deems necessary for the successful staging and safety of the camp. This includes, but isn't limited to, reducing the distance of any or all swims, changing a swim course, or altering the timetable and structure of events. Any changes to a swim will be communicated to you at the LGSA Swim Camp itself or sooner if possible. Should the LGSA Swim Camp be amended in any way, you agree that the camp has still been staged, and you won't be eligible for any refund under these circumstances.",
+            "The LGSA reserves the right to use images, photographs, and video footage of you taking part in the LGSA Swim Camp for its own legitimate purposes, including promotional and archival material. By agreeing to these terms, you consent to the publication and broadcast of your image which accurately depicts your participation in the LGSA Swim Camp.",
+            "It is essential that you have your own appropriate insurance coverage for the duration of your trip and participation in the LGSA Swim Camp. This should include, but not be limited to, travel insurance (if applicable), medical emergencies, personal accident cover, and trip cancellation/interruption. It is solely your responsibility to secure adequate personal insurance coverage.",
+            "The LGSA carries its own third-party liability insurance for the LGSA Swim Camp for its own benefit. This insurance does not cover personal accident, injury, or loss for participants, nor does it cover any claims made against you by a third party. In no event will the LGSA be liable to you for any: Loss or damage, Loss of profit, reputation, business, revenue, or goodwill, Pledges made by you (or on your behalf) to charity, Consequential or indirect loss, Injury or sickness due to your own negligence or lack of preparation. Nothing in this Agreement shall affect our liability for death or personal injury caused by our negligence, fraud, or any other liability to the extent it cannot be excluded or limited by law. You acknowledge that you are solely responsible for your actions and omissions whilst taking part in the LGSA Swim Camp. You agree to indemnify and keep the LGSA indemnified against any claim made against us by a third party for death, personal injury, or damage to property as a result of, or in connection with, your negligent actions or omissions whilst taking part in the LGSA Swim Camp.",
+            "Participants acknowledge that the event operates under permits issued by Swiss and French authorities. The event may be modified, delayed, or stopped if instructed by those authorities.",
+            "The LGSA reserves the right to use images of you taking part in La Classique swim for its own purposes. You agree to the publication of photographs and broadcasts of your image which accurately depict your participation in La Classique swim.",
+            "You acknowledge and accept that your skippers may advise you regarding weather and lake conditions before and on the day of your swim. However, you accept full responsibility for the final decision to attempt the swim. You acknowledge and understand that open-water marathon swimming is an extreme sport and involves significant inherent risks, including but not limited to drowning, exhaustion, hypothermia or cold-water exposure, collisions with boats or kayaks, changing weather or lake conditions, and delayed rescue due to the open-water environment. You acknowledge that participation in such activities may result in serious injury, permanent disability, or death, and you voluntarily accept and assume all such risks associated with participating in La Classique and any activities related to the event. To the fullest extent permitted by applicable law, you hereby waive any and all rights to claim loss or damages against the Lake Geneva Swimming Association (LGSA), its officers, volunteers, safety personnel, contractors, affiliated organisations, and event officials arising out of your participation in the swim or any activities related to the event. Please note that seasickness may affect swimmers and support kayakers during the crossing.",
+            "In the event of injury or illness participants authorize event organizers to arrange medical treatment or evacuation if deemed necessary.",
+            "The LGSA maintains third-party liability insurance as required by French sports law. Participants are encouraged to obtain personal insurance.",
+            "The swim crosses the international border between Switzerland and France. Participants are responsible for carrying valid identification and complying with entry requirements of both countries."
           ],
           "la-classique": [
             "By ticking the box labelled ‘I have read and agree to the terms and conditions of entry’, you agree to enter the Guided Nyvoirienne and abide by the following conditions, and any instructions given to you by the organisers/officials of your Guided Nyvoirienne swim.",
@@ -4521,6 +4568,59 @@
           ],
         };
 
+        eventTerms["la-classique"] = [
+          `1. Agreeing to the Terms and Conditions
+      By ticking the box labelled "I have read, understood, and agree to the terms and conditions of entry," you agree to enter La Classique and abide by these conditions and any instructions given by the organisers or event officials.`,
+          `2. Contact Details
+      Important information will be sent to the email address you provide during registration. It is your responsibility to ensure that your contact details are accurate and up to date.`,
+          `3. Date of La Classique Swim
+      La Classique is scheduled for 11 July 2026 with a backup weather date of 12 July 2026. The final date will be determined based on weather and safety conditions. Participants must remain available on both dates.`,
+          `4. Payments and Refunds
+      All payments must be completed by the deadlines set by the LGSA. Entry fees are non-transferable and may not be deferred to a future year or transferred to another participant.`,
+          `5. Cancellation by You
+      If you are unable to participate you must notify the LGSA. No refunds will be issued for participant withdrawals.`,
+          `6. Cancellation by the LGSA
+      The LGSA may cancel, postpone, or modify La Classique if circumstances arise beyond our reasonable control, including severe weather, unsafe lake conditions, poor water quality, withdrawal of authorisation by Swiss or French authorities, civil disturbance, public safety concerns, or other force majeure events.
+      The LGSA will make reasonable efforts to reschedule La Classique and will inform participants of changes as early as possible. The LGSA accepts no responsibility for additional travel, accommodation, or personal costs. If the event cannot be rescheduled, participants will receive a 100% refund of the registration fee and any kayaker or kayak rental fees paid to the LGSA.`,
+          `7. Age and Medical Condition
+      Participants must be at least 18 years of age on the day of La Classique.
+      By entering, you certify that you are physically and mentally fit to undertake a 13 km open-water swim and have not been advised otherwise by a qualified medical practitioner. You acknowledge that you are adequately trained and prepared; this self-assessment is not a representation or warranty by the LGSA.
+      You agree to inform the LGSA race director of any medical or physical condition requiring consideration or assistance and indicate where necessary medication is stored. You must notify the LGSA of significant health changes after registration and before the event. Consult a medical professional if unwell or if your health changes, including pregnancy, and do not attempt the swim if you are not fit to do so.`,
+          `8. Preparation
+      All swimmers must be capable of swimming 1 km in less than 25 minutes.
+      You are solely responsible for determining whether your training, fitness, and health are sufficient. Meeting the time standard alone does not guarantee adequate preparation, and the LGSA cannot be held responsible for lack of preparation.
+      You must prepare for varying lake and weather conditions through regular open-water training. The distance may be longer or shorter than 13 km due to navigation, safety, or lake conditions.
+      You are responsible for personal equipment including goggles, grease, food, and nutrition. Support kayakers are responsible for their support equipment. Swimmers sharing a kayaker must maintain the same pace and remain together; if the allowable distance is exceeded, slower swimmers may be removed for safety, without refund.`,
+          `9. Event Safety and Compliance
+      All swimmers and support kayakers must follow instructions from skippers, lifeguards, safety personnel, and LGSA officials.
+      The swim may be delayed, modified, or abandoned for lightning, severe weather, unsafe lake conditions, or a serious incident. Officials may refuse a start or remove a swimmer who fails to follow instructions, creates a risk, appears under the influence of alcohol or drugs, is unfit through illness or injury, arrives late, or fails to remain with their designated support kayaker.
+      Intermediate cutoffs are 6 km within 3 hours 30 minutes and 10 km within 5 hours 45 minutes. The final cutoff is 7 hours. No refund is provided where a swimmer is removed for safety reasons.`,
+          `10. Support Kayakers
+      All swimmers must have a dedicated support kayaker and remain with that kayaker throughout the swim. Kayakers assist with navigation, feeding, and visibility but are not professional rescue personnel.
+      Kayakers must be at least 16 years of age and sufficiently experienced and trained. Participants providing their own kayaker are responsible for that kayaker's preparation. Kayakers must be capable of continuous paddling and necessary manoeuvres, including righting a capsized kayak. Unsuitable kayaks may be refused by the LGSA or safety personnel.`,
+          `11. Tow Float
+      Participants may wear a tow-float during the swim. It is not a life-saving device and does not prevent drowning. Swimmers completing the crossing with a tow-float will be classified under the non-standard equipment category in accordance with LGSA rules.`,
+          `12. Wetsuits
+      Wetsuits are mandatory when the official water temperature is below 18 C and optional when it is 18 C or above. Swimmers who wear a wetsuit will have their swim recorded in the non-standard equipment category in accordance with LGSA Rules.`,
+          `13. Event Changes
+      The swim may be amended for safety, including reducing the distance, changing the course, or altering timings and event structure. Changes will be communicated on the day or sooner where possible. If amended, the swim will still be deemed staged and no refund will be due.`,
+          `14. Safety Authority and Evacuation
+      Safety officials and motorised safety boats have full authority over swimmer safety. A swimmer unable to continue safely may be removed and transported by safety boat. Participants must comply immediately with safety instructions. The LGSA has ultimate authority to terminate the swim if it judges there is a risk to a swimmer.`,
+          `15. Government and Authority Compliance
+      The event operates under permits issued by Swiss and French authorities and may be modified, delayed, or stopped if instructed by those authorities.`,
+          `16. Use of Images
+      The LGSA reserves the right to use images of you taking part in La Classique for its own purposes. You agree to the publication of photographs and broadcasts of your image accurately depicting your participation.`,
+          `17. Assumption of Risk and Liability
+      You accept full responsibility for the final decision to attempt the swim and acknowledge the inherent risks of open-water swimming, including drowning, exhaustion, hypothermia, collisions, changing conditions, and delayed rescue.
+      You voluntarily accept these risks, including serious injury, permanent disability, or death. To the fullest extent permitted by law, you waive rights to claim loss or damages against the LGSA, its officers, volunteers, safety personnel, contractors, affiliated organisations, and event officials. Seasickness may affect swimmers and support kayakers.`,
+          `18. Medical Treatment
+      In the event of injury or illness, participants authorise event organisers to arrange medical treatment or evacuation if deemed necessary.`,
+          `19. Insurance
+      The LGSA maintains third-party liability insurance as required by French sports law. Participants are encouraged to obtain personal insurance.`,
+          `20. Cross-Border Participation
+      The swim crosses the international border between Switzerland and France. Participants are responsible for carrying valid identification and complying with entry requirements of both countries.`,
+        ];
+
         const chosenTerms = eventTerms[productId] || baseTerms;
         const getTermSummary = (term) => {
           const plainText = term.replace(/<[^>]*>/g, "").trim();
@@ -4532,8 +4632,12 @@
         };
         return `<div class="tab-sub-title">Booking terms</div><div class="terms-accordion">${chosenTerms
           .map(
-            (line) =>
-              `<details class="terms-accordion-item"><summary>${getTermSummary(line)}</summary><div class="terms-accordion-content">${line}</div></details>`,
+            (line) => {
+              const sections = line.split("\n");
+              const heading = sections.shift();
+              const content = sections.join("\n");
+              return `<details class="terms-accordion-item"><summary>${heading}</summary><div class="terms-accordion-content">${content || line}</div></details>`;
+            },
           )
           .join("")}</div>`;
       }
@@ -4617,7 +4721,7 @@
                       ? "img-guided-nyvo"
                       : "img-initiation";
         document.getElementById("detail-wrap").innerHTML = `
-    <button class="btn-back" onclick="backToCatalog()"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back to collection</button>
+    <button class="btn-back" onclick="backToCatalog()"><svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back to catalog</button>
     <div class="detail-hero-card" style="${p.imgStyle}"><span class="detail-hero-badge"><span class="badge ${p.badgeClass}">${p.badge}</span></span><div class="detail-hero-title">${p.title}</div></div>
     <div class="tab-bar" id="tabbar-${id}">${tabBtns}</div>
     <div id="panels-${id}">${tabPanels}</div>
@@ -5530,6 +5634,8 @@
         const form = document.getElementById("swimmer-form");
         if (form) {
           [
+            "sw-first-name",
+            "sw-last-name",
             "sw-phone",
             "sw-phone-country",
             "sw-team",
@@ -5618,6 +5724,8 @@
             el.classList.remove("err");
           }
         };
+        req("sw-first-name", "First name");
+        req("sw-last-name", "Last name");
         req("sw-phone", "Phone number");
         const phoneEl = document.getElementById("sw-phone");
         if (phoneEl && phoneEl.value.trim()) {
@@ -5760,7 +5868,8 @@
       function applyFilters() {
         const flagship = document.getElementById("d-flagship").checked,
           core = document.getElementById("d-core").checked,
-          entry = document.getElementById("d-entry").checked;
+          entry = document.getElementById("d-entry").checked,
+          classique = document.getElementById("d-classique").checked;
         const nyon = document.getElementById("d-nyon").checked,
           yvoire = document.getElementById("d-yvoire").checked,
           evian = document.getElementById("d-evian").checked,
@@ -5774,7 +5883,7 @@
           group = document.getElementById("d-group").checked,
           relayTeam = document.getElementById("d-relay-team").checked;
         // team = document.getElementById("d-team").checked;
-        const anyType = flagship || core || entry,
+        const anyType = flagship || core || entry || classique,
           anyPlace = nyon || yvoire || evian || lausanne || veytaux || geneva,
           anyEType = guided || eventType || training,
           anyPart = solo || group || relayTeam; // || team;
@@ -5789,7 +5898,10 @@
               card.style.display = "none";
               return;
             } /* permanently hidden */
-            const tOk = !anyType || (typeMap[card.dataset.type] ?? false);
+            const tOk =
+              !anyType ||
+              (typeMap[card.dataset.type] ?? false) ||
+              (classique && card.dataset.category === "classique");
             const place = (card.dataset.place || "").toLowerCase();
             const plOk =
               !anyPlace ||
@@ -5849,6 +5961,7 @@
           flagship: ["d-flagship", "m-flagship"],
           core: ["d-core", "m-core"],
           entry: ["d-entry", "m-entry"],
+          classique: ["d-classique", "m-classique"],
           geneva: ["d-geneva", "m-geneva"],
           nyon: ["d-nyon", "m-nyon"],
           yvoire: ["d-yvoire", "m-yvoire"],
@@ -6345,8 +6458,12 @@
         const formattedDate = `${dd}${mm}${yy}`;
         console.log("build google sheet : ", today, dd, mm, yy, formattedDate);
         const swimmerData = {
-          name:
-            document.getElementById("banktx-client-name")?.value.trim() || "",
+          name: [
+            document.getElementById("sw-first-name")?.value.trim() || "",
+            document.getElementById("sw-last-name")?.value.trim() || "",
+          ]
+            .filter(Boolean)
+            .join(" ") || document.getElementById("banktx-client-name")?.value.trim() || "",
           // name: document.getElementById("sw-team")?.value.trim() || "",
           mail:
             document.getElementById("banktx-client-email")?.value.trim() || "",
